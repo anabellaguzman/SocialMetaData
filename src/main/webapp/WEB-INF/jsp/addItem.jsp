@@ -6,27 +6,40 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Agregar Nuevo Item</title>
+
+
+<script src="<c:url value="/resources/js/jquery-1.11.2.js" />"></script>
+
+<script type="text/javascript">
+	function jsFunction() {
+		var myselect = document.getElementById("selectOpt");
+		alert(myselect.options[myselect.selectedIndex].id);
+
+		$.ajax({
+			url : 'selectedTipoItem.do',
+			type : "GET",
+			dataType: "json",
+			data : {"id" : myselect.options[myselect.selectedIndex].id} 
+		// 			
+		// 			success: function (data) {
+		// 			    alert(data);
+		// 			}
+		});
+
+	}
+</script>
+
 </head>
 <body>
 
 
-	<form role="form" >
+	<form role="form"></form>
 
-
-	</form>
-
-
-<form:form action="selectedTipoItem.do" method="POST" commandName="tipoItem">
-		<select class="form-control" onchange="">
-			<c:forEach items="${listTipoItem}" var="tipoItem">
-				<option id="${tipoItem.idTipoItem}">${tipoItem.descripcion}</option>
-			</c:forEach>
-		</select>
-		<input type="submit" name="action" value="Aceptar" />
-		
-</form:form>
-
-
+	<select class="form-control" onchange="jsFunction()" id="selectOpt">
+		<c:forEach items="${listTipoItem}" var="tipoItem">
+			<option id="${tipoItem.idTipoItem}">${tipoItem.descripcion}</option>
+		</c:forEach>
+	</select>
 
 </body>
 </html>

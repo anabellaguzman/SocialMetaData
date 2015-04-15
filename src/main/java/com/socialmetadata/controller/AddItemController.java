@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.socialmetadata.model.Idioma;
+import com.socialmetadata.model.Item;
 import com.socialmetadata.model.TipoItem;
 import com.socialmetadata.service.ItemService;
 import com.socialmetadata.service.TipoItemService;
@@ -25,6 +26,7 @@ public class AddItemController {
 	
 	@Autowired
 	private TipoItemService tipoItemService;
+	private  ItemService itemService;
 	
 	@RequestMapping("/addItem")
 	public String setupForm(Map<String, Object> map){
@@ -46,10 +48,26 @@ public class AddItemController {
 		
 	}
 	
-	@RequestMapping(value="/selectedTipoItem.do", method=RequestMethod.POST)
-	public String doActions(@ModelAttribute TipoItem tipoItem, BindingResult result, @RequestParam String id, Map<String, Object> map){
-//	public String doActions(HttpServletRequest request, Map<String, Object> map){	
+	@RequestMapping(value="/selectedTipoItem.do", method=RequestMethod.GET)
+//	public String doActions(@ModelAttribute TipoItem tipoItem, BindingResult result, @RequestParam Map<String, Object> id, Map<String, Object> map){
+	
+	public String doActions(HttpServletRequest request){
+		
+		String sid = request.getParameter("id");
+
+		
+//		Integer x = Integer.valueOf(id);
+//		// or
+		int id = Integer.parseInt(sid);
+	 
 		System.out.println("HOLAAAAA");
+		System.out.println("id "+ id);	
+		
+		Item item = new Item();	
+		item = itemService.getItem(2);
+		
+//		
+		
 		return "addItem";
 	}
 	
