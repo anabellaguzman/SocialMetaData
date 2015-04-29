@@ -28,8 +28,8 @@ public class ItemService {
 		for (ValorAtributoItem vai : item.getValorAtributoPropio()) {
 			vai.getValor();
 			vai.getPk().getAtributo().getNombre();
-//		    System.out.println(" ValorAtributoItem VALOR: "+vai.getValor());
-//		    System.out.println(" ValorAtributoItem NOMBRE atributo: "+vai.getPk().getAtributo().getNombre());
+		    System.out.println(" ValorAtributoItem VALOR: "+vai.getValor());
+		    System.out.println(" ValorAtributoItem NOMBRE atributo: "+vai.getPk().getAtributo().getNombre());
 		}
 		
 		

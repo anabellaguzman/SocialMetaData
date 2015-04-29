@@ -8,30 +8,56 @@
 <title>Agregar Nuevo Item</title>
 
 
-<script src="<c:url value="/resources/js/jquery-1.11.2.js" />"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/jquery-1.11.2.js" />"></script>
+
+<!-- <script type="text/javascript" -->
+<!--     src="http://code.jquery.com/jquery-1.10.1.min.js"></script> -->
 
 <script type="text/javascript">
-	function jsFunction() {
-		var myselect = document.getElementById("selectOpt");
-		alert(myselect.options[myselect.selectedIndex].id);
 
-		$.ajax({
-			url : 'selectedTipoItem.do',
-			type : "GET",
-			dataType: "json",
-			data : {"id" : myselect.options[myselect.selectedIndex].id} 
-		// 			
-		// 			success: function (data) {
-		// 			    alert(data);
-		// 			}
-		});
+function jsFunction() {	
+	var myselect = document.getElementById("selectOpt");
+	console.log("CONSOLEEEEEEEEEEEE");
+	$.ajax({
+		url : 'selectedTipoItem.do',
+		type : "GET",
+		data : {"id" : myselect.options[myselect.selectedIndex].id},
+		success: function (tipoItem) {
+			console.log("SUCCESS");
+			$('#result').text(tipoItem.descripcion + ', id ' + tipoItem.idTipoItem);
 
-	}
+		}
+	});
+}
+
+	
+
+// <h2>Random Person Generator</h2>
+
+//     <input type="submit" id="randomPerson" value="Get Random Person" /><br/><br/>
+
+//     <div id="personResponse"> </div>
+
+
+
+// $('#randomPerson').click(function() {
+
+//   $.getJSON('${pageContext.request.contextPath}/api/person/random', function(person) {
+
+//     $('#personResponse').text(person.name + ', age ' + person.age);
+
+//   });
+
+// });
+ 
+
+	
+	
+	
+
 </script>
-
 </head>
 <body>
-
 
 	<form role="form"></form>
 
@@ -40,6 +66,14 @@
 			<option id="${tipoItem.idTipoItem}">${tipoItem.descripcion}</option>
 		</c:forEach>
 	</select>
+	
+	<select class="form-control" id="selectOpt1">
+		<c:forEach items="${tipoItemAtributosLoaded.getAtributoItem()}" var="tipoItem1">
+			<option id="${atributoItem.getIdAtributoItem()}">${atributoItem.getNombre()}</option>
+		</c:forEach>
+	</select>
+	
+	<div id="result"></div>
 
 </body>
 </html>
