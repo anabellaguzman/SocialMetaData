@@ -34,8 +34,11 @@ public class TipoItemService {
 			ai.getNombre();
 		}
 		
-		tipoItem.getDescripcion();
-		tipoItem.getIdTipoItem();
+		
+		//VER SI HACE FALTA ESTO
+//		
+//		tipoItem.getDescripcion();
+//		tipoItem.getIdTipoItem();
 		
 		return tipoItem;
 	}

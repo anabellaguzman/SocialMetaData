@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +19,6 @@ import com.socialmetadata.model.AtributoItem;
 import com.socialmetadata.model.Idioma;
 import com.socialmetadata.model.Item;
 import com.socialmetadata.model.TipoItem;
-import com.socialmetadata.model.ValorAtributoItem;
 import com.socialmetadata.service.ItemService;
 import com.socialmetadata.service.TipoItemService;
 
@@ -52,24 +51,21 @@ public class AddItemController {
 	}
 
 	@RequestMapping(value = "/selectedTipoItem.do", method = RequestMethod.GET)
-	public @ResponseBody TipoItem doActions(@RequestParam int id, Map<String, Object> map) {
+	public @ResponseBody Set<AtributoItem> doActions(@RequestParam int id) {
 		// Integer x = Integer.valueOf(id);
 		// // or
 //		int id1 = Integer.parseInt(sid);
 
 
 		 TipoItem tipoItemAtributosLoaded = tipoItemService.getTipoItem(id);
-		 	 
-		 for (AtributoItem ai : tipoItemAtributosLoaded.getAtributoItem()){	
-		 System.out.println(" ValorAtributoItem NOMBRE atributo: "+
-		 ai.getNombre());		 
-		  }
-		 
-//		 map.put("tipoItemAtributosLoaded", tipoItemAtributosLoaded);
-//		 map.put("enelmap", "SOY DEL MAP");
+		 Set <AtributoItem> atributosLoaded =  tipoItemAtributosLoaded.getAtributoItem();
 
+
+//		 for (AtributoItem ai: atributosLoaded){
+//			 System.out.println(ai.getNombre());
+//		 }
 		
-		return tipoItemAtributosLoaded;
+		return atributosLoaded;
 	}
 
 }

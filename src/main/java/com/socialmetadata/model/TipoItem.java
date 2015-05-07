@@ -10,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 @Entity
 public class TipoItem {
 	
@@ -54,6 +57,7 @@ public class TipoItem {
 		this.descripcion = descripcion;
 	}
 
+	@JsonIgnore
 	public Set<Item> getItems() {
 		return items;
 	}
@@ -62,6 +66,8 @@ public class TipoItem {
 		this.items = items;
 	}
 
+	
+	@JsonIgnore
 	public Set<AtributoItem> getAtributoItem() {
 		return atributoItem;
 	}

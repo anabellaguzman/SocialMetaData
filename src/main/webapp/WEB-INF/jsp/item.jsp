@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
 <%@ include file="/WEB-INF/jsp/includes.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,22 +7,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--<link rel="stylesheet" href="./src/main/webapp/WEB-INF/bootstrap/dist/css/bootstrap.min.css" media="screen">  -->
 <link
-	href="<c:url value="/resources/bootstrap/dist/css/bootstrap.min.css" />"
+	href="<c:url value="/resources/css/bootstrap.min.css" />"
 	rel="stylesheet">
 <script
-	src="<c:url value="/resources/bootstrap/dist/js/jquery-1.9.1.js" />"></script>
+	src="<c:url value="/resources/js/jquery-1.11.2.js" />"></script>
 <script
-	src="<c:url value="/resources/bootstrap/dist/js/jquery-ui-1.10.3.custom.min.js" />"></script>
+	src="<c:url value="/resources/js/jquery-ui.min.js" />"></script>
 
-
-<!-- <script src="<c:url value="/resources/javascript/example.js" />"></script> -->
-
-<!-- <link rel="stylesheet" href="../assets/css/bootswatch.min.css"> -->
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-      <script src="../bower_components/html5shiv/dist/html5shiv.js"></script>
-      <script src="../bower_components/respond/dest/respond.min.js"></script>
-    <![endif]-->
 
 </head>
 
