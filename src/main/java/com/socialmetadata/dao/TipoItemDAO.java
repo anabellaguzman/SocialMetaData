@@ -33,7 +33,6 @@ public class TipoItemDAO {
 		return (TipoItem)session.getCurrentSession().get(TipoItem.class, idTipoItem);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<TipoItem> getAllTipoItem() {
 		return session.getCurrentSession().createQuery("from TipoItem").list();
 	}

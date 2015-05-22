@@ -6,8 +6,6 @@ import java.util.Set;
 
 
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -18,11 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.socialmetadata.model.AtributoItem;
-import com.socialmetadata.model.Autor;
 import com.socialmetadata.model.Idioma;
 import com.socialmetadata.model.Item;
 import com.socialmetadata.model.TipoItem;
-import com.socialmetadata.service.IdiomaService;
 import com.socialmetadata.service.ItemService;
 import com.socialmetadata.service.TipoItemService;
 
@@ -33,8 +29,6 @@ public class AddItemController {
 	private TipoItemService tipoItemService;
 	@Autowired
 	private ItemService itemService;
-	@Autowired
-	private IdiomaService idiomaService;
 
 	@RequestMapping("/addItem")
 	public String setupForm(Map<String, Object> map) {
@@ -42,8 +36,6 @@ public class AddItemController {
 		System.out.println("addItemController");
 
 		List<TipoItem> listTipoItem = tipoItemService.getAllTipoItem();
-		List<Idioma> listIdioma = idiomaService.getAllIdiomas();
-
 
 		// for (TipoItem tipoItem : listTipoItem){
 		//
@@ -53,7 +45,6 @@ public class AddItemController {
 		//
 		// map.put("listTipoItem", tipoItemService.getAllTipoItem());
 		map.put("listTipoItem", listTipoItem);
-		map.put("listIdioma", listIdioma);
 
 		return "addItem";
 
@@ -75,15 +66,6 @@ public class AddItemController {
 //		 }
 		
 		return atributosLoaded;
-	}
-	
-	@RequestMapping(value = "/searchAutor.do", method = RequestMethod.GET)
-	public @ResponseBody String searchAutor(@RequestParam int term) {
-		
-		System.out.println("HOLALALALLALALALALAL");
-		
-		return "Hola";
-		
 	}
 
 }

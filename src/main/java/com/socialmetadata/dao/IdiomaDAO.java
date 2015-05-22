@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 
 
-
 import com.socialmetadata.model.AtributoItem;
 import com.socialmetadata.model.Idioma;
 import com.socialmetadata.model.ValorAtributoItem;
@@ -44,8 +43,9 @@ public class IdiomaDAO {
 		
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<Idioma> getAllIdiomas() {	
+	public List getAllIdiomas() {
+			
+		
 		return session.getCurrentSession().createQuery("from Idioma").list();
 	}
 	

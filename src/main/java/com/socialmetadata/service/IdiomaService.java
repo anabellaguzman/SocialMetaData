@@ -15,9 +15,16 @@ import com.socialmetadata.dao.ItemDAO;
 import com.socialmetadata.dao.PosteoDAO;
 import com.socialmetadata.dao.UsuarioDAO;
 import com.socialmetadata.dao.VotacionDAO;
+import com.socialmetadata.model.Autor;
+import com.socialmetadata.model.Error;
 import com.socialmetadata.model.Idioma;
 import com.socialmetadata.model.Item;
+import com.socialmetadata.model.Posteo;
+import com.socialmetadata.model.Tema;
+import com.socialmetadata.model.Usuario;
 import com.socialmetadata.model.ValorAtributoItem;
+import com.socialmetadata.model.Votacion;
+import com.socialmetadata.modeloDao.embebedPK.VotacionEPK;
 
 @Service
 public class IdiomaService {
@@ -61,7 +68,7 @@ public class IdiomaService {
 	}
 	
 	@Transactional
-	public List<Idioma> getAllIdiomas() {
+	public List getAllIdiomas() {
 		return idiomaDAO.getAllIdiomas();
 	}
 	
