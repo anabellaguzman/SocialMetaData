@@ -17,8 +17,13 @@ public class AutorService {
 	private AutorDAO autorDAO;
 	
 	@Transactional
-	public List<Autor> getAllTipoItem() {
+	public List<Autor> getAllAutores() {
 		return autorDAO.getAllAutores();
+	}
+	
+	@Transactional
+	public List<Autor> getAutoresLike(String term) {
+		return autorDAO.getAutoresLike(term); 
 	}
 
 }

@@ -8,6 +8,8 @@ import java.util.Set;
 
 
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -22,6 +24,7 @@ import com.socialmetadata.model.Autor;
 import com.socialmetadata.model.Idioma;
 import com.socialmetadata.model.Item;
 import com.socialmetadata.model.TipoItem;
+import com.socialmetadata.service.AutorService;
 import com.socialmetadata.service.IdiomaService;
 import com.socialmetadata.service.ItemService;
 import com.socialmetadata.service.TipoItemService;
@@ -35,6 +38,8 @@ public class AddItemController {
 	private ItemService itemService;
 	@Autowired
 	private IdiomaService idiomaService;
+	@Autowired
+	private AutorService autorService;
 
 	@RequestMapping("/addItem")
 	public String setupForm(Map<String, Object> map) {
@@ -78,11 +83,21 @@ public class AddItemController {
 	}
 	
 	@RequestMapping(value = "/searchAutor.do", method = RequestMethod.GET)
-	public @ResponseBody String searchAutor(@RequestParam int term) {
+	public @ResponseBody List <Autor>  searchAutor(@RequestParam String term) {
 		
-		System.out.println("HOLALALALLALALALALAL");
+		System.out.println("term: "+term);
 		
-		return "Hola";
+		List<Autor> autores = autorService.getAutoresLike(term);
+		
+		for(Autor a: autores){
+			
+			System.out.println("a.getNombre(): "+a.getNombre()+ " getApellido(): "+ a.getApellido() + " a.getIdAutor(): "+a.getIdAutor());
+			
+			
+			
+		}
+		
+		return autores;
 		
 	}
 

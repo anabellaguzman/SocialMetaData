@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Autor {
 	
@@ -52,7 +54,8 @@ public class Autor {
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
-
+	
+	@JsonIgnore
 	public Set<Item> getItems() {
 		return items;
 	}

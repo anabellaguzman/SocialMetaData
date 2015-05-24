@@ -44,6 +44,11 @@ public class AutorDAO {
 		return session.getCurrentSession().createQuery("from Autor").list();
 	}
 	
+	public List<Autor>getAutoresLike(String term){
+		
+		return session.getCurrentSession().createQuery("FROM Autor WHERE nombre like '%"+ term + "%' OR apellido like'%"+ term + "%'").list();
+	}
+	
 	
 
 

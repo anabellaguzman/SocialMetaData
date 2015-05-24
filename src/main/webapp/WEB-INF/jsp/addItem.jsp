@@ -7,83 +7,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="<c:url value="/resources/css/bootstrap.min.css" />"
 	rel="stylesheet">
-<script src="<c:url value="/resources/js/jquery-1.11.2.js" />"></script>
-<script src="<c:url value="/resources/js/jquery-ui.min.js" />"></script>
 
+
+<script type="text/javascript" src="<c:url value="/resources/js/jquery.js" />"></script>
+<script  type= "text/javascript" src="<c:url value="/resources/js/jquery-ui.min.js" />"></script>
 <title>Agregar Nuevo Item</title>
 
 
-<script type="text/javascript"
-	src="<c:url value="/resources/js/jquery-1.11.2.js" />"></script>
+
 
 <!-- <script type="text/javascript" -->
 <!--     src="http://code.jquery.com/jquery-1.10.1.min.js"></script> -->
 
-<script type="text/javascript">
-	function jsFunction() {
-		vNombreAtributos = new Array();
-		var myselect = document.getElementById("selectOpt");		
-		var fs_iA = document.getElementById("fs_individualAtributes");	
-		$(fs_iA).empty();		
-		$.getJSON('selectedTipoItem.do', "id="
-				+ myselect.options[myselect.selectedIndex].id, function(
-				nombreAtributos) {
-			var items = [];			
-			$.each(nombreAtributos, function(key, val) {		
- 				items.push("<div class='form-group'> <label class='col-lg-2 control-label' for='inputDefault'>"+ val.nombre +"</label> <div class='col-lg-10'> <input type='text' class='form-control' id="+val.idAtributoItem+"> </input> </div> </div>");			
-			});
-			$("<ul/>", {
-				html : items.join("")
-			}).appendTo("#fs_individualAtributes");
-		});
-	}
-	
-	
-	
-	
-	$(document).ready(function() {
-        $(function() {
-                $("#search").autocomplete({     
-                source : function(request, response) {
-                $.ajax({
-                        url : "searchAutor.do",
-                        type : "GET",
-                        data : {
-                                term : request.term
-                        },
-                        dataType : "json",
-                        success : function(data) {
-                                response(data);
-                        }
-                });
-        }
-});
-});
-});
-	
-// 	function autocompleteautores(){
-		
-//         $("#search").autocomplete({     
-//             source : function(request, response) {
-//             $.ajax({
-//                     url : "searchAutor.do",
-//                     type : "GET",
-//                     data : {
-//                             term : request.term
-//                     },
-//                     dataType : "json",
-//                     success : function(data) {
-//                             response(data);
-//                     }
-//             });
-//     }
-// });
-		
-		
-// 	}
-	
-	
-</script>
+
 </head>
 
 
@@ -159,6 +95,86 @@
 		</div>
 	</div>
 
+
+
+
+<script type="text/javascript">
+	function jsFunction() {
+		vNombreAtributos = new Array();
+		var myselect = document.getElementById("selectOpt");		
+		var fs_iA = document.getElementById("fs_individualAtributes");	
+		$(fs_iA).empty();		
+		$.getJSON('selectedTipoItem.do', "id="
+				+ myselect.options[myselect.selectedIndex].id, function(
+				nombreAtributos) {
+			var items = [];			
+			$.each(nombreAtributos, function(key, val) {		
+ 				items.push("<div class='form-group'> <label class='col-lg-2 control-label' for='inputDefault'>"+ val.nombre +"</label> <div class='col-lg-10'> <input type='text' class='form-control' id="+val.idAtributoItem+"> </input> </div> </div>");			
+			});
+			$("<ul/>", {
+				html : items.join("")
+			}).appendTo("#fs_individualAtributes");
+		});
+	}
+	
+	
+	
+	
+	
+        $(function() {
+                $("#search").autocomplete({   
+                delay: 500,
+                source : function(request, response) {
+                $.ajax({
+                        url : "searchAutor.do",
+                        type : "GET",
+                        data : {
+                                term : request.term
+                        },
+                        dataType : "json",
+                        success : function(data) {
+//                         	alert(data.toSource());
+                        	response($.map(data, function(v,i){
+                        		console.log(v.idAutor);
+                        		
+                                return {
+                                			
+                                            label: v.idAutor,                                 
+                                            value: v.nombre
+                                           };
+                            }));
+                 		}
+                        
+                        
+                        
+                        
+                        
+                        
+//                         response: ($.map(data, function(v,i){
+//                             return {
+//                                 label: v.MainName,
+//                                 value: v.MainItemID
+
+//                             };
+//                             }))
+                });
+                
+                
+                }
+                });
+                });
+                        
+//                         response : function(data) {
+//                                 response(data);
+//                         }
+                
+
+
+	
+
+	
+	
+</script>
 
 
 
