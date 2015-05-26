@@ -7,29 +7,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="<c:url value="/resources/css/bootstrap.min.css" />"
 	rel="stylesheet">
-
-
+<link href="<c:url value="/resources/css/jquery-ui.min.css" />"
+	rel="stylesheet">
+<%-- <link href="<c:url value="/resources/css/autocomplete.css" />" --%>
+<!-- 	rel="stylesheet"> -->
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.js" />"></script>
 <script  type= "text/javascript" src="<c:url value="/resources/js/jquery-ui.min.js" />"></script>
 <title>Agregar Nuevo Item</title>
-
-
-
-
-<!-- <script type="text/javascript" -->
-<!--     src="http://code.jquery.com/jquery-1.10.1.min.js"></script> -->
-
-
 </head>
 
 
-
-
 <body>
-
-
-
-
 	<div class="col-lg-6">
 		<div class="well bs-component">
 			<form class="form-horizontal">
@@ -41,7 +29,7 @@
 						<div class="col-lg-10">
 							<input type="text" class="form-control"  id="idTituloItem"></input>
 						</div>
-					</div>
+				</div>
 					
 					<div class="form-group">
 						<label for="inputDefault" class="col-lg-2 control-label">Año</label>
@@ -50,11 +38,33 @@
 						</div>
 					</div>
 					
+<!-- 					<div class="form-group"> -->
+<!-- 						<label for="inputDefault" class="col-lg-2 control-label">Autor</label> -->
+<!-- 						<div class="col-lg-10"> -->
+<!-- 							<input type="text" class="form-control"  id="search"></input> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+					
 					<div class="form-group">
 						<label for="inputDefault" class="col-lg-2 control-label">Autor</label>
 						<div class="col-lg-10">
-							<input type="text" class="form-control"  id="search"></input>
+							<input id="search" class="form-control">
+<!-- 							<input type="text" class="form-control"  id="search"></input> -->
+							
 						</div>
+
+						
+					</div>
+					
+					<div class="form-group">
+						<label for="inputDefault" class="col-lg-2 control-label">Temas Relacionados</label>
+						<div class="col-lg-10">
+							<input id="autocompleteTema" class="form-control">
+<!-- 							<input type="text" class="form-control"  id="search"></input> -->
+							
+						</div>
+
+						
 					</div>
 					
 					<div class="form-group">
@@ -123,6 +133,7 @@
 	
         $(function() {
                 $("#search").autocomplete({   
+                appentTo:"#search", 
                 delay: 500,
                 source : function(request, response) {
                 $.ajax({
@@ -133,46 +144,53 @@
                         },
                         dataType : "json",
                         success : function(data) {
-//                         	alert(data.toSource());
                         	response($.map(data, function(v,i){
                         		console.log(v.idAutor);
                         		
-                                return {
-                                			
+                                return {	
                                             label: v.idAutor,                                 
                                             value: v.nombre
                                            };
                             }));
                  		}
-                        
-                        
-                        
-                        
-                        
-                        
-//                         response: ($.map(data, function(v,i){
-//                             return {
-//                                 label: v.MainName,
-//                                 value: v.MainItemID
 
-//                             };
-//                             }))
                 });
                 
                 
                 }
                 });
                 });
-                        
-//                         response : function(data) {
-//                                 response(data);
-//                         }
-                
+        
+        $(function() {
+            $("#autocompleteTema").autocomplete({   
+            appentTo:"#autocompleteTema", 
+            delay: 500,
+            source : function(request, response) {
+            $.ajax({
+                    url : "searchTema.do",
+                    type : "GET",
+                    data : {
+                            term : request.term
+                    },
+                    dataType : "json",
+                    success : function(data) {
+                    	response($.map(data, function(v,i){
+                    		console.log(v.idAutor);
+                    		
+                            return {	
+                                        label: v.idAutor,                                 
+                                        value: v.nombre
+                                       };
+                        }));
+             		}
 
+            });
+            
+            
+            }
+            });
+            });
 
-	
-
-	
 	
 </script>
 
