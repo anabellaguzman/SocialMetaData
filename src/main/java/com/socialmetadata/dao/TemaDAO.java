@@ -6,6 +6,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
+
+import com.socialmetadata.model.Autor;
 import com.socialmetadata.model.Tema;
 
 public class TemaDAO {
@@ -39,6 +41,11 @@ public class TemaDAO {
 			
 		
 		return session.getCurrentSession().createQuery("from Tema").list();
+	}
+	
+	public List<Tema>getTemasLike(String term){
+		
+		return session.getCurrentSession().createQuery("FROM Tema WHERE tema like '%"+ term + "%'").list();
 	}
 	
 }
