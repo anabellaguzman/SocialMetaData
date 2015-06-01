@@ -11,11 +11,13 @@ import com.socialmetadata.dao.TemaDAO;
 import com.socialmetadata.model.Tema;
 
 
+
 @Service
 public class TemaService {
 	
 	@Autowired
 	private TemaDAO temaDAO;
+
 	
 	@Transactional
 	public List<Tema> getAllTemas() {
@@ -26,5 +28,6 @@ public class TemaService {
 	public List<Tema> getTemasLike(String term) {
 		return temaDAO.getTemasLike(term); 
 	}
+
 
 }
