@@ -175,7 +175,7 @@
                     dataType : "json",
                     success : function(data) {
                     	response($.map(data, function(v,i){
-                    		console.log(v.idAutor);
+                    		console.log(v.nombre);
                     		
                             return {	
                                         label: v.idAutor,                                 
