@@ -7,9 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 
 
+import org.springframework.stereotype.Repository;
+
 import com.socialmetadata.model.Autor;
 import com.socialmetadata.model.Tema;
 
+@Repository
 public class TemaDAO {
 	
 	@Autowired
@@ -37,7 +40,7 @@ public class TemaDAO {
 		
 	}
 
-	public List getAllTemas() {
+	public List<Tema> getAllTemas() {
 			
 		
 		return session.getCurrentSession().createQuery("from Tema").list();

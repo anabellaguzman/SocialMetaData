@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Tema {
 	
@@ -49,6 +51,7 @@ public class Tema {
 		this.tema = tema;
 	}
 
+	@JsonIgnore
 	public Set<Item> getSetItems() {
 		return setItems;
 	}
