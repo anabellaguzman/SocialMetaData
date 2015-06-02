@@ -43,6 +43,7 @@
 						<label for="inputDefault" class="col-lg-2 control-label">Autor</label>
 						<div class="col-lg-10">
 							<input id="search" class="form-control">
+							<input type="hidden" class="form-control"  id="idAutor"></input>
 							
 						</div>
 
@@ -53,6 +54,7 @@
 						<label for="inputDefault" class="col-lg-2 control-label">Temas Relacionados</label>
 						<div class="col-lg-10">
 							<input id="autocompleteTema" class="form-control">
+							<input type="hidden" class="form-control"  id="idTema"></input>
 							
 						</div>
 
@@ -137,18 +139,33 @@
                         dataType : "json",
                         success : function(data) {
                         	response($.map(data, function(v,i){
-                        		
+                        		                     		
                                 return {	
-                                            label: v.nombre + " " + v.apellido,                                 
-                                            value: v.nombre + " " + v.apellido
+                                			
+                                            value: v.idAutor,                                 
+                                            label: v.nombre + " " + v.apellido,
+                                            
                                            };
+                                       
                             }));
                  		}
+                        
+                        
 
                 });
                 
                 
+                },
+                
+                select: function (event, ui) {
+                    $("#search").val(ui.item.label); 
+                    $("#idAutor").val(ui.item.value); 
+                    return false;
+    
                 }
+                
+                
+                
                 });
                 });
         
@@ -167,9 +184,10 @@
                     success : function(data) {
                     	response($.map(data, function(v,i){
                     		
+                    		
                             return {	
                                         label: v.tema,                                 
-                                        value: v.tema
+                                        value: v.idTema
                                        };
                         }));
              		}
@@ -177,6 +195,15 @@
             });
             
             
+            },
+            
+            select: function (event, ui) {
+                
+                $("#idTema").val(ui.item.value); 
+                $("#autocompleteTema").val(ui.item.label); 
+                return false;
+                
+
             }
             });
             });

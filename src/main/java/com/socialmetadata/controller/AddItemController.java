@@ -45,19 +45,9 @@ public class AddItemController {
 	@RequestMapping("/addItem")
 	public String setupForm(Map<String, Object> map) {
 
-		System.out.println("addItemController");
-
 		List<TipoItem> listTipoItem = tipoItemService.getAllTipoItem();
 		List<Idioma> listIdioma = idiomaService.getAllIdiomas();
-
-
-		// for (TipoItem tipoItem : listTipoItem){
-		//
-		// System.out.println("tipoItem descripcion: " +
-		// tipoItem.getDescripcion());
-		// }
-		//
-		// map.put("listTipoItem", tipoItemService.getAllTipoItem());
+		
 		map.put("listTipoItem", listTipoItem);
 		map.put("listIdioma", listIdioma);
 
@@ -84,34 +74,15 @@ public class AddItemController {
 	}
 	
 	@RequestMapping(value = "/searchAutor.do", method = RequestMethod.GET)
-	public @ResponseBody List <Autor>  searchAutor(@RequestParam String term) {
-		
-//		System.out.println("term: "+term);
-		
+	public @ResponseBody List <Autor>  searchAutor(@RequestParam String term) {	
 		List<Autor> autores = autorService.getAutoresLike(term);
-		
-//		for(Autor a: autores){
-//			
-//			System.out.println("a.getNombre(): "+a.getNombre()+ " getApellido(): "+ a.getApellido() + " a.getIdAutor(): "+a.getIdAutor());
-//		
-//		}
-
 		return autores;
 		
 	}
 	
 	@RequestMapping(value = "/searchTema.do", method = RequestMethod.GET)
 	public @ResponseBody List <Tema>  searchTema(@RequestParam String term) {
-		List<Tema> temas = temaService.getTemasLike(term);	
-		
-		
-		for (Tema t: temas){
-			
-			System.out.println("Tema: " + t.getTema() );
-		}
-
-		
-		
+		List<Tema> temas = temaService.getTemasLike(term);			
 		return temas;
 		
 	}
