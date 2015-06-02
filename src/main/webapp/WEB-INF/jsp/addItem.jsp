@@ -38,18 +38,11 @@
 						</div>
 					</div>
 					
-<!-- 					<div class="form-group"> -->
-<!-- 						<label for="inputDefault" class="col-lg-2 control-label">Autor</label> -->
-<!-- 						<div class="col-lg-10"> -->
-<!-- 							<input type="text" class="form-control"  id="search"></input> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
 					
 					<div class="form-group">
 						<label for="inputDefault" class="col-lg-2 control-label">Autor</label>
 						<div class="col-lg-10">
 							<input id="search" class="form-control">
-<!-- 							<input type="text" class="form-control"  id="search"></input> -->
 							
 						</div>
 
@@ -60,7 +53,6 @@
 						<label for="inputDefault" class="col-lg-2 control-label">Temas Relacionados</label>
 						<div class="col-lg-10">
 							<input id="autocompleteTema" class="form-control">
-<!-- 							<input type="text" class="form-control"  id="search"></input> -->
 							
 						</div>
 
@@ -145,11 +137,10 @@
                         dataType : "json",
                         success : function(data) {
                         	response($.map(data, function(v,i){
-                        		console.log(v.idAutor);
                         		
                                 return {	
-                                            label: v.idAutor,                                 
-                                            value: v.nombre
+                                            label: v.nombre + " " + v.apellido,                                 
+                                            value: v.nombre + " " + v.apellido
                                            };
                             }));
                  		}
@@ -175,11 +166,10 @@
                     dataType : "json",
                     success : function(data) {
                     	response($.map(data, function(v,i){
-                    		console.log(v.nombre);
                     		
                             return {	
-                                        label: v.idAutor,                                 
-                                        value: v.nombre
+                                        label: v.tema,                                 
+                                        value: v.tema
                                        };
                         }));
              		}
