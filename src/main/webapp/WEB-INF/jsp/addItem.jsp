@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/includes.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -85,7 +85,13 @@
 						</div>
 					</div>
 					<fieldset id="fs_individualAtributes">
-				
+							<c:forEach items="${listAtributosFistItem}" var="atributoItem">
+										
+									<div class='form-group'> <label class='col-lg-2 control-label' for='inputDefault'>${atributoItem.nombre}</label>
+										 <div class='col-lg-10'> <input type='text' class='form-control' id="${atributoItem.idAtributoItem}"> 
+										 </div> 
+									</div>
+							</c:forEach>
 					</fieldset>
 					<div class="form-group">
 						<div class="col-lg-10 col-lg-offset-2">

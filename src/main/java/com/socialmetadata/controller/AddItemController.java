@@ -9,7 +9,9 @@ import java.util.Set;
 
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.SpringVersion;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.socialmetadata.model.AtributoItem;
 import com.socialmetadata.model.Autor;
 import com.socialmetadata.model.Idioma;
-
 import com.socialmetadata.model.Tema;
 import com.socialmetadata.model.TipoItem;
 import com.socialmetadata.service.AutorService;
@@ -48,6 +49,11 @@ public class AddItemController {
 		List<TipoItem> listTipoItem = tipoItemService.getAllTipoItem();
 		List<Idioma> listIdioma = idiomaService.getAllIdiomas();
 		
+//		System.out.println("VERSION: "+SpringVersion.getVersion());
+
+		TipoItem firstItem = tipoItemService.getTipoItem(listTipoItem.get(0).getIdTipoItem());
+		Set <AtributoItem> atributosFirstItem =  firstItem.getAtributoItem();
+		map.put("listAtributosFistItem", atributosFirstItem);
 		map.put("listTipoItem", listTipoItem);
 		map.put("listIdioma", listIdioma);
 
