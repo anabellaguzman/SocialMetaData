@@ -47,8 +47,20 @@
 						<div class="col-lg-10">
 							<input id="search" class="form-control"> <input
 								type="hidden" class="form-control" id="idAutor"></input>
+								<ul class="list-group" id="listAutores">
+<!-- 								<li class="list-group-item"> -->
+<!-- 									Cras justo odio<button type="button" class="close">×</button></li> -->
+<!-- 								<li class="list-group-item"> -->
+<!-- 									Dapibus ac facilisis in <button type="button" class="close">×</button></li> -->
+<!-- 								<li class="list-group-item"><button type="button" class="close">×</button> -->
+<!-- 									Morbi leo risus</li> -->
+							</ul>
+								
 
 						</div>
+
+						
+
 
 
 					</div>
@@ -93,7 +105,8 @@
 						<label for="textArea" class="col-lg-2 control-label">Descripcion</label>
 						<div class="col-lg-10">
 							<textarea class="form-control" rows="3" id="textArea"></textarea>
-							<span class="help-block">No debe superar los 500 caracteres</span>
+							<span class="help-block">No debe superar los 500
+								caracteres</span>
 						</div>
 					</div>
 
@@ -151,14 +164,6 @@
 							});
 		}
 
-		function addTemaRelacionadoInput() {
-
-			var nodoPadre = document.getElementById("")
-
-			alert("HOLA");
-
-		}
-
 		$(function() {
 			$("#search").autocomplete({
 				appentTo : "#search",
@@ -184,10 +189,27 @@
 				select : function(event, ui) {
 					$("#search").val(ui.item.label);
 					$("#idAutor").val(ui.item.value);
+					crearAutor(ui.item.value, ui.item.label);
 					return false;
 				}
 			});
 		});
+		
+		function crearAutor(id, value) {
+			
+			var $newAutor = $('<li/>', {
+				'class' : "list-group-item",
+				'id' : id,
+				html : value
+			}).append($('<button/>', {
+				'type' : "button",
+				'class' : "close",
+				html : "x"
+			}));
+
+			$newAutor.appendTo("#listAutores");
+			
+		}
 
 		$(function() {
 			$("#autocompleteTema").autocomplete({
