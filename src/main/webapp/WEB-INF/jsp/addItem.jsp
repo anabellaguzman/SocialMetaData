@@ -59,27 +59,7 @@
 						<div class="col-lg-10" id="temasRelacionados">
 							<input id="autocompleteTema" class="form-control"> <input
 								type="hidden" class="form-control" id="idTema"></input>
-							<button class="btn btn-primary btn-xs"
-								onclick="addTemaRelacionadoInput()">+</button>
-							<div class="bs-component">
-								<span class="label label-success">Success</span>
-								<button type="button" class="close" data-dismiss="alert">×</button>
-
-
-								<div class="col-lg-4">
-									<div class="bs-component">
-										<div class="alert alert-dismissible alert-success">
-											<button type="button" class="close" data-dismiss="alert">×</button>
-											<strong>Well done!</strong> You successfully read <a href="#"
-												class="alert-link">this important alert message</a>.
-										</div>
-									</div>
-								</div>
-
-
-
-
-							</div>
+							<div class="bs-component" id="contenedorTemas"></div>
 
 						</div>
 
@@ -109,6 +89,14 @@
 							</select>
 						</div>
 					</div>
+					<div class="form-group">
+						<label for="textArea" class="col-lg-2 control-label">Descripcion</label>
+						<div class="col-lg-10">
+							<textarea class="form-control" rows="3" id="textArea"></textarea>
+							<span class="help-block">No debe superar los 500 caracteres</span>
+						</div>
+					</div>
+
 					<fieldset id="fs_individualAtributes">
 						<c:forEach items="${listAtributosFistItem}" var="atributoItem">
 
@@ -236,11 +224,53 @@
 
 		function crearTemaRel(id, value) {
 
-			console.log(id + value);
+			var $newTemaRel = $('<div/>', {
+				'class' : "col-lg-4",
+			}).append($('<div/>', {
+				'class' : "bs-component",
+			}).append($('<div/>', {
+				'class' : "alert alert-dismissible alert-success",
+				'id' : id,
+				html : value
+			}).append($('<button/>', {
+				'type' : "button",
+				'class' : "close",
+				html : "x"
+			}))));
+
+			$newTemaRel.appendTo("#contenedorTemas");
+
+			// 			var e = document.createElement('div');
+			// 			e.class = 'class';
+			// 			e.innerHTML = 'some Text';
+
+			// 			var $e = $(e);
+
+			// 			console.log(id + value);
+
+			// 			var capaDiasSemana = $('<div/>', {
+			// 			    'class' : 'diassemana',
+			// 			    'id'    : 'id_' + user.id
+			// 			});
+
+			// 			$('<li>', {
+			// 			    id: '#tab-' + count
+			// 			}).append($('<a>', {
+			// 			    href: some_variable,
+			// 			    text: $(this).text()
+			// 			})).appendTo('#uls');
 
 		}
 	</script>
 
+	<!-- 								<div class="col-lg-4"> -->
+	<!-- 									<div class="bs-component"> -->
+	<!-- 										<div class="alert alert-dismissible alert-success"> -->
+	<!-- 											<button type="button" class="close">×</button> -->
+	<!-- 											Chisme  -->
+	<!-- 										</div> -->
+	<!-- 									</div> -->
+	<!-- 								</div> -->
 
 
 </body>
