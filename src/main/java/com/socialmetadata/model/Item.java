@@ -30,8 +30,8 @@ public class Item {
 	private String titulo;
 	@Column
 	private String año;
-	@Column
-	private double puntaje;
+	@Column 
+	private Double puntaje;
 	@Column
 	private int cantidadVotos;
 	@Column
