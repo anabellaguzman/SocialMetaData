@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/includes.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -48,12 +46,6 @@
 							<input id="search" class="form-control"> <input
 								type="hidden" class="form-control" id="idAutor"></input>
 								<ul class="list-group" id="listAutores">
-<!-- 								<li class="list-group-item"> -->
-<!-- 									Cras justo odio<button type="button" class="close">×</button></li> -->
-<!-- 								<li class="list-group-item"> -->
-<!-- 									Dapibus ac facilisis in <button type="button" class="close">×</button></li> -->
-<!-- 								<li class="list-group-item"><button type="button" class="close">×</button> -->
-<!-- 									Morbi leo risus</li> -->
 							</ul>
 								
 

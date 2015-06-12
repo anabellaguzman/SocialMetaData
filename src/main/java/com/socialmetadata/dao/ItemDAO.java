@@ -41,5 +41,10 @@ public class ItemDAO {
 		
 		return session.getCurrentSession().createQuery("from Item").list();
 	}
+	
+	public List<Item> getItemsByTile(String term) {
+		
+		return session.getCurrentSession().createQuery("FROM Item WHERE titulo like '%"+ term + "%'").list();
+	}
 
 }
