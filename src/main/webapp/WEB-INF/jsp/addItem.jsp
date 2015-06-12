@@ -190,9 +190,12 @@
 					$("#search").val(ui.item.label);
 					$("#idAutor").val(ui.item.value);
 					crearAutor(ui.item.value, ui.item.label);
+				    
 					return false;
 				}
 			});
+			
+			clearThis($("#search"));
 		});
 		
 		function crearAutor(id, value) {
@@ -283,16 +286,14 @@
 			// 			})).appendTo('#uls');
 
 		}
+		
+	    function clearThis(target){
+	    	console.log("entroooo");
+	        target.value= "HOALLALALALAL";
+	    }
+		
 	</script>
 
-	<!-- 								<div class="col-lg-4"> -->
-	<!-- 									<div class="bs-component"> -->
-	<!-- 										<div class="alert alert-dismissible alert-success"> -->
-	<!-- 											<button type="button" class="close">×</button> -->
-	<!-- 											Chisme  -->
-	<!-- 										</div> -->
-	<!-- 									</div> -->
-	<!-- 								</div> -->
 
 
 </body>
