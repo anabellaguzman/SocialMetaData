@@ -24,7 +24,7 @@
 		<div class="form-group">
 			<input id="searchItem" type="text" class="form-control" placeholder="Buscar Item">
 		</div>
-		<button type="button" class="btn btn-default"  onclick="doSearchItem()">Buscar</button>
+		<button type="button" class="btn btn-default"  onclick="doSearchItemsLike()">Buscar</button>
 
 		
 	</form>
@@ -33,7 +33,7 @@
 
 
 <script type="text/javascript">
-function doSearchItem() {
+function doSearchItemsLike() {
 
 
 			$.ajax({

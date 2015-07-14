@@ -41,26 +41,34 @@ public class SearchItemController {
 		mav.addObject("items", items);
 		mav.addObject("mensaje", "hola, todo bien");
 //		
-		for (Item i : items){
+//		for (Item i : items){
+////			
+//			System.out.println("Titlo item: " + i.getTitulo());
+////			i.getAño();
+////			i.getTipo().getDescripcion();
+////			
+////			System.out.println(i.getTipo().getDescripcion());
+////			Set<Autor> autores = i.getAutores();
 //			
-			System.out.println("Titlo item: " + i.getTitulo());
-//			i.getAño();
-//			i.getTipo().getDescripcion();
+//			for (Autor a : i.getAutores()){
+//				System.out.println("autor nombre"+ a.getNombre());
+//				System.out.println("autor apellido"+ a.getApellido());
+//			}
+//
 //			
-//			System.out.println(i.getTipo().getDescripcion());
-//			Set<Autor> autores = i.getAutores();
-			
-			for (Autor a : i.getAutores()){
-				System.out.println("autor nombre"+ a.getNombre());
-				System.out.println("autor apellido"+ a.getApellido());
-			}
-
-			
-		}
-		
+//		}
 		
 		return mav;
 		
 	}
+	
+	@RequestMapping(value = "/showItem.do", method = RequestMethod.GET)
+	public @ResponseBody ModelAndView  showItem(@RequestParam int idItem) {
+		
+
+		System.out.println("el id: "+ idItem);
+		Item item = itemService.getItem(idItem);
+		return null;
+	}	
 
 }

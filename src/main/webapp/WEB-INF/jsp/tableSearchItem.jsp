@@ -11,7 +11,7 @@
 				<table class="table table-striped table-hover ">
 					<thead>
 						<tr>
-							<th>#</th>
+<!-- 							<th style="display:none;">id</th> -->
 							<th>Titulo</th>
 							<th>Tipo Item</th>
 							
@@ -19,8 +19,8 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${items}" var="item">
-						<tr>
-							<td>${item.idItem}</td>
+						<tr onclick="doSearchItem('${item.idItem}')">
+<%-- 							<td id="td${item.idItem}" style="display:none;">${item.idItem}</td> --%>
 							<td>${item.titulo}</td>
 							<td>${item.tipo.descripcion}</td>
 						</tr>
@@ -32,3 +32,28 @@
 		</div>
 	</div>
 </div>
+
+<script  type="text/javascript">
+
+function doSearchItem(id){
+	
+	
+	
+	$.ajax({
+		url : "item",
+		type : "GET",
+		data : {idItem: id},
+// 		success : function(response) {		
+// 			 $("#subViewDiv").html(response);
+// 		}
+// 		,
+// 		error: function (xhr,textStatus,errorThrown){
+			
+// 		alert("Error: " + xhr.status + " " + xhr.statusText);
+// 		}
+	
+		
+	});
+}
+
+</script>
