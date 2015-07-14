@@ -38,13 +38,15 @@ public class ItemService {
 		List<Item> items = itemDAO.getItemsByTile(term);
 		
 		for (Item i : items){	
-			i.getTipo().getDescripcion();	
+			i.getTipo().getDescripcion();
 			for (Autor a : i.getAutores()){			
 			}			
 		}
 		
 		return items; 
 	}
+	
+	
 	
 
 }

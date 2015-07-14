@@ -24,36 +24,36 @@
 		<div class="form-group">
 			<input id="searchItem" type="text" class="form-control" placeholder="Buscar Item">
 		</div>
-		<button type="submit" class="btn btn-default">Buscar</button>
-	</form>
+		<button type="button" class="btn btn-default"  onclick="doSearchItemsLike()">Buscar</button>
 
+		
+	</form>
+	<div id="subViewDiv"></div>
+		
 
 
 <script type="text/javascript">
-$(function() {
-	$("#searchItem").autocomplete({
-		delay : 500,
-		source : function(request, response) {
+function doSearchItemsLike() {
+
+
 			$.ajax({
 				url : "searchItem.do",
 				type : "GET",
-				data : {
-					term : request.term
-				},
-				dataType : "json",
-				success : function(data) {
-					response($.map(data, function(v, i) {
-						return {
-							value : v.idItem,
-							label : v.titulo
-						};
-					}));
+				data : {term: $('#searchItem').val()},
+				success : function(response) {		
+					 $("#subViewDiv").html(response);
 				}
+				,
+				error: function (xhr,textStatus,errorThrown){
+					
+				alert("Error: " + xhr.status + " " + xhr.statusText);
+				}
+			
+				
 			});
-		},
 
-	});
-});
+	
+}
 </script>
 
 
