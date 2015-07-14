@@ -2,7 +2,6 @@ package com.socialmetadata.controller;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.socialmetadata.model.Autor;
 import com.socialmetadata.model.Item;
@@ -30,11 +30,16 @@ public class SearchItemController {
 	
 	
 	@RequestMapping(value = "/searchItem.do", method = RequestMethod.GET)
-	public @ResponseBody List <Item>  searchItem(@RequestParam String term) {	
+	public @ResponseBody ModelAndView  searchItem(@RequestParam String term) {	
 		
-	 
+		System.out.println("ENTRO AL CONTROLLER" + term);
+		
 		List<Item> items = itemService.getItemByTitle(term);
 		
+		ModelAndView mav = new ModelAndView("tableSearchItem");
+		
+		mav.addObject("items", items);
+		mav.addObject("mensaje", "hola, todo bien");
 //		
 //		for (Item i : items){
 ////			
@@ -53,9 +58,17 @@ public class SearchItemController {
 //			
 //		}
 		
-		
-		return items;
+		return mav;
 		
 	}
+	
+	@RequestMapping(value = "/showItem.do", method = RequestMethod.GET)
+	public @ResponseBody ModelAndView  showItem(@RequestParam int idItem) {
+		
+
+		System.out.println("el id: "+ idItem);
+		Item item = itemService.getItem(idItem);
+		return null;
+	}	
 
 }
