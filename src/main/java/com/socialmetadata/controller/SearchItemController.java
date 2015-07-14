@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.socialmetadata.model.Autor;
+
 import com.socialmetadata.model.Item;
 import com.socialmetadata.service.ItemService;
 
@@ -32,14 +32,13 @@ public class SearchItemController {
 	@RequestMapping(value = "/searchItem.do", method = RequestMethod.GET)
 	public @ResponseBody ModelAndView  searchItem(@RequestParam String term) {	
 		
-		System.out.println("ENTRO AL CONTROLLER" + term);
+
 		
 		List<Item> items = itemService.getItemByTitle(term);
 		
 		ModelAndView mav = new ModelAndView("tableSearchItem");
 		
 		mav.addObject("items", items);
-		mav.addObject("mensaje", "hola, todo bien");
 //		
 //		for (Item i : items){
 ////			
@@ -61,14 +60,6 @@ public class SearchItemController {
 		return mav;
 		
 	}
-	
-	@RequestMapping(value = "/showItem.do", method = RequestMethod.GET)
-	public @ResponseBody ModelAndView  showItem(@RequestParam int idItem) {
 		
-
-		System.out.println("el id: "+ idItem);
-		Item item = itemService.getItem(idItem);
-		return null;
-	}	
 
 }
