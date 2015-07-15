@@ -37,23 +37,7 @@
 
 function doSearchItem(id){
 	
-	
-	
-	$.ajax({
-		url : "item",
-		type : "GET",
-		data : {idItem: id},
-// 		success : function(response) {		
-// 			 $("#subViewDiv").html(response);
-// 		}
-// 		,
-// 		error: function (xhr,textStatus,errorThrown){
-			
-// 		alert("Error: " + xhr.status + " " + xhr.statusText);
-// 		}
-	
-		
-	});
-}
+	location.href=document.URL.substr(0,document.URL.lastIndexOf('/'))+"/item?idItem="+id;
+}	
 
 </script>
