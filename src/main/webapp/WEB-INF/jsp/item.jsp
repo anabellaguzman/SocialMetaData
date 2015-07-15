@@ -26,6 +26,7 @@
 
 			<ul class="list-group">
 				<li class="list-group-item">Formato : ${item.tipo.descripcion} </li>
+				<li class="list-group-item">Cantidad votos : ${item.cantidadVotos} </li>
 				<c:forEach items="${item.valorAtributoPropio}" var="valorAtributo">
 					
 					<li class="list-group-item">${valorAtributo.pk.atributo.nombre} : ${valorAtributo.valor} </li>
