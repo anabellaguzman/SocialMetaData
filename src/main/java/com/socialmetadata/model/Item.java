@@ -29,7 +29,7 @@ public class Item {
 	@Column
 	private String titulo;
 	@Column
-	private String año;
+	private int año;
 	@Column 
 	private Double puntaje;
 	@Column
@@ -83,10 +83,10 @@ public class Item {
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
-	public String getAño() {
+	public int getAño() {
 		return año;
 	}
-	public void setAño(String año) {
+	public void setAño(int año) {
 		this.año = año;
 	}
 	public double getPuntaje() {

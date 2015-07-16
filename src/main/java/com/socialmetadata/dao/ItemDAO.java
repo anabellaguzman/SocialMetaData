@@ -31,10 +31,8 @@ public class ItemDAO {
 	}
 
 	public Item getItem(int idItem) {
-				
 		return (Item)session.getCurrentSession().get(Item.class, idItem);
-		
-		
+	
 	}
 
 	public List<Item> getAllItems() {

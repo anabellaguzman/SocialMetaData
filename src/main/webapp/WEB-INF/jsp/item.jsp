@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/includes.jsp"%>
 <!DOCTYPE html>
 <html>
@@ -25,7 +26,8 @@
 
 
 			<ul class="list-group">
-				<li class="list-group-item">Formato : ${item.tipo.descripcion} </li>
+				<li class="list-group-item">Formato: ${item.tipo.descripcion} </li>
+				<li class="list-group-item">Año: ${item.año} </li>
 				<li class="list-group-item">Cantidad votos : ${item.cantidadVotos} </li>
 				<c:forEach items="${item.valorAtributoPropio}" var="valorAtributo">
 					
