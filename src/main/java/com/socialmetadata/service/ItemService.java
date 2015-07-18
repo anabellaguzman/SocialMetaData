@@ -1,5 +1,7 @@
 package com.socialmetadata.service;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +25,18 @@ public class ItemService {
 	public Item getItem(int idItem) {
 		
 		Item item = itemDAO.getItem(idItem);
-		
+	
 		item.getTipo().getDescripcion();
+		item.getIdioma().getIdioma();
 	
 		for (ValorAtributoItem vai : item.getValorAtributoPropio()) {
 			vai.getValor();
 			vai.getPk().getAtributo().getNombre();
+		}
+		
+		for (Autor a : item.getAutores()) {
+			a.getNombre();
+			a.getApellido();
 		}
 		
 		
