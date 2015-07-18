@@ -27,10 +27,16 @@ public class ItemService {
 		Item item = itemDAO.getItem(idItem);
 	
 		item.getTipo().getDescripcion();
+		item.getIdioma().getIdioma();
 	
 		for (ValorAtributoItem vai : item.getValorAtributoPropio()) {
 			vai.getValor();
 			vai.getPk().getAtributo().getNombre();
+		}
+		
+		for (Autor a : item.getAutores()) {
+			a.getNombre();
+			a.getApellido();
 		}
 		
 		
