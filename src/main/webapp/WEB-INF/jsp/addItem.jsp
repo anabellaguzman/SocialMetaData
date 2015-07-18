@@ -1,8 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/includes.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
+<head>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
 
 <link rel="stylesheet"
 	href="<c:url value="/resources/flatly/bootstrap.css" />" media="screen">
@@ -45,13 +50,13 @@
 						<div class="col-lg-10">
 							<input id="search" class="form-control"> <input
 								type="hidden" class="form-control" id="idAutor"></input>
-								<ul class="list-group" id="listAutores">
+							<ul class="list-group" id="listAutores">
 							</ul>
-								
+
 
 						</div>
 
-						
+
 
 
 
@@ -182,16 +187,16 @@
 					$("#search").val(ui.item.label);
 					$("#idAutor").val(ui.item.value);
 					crearAutor(ui.item.value, ui.item.label);
-				    
+
 					return false;
 				}
 			});
-			
+
 			clearThis($("#search"));
 		});
-		
+
 		function crearAutor(id, value) {
-			
+
 			var $newAutor = $('<li/>', {
 				'class' : "list-group-item",
 				'id' : id,
@@ -203,7 +208,7 @@
 			}));
 
 			$newAutor.appendTo("#listAutores");
-			
+
 		}
 
 		$(function() {
@@ -278,12 +283,11 @@
 			// 			})).appendTo('#uls');
 
 		}
-		
-	    function clearThis(target){
-	    	console.log("entroooo");
-	        target.value= "HOALLALALALAL";
-	    }
-		
+
+		function clearThis(target) {
+			console.log("entroooo");
+			target.value = "HOALLALALALAL";
+		}
 	</script>
 
 

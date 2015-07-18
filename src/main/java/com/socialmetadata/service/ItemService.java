@@ -1,10 +1,12 @@
 package com.socialmetadata.service;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.socialmetadata.dao.ItemDAO;
@@ -19,13 +21,22 @@ public class ItemService {
 	private ItemDAO itemDAO;
 	
 	@Transactional
+//	(propagation = Propagation.REQUIRES_NEW)
 	public Item getItem(int idItem) {
 		
 		Item item = itemDAO.getItem(idItem);
 	
+		item.getTipo().getDescripcion();
+		item.getIdioma().getIdioma();
+	
 		for (ValorAtributoItem vai : item.getValorAtributoPropio()) {
 			vai.getValor();
 			vai.getPk().getAtributo().getNombre();
+		}
+		
+		for (Autor a : item.getAutores()) {
+			a.getNombre();
+			a.getApellido();
 		}
 		
 		
