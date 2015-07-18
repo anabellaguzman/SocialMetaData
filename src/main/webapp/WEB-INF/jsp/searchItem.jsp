@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/includes.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -12,49 +14,58 @@
 <script type="text/javascript"
 	src="<c:url value="/resources/js/jquery.js" />"></script>
 <script type="text/javascript"
-	src="<c:url value="/resources/js/jquery-ui.min.js" />"></script>	
-	
-	
+	src="<c:url value="/resources/js/jquery-ui.min.js" />"></script>
+
+
 <title>Buscar Item</title>
 </head>
 
 <body>
 
-	<form class="navbar-form navbar-left" role="search">
-		<div class="form-group">
-			<input id="searchItem" type="text" class="form-control" placeholder="Buscar Item">
-		</div>
-		<button type="button" class="btn btn-default"  onclick="doSearchItemsLike()">Buscar</button>
 
-		
-	</form>
-	<div id="subViewDiv"></div>
-		
+<div class="container">
 
 
-<script type="text/javascript">
-function doSearchItemsLike() {
+			<div class="page-header">
+					<form class="navbar-form navbar-left" role="search">
+						<div class="form-group">
+							<input id="searchItem" type="text" class="form-control"
+								placeholder="Buscar Item">
+						</div>
+						<button type="button" class="btn btn-default"
+							onclick="doSearchItemsLike()">Buscar</button>
+					</form>
+			</div>
+			<br>
+			<br>
+			<div id="subViewDiv" class="bs-component"></div>
 
+
+
+</div>
+
+
+	<script type="text/javascript">
+		function doSearchItemsLike() {
 
 			$.ajax({
 				url : "searchItem.do",
 				type : "GET",
-				data : {term: $('#searchItem').val()},
-				success : function(response) {		
-					 $("#subViewDiv").html(response);
+				data : {
+					term : $('#searchItem').val()
+				},
+				success : function(response) {
+					$("#subViewDiv").html(response);
+				},
+				error : function(xhr, textStatus, errorThrown) {
+
+					alert("Error: " + xhr.status + " " + xhr.statusText);
 				}
-				,
-				error: function (xhr,textStatus,errorThrown){
-					
-				alert("Error: " + xhr.status + " " + xhr.statusText);
-				}
-			
-				
+
 			});
 
-	
-}
-</script>
+		}
+	</script>
 
 
 </body>
