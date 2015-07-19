@@ -24,8 +24,11 @@
 
 
 <body>
+		
 	<div class="col-lg-6">
+			<br>
 		<div class="well bs-component">
+
 			<form class="form-horizontal">
 				<fieldset id="fs_generalAtributes">
 					<legend>Nuevo Item</legend>
