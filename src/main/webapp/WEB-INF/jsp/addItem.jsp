@@ -32,22 +32,18 @@
 			<form class="form-horizontal">
 				<fieldset id="fs_generalAtributes">
 					<legend>Nuevo Item</legend>
-
 					<div class="form-group">
 						<label for="inputDefault" class="col-lg-2 control-label">Titulo</label>
 						<div class="col-lg-10">
 							<input type="text" class="form-control" id="idTituloItem"></input>
 						</div>
 					</div>
-
 					<div class="form-group">
 						<label for="inputDefault" class="col-lg-2 control-label">Año</label>
 						<div class="col-lg-10">
 							<input type="text" class="form-control" id="idAñoItem"></input>
 						</div>
 					</div>
-
-
 					<div class="form-group">
 						<label for="inputDefault" class="col-lg-2 control-label">Autor</label>
 						<div class="col-lg-10">
@@ -55,16 +51,8 @@
 								type="hidden" class="form-control" id="idAutor"></input>
 							<ul class="list-group" id="listAutores">
 							</ul>
-
-
 						</div>
-
-
-
-
-
 					</div>
-
 					<div class="form-group">
 						<label for="inputDefault" class="col-lg-2 control-label">Temas
 							Relacionados</label>
@@ -72,10 +60,7 @@
 							<input id="autocompleteTema" class="form-control"> <input
 								type="hidden" class="form-control" id="idTema"></input>
 							<div class="bs-component" id="contenedorTemas"></div>
-
 						</div>
-
-
 					</div>
 
 					<div class="form-group">
