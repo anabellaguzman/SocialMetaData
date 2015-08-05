@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/includes.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
-<head>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -24,26 +24,34 @@
 
 
 <body>
-		
+
 	<div class="col-lg-6">
-			<br>
+		<br>
 		<div class="well bs-component">
 
-			<form class="form-horizontal">
+			<form:form class="form-horizontal" method="POST" action="addItem"
+				modelAttribute="item">
 				<fieldset id="fs_generalAtributes">
 					<legend>Nuevo Item</legend>
 					<div class="form-group">
-						<label for="inputDefault" class="col-lg-2 control-label">Titulo</label>
+						<form:label path="titulo" for="inputDefault"
+							class="col-lg-2 control-label">Titulo</form:label>
 						<div class="col-lg-10">
-							<input type="text" class="form-control" id="idTituloItem"></input>
+							<form:input path="titulo" type="text" class="form-control"
+								id="idTituloItem"></form:input>
 						</div>
 					</div>
+
 					<div class="form-group">
 						<label for="inputDefault" class="col-lg-2 control-label">Año</label>
 						<div class="col-lg-10">
-							<input type="text" class="form-control" id="idAñoItem"></input>
+
+							<form:select path="year" class="form-control" id="selectYear">
+							</form:select>
 						</div>
 					</div>
+
+
 					<div class="form-group">
 						<label for="inputDefault" class="col-lg-2 control-label">Autor</label>
 						<div class="col-lg-10">
@@ -89,7 +97,8 @@
 					<div class="form-group">
 						<label for="textArea" class="col-lg-2 control-label">Descripcion</label>
 						<div class="col-lg-10">
-							<textarea class="form-control" rows="3" id="textArea"></textarea>
+							<form:textarea path="descripcion" class="form-control" rows="3"
+								id="textArea"></form:textarea>
 							<span class="help-block">No debe superar los 500
 								caracteres</span>
 						</div>
@@ -107,15 +116,18 @@
 							</div>
 						</c:forEach>
 					</fieldset>
+
+
 					<div class="form-group">
 						<div class="col-lg-10 col-lg-offset-2">
 							<button class="btn btn-default">Cancel</button>
 							<button type="submit" class="btn btn-primary">Submit</button>
+
 						</div>
 					</div>
 				</fieldset>
 
-			</form>
+			</form:form>
 		</div>
 	</div>
 
@@ -123,6 +135,22 @@
 
 
 	<script type="text/javascript">
+		$(function year() {
+
+			var min = 1999, max = new Date().getFullYear(), select = document
+					.getElementById('selectYear');
+
+			for (var i = min; i <= max; i++) {
+				var opt = document.createElement('option');
+				opt.value = i;
+				opt.innerHTML = i;
+				select.appendChild(opt);
+			}
+
+			select.value = new Date().getFullYear();
+
+		})
+
 		function jsFunction() {
 			vNombreAtributos = new Array();
 			var myselect = document.getElementById("selectOpt");

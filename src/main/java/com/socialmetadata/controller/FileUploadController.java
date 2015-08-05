@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import utilities.FileFormBean;
+import com.socialmetadata.utilities.FileFormBean;
 
 @Controller
 @RequestMapping("fileUpload")

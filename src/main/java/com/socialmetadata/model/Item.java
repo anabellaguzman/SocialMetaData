@@ -28,12 +28,12 @@ public class Item {
 	private int idItem;
 	@Column
 	private String titulo;
-	@Column
-	private int año;
+	@Column(name = "año")
+	private Integer year;
 	@Column 
 	private Double puntaje;
 	@Column
-	private int cantidadVotos;
+	private Integer cantidadVotos;
 	@Column
 	private String imagen; //Es el path de la imagen.
 	@Column
@@ -83,11 +83,11 @@ public class Item {
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
-	public int getAño() {
-		return año;
+	public Integer getYear() {
+		return year;
 	}
-	public void setAño(int año) {
-		this.año = año;
+	public void setYear(Integer year) {
+		this.year = year;
 	}
 	public double getPuntaje() {
 		return puntaje;
@@ -95,10 +95,10 @@ public class Item {
 	public void setPuntaje(double puntaje) {
 		this.puntaje = puntaje;
 	}
-	public int getCantidadVotos() {
+	public Integer getCantidadVotos() {
 		return cantidadVotos;
 	}
-	public void setCantidadVotos(int cantidadVotos) {
+	public void setCantidadVotos(Integer cantidadVotos) {
 		this.cantidadVotos = cantidadVotos;
 	}
 	public String getImagen() {

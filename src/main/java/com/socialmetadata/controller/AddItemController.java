@@ -10,9 +10,14 @@ import java.util.Set;
 
 
 
+
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.SpringVersion;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.socialmetadata.model.AtributoItem;
 import com.socialmetadata.model.Autor;
 import com.socialmetadata.model.Idioma;
+import com.socialmetadata.model.Item;
 import com.socialmetadata.model.Tema;
 import com.socialmetadata.model.TipoItem;
 import com.socialmetadata.service.AutorService;
@@ -43,8 +49,8 @@ public class AddItemController {
 	@Autowired
 	private TemaService temaService;
 
-	@RequestMapping("/addItem")
-	public String setupForm(Map<String, Object> map) {
+	@RequestMapping(value ="/addItem", method = RequestMethod.GET)
+	public String setupForm(Map<String, Object> map, Model model) {
 
 		List<TipoItem> listTipoItem = tipoItemService.getAllTipoItem();
 		List<Idioma> listIdioma = idiomaService.getAllIdiomas();
@@ -56,10 +62,21 @@ public class AddItemController {
 		map.put("listAtributosFistItem", atributosFirstItem);
 		map.put("listTipoItem", listTipoItem);
 		map.put("listIdioma", listIdioma);
+		map.put("item", new Item());
+		
+		model.addAttribute("item", new Item());
 
 		return "addItem";
 
 	}
+	
+	
+//    @RequestMapping(value="/greeting", method=RequestMethod.GET)
+//    public String greetingForm(Model model) {
+//        model.addAttribute("greeting", new Greeting());
+//        return "greeting";
+//    }
+
 
 	@RequestMapping(value = "/selectedTipoItem.do", method = RequestMethod.GET)
 	public @ResponseBody Set<AtributoItem> doActions(@RequestParam int id) {
@@ -90,6 +107,19 @@ public class AddItemController {
 	public @ResponseBody List <Tema>  searchTema(@RequestParam String term) {
 		List<Tema> temas = temaService.getTemasLike(term);			
 		return temas;
+		
+	}
+	
+	@RequestMapping(value ="/addItem", method = RequestMethod.POST)
+//	public @ModelAttribute("message") String  addItem(@RequestParam String term) {
+		
+//		return "Item creado correctamente";
+	public void addItem(@ModelAttribute("item") Item item) {
+		System.out.println("addItem.do");
+		System.out.println("TITULO: "+ item.getTitulo());
+//		System.out.println("CantidadVotos: "+ item.getCantidadVotos());
+		System.out.println("Año: "+ item.getYear());
+		System.out.println("Descripcion: "+ item.getDescripcion());
 		
 	}
 	

@@ -1,4 +1,4 @@
-package utilities;
+package com.socialmetadata.utilities;
 
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
