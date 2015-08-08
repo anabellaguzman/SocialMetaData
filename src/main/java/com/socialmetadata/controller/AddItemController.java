@@ -36,7 +36,7 @@ import com.socialmetadata.service.TemaService;
 import com.socialmetadata.service.TipoItemService;
 
 @Controller
-public class AddItemController<E> {
+public class AddItemController {
 
 	@Autowired
 	private TipoItemService tipoItemService;
@@ -121,17 +121,27 @@ public class AddItemController<E> {
 //	public @ModelAttribute("message") String  addItem(@RequestParam String term) {
 		
 //		return "Item creado correctamente";
-	public void addItem(@RequestParam String tituloItem, @RequestParam String year, @RequestParam String autor) {
+	public void addItem(@RequestParam String tituloItem, @RequestParam String year, @RequestParam(value = "idAutores") List<String> idAutores) {
 //		System.out.println("addItem.do");
 		System.out.println("TITULO: "+ tituloItem);
 ////		System.out.println("CantidadVotos: "+ item.getCantidadVotos());
 		System.out.println("Año: "+ year);
 //		System.out.println("Descripcion: "+ item.getDescripcion());
-		 System.out.println("AUTOR: "+autor);
+		 System.out.println("AUTOR: "+idAutores);
+		 System.out.println("AUTORlength: "+idAutores.size());
 //
-//		 for (Autor autor: item.getAutores()){
+//		 for (String idAutor: idAutores.size()){
 //		 System.out.println("AUTOR: "+autor.getNombre());
 //	 }
+		 
+		 for(int i=0; i<idAutores.size(); i++){
+			 String enteroString = idAutores.get(i);
+			 int entero = Integer.parseInt(enteroString);
+			 
+			Autor a = autorService.getAutor(entero);
+			System.out.println("Autor :"+ a.getNombre() + a.getApellido());
+			 
+		 }
 		
 	}
 	

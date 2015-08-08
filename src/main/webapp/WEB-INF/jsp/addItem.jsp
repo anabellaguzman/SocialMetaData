@@ -66,8 +66,7 @@
 
 						<div class="col-lg-10">
 
-							<input type="text" class="form-control"
-								id="idTituloItem"></input>
+							<input type="text" class="form-control" id="idTituloItem"></input>
 
 						</div>
 
@@ -182,8 +181,7 @@
 
 						<div class="col-lg-10">
 
-							<textarea  class="form-control" rows="3"
-								id="textArea"></textarea>
+							<textarea class="form-control" rows="3" id="textArea"></textarea>
 
 							<span class="help-block">No debe superar los 500
 
@@ -228,7 +226,8 @@
 
 							<button class="btn btn-default">Cancel</button>
 
-							<button type="submit" class="btn btn-primary">Submit</button>
+							<button type="button" class="btn btn-primary"
+								onclick="addNewItem()">Submit</button>
 
 
 
@@ -255,6 +254,51 @@
 
 
 	<script type="text/javascript">
+		function addNewItem() {
+			console.log("addNewItem()");
+
+			var titulo = $("#idTituloItem").val();
+			var year = $("#selectYear").val();
+			var x = document.getElementById("listAutores");
+			var y = x.getElementsByTagName("li");
+			var length = y.length;
+
+			var idAutores = [];
+
+			for (var i = 0; i < length; ++i) {
+				var idA = y[i].id;
+				idAutores.push(idA);
+			}
+			$.ajax({
+				url : "addItem",
+				type : "POST",
+				data : {
+					tituloItem : titulo,
+					year: year,
+					idAutores: idAutores.toString()
+					
+					
+				}
+				});
+			// 			for (var i = 0; i < length; ++i) {		
+			// 				console.log("idAutores: " + idAutores[i]);
+			// 			}
+			
+// 			 $.ajax({
+// 			        type: "POST",
+// 			        url: "/webservices/PodcastService.asmx/CreateMarkers",
+// 			        data: markers,
+// 			        contentType: "application/json; charset=utf-8",
+// 			        dataType: "json",
+// 			        success: function(data){alert(data);},
+// 			        failure: function(errMsg) {
+// 			            alert(errMsg);
+// 			        }
+// 			  });
+
+			
+		}
+
 		$(function year() {
 
 			var min = 1999, max = new Date().getFullYear(), select = document
