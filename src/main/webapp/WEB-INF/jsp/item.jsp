@@ -39,7 +39,7 @@
 				</c:forEach>
 
 				</li>
-				<li class="list-group-item">Año: ${item.año}</li>
+				<li class="list-group-item">Año: ${item.year}</li>
 				<li class="list-group-item">Cantidad votos :
 					${item.cantidadVotos}</li>
 				<li class="list-group-item">Idioma : ${item.idioma.idioma}</li>

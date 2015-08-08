@@ -75,7 +75,7 @@ public class IdiomaService {
 //		
 		System.out.println("Id item: "+ item.getIdItem());
 		System.out.println("titulo item: "+ item.getTitulo());
-		System.out.println("titulo año: "+ item.getAño());
+		System.out.println("titulo año: "+ item.getYear());
 		System.out.println("titulo puntaje: "+ item.getPuntaje());
 		System.out.println("titulo tipo item:"+ item.getTipo().getDescripcion());
 		

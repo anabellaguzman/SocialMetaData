@@ -25,5 +25,10 @@ public class AutorService {
 	public List<Autor> getAutoresLike(String term) {
 		return autorDAO.getAutoresLike(term); 
 	}
+	
+	@Transactional
+	public Autor getAutor(int idAutor) {
+		return autorDAO.getAutor(idAutor);
+	}
 
 }
