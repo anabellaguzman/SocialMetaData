@@ -36,7 +36,7 @@ import com.socialmetadata.service.TemaService;
 import com.socialmetadata.service.TipoItemService;
 
 @Controller
-public class AddItemController {
+public class AddItemController<E> {
 
 	@Autowired
 	private TipoItemService tipoItemService;
@@ -62,9 +62,16 @@ public class AddItemController {
 		map.put("listAtributosFistItem", atributosFirstItem);
 		map.put("listTipoItem", listTipoItem);
 		map.put("listIdioma", listIdioma);
-		map.put("item", new Item());
+//		map.put("item", new Item());
+		 Item item = new Item();
+		 
 		
-		model.addAttribute("item", new Item());
+		 
+
+		
+		model.addAttribute("item", item);
+		
+
 
 		return "addItem";
 
@@ -114,12 +121,17 @@ public class AddItemController {
 //	public @ModelAttribute("message") String  addItem(@RequestParam String term) {
 		
 //		return "Item creado correctamente";
-	public void addItem(@ModelAttribute("item") Item item) {
-		System.out.println("addItem.do");
-		System.out.println("TITULO: "+ item.getTitulo());
-//		System.out.println("CantidadVotos: "+ item.getCantidadVotos());
-		System.out.println("Año: "+ item.getYear());
-		System.out.println("Descripcion: "+ item.getDescripcion());
+	public void addItem(@RequestParam String tituloItem, @RequestParam String year, @RequestParam String autor) {
+//		System.out.println("addItem.do");
+		System.out.println("TITULO: "+ tituloItem);
+////		System.out.println("CantidadVotos: "+ item.getCantidadVotos());
+		System.out.println("Año: "+ year);
+//		System.out.println("Descripcion: "+ item.getDescripcion());
+		 System.out.println("AUTOR: "+autor);
+//
+//		 for (Autor autor: item.getAutores()){
+//		 System.out.println("AUTOR: "+autor.getNombre());
+//	 }
 		
 	}
 	
