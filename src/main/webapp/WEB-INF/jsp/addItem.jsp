@@ -143,7 +143,7 @@
 
 								<c:forEach items="${listTipoItem}" var="tipoItem">
 
-									<option id="${tipoItem.idTipoItem}">${tipoItem.descripcion}</option>
+									<option value="${tipoItem.idTipoItem}">${tipoItem.descripcion}</option>
 
 								</c:forEach>
 
@@ -165,7 +165,7 @@
 
 								<c:forEach items="${listIdioma}" var="idioma">
 
-									<option id="${idioma.idIdioma}">${idioma.idioma}</option>
+									<option value="${idioma.idIdioma}">${idioma.idioma}</option>
 
 								</c:forEach>
 
@@ -255,16 +255,27 @@
 
 	<script type="text/javascript">
 		function addNewItem() {
-			console.log("addNewItem()");
 
 			var titulo = $("#idTituloItem").val();
 			var year = $("#selectYear").val();
+			var tipoItem = $("#selectOpt").val();
+			var idioma = $("#selectIdioma").val();
+			var descripcion = $("#textArea").val();
+
+			var cTemas = document.getElementById("contenedorTemas");
+			var lTemas = cTemas.getElementsByTagName("label");
+			var lengthTemas = lTemas.length;
+			var idTemas = [];
+			for (var i = 0; i < lengthTemas; ++i) {
+				var idT = lTemas[i].id;
+				idTemas.push(idT);
+				console.log(idT);
+			}
+
 			var x = document.getElementById("listAutores");
 			var y = x.getElementsByTagName("li");
 			var length = y.length;
-
 			var idAutores = [];
-
 			for (var i = 0; i < length; ++i) {
 				var idA = y[i].id;
 				idAutores.push(idA);
@@ -274,29 +285,15 @@
 				type : "POST",
 				data : {
 					tituloItem : titulo,
-					year: year,
-					idAutores: idAutores.toString()
-					
-					
+					year : year,
+					idAutores : idAutores.toString(),
+					idTemas : idTemas.toString(),
+					idTipoItem : tipoItem,
+					idIdioma : idioma,
+					descripcion : descripcion,
 				}
-				});
-			// 			for (var i = 0; i < length; ++i) {		
-			// 				console.log("idAutores: " + idAutores[i]);
-			// 			}
-			
-// 			 $.ajax({
-// 			        type: "POST",
-// 			        url: "/webservices/PodcastService.asmx/CreateMarkers",
-// 			        data: markers,
-// 			        contentType: "application/json; charset=utf-8",
-// 			        dataType: "json",
-// 			        success: function(data){alert(data);},
-// 			        failure: function(errMsg) {
-// 			            alert(errMsg);
-// 			        }
-// 			  });
+			});
 
-			
 		}
 
 		$(function year() {
@@ -324,20 +321,17 @@
 		function jsFunction() {
 
 			vNombreAtributos = new Array();
-
 			var myselect = document.getElementById("selectOpt");
-
 			var fs_iA = document.getElementById("fs_individualAtributes");
-
 			$(fs_iA).empty();
 
 			$
-
 					.getJSON(
 
 							'selectedTipoItem.do',
 
-							"id=" + myselect.options[myselect.selectedIndex].id,
+							"id="
+									+ myselect.options[myselect.selectedIndex].value,
 
 							function(nombreAtributos) {
 
@@ -527,7 +521,7 @@
 
 				'class' : "bs-component",
 
-			}).append($('<div/>', {
+			}).append($('<label/>', {
 
 				'class' : "alert alert-dismissible alert-success",
 
