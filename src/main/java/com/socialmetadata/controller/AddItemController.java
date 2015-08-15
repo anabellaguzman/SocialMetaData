@@ -23,6 +23,9 @@ import com.socialmetadata.model.Idioma;
 import com.socialmetadata.model.Item;
 import com.socialmetadata.model.Tema;
 import com.socialmetadata.model.TipoItem;
+import com.socialmetadata.model.ValorAtributoItem;
+import com.socialmetadata.modeloDao.embebedPK.ValorAtributoItemEPK;
+import com.socialmetadata.service.AtributoItemService;
 import com.socialmetadata.service.AutorService;
 import com.socialmetadata.service.IdiomaService;
 import com.socialmetadata.service.ItemService;
@@ -42,6 +45,8 @@ public class AddItemController {
 	private AutorService autorService;
 	@Autowired
 	private TemaService temaService;
+	@Autowired
+	private AtributoItemService atributoItemService;
 
 	@RequestMapping(value = "/addItem", method = RequestMethod.GET)
 	public String setupForm(Map<String, Object> map, Model model) {
@@ -93,7 +98,9 @@ public class AddItemController {
 	public void addItem(@RequestParam String tituloItem,
 			@RequestParam String year, @RequestParam List<String> idAutores,
 			@RequestParam List<String> idTemas, @RequestParam int idTipoItem,
-			@RequestParam int idIdioma, @RequestParam String descripcion) {
+			@RequestParam int idIdioma, @RequestParam String descripcion,
+			@RequestParam List<String> idOwnAtr, @RequestParam List<String> valOwnAtr
+			) {
 
 		Idioma idioma = idiomaService.getIdioma(idIdioma);
 		TipoItem tipoItem = tipoItemService.getTipoItem(idTipoItem);
@@ -122,6 +129,33 @@ public class AddItemController {
 			temas.add(t);
 		}
 		item.setSetTemas(temas);
+		
+		
+		item.setIdItem(itemService.add(item));
+		
+		
+	
+		
+//		ACA QUEDE 
+//		Set<AtributoItem> atributosItem = new HashSet<AtributoItem>();
+		Set<ValorAtributoItem> valorAtributoItem = new HashSet<ValorAtributoItem>();
+		
+		for (int i = 0; i < idOwnAtr.size(); i++) {
+			String enteroString = idOwnAtr.get(i);
+			int id = Integer.parseInt(enteroString);
+			AtributoItem atributo = atributoItemService.getAtributoItem(id);
+			
+			ValorAtributoItemEPK pk = new ValorAtributoItemEPK(item, atributo);
+			ValorAtributoItem valAI = new ValorAtributoItem(pk, valOwnAtr.get(i));
+			valorAtributoItem.add(valAI);
+			
+			
+		}
+		
+		item.setValorAtributoPropio(valorAtributoItem);
+		
+		itemService.update(item);
+
 		
 		
 

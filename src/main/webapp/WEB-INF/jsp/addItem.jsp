@@ -271,7 +271,32 @@
 				idTemas.push(idT);
 				console.log(idT);
 			}
-
+			
+			var fsIndAtr = document.getElementById("fs_individualAtributes");
+			var inputIndAtr = fsIndAtr.getElementsByTagName("input");
+			var lIndAtr = inputIndAtr.length;
+			
+			console.log("inputInd");
+			console.log(inputIndAtr);
+			
+// 			console.log(lIndAtr);
+			var idIndAtr = [];
+			var valIndAtr = [];
+			for (var i = 0; i < lIndAtr; ++i) {
+				
+				console.log("console.log(inputIndAtr[i].id);");
+				idIndAtr.push(inputIndAtr[i].id);
+				console.log(inputIndAtr[i].id);
+				console.log("console.log(inputIndAtr[i].value);");
+				console.log(inputIndAtr[i].value);
+				valIndAtr.push(inputIndAtr[i].value);
+				
+// 				console.log(inIndAtr[i]);
+// 				console.log(inIndAtr[i].val());
+// 				var idA = inIndAtr[i].id;
+// 				idAutores.push(idA);
+			}
+			
 			var x = document.getElementById("listAutores");
 			var y = x.getElementsByTagName("li");
 			var length = y.length;
@@ -291,6 +316,9 @@
 					idTipoItem : tipoItem,
 					idIdioma : idioma,
 					descripcion : descripcion,
+					idOwnAtr: idIndAtr.toString(), 
+					valOwnAtr: valIndAtr.toString(),
+					
 				}
 			});
 
@@ -326,40 +354,24 @@
 			$(fs_iA).empty();
 
 			$
-					.getJSON(
-
-							'selectedTipoItem.do',
-
-							"id="
-									+ myselect.options[myselect.selectedIndex].value,
-
+					.getJSON('selectedTipoItem.do',
+							"id="+ myselect.options[myselect.selectedIndex].value,
 							function(nombreAtributos) {
-
 								var items = [];
+								$.each(nombreAtributos,
+									function(key, val) {
+									items.push("<div class='form-group'> <label class='col-lg-2 control-label' for='inputDefault'>"
+											+ val.nombre
+											+ "</label> <div class='col-lg-10'> <input type='text' class='form-control' id="+val.idAtributoItem+"> </input> </div> </div>");
+									});
+								
+								$("#fs_individualAtributes").append(items);
+	
+// 								$("<ul/>", {
 
-								$
+// 									html : items.join("")
 
-										.each(
-
-												nombreAtributos,
-
-												function(key, val) {
-
-													items
-
-															.push("<div class='form-group'> <label class='col-lg-2 control-label' for='inputDefault'>"
-
-																	+ val.nombre
-
-																	+ "</label> <div class='col-lg-10'> <input type='text' class='form-control' id="+val.idAtributoItem+"> </input> </div> </div>");
-
-												});
-
-								$("<ul/>", {
-
-									html : items.join("")
-
-								}).appendTo("#fs_individualAtributes");
+// 								}).appendTo("#fs_individualAtributes");
 
 							});
 

@@ -57,6 +57,20 @@ public class ItemService {
 		return items; 
 	}
 	
+	@Transactional
+	public int add(Item item) {
+		return itemDAO.add(item);
+		
+	}
+	
+	@Transactional
+	public void update(Item item) {
+		itemDAO.update(item);
+		
+	}
+	
+	
+	
 	
 	
 
