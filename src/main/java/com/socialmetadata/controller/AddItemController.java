@@ -34,6 +34,8 @@ import com.socialmetadata.service.TipoItemService;
 
 @Controller
 public class AddItemController {
+	
+	static final ClassLoader loader = FileUploadController.class.getClassLoader();
 
 	@Autowired
 	private TipoItemService tipoItemService;

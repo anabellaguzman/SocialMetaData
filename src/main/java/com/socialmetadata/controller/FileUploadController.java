@@ -25,8 +25,12 @@ public class FileUploadController {
 	
 
     @RequestMapping(method = RequestMethod.GET)
-    public @ModelAttribute("fileFormBean") FileFormBean getInitialMessage() {
-        return new FileFormBean();
+//    public @ModelAttribute("fileFormBean") FileFormBean getInitialMessage() {
+//        return new FileFormBean();
+//    }
+    
+    public String getInitialMessage() {
+        return "fileUpload";
     }
  
     @RequestMapping(method = RequestMethod.POST)
@@ -156,6 +160,3 @@ public class FileUploadController {
 //    		}
 //    	}
 }
-
-
-

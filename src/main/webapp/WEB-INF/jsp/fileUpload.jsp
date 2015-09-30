@@ -33,17 +33,49 @@
 <form method="post" action="fileUpload" enctype="multipart/form-data">
     <table>
         <tr>
-           <td>Selecciona fichero: </td>
-           <td><input type="file" name="fichero"></td>
+           <td>Seleccionar archivo: </td>
+           <td><input type="file" id=fichero name="fichero"></td>
         </tr>
         <tr>
     
         </tr>
         <tr><td colspan="2" align="center">
-    	<input type="submit" value="Subir fichero"></td>
+    	<input type="submit" value="Subir fichero">
+<!--     	<button type="button" class="btn btn-primary" -->
+<!-- 								onclick="uploadFile()">Submit</button></td> -->
         </tr>
      </table>
 </form>
+
+<!-- <table> -->
+<!--         <tr> -->
+<!--            <td>Seleccionar archivo: </td> -->
+<!--            <td><input type="file" id=fichero name="fichero"></td> -->
+<!--         </tr> -->
+<!--         <tr> -->
+    
+<!--         </tr> -->
+<!--         <tr><td colspan="2" align="center"> -->
+    	
+<!--     	<button type="button" class="btn btn-primary" onclick="uploadFile()">Submit</button></td> -->
+<!--         </tr> -->
+<!--      </table> -->
+
+<script type="text/javascript">
+		function uploadFile() {
+			$.ajax({
+			    url: 'fileUpload',
+			    contentType: false,
+			    type: 'POST',
+			    data: {fileFormBean: $('#fichero')},
+			    cache: false,
+			    processData: false,
+			    success: function(data){
+			        alert(':)');
+			    }
+			});
+		}
+</script>
 
 </body>
 </html>
