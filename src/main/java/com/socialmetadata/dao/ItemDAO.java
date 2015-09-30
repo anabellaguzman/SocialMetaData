@@ -1,5 +1,6 @@
 package com.socialmetadata.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -15,12 +16,15 @@ public class ItemDAO {
 	@Autowired
 	private SessionFactory session;
 
-	public void add(Item item) {
-		session.getCurrentSession().save(item);
-		
+	public int add(Item item) {
+		Serializable i = session.getCurrentSession().save(item);
+
+		int id = (Integer) i;
+		System.out.println("ID: "+ id);
+		return id;
 	}
 
-	public void edit(Item item) {
+	public void update(Item item) {
 		session.getCurrentSession().update(item);
 		
 	}

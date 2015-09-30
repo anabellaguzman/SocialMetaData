@@ -31,7 +31,9 @@
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<mvc:default-servlet-handler />
 	<mvc:annotation-driven />
-
+	
+	
+<!-- 	<resources mapping="/images/**" location="/images/" />  -->
 
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
