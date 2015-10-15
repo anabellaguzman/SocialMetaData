@@ -20,7 +20,7 @@ public class ItemDAO {
 		Serializable i = session.getCurrentSession().save(item);
 
 		int id = (Integer) i;
-		System.out.println("ID: "+ id);
+//		System.out.println("ID: "+ id);
 		return id;
 	}
 

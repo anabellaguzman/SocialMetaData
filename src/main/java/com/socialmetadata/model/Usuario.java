@@ -1,6 +1,7 @@
 package com.socialmetadata.model;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -13,6 +14,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+
+
+
 
 @Entity
 public class Usuario {
@@ -29,6 +33,21 @@ public class Usuario {
 	private String email;
 	@Column
 	private String password;
+	@Column
+	private String username;
+	@Column 
+	private boolean enabled;
+	
+	
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(
+		name="usuariorol",
+		joinColumns = @JoinColumn(name="idUsuario"),
+		inverseJoinColumns = @JoinColumn(name="idRol")
+	)
+	private Set<Rol> roles = new HashSet<Rol>(0);
+	
+	
 	
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
@@ -37,6 +56,8 @@ public class Usuario {
             inverseJoinColumns = @JoinColumn(name = "idItem")
     )	
 	private Set<Item> itemsFavoritos;
+    
+
 	
 	public Usuario() {}
 
@@ -97,6 +118,32 @@ public class Usuario {
 	public void setItemsFavoritos(Set<Item> itemsFavoritos) {
 		this.itemsFavoritos = itemsFavoritos;
 	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public Set<Rol> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Rol> roles) {
+		this.roles = roles;
+	}
+
+
 	
 	
 	
