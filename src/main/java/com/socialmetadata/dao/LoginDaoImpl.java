@@ -1,18 +1,17 @@
 package com.socialmetadata.dao;
 
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
-import com.socialmetadata.model.Usuario;
-
+import com.socialmetadata.model.Users;
 
 
 @Repository("loginDao")
-public class LoginDAOImpl implements LoginDAO {
+public class LoginDaoImpl implements LoginDao{
 	
 	@Autowired
 	SessionFactory sessionFactory;
@@ -21,11 +20,11 @@ public class LoginDAOImpl implements LoginDAO {
 	Transaction tx = null;
 
 	@Override
-	public Usuario findByUserName(String username) {
+	public Users findByUserName(String username) {
 		session = sessionFactory.openSession();
 		tx = session.getTransaction();
 		session.beginTransaction();
-		Usuario user = (Usuario) session.load(Usuario.class, new String(username));
+		Users user = (Users) session.load(Users.class, new String(username));
 		tx.commit();
 		return user;
 	}

@@ -15,39 +15,42 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 
-import com.socialmetadata.dao.LoginDAO;
-import com.socialmetadata.model.Rol;
-import com.socialmetadata.model.Usuario;
+import com.socialmetadata.dao.LoginDao;
+import com.socialmetadata.model.UserRole;
+import com.socialmetadata.model.Users;
+
 
 @Service("loginService")
 public class LoginServiceImpl implements UserDetailsService{
 
 	@Autowired
-	LoginDAO loginDao;
+	LoginDao loginDao;
+
 	@Override
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException {
-		Usuario user = loginDao.findByUserName(username);
 
-		List<GrantedAuthority> authorities = buildUserAuthority(user.getRoles());
+		Users user = loginDao.findByUserName(username);
+
+		List<GrantedAuthority> authorities = buildUserAuthority(user
+				.getUserRole());
 
 		return buildUserForAuthentication(user, authorities);
-		
 	}
-	
-	private User buildUserForAuthentication(Usuario user,
+
+	private User buildUserForAuthentication(Users user,
 			List<GrantedAuthority> authorities) {
 		return new User(user.getUsername(), user.getPassword(),
 				user.isEnabled(), true, true, true, authorities);
 	}
-	
-	private List<GrantedAuthority> buildUserAuthority(Set<Rol> userRoles) {
+
+	private List<GrantedAuthority> buildUserAuthority(Set<UserRole> userRoles) {
 
 		Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
 
 		// Build user's authorities
-		for (Rol rol : userRoles) {
-			setAuths.add(new SimpleGrantedAuthority(rol.getRol()));
+		for (UserRole userRole : userRoles) {
+			setAuths.add(new SimpleGrantedAuthority(userRole.getRole()));
 		}
 
 		List<GrantedAuthority> Result = new ArrayList<GrantedAuthority>(

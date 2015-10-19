@@ -24,7 +24,7 @@ public class Usuario {
 	@Id
 	@Column	
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int idUsuario;
+	private Integer idUsuario;
 	@Column
 	private String nombre;
 	@Column
@@ -39,7 +39,7 @@ public class Usuario {
 	private boolean enabled;
 	
 	
-	@ManyToMany(cascade=CascadeType.ALL)
+	@ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(
 		name="usuariorol",
 		joinColumns = @JoinColumn(name="idUsuario"),
@@ -61,7 +61,7 @@ public class Usuario {
 	
 	public Usuario() {}
 
-	public Usuario(int idUsuario, String nombre, String apellido, String email,
+	public Usuario(Integer idUsuario, String nombre, String apellido, String email,
 			Date fechaNacimiento, String password) {
 		super();
 		this.idUsuario = idUsuario;
@@ -71,11 +71,11 @@ public class Usuario {
 		this.password = password;
 	}
 
-	public int getIdUsuario() {
+	public Integer getIdUsuario() {
 		return idUsuario;
 	}
 
-	public void setIdUsuario(int idUsuario) {
+	public void setIdUsuario(Integer idUsuario) {
 		this.idUsuario = idUsuario;
 	}
 

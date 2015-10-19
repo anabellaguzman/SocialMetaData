@@ -11,7 +11,7 @@
 			<br /> Please enter your username and password to login ! <br /> <span
 				style="color: red">${message}</span> <br />
 			<form:form method="post" action="j_spring_security_check"
-				modelAttribute="usuario">
+				modelAttribute="users">
 				<table>
 					<tr>
 						<td>Username:</td>
