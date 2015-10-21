@@ -34,33 +34,13 @@ public class UsuarioDAO {
 		
 	}
 	
-	public Usuario getByUsername(String username) {
+	public List<Usuario> getByUsername(String username) {
 
 		List<Usuario> usuarios = new ArrayList<Usuario>();
-
-		usuarios = session.getCurrentSession().createQuery("from usuario where username=?").setParameter(0, username).list();
-
-		if (usuarios.size() > 0) {
-			return usuarios.get(0);
-		} else {
-			return null;
-		}
-
+		usuarios = session.getCurrentSession().createQuery("FROM Usuario WHERE username = '"+username+"'").list();	
+		return usuarios;
 	}
 
-//	public Usuario getUsuario(String login) {
-//		
-//		List<Usuario> userList = new ArrayList<Usuario>();
-//		Query query = session.getCurrentSession().createQuery("from usuario u where u. = :login");
-//		query.setParameter("login", login);
-//		userList = query.list();
-//		if (userList.size() > 0)
-//			return userList.get(0);
-//		else
-//			return null;	
-//		
-//		
-//	}
 	
 	public Usuario getUsuario(int idUsuario) {
 		

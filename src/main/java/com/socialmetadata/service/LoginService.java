@@ -14,43 +14,38 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.socialmetadata.model.Rol;
+import com.socialmetadata.model.Usuario;
 
-import com.socialmetadata.dao.LoginDao;
-import com.socialmetadata.model.UserRole;
-import com.socialmetadata.model.Users;
-
-
-//@Service("loginService")
-public class LoginServiceImpl implements UserDetailsService{
-
+@Service("loginService")
+public class LoginService implements UserDetailsService {
+	
 	@Autowired
-	LoginDao loginDao;
+	UsuarioService usuarioService;
 
 	@Override
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException {
-
-		Users user = loginDao.findByUserName(username);
-
-		List<GrantedAuthority> authorities = buildUserAuthority(user
-				.getUserRole());
-
-		return buildUserForAuthentication(user, authorities);
+		
+		Usuario usuario = usuarioService.getByUsername(username);
+		List<GrantedAuthority> authorities = buildUserAuthority(usuario.getRoles());
+		
+		return buildUserForAuthentication(usuario, authorities);
 	}
-
-	private User buildUserForAuthentication(Users user,
+	
+	private User buildUserForAuthentication(Usuario u,
 			List<GrantedAuthority> authorities) {
-		return new User(user.getUsername(), user.getPassword(),
-				user.isEnabled(), true, true, true, authorities);
+		return new User(u.getUsername(), u.getPassword(),
+				u.isEnabled(), true, true, true, authorities);
 	}
-
-	private List<GrantedAuthority> buildUserAuthority(Set<UserRole> userRoles) {
+	
+	private List<GrantedAuthority> buildUserAuthority(Set<Rol> roles) {
 
 		Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
 
 		// Build user's authorities
-		for (UserRole userRole : userRoles) {
-			setAuths.add(new SimpleGrantedAuthority(userRole.getRole()));
+		for (Rol r : roles) {
+			setAuths.add(new SimpleGrantedAuthority(r.getRol()));
 		}
 
 		List<GrantedAuthority> Result = new ArrayList<GrantedAuthority>(
@@ -58,5 +53,9 @@ public class LoginServiceImpl implements UserDetailsService{
 
 		return Result;
 	}
+	
+	
+	
+	
 
 }

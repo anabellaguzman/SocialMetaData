@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 
 
@@ -33,7 +34,6 @@ public class Usuario {
 	private String email;
 	@Column
 	private String password;
-	@Column
 	private String username;
 	@Column 
 	private boolean enabled;
@@ -45,7 +45,9 @@ public class Usuario {
 		joinColumns = @JoinColumn(name="idUsuario"),
 		inverseJoinColumns = @JoinColumn(name="idRol")
 	)
-	private Set<Rol> roles = new HashSet<Rol>(0);
+	private Set<Rol> roles;
+//	private Set<Rol> roles = new HashSet<Rol>(0);
+
 	
 	
 	
@@ -143,12 +145,6 @@ public class Usuario {
 		this.roles = roles;
 	}
 
-
-	
-	
-	
-	
-	
 	
 
 }
