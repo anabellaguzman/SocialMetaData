@@ -9,6 +9,10 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.SpringVersion;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,6 +27,7 @@ import com.socialmetadata.model.Idioma;
 import com.socialmetadata.model.Item;
 import com.socialmetadata.model.Tema;
 import com.socialmetadata.model.TipoItem;
+import com.socialmetadata.model.Usuario;
 import com.socialmetadata.model.ValorAtributoItem;
 import com.socialmetadata.modeloDao.embebedPK.ValorAtributoItemEPK;
 import com.socialmetadata.service.AtributoItemService;
@@ -31,6 +36,7 @@ import com.socialmetadata.service.IdiomaService;
 import com.socialmetadata.service.ItemService;
 import com.socialmetadata.service.TemaService;
 import com.socialmetadata.service.TipoItemService;
+import com.socialmetadata.service.UsuarioService;
 
 @Controller
 public class AddItemController {
@@ -49,6 +55,8 @@ public class AddItemController {
 	private TemaService temaService;
 	@Autowired
 	private AtributoItemService atributoItemService;
+	@Autowired
+	private UsuarioService usuarioService;
 
 	@RequestMapping(value = "/addItem", method = RequestMethod.GET)
 	public String setupForm(Map<String, Object> map, Model model) {
@@ -104,10 +112,13 @@ public class AddItemController {
 			@RequestParam List<String> idOwnAtr, @RequestParam List<String> valOwnAtr
 			) {
 
+		System.out.println("HOLA");
 		Idioma idioma = idiomaService.getIdioma(idIdioma);
 		TipoItem tipoItem = tipoItemService.getTipoItem(idTipoItem);
 
 		Item item = new Item();
+		
+		item.setCreator(getUsuarioInSession());
 		item.setTitulo(tituloItem);
 		item.setYear(Integer.valueOf(year));
 		item.setTipo(tipoItem);
@@ -161,6 +172,22 @@ public class AddItemController {
 		
 		
 
+	}
+	
+	private Usuario getUsuarioInSession(){
+		
+		  Authentication auth = SecurityContextHolder.getContext()  
+				    .getAuthentication();  
+				  String username = "";  
+				  if (!(auth instanceof AnonymousAuthenticationToken)) {  
+				   UserDetails userDetail = (UserDetails) auth.getPrincipal();  
+				   username = userDetail.getUsername();  
+				  }  
+				  
+				  System.out.println("username: "+username);
+		
+		return usuarioService.getByUsername(username);
+		
 	}
 
 }

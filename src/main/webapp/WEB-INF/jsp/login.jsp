@@ -1,34 +1,62 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/jsp/includes.jsp"%>
 <html>
 <head>
 <title>Login | Social Metadata</title>
 </head>
 <body>
+	<br />
+	<br />
+	<br />
 
-		<br /> <br /> <br />
-		<div style="border: 1px solid black; width: 300px; padding-top: 10px;">
-			<br /> Please enter your username and password to login ! <br /> <span
-				style="color: red">${message}</span> <br />
-			<form:form method="post" action="j_spring_security_check"
-				modelAttribute="users">
-				<table>
-					<tr>
-						<td>Username:</td>
-						<td><form:input path="username" /></td>
-					</tr>
-					<tr>
-						<td>Password:</td>
-						<td><form:input path="password" /></td>
-					</tr>
-					<tr>
-						<td>&nbsp;</td>
-						<td><input type="submit" /></td>
-					</tr>
-				</table>
-			</form:form>
+
+
+	<div class="container">
+		<div class="row">
+
+			<div class="col-lg-6">
+				<div class="well bs-component">
+
+					<form:form method="post" action="j_spring_security_check"
+						modelAttribute="usuario">
+						<fieldset>
+
+
+							<legend>Login</legend>
+							<div class="form-group">
+								<label for="inputEmail" class="col-lg-2 control-label">Usuario
+									o e-mail </label>
+								<div class="col-lg-10">
+									<form:input path="username" type="text" class="form-control"
+										id="inputEmail" placeholder="Usuario o e-mail" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="inputPassword" class="col-lg-2 control-label">Password</label>
+								<div class="col-lg-10">
+									<form:input path="password" type="password" class="form-control" id="inputPassword" placeholder="Password"/>
+								</div>
+							</div>
+							
+
+							<div class="form-group">
+								<div class="col-lg-10 col-lg-offset-2">
+									<button type="reset" class="btn btn-default">Cancel</button>
+									<button type="submit" class="btn btn-primary">Submit</button>
+								</div>
+							</div>
+						</fieldset>
+					</form:form>
+
+
+				</div>
+			</div>
 		</div>
-
+	</div>
 
 </body>
 </html>

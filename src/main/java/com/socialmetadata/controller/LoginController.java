@@ -17,11 +17,11 @@ import com.socialmetadata.model.Usuario;
 public class LoginController {
 	 @RequestMapping(value = { "/", "/home" })  
 	 public String getUserDefault() {  
-	  return "home";  
+	  return "searchItem";  
 	 }  
 	  
 	 @RequestMapping("/login")  
-	 public ModelAndView getLoginForm(@ModelAttribute Users users,  
+	 public ModelAndView getLoginForm(@ModelAttribute Usuario usuario,  
 	   @RequestParam(value = "error", required = false) String error,  
 	   @RequestParam(value = "logout", required = false) String logout) {  
 	  

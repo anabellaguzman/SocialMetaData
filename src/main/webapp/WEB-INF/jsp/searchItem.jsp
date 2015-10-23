@@ -24,6 +24,7 @@
 
 
 <div class="container">
+<div class="well bs-component">
 
 
 			<div class="page-header">
@@ -44,6 +45,7 @@
 
 </div>
 
+</div>
 
 	<script type="text/javascript">
 		function doSearchItemsLike() {

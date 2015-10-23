@@ -6,8 +6,9 @@
 	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
 	<!-- enable use-expressions -->
-
+<!--  hasRole('ROLE_USER') permitAll-->
 	<http auto-config="true" use-expressions="true">
+		<intercept-url pattern="/addItem**" access="hasRole('ROLE_USER')" />
 		<intercept-url pattern="/admin**" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/user**" access="hasRole('ROLE_USER')" />
 
@@ -17,8 +18,10 @@
 			username-parameter="username" password-parameter="password" />
 		<logout logout-success-url="/login?logout" />
 
-		<!-- enable csrf protection -->
-		<csrf />
+
+		<!-- enable csrf protection (cross site request forgery) -->
+<!-- 		<csrf /> -->
+<!-- 		<csrf disabled="true"/> -->
 
 	</http>
 

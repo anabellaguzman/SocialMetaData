@@ -23,6 +23,7 @@ public class ItemController {
 		
 		ModelAndView mav = new ModelAndView("item");
 		Item item = itemService.getItem(idItem);
+
 		mav.addObject("item", item);
 
 	 return mav;
