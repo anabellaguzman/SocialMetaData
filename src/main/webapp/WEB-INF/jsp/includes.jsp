@@ -16,13 +16,28 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="http://builtwithbootstrap.com/" target="_blank">Mi
 							Cuenta</a></li>
-					<li><a href="https://wrapbootstrap.com/?ref=bsw"
-						target="_blank">Login/Sign in</a></li>
+					<li><a href="./login"
+						target="_blank">Login</a></li>
 				</ul>
 
 			</div>
 		</div>
 	</div>
+	
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet"
+	href="<c:url value="/resources/flatly/bootstrap.css" />" media="screen">
+<link rel="stylesheet"
+	href="<c:url value="/resources/flatly/bootswatch.min.css" />">
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/jquery-ui.min.css" />">
+<script type="text/javascript"
+	src="<c:url value="/resources/js/jquery.js" />"></script>
+<script type="text/javascript"
+	src="<c:url value="/resources/js/jquery-ui.min.js" />"></script>
+
+
 <!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> -->
 
 

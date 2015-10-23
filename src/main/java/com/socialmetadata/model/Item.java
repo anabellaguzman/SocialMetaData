@@ -38,12 +38,17 @@ public class Item {
 	private String imagen; //Es el path de la imagen.
 	@Column
 	private String descripcion;
+	@Column 
+	private boolean enabled;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Idioma")
 	private Idioma idioma;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "tipo")
 	private TipoItem tipo; 
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "creator")
+	private Usuario creator;
 	
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY )
     @JoinTable(
@@ -149,6 +154,22 @@ public class Item {
 	public void setValorAtributoPropio(Set<ValorAtributoItem> valorAtributoPropio) {
 		this.valorAtributoPropio = valorAtributoPropio;
 	}
+	public boolean isEnabled() {
+		return enabled;
+	}
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+	public Usuario getCreator() {
+		return creator;
+	}
+	public void setCreator(Usuario creator) {
+		this.creator = creator;
+	}
+	public void setPuntaje(Double puntaje) {
+		this.puntaje = puntaje;
+	}
+	
 	
 	
 }

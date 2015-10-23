@@ -1,6 +1,7 @@
 package com.socialmetadata.model;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -13,6 +14,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+
+
 
 @Entity
 public class Usuario {
@@ -20,7 +25,7 @@ public class Usuario {
 	@Id
 	@Column	
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int idUsuario;
+	private Integer idUsuario;
 	@Column
 	private String nombre;
 	@Column
@@ -29,6 +34,22 @@ public class Usuario {
 	private String email;
 	@Column
 	private String password;
+	private String username;
+	@Column 
+	private boolean enabled;
+	
+	
+	@ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(
+		name="usuariorol",
+		joinColumns = @JoinColumn(name="idUsuario"),
+		inverseJoinColumns = @JoinColumn(name="idRol")
+	)
+	private Set<Rol> roles;
+//	private Set<Rol> roles = new HashSet<Rol>(0);
+
+	
+	
 	
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
@@ -37,10 +58,12 @@ public class Usuario {
             inverseJoinColumns = @JoinColumn(name = "idItem")
     )	
 	private Set<Item> itemsFavoritos;
+    
+
 	
 	public Usuario() {}
 
-	public Usuario(int idUsuario, String nombre, String apellido, String email,
+	public Usuario(Integer idUsuario, String nombre, String apellido, String email,
 			Date fechaNacimiento, String password) {
 		super();
 		this.idUsuario = idUsuario;
@@ -50,11 +73,11 @@ public class Usuario {
 		this.password = password;
 	}
 
-	public int getIdUsuario() {
+	public Integer getIdUsuario() {
 		return idUsuario;
 	}
 
-	public void setIdUsuario(int idUsuario) {
+	public void setIdUsuario(Integer idUsuario) {
 		this.idUsuario = idUsuario;
 	}
 
@@ -97,11 +120,31 @@ public class Usuario {
 	public void setItemsFavoritos(Set<Item> itemsFavoritos) {
 		this.itemsFavoritos = itemsFavoritos;
 	}
-	
-	
-	
-	
-	
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public Set<Rol> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Rol> roles) {
+		this.roles = roles;
+	}
+
 	
 
 }
