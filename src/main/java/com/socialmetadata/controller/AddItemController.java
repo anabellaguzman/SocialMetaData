@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.socialmetadata.model.AtributoItem;
 import com.socialmetadata.model.Autor;
@@ -57,6 +58,7 @@ public class AddItemController {
 	private AtributoItemService atributoItemService;
 	@Autowired
 	private UsuarioService usuarioService;
+
 
 	@RequestMapping(value = "/addItem", method = RequestMethod.GET)
 	public String setupForm(Map<String, Object> map, Model model) {
@@ -105,7 +107,8 @@ public class AddItemController {
 	@RequestMapping(value = "/addItem", method = RequestMethod.POST)
 	// public @ModelAttribute("message") String addItem(@RequestParam String
 	// term) {
-	public void addItem(@RequestParam String tituloItem,
+	@ResponseBody
+	public int addItem(@RequestParam String tituloItem,
 			@RequestParam String year, @RequestParam List<String> idAutores,
 			@RequestParam List<String> idTemas, @RequestParam int idTipoItem,
 			@RequestParam int idIdioma, @RequestParam String descripcion,
@@ -148,9 +151,6 @@ public class AddItemController {
 		
 		
 	
-		
-//		ACA QUEDE 
-//		Set<AtributoItem> atributosItem = new HashSet<AtributoItem>();
 		Set<ValorAtributoItem> valorAtributoItem = new HashSet<ValorAtributoItem>();
 		
 		for (int i = 0; i < idOwnAtr.size(); i++) {
@@ -167,8 +167,8 @@ public class AddItemController {
 		
 		item.setValorAtributoPropio(valorAtributoItem);
 		
-		itemService.update(item);
 
+		 return item.getIdItem();
 		
 		
 
