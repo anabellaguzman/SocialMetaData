@@ -327,7 +327,17 @@
 					idOwnAtr: idIndAtr.toString(), 
 					valOwnAtr: valIndAtr.toString(),
 					
-				}
+				},
+				success: function(data, textStatus) {
+				      
+				            // data.redirect contains the string URL to redirect to
+// 				            window.location.href = data.redirect;
+				            console.log("data");
+				            console.log(data);
+				    		location.href = document.URL.substr(0, document.URL.lastIndexOf('/'))
+							+ "/item?idItem=" + data;
+				            
+				        }
 			});
 
 		}

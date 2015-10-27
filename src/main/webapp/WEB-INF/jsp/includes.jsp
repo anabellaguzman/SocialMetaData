@@ -1,29 +1,46 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 
-	<div class="navbar navbar-default navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-				<a class="navbar-brand">SocialMetadata</a>
 
-			</div>
-			<div class="navbar-collapse collapse" id="navbar-main">
-				<ul class="nav navbar-nav">
-					<li><a href="../help/">Help</a></li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
+
+
+<div class="navbar navbar-default navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<a class="navbar-brand">SocialMetadata</a>
+
+		</div>
+		<div class="navbar-collapse collapse" id="navbar-main">
+			<ul class="nav navbar-nav">
+				<li><a href="../help/">Help</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<sec:authorize access="isAuthenticated()">
 					<li><a href="http://builtwithbootstrap.com/" target="_blank">Mi
 							Cuenta</a></li>
-					<li><a href="./login"
-						target="_blank">Login</a></li>
-				</ul>
+					<c:url var="logoutUrl" value="j_spring_security_logout" />
+					<form action="${logoutUrl}" method="post">
+						<input type="submit" value="Log out" /> <input type="hidden"
+							name="${_csrf.parameterName}" value="${_csrf.token}" />
+					</form>
+				</sec:authorize>
 
-			</div>
+				<sec:authorize access="isAnonymous()">
+					<li><a href="./login" target="_blank">Login</a></li>
+				</sec:authorize>
+
+
+			</ul>
+
 		</div>
 	</div>
-	
+</div>
+
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet"

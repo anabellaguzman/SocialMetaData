@@ -25,10 +25,15 @@
 
 <body>
 	<div class="container">
+<%-- 	<img src="<c:url value="/resources/images/1.jpg" />" alt="some_text" width="180" height="150"> --%>
 		<br>
 		<div class="jumbotron">
 			<h1>${item.titulo}</h1>
-
+			<div class="row">
+			 <div class="col-lg-4 col-md-5 col-sm-6">
+			<img src="<c:url value="/resources/images/1.jpg" />" alt="some_text" width="180" height="150">
+			</div>
+			<div class="col-lg-4 col-md-5 col-sm-6">
 			<ul class="list-group">
 				<li class="list-group-item">Formato: ${item.tipo.descripcion}</li>
 				<li class="list-group-item">Autores : <c:forEach
@@ -49,6 +54,8 @@
 						: ${valorAtributo.valor}</li>
 				</c:forEach>
 			</ul>
+			</div>
+			</div>
 		</div>
 		<div>
 			<ul class="nav nav-tabs">
@@ -74,7 +81,6 @@
 
 		</div>
 	</div>
-
 
 
 </body>
