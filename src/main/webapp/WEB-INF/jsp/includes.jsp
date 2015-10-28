@@ -21,18 +21,35 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<sec:authorize access="isAuthenticated()">
-					<li><a href="http://builtwithbootstrap.com/" target="_blank">Mi
-							Cuenta</a></li>
-					<c:url var="logoutUrl" value="j_spring_security_logout" />
-					<form action="${logoutUrl}" method="post">
-						<input type="submit" value="Log out" /> <input type="hidden"
-							name="${_csrf.parameterName}" value="${_csrf.token}" />
-					</form>
+					<li><a href="#" class="btn btn-default">Mi Cuenta</a></li>
+
+					<li><a
+						href="<c:url var="logoutUrl" value="j_spring_security_logout" />">
+
+							<form action="${logoutUrl}" method="post">
+								<button type="submit" class="btn btn-default">Logout</button>
+								<input type="hidden" name="${_csrf.parameterName}"
+									value="${_csrf.token}" />
+							</form>
+					</a></li>
 				</sec:authorize>
 
 				<sec:authorize access="isAnonymous()">
-					<li><a href="./login" target="_blank">Login</a></li>
+					<li><a href="./login" class="btn btn-default" target="_blank">Login</a></li>
 				</sec:authorize>
+
+
+				<%-- 				<sec:authorize access="isAuthenticated()"> --%>
+				<!-- 					<li><a href="#" class="btn btn-default">Mi Cuenta</a> -->
+				<%-- 					<li><c:url var="logoutUrl" value="j_spring_security_logout" /> --%>
+				<%-- 						<form action="${logoutUrl}" method="post"> --%>
+				<!-- 							<button type="submit" class="btn btn-default">Logout</button> -->
+				<%-- 							<input type="hidden" name="${_csrf.parameterName}" --%>
+				<%-- 								value="${_csrf.token}" /> --%>
+				<%-- 						</form></li> --%>
+				<%-- 				</sec:authorize> --%>
+
+
 
 
 			</ul>
