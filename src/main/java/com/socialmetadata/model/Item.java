@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -69,6 +70,9 @@ public class Item {
     @OneToMany(mappedBy="item", fetch = FetchType.LAZY)
     private Set<Posteo> posteos;
     
+   
+//    private Set<Comentario> comentarios;
+//    private Set<Error> errores;
     
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.item", cascade=CascadeType.ALL)
@@ -169,6 +173,19 @@ public class Item {
 	public void setPuntaje(Double puntaje) {
 		this.puntaje = puntaje;
 	}
+//	public Set<Posteo> getComentarios() {
+//		return comentarios;
+//	}
+//	public void setComentarios(Set<Posteo> comentarios) {
+//		this.comentarios = comentarios;
+//	}
+//	public Set<Posteo> getErrores() {
+//		return errores;
+//	}
+//	public void setErrores(Set<Posteo> errores) {
+//		this.errores = errores;
+//	}
+//	
 	
 	
 	
