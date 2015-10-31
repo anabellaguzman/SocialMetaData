@@ -78,32 +78,54 @@ public class ItemService {
 		
 	}
 	
-	@Transactional (propagation = Propagation.REQUIRES_NEW)
-	public Item getItemPosteos(Item item) {
-		
-//		Item itemi =itemDAO.getItem(5);
-		
-		Set <Posteo> posteos= item.getPosteos();
-	
-		for (Posteo p : posteos){
-			
-			if (p instanceof Comentario){
-				System.out.println("Class Comentario");
-//				item.getComentarios().add(p);
-				System.out.println(p.getComentario());
-			}
-			
-			if (p instanceof Error){
-				System.out.println("Class Error");
-//				item.getErrores().add(p);
-				System.out.println(p.getComentario());
-			}
-//			System.out.println(p.getClass());
-			
+//	@Transactional
+//	(propagation = Propagation.REQUIRES_NEW)
+//	public Item getItemComentarios(Item item) {
+//		
+////		Item itemi =itemDAO.getItem(5);
+//		
+////		Set<Comentario> comentarios = item.getComentarios();
+//		
+//		for (Comentario c : item.getComentarios()){
+//			c.getComentario();
+//			c.getTitulo();
+//			System.out.println(c.getComentario());
+//		}
+//		
+////		Set<Error> errores = item.getErrores();
+////		for (Error e : errores){
+////			System.out.println(e.getComentario());
+////		}
+////		Set <Posteo> posteos= item.getPosteos();
+////	
+////		for (Posteo p : posteos){
+////			
+////			if (p instanceof Comentario){
+////				System.out.println("Class Comentario");
+//////				item.getComentarios().add(p);
+////				System.out.println(p.getComentario());
+////			}
+////			
+////			if (p instanceof Error){
+////				System.out.println("Class Error");
+//////				item.getErrores().add(p);
+////				System.out.println(p.getComentario());
+////			}
+//////			System.out.println(p.getClass());
+////			
+////		}
+//	
+//		return item;
+//		
+//	}
+
+	public Item getItemComentarios(Item item) {
+		for (Comentario c : item.getComentarios()){
+			c.getComentario();
+			c.getTitulo();
+//			System.out.println(c.getComentario());
 		}
-	
 		return item;
-		
 	}
 
 }
