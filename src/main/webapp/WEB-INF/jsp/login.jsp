@@ -12,16 +12,14 @@
 	<br />
 	<br />
 
-
-
 	<div class="container">
 		<div class="row">
 
 			<div class="col-lg-6">
 				<div class="well bs-component">
 
-					<form:form method="post" action="j_spring_security_check"
-						modelAttribute="usuario">
+					<form:form class="form-horizontal" method="post"
+						action="j_spring_security_check" modelAttribute="usuario">
 						<fieldset>
 
 
@@ -35,13 +33,19 @@
 								</div>
 							</div>
 
+
 							<div class="form-group">
 								<label for="inputPassword" class="col-lg-2 control-label">Password</label>
+
 								<div class="col-lg-10">
-									<form:input path="password" type="password" class="form-control" id="inputPassword" placeholder="Password"/>
+									<form:input path="password" type="password"
+										class="form-control" id="inputPassword" placeholder="Password" />
+
 								</div>
+
+
 							</div>
-							
+
 
 							<div class="form-group">
 								<div class="col-lg-10 col-lg-offset-2">
