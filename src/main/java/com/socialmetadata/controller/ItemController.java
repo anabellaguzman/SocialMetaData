@@ -30,6 +30,7 @@ public class ItemController {
 		ModelAndView mav = new ModelAndView("item");
 		Item item = itemService.getItem(idItem);
 		itemService.getItemComentarios(item);
+		itemService.getItemErrores(item);
 
 //		item.getComentarios();
 //		item.getErrores();
