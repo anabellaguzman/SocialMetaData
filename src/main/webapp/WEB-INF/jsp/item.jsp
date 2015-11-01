@@ -76,7 +76,7 @@
 					<p>${item.descripcion}</p>
 				</div>
 				<div class="tab-pane fade" id="comentarios">
-					<ul>
+					<ul class="list-unstyled">
 						<li><c:forEach items="${item.comentarios}" var="comentarios">
 								<div class="panel panel-default">
 									<div class="panel-heading">${comentarios.titulo}</div>
@@ -84,42 +84,39 @@
 								</div>
 							</c:forEach></li>
 
-						<li>
-							<div class="bs-component">
-								<div class="modal">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal"
-													aria-hidden="true">×</button>
-												<h4 class="modal-title">Modal title</h4>
-											</div>
-											<div class="modal-body">
-												<p>One fine body…</p>
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default"
-													data-dismiss="modal">Close</button>
-												<button type="button" class="btn btn-primary">Save
-													changes</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div id="source-button" class="btn btn-primary btn-xs"
-									style="display: none;">&lt; &gt;</div>
-							</div>
 
-
-						</li>
 
 					</ul>
+					<div class="bs-component">
+						<div class="modal">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h4 class="modal-title" contenteditable="true">Titulo de
+											tu comentario ...</h4>
+									</div>
+									<div class="modal-body">
+										<p contenteditable="true">Escribe tu comentario...</p>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-primary">Enviar</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="source-button" class="btn btn-primary btn-xs"
+							style="display: none;">&lt; &gt;</div>
+					</div>
+
+
+
+
 
 
 				</div>
 
 				<div class="tab-pane fade" id="errores">
-					<ul>
+					<ul class="list-unstyled">
 						<li><c:forEach items="${item.errores}" var="errores">
 								<div class="panel panel-default">
 									<div class="panel-heading">${errores.titulo}</div>
@@ -127,36 +124,32 @@
 								</div>
 							</c:forEach></li>
 
-						<li>
-							<div class="bs-component">
-								<div class="modal">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal"
-													aria-hidden="true">×</button>
-												<h4 class="modal-title">Modal title</h4>
-											</div>
-											<div class="modal-body">
-												<p>One fine body…</p>
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default"
-													data-dismiss="modal">Close</button>
-												<button type="button" class="btn btn-primary">Save
-													changes</button>
-											</div>
-										</div>
+					</ul>
+					<div class="bs-component">
+						<div class="modal">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h4 class="modal-title" contenteditable="true">Titulo del
+											Error</h4>
+									</div>
+									<div class="modal-body">
+										<p contenteditable="true">Reporte del error ...</p>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-primary">Reportar</button>
 									</div>
 								</div>
-								<div id="source-button" class="btn btn-primary btn-xs"
-									style="display: none;">&lt; &gt;</div>
 							</div>
+						</div>
+						<div id="source-button" class="btn btn-primary btn-xs"
+							style="display: none;">&lt; &gt;</div>
+					</div>
 
 
-						</li>
 
-					</ul>
+
+
 
 
 				</div>
