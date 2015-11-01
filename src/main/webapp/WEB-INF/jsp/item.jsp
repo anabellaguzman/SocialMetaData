@@ -30,11 +30,11 @@
 		<div class="jumbotron">
 			<h1>${item.titulo}</h1>
 			<div class="row">
-				<div class="col-lg-4 col-md-5 col-sm-6">
-					<img src="<c:url value="/resources/images/${item.imagen}" />"
-						alt="some_text" width="180" height="150">
+				<div class="col-sm-4">
+					<img class="img-responsive" src="<c:url value="/resources/images/${item.imagen}" />"
+						alt="some_text" width="460" height="345">
 				</div>
-				<div class="col-lg-4 col-md-5 col-sm-6">
+				<div class="col-sm-8">
 					<ul class="list-group">
 						<li class="list-group-item">Formato: ${item.tipo.descripcion}</li>
 						<li class="list-group-item">Autores : <c:forEach
@@ -99,7 +99,13 @@
 										<p contenteditable="true">Escribe tu comentario...</p>
 									</div>
 									<div class="modal-footer">
+									<sec:authorize access="isAuthenticated()">
 										<button type="button" class="btn btn-primary">Enviar</button>
+									</sec:authorize>
+										<sec:authorize access="isAnonymous()">
+											<button type="button" class="btn btn-primary disabled">Enviar</button>
+										</sec:authorize>
+
 									</div>
 								</div>
 							</div>
