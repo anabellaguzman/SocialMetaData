@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 
@@ -24,11 +25,11 @@ public abstract class Posteo {
 	@Id
 	@Column
 	@GeneratedValue(strategy=GenerationType.AUTO) //for autonumber
-
 	private int idPosteo;
 	@Column
 	private String titulo;
-	@Column
+	@Lob
+	@Column(columnDefinition = "TEXT")
 	private String comentario;
 	@Column
 	private Date fecha;
@@ -41,14 +42,10 @@ public abstract class Posteo {
 	
 	public Posteo(){}
 	
-	public Posteo(int idPosteo, String titulo, String comentario, Date fecha,
-			int tipo, Item item, Usuario usuario) {
-		super();
-		this.idPosteo = idPosteo;
+	public Posteo(String titulo, Date fecha, Item item, Usuario usuario) {
+//		super();
 		this.titulo = titulo;
-		this.comentario = comentario;
 		this.fecha = fecha;
-//		this.tipo = tipo;
 		this.item = item;
 		this.usuario = usuario;
 	}
