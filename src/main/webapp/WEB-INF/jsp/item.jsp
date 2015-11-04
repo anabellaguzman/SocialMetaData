@@ -28,13 +28,15 @@
 		<%-- 	<img src="<c:url value="/resources/images/1.jpg" />" alt="some_text" width="180" height="150"> --%>
 		<br>
 		<div class="jumbotron">
+			<input type="hidden" id="idItem" value="${item.idItem}" />
 			<h1>${item.titulo}</h1>
 			<div class="row">
-				<div class="col-lg-4 col-md-5 col-sm-6">
-					<img src="<c:url value="/resources/images/${item.imagen}" />"
-						alt="some_text" width="180" height="150">
+				<div class="col-sm-4">
+					<img class="img-responsive"
+						src="<c:url value="/resources/images/${item.imagen}" />"
+						alt="some_text" width="460" height="345">
 				</div>
-				<div class="col-lg-4 col-md-5 col-sm-6">
+				<div class="col-sm-8">
 					<ul class="list-group">
 						<li class="list-group-item">Formato: ${item.tipo.descripcion}</li>
 						<li class="list-group-item">Autores : <c:forEach
@@ -76,7 +78,7 @@
 					<p>${item.descripcion}</p>
 				</div>
 				<div class="tab-pane fade" id="comentarios">
-					<ul>
+					<ul class="list-unstyled">
 						<li><c:forEach items="${item.comentarios}" var="comentarios">
 								<div class="panel panel-default">
 									<div class="panel-heading">${comentarios.titulo}</div>
@@ -84,42 +86,41 @@
 								</div>
 							</c:forEach></li>
 
-						<li>
-							<div class="bs-component">
-								<div class="modal">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal"
-													aria-hidden="true">×</button>
-												<h4 class="modal-title">Modal title</h4>
-											</div>
-											<div class="modal-body">
-												<p>One fine body…</p>
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default"
-													data-dismiss="modal">Close</button>
-												<button type="button" class="btn btn-primary">Save
-													changes</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div id="source-button" class="btn btn-primary btn-xs"
-									style="display: none;">&lt; &gt;</div>
-							</div>
 
-
-						</li>
 
 					</ul>
+					<div class="bs-component">
+						<div class="modal">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h4 class="modal-title" contenteditable="true" id="tituloC">Titulo
+											de tu comentario ...</h4>
+									</div>
+									<div class="modal-body">
+										<p contenteditable="true" id="comentarioC">Escribe tu comentario...</p>
+									</div>
+									<div class="modal-footer">
+										<sec:authorize access="isAuthenticated()">
+											<button type="button" class="btn btn-primary"
+												onclick="addComment()">Enviar</button>
+										</sec:authorize>
+										<sec:authorize access="isAnonymous()">
+											<button type="button" class="btn btn-primary disabled">Enviar</button>
+										</sec:authorize>
 
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="source-button" class="btn btn-primary btn-xs"
+							style="display: none;">&lt; &gt;</div>
+					</div>
 
 				</div>
 
 				<div class="tab-pane fade" id="errores">
-					<ul>
+					<ul class="list-unstyled">
 						<li><c:forEach items="${item.errores}" var="errores">
 								<div class="panel panel-default">
 									<div class="panel-heading">${errores.titulo}</div>
@@ -127,46 +128,71 @@
 								</div>
 							</c:forEach></li>
 
-						<li>
-							<div class="bs-component">
-								<div class="modal">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal"
-													aria-hidden="true">×</button>
-												<h4 class="modal-title">Modal title</h4>
-											</div>
-											<div class="modal-body">
-												<p>One fine body…</p>
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default"
-													data-dismiss="modal">Close</button>
-												<button type="button" class="btn btn-primary">Save
-													changes</button>
-											</div>
-										</div>
+					</ul>
+					<div class="bs-component">
+						<div class="modal">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h4 class="modal-title" contenteditable="true" id="tituloE">Titulo del
+											Error</h4>
+									</div>
+									<div class="modal-body">
+										<p contenteditable="true" id="comentarioE">Reporte del error ...</p>
+									</div>
+									<div class="modal-footer">
+										<sec:authorize access="isAuthenticated()">
+											<button type="button" class="btn btn-primary"
+												onclick="addError()">Reportar</button>
+										</sec:authorize>
+										<sec:authorize access="isAnonymous()">
+											<button type="button" class="btn btn-primary disabled">Reportar</button>
+										</sec:authorize>
+
 									</div>
 								</div>
-								<div id="source-button" class="btn btn-primary btn-xs"
-									style="display: none;">&lt; &gt;</div>
 							</div>
-
-
-						</li>
-
-					</ul>
-
+						</div>
+						<div id="source-button" class="btn btn-primary btn-xs"
+							style="display: none;">&lt; &gt;</div>
+					</div>
 
 				</div>
 			</div>
 
 		</div>
 	</div>
+	<script type="text/javascript">
+		function addComment() {
+			$.ajax({
+				url : "addComment",
+				type : "POST",
+				data : {
+					tituloC : $("#tituloC").text(),
+					comentarioC : $("#comentarioC").text(),
+					idItem : $("#idItem").val()
+				}
+
+			});
+		}
+
+		function addError() {
+			$.ajax({
+				url : "addError",
+				type : "POST",
+				data : {
+					tituloE : $("#tituloE").text(),
+					comentarioE : $("#comentarioE").text(),
+					idItem : $("#idItem").val()
+				}
+
+			});
+		}
+	</script>
 
 
 </body>
+
 
 
 </html>

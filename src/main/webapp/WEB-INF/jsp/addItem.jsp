@@ -6,18 +6,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
-
-
-
 <head>
-
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-
-
-
-
-
 
 <link rel="stylesheet"
 	href="<c:url value="/resources/flatly/bootstrap.css" />" media="screen">
@@ -37,43 +27,19 @@
 <title>Agregar Nuevo Item</title>
 
 </head>
-
-
-
-
-
 <body>
-
-
-
 	<div class="col-lg-6">
-
 		<br>
-
 		<div class="well bs-component">
-
-
-
 			<form class="form-horizontal" method="POST" action="addItem">
-
 				<fieldset id="fs_generalAtributes">
-
 					<legend>Nuevo Item</legend>
-
 					<div class="form-group">
-
 						<label for="inputDefault" class="col-lg-2 control-label">Titulo</label>
-
 						<div class="col-lg-10">
-
 							<input type="text" class="form-control" id="idTituloItem"></input>
-
 						</div>
-
 					</div>
-
-
-
 					<div class="form-group">
 
 						<label for="inputDefault" class="col-lg-2 control-label">Año</label>

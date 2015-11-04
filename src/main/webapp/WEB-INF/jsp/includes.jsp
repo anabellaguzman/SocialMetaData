@@ -17,7 +17,7 @@
 		</div>
 		<div class="navbar-collapse collapse" id="navbar-main">
 			<ul class="nav navbar-nav">
-				<li><a href="../help/">Help</a></li>
+				<li><a href="../GI/">Grupo de Investigacion</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<sec:authorize access="isAuthenticated()">
