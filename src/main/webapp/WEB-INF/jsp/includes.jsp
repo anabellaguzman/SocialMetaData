@@ -22,12 +22,14 @@
 
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
-				<form class="navbar-form navbar-left" role="search">
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Search">
-					</div>
-					<button type="submit" class="btn btn-default">Submit</button>
-				</form>
+					<form class="navbar-form navbar-left" role="search">
+						<div class="form-group">
+							<input id="searchItem" type="text" class="form-control"
+								placeholder="Buscar Item">
+						</div>
+						<button type="button" class="btn btn-default"
+							onclick="doSearchItemsLike()">Buscar</button>
+					</form>
 
 				<ul class="nav navbar-nav navbar-right">
 					<sec:authorize access="isAuthenticated()">
@@ -42,7 +44,7 @@
 							</a></form></li>
 					</sec:authorize>
 					<sec:authorize access="isAnonymous()">
-						<li><a href="././login">Login</a></li>
+						<li><a href="./login">Login</a></li>
 					</sec:authorize>
 
 				</ul>
@@ -50,7 +52,27 @@
 		</div>
 	</nav>
 </div>
+	<script type="text/javascript">
+		function doSearchItemsLike() {
 
+			$.ajax({
+				url : "searchItem.do",
+				type : "GET",
+				data : {
+					term : $('#searchItem').val()
+				},
+				success : function(response) {
+					$("#subViewDiv").html(response);
+				},
+				error : function(xhr, textStatus, errorThrown) {
+
+					alert("Error: " + xhr.status + " " + xhr.statusText);
+				}
+
+			});
+
+		}
+	</script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet"
