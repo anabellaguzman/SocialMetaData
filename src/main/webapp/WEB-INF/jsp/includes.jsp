@@ -28,44 +28,28 @@
 					</div>
 					<button type="submit" class="btn btn-default">Submit</button>
 				</form>
-		
+
 				<ul class="nav navbar-nav navbar-right">
-			<li class="navbar-form navbar-left">
-<%-- 							<form class="navbar-form navbar-left"> --%>
-
-					<button type="submit" class="btn btn-default">Mi Cuenta</button>
-<%-- 				</form> --%>
-				
-				</li>
-			
+					<sec:authorize access="isAuthenticated()">
+					<li><a href="./micuenta">Mi Cuenta</a></li>
 	
-<%-- 					<sec:authorize access="isAuthenticated()"> --%>
-<!-- 						<li><button type="submit" class="btn btn-default">Mi Cuenta</button></li> -->
-<!-- 						<li><a -->
-<%-- 							href="<c:url var="logoutUrl" value="j_spring_security_logout" />"></a> --%>
-<%-- 								<form action="${logoutUrl}" method="post"> --%>
-<!-- 									<button type="submit" class="btn btn-default">Logout</button> -->
-<%-- 									<input type="hidden" name="${_csrf.parameterName}" --%>
-<%-- 										value="${_csrf.token}" /> --%>
-<%-- 								</form> --%>
-<!-- 						</li> -->
-<%-- 					</sec:authorize> --%>
-<%-- 					<sec:authorize access="isAnonymous()"> --%>
-<%-- 						<li><a href="<c:url var="loginUrl" value="./login" />"></a> --%>
-<%-- 								<form action="${loginUrl}" method="get"> --%>
-<!-- 									<button type="submit" class="btn btn-default">Login</button> -->
-<%-- 								</form> --%>
-<!-- 						</li> -->
+						<li><form action="j_spring_security_logout" method="post"><a 
+							href="<c:url var="logoutUrl" value="j_spring_security_logout" />">
+							
+								<button type="submit" class="btn btn-default">Logout</button>
+								<input type="hidden" name="${_csrf.parameterName}"
+									value="${_csrf.token}" />
+							</a></form></li>
+					</sec:authorize>
+					<sec:authorize access="isAnonymous()">
+						<li><a href="././login">Login</a></li>
+					</sec:authorize>
 
-<%-- 					</sec:authorize> --%>
 				</ul>
 			</div>
-		
+		</div>
 	</nav>
 </div>
-
-
-
 
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -81,9 +65,3 @@
 	src="<c:url value="/resources/js/jquery-ui.min.js" />"></script>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
-
-
-<!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> -->
-
-
-<!-- This contains the most used tag libraries, -->
