@@ -35,7 +35,7 @@
 				</sec:authorize>
 
 				<sec:authorize access="isAnonymous()">
-					<li><a href="./login" class="btn btn-default" target="_blank">Login</a></li>
+					<li><a href="./login" target="_blank">Login</a></li>
 				</sec:authorize>
 
 
