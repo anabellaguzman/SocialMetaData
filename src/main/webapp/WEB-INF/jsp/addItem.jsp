@@ -28,194 +28,191 @@
 
 </head>
 <body>
-
-	<div id="removable">
-		<div class="col-lg-6">
-			<br>
-			<div class="well bs-component">
-				<form class="form-horizontal" method="POST" action="addItem">
-					<fieldset id="fs_generalAtributes">
-						<legend>Nuevo Item</legend>
-						<div class="form-group">
-							<label for="inputDefault" class="col-lg-2 control-label">Titulo</label>
-							<div class="col-lg-10">
-								<input type="text" class="form-control" id="idTituloItem"></input>
-							</div>
+	<div class="col-lg-6">
+		<br>
+		<div class="well bs-component">
+			<form class="form-horizontal" method="POST" action="addItem">
+				<fieldset id="fs_generalAtributes">
+					<legend>Nuevo Item</legend>
+					<div class="form-group">
+						<label for="inputDefault" class="col-lg-2 control-label">Titulo</label>
+						<div class="col-lg-10">
+							<input type="text" class="form-control" id="idTituloItem"></input>
 						</div>
-						<div class="form-group">
+					</div>
+					<div class="form-group">
 
-							<label for="inputDefault" class="col-lg-2 control-label">Año</label>
+						<label for="inputDefault" class="col-lg-2 control-label">Año</label>
 
-							<div class="col-lg-10">
+						<div class="col-lg-10">
 
 
 
-								<select class="form-control" id="selectYear">
+							<select class="form-control" id="selectYear">
 
-								</select>
-
-							</div>
+							</select>
 
 						</div>
 
+					</div>
 
 
 
 
-						<div class="form-group">
 
-							<label for="inputDefault" class="col-lg-2 control-label">Autor</label>
+					<div class="form-group">
 
-							<div class="col-lg-10">
+						<label for="inputDefault" class="col-lg-2 control-label">Autor</label>
 
-								<input id="search" class="form-control"> <input
-									type="hidden" class="form-control" id="idAutor"></input>
+						<div class="col-lg-10">
 
-								<ul class="list-group" id="listAutores">
+							<input id="search" class="form-control"> <input
+								type="hidden" class="form-control" id="idAutor"></input>
 
-								</ul>
+							<ul class="list-group" id="listAutores">
 
-							</div>
-
-						</div>
-
-						<div class="form-group">
-
-							<label for="inputDefault" class="col-lg-2 control-label">Temas
-
-								Relacionados</label>
-
-							<div class="col-lg-10" id="temasRelacionados">
-
-								<input id="autocompleteTema" class="form-control"> <input
-									type="hidden" class="form-control" id="idTema"></input>
-
-								<div class="bs-component" id="contenedorTemas"></div>
-
-							</div>
+							</ul>
 
 						</div>
 
+					</div>
 
+					<div class="form-group">
 
-						<div class="form-group">
+						<label for="inputDefault" class="col-lg-2 control-label">Temas
 
-							<label for="select" class="col-lg-2 control-label">Tipo
+							Relacionados</label>
 
-								Item</label>
+						<div class="col-lg-10" id="temasRelacionados">
 
-							<div class="col-lg-10">
+							<input id="autocompleteTema" class="form-control"> <input
+								type="hidden" class="form-control" id="idTema"></input>
 
-								<select class="form-control" onchange="jsFunction()"
-									id="selectOpt">
-
-									<c:forEach items="${listTipoItem}" var="tipoItem">
-
-										<option value="${tipoItem.idTipoItem}">${tipoItem.descripcion}</option>
-
-									</c:forEach>
-
-								</select>
-
-							</div>
+							<div class="bs-component" id="contenedorTemas"></div>
 
 						</div>
 
+					</div>
 
 
-						<div class="form-group">
 
-							<label for="select" class="col-lg-2 control-label">Idioma</label>
+					<div class="form-group">
 
-							<div class="col-lg-10">
+						<label for="select" class="col-lg-2 control-label">Tipo
 
-								<select class="form-control" id="selectIdioma">
+							Item</label>
 
-									<c:forEach items="${listIdioma}" var="idioma">
+						<div class="col-lg-10">
 
-										<option value="${idioma.idIdioma}">${idioma.idioma}</option>
+							<select class="form-control" onchange="jsFunction()"
+								id="selectOpt">
 
-									</c:forEach>
+								<c:forEach items="${listTipoItem}" var="tipoItem">
 
-								</select>
+									<option value="${tipoItem.idTipoItem}">${tipoItem.descripcion}</option>
 
-							</div>
+								</c:forEach>
 
-						</div>
-
-						<div class="form-group">
-
-							<label for="textArea" class="col-lg-2 control-label">Descripcion</label>
-
-							<div class="col-lg-10">
-
-								<textarea class="form-control" rows="3" id="textArea"></textarea>
-
-								<span class="help-block">No debe superar los 500
-
-									caracteres</span>
-
-							</div>
+							</select>
 
 						</div>
 
-
-
-						<fieldset id="fs_individualAtributes">
-
-							<c:forEach items="${listAtributosFistItem}" var="atributoItem">
+					</div>
 
 
 
-								<div class='form-group'>
+					<div class="form-group">
 
-									<label class='col-lg-2 control-label' for='inputDefault'>${atributoItem.nombre}</label>
+						<label for="select" class="col-lg-2 control-label">Idioma</label>
 
-									<div class='col-lg-10'>
+						<div class="col-lg-10">
 
-										<input type='text' class='form-control'
-											id="${atributoItem.idAtributoItem}">
+							<select class="form-control" id="selectIdioma">
 
-									</div>
+								<c:forEach items="${listIdioma}" var="idioma">
+
+									<option value="${idioma.idIdioma}">${idioma.idioma}</option>
+
+								</c:forEach>
+
+							</select>
+
+						</div>
+
+					</div>
+
+					<div class="form-group">
+
+						<label for="textArea" class="col-lg-2 control-label">Descripcion</label>
+
+						<div class="col-lg-10">
+
+							<textarea class="form-control" rows="3" id="textArea"></textarea>
+
+							<span class="help-block">No debe superar los 500
+
+								caracteres</span>
+
+						</div>
+
+					</div>
+
+
+
+					<fieldset id="fs_individualAtributes">
+
+						<c:forEach items="${listAtributosFistItem}" var="atributoItem">
+
+
+
+							<div class='form-group'>
+
+								<label class='col-lg-2 control-label' for='inputDefault'>${atributoItem.nombre}</label>
+
+								<div class='col-lg-10'>
+
+									<input type='text' class='form-control'
+										id="${atributoItem.idAtributoItem}">
 
 								</div>
 
-							</c:forEach>
-
-						</fieldset>
-
-
-
-
-
-
-						<div class="form-group">
-
-							<div class="col-lg-10 col-lg-offset-2">
-
-								<button class="btn btn-default">Cancel</button>
-
-								<button type="button" class="btn btn-primary"
-									onclick="addNewItem()">Submit</button>
-
-
-
 							</div>
+
+						</c:forEach>
+
+					</fieldset>
+					
+
+
+
+
+
+					<div class="form-group">
+
+						<div class="col-lg-10 col-lg-offset-2">
+
+							<button class="btn btn-default">Cancel</button>
+
+							<button type="button" class="btn btn-primary"
+								onclick="addNewItem()">Submit</button>
+
+
 
 						</div>
 
-					</fieldset>
+					</div>
+
+				</fieldset>
 
 
 
-				</form>
-
-			</div>
+			</form>
 
 		</div>
+
 	</div>
 
-	<div id="subViewDiv" class="bs-component"></div>
+
 
 
 
@@ -224,10 +221,13 @@
 
 
 	<script type="text/javascript">
-		$(function loadFileUploadView() {
-
-		});
-
+	
+	$(function loadFileUploadView(){
+		
+		
+		
+	});
+	
 		function addNewItem() {
 
 			var titulo = $("#idTituloItem").val();
@@ -245,32 +245,32 @@
 				idTemas.push(idT);
 				console.log(idT);
 			}
-
+			
 			var fsIndAtr = document.getElementById("fs_individualAtributes");
 			var inputIndAtr = fsIndAtr.getElementsByTagName("input");
 			var lIndAtr = inputIndAtr.length;
-
+			
 			console.log("inputInd");
 			console.log(inputIndAtr);
-
-			// 			console.log(lIndAtr);
+			
+// 			console.log(lIndAtr);
 			var idIndAtr = [];
 			var valIndAtr = [];
 			for (var i = 0; i < lIndAtr; ++i) {
-
+				
 				console.log("console.log(inputIndAtr[i].id);");
 				idIndAtr.push(inputIndAtr[i].id);
 				console.log(inputIndAtr[i].id);
 				console.log("console.log(inputIndAtr[i].value);");
 				console.log(inputIndAtr[i].value);
 				valIndAtr.push(inputIndAtr[i].value);
-
-				// 				console.log(inIndAtr[i]);
-				// 				console.log(inIndAtr[i].val());
-				// 				var idA = inIndAtr[i].id;
-				// 				idAutores.push(idA);
+				
+// 				console.log(inIndAtr[i]);
+// 				console.log(inIndAtr[i].val());
+// 				var idA = inIndAtr[i].id;
+// 				idAutores.push(idA);
 			}
-
+			
 			var x = document.getElementById("listAutores");
 			var y = x.getElementsByTagName("li");
 			var length = y.length;
@@ -290,28 +290,26 @@
 					idTipoItem : tipoItem,
 					idIdioma : idioma,
 					descripcion : descripcion,
-					idOwnAtr : idIndAtr.toString(),
-					valOwnAtr : valIndAtr.toString(),
-
+					idOwnAtr: idIndAtr.toString(), 
+					valOwnAtr: valIndAtr.toString(),
+					
 				},
-				success : function(data, textStatus) {
-
-					// data.redirect contains the string URL to redirect to
-					// 				            window.location.href = data.redirect;
-					console.log("data");
-					console.log(data);
-					location.href = document.URL.substr(0, document.URL
-							.lastIndexOf('/'))
+				success: function(data, textStatus) {
+				      
+				            // data.redirect contains the string URL to redirect to
+// 				            window.location.href = data.redirect;
+				            console.log("data");
+				            console.log(data);
+				    		location.href = document.URL.substr(0, document.URL.lastIndexOf('/'))
 							+ "/item?idItem=" + data;
-
-				}
+				            
+				        }
 			});
 
 		}
 
 		$(function year() {
-			var min = 1999, max = new Date().getFullYear(), select = document
-					.getElementById('selectYear');
+			var min = 1999, max = new Date().getFullYear(), select = document.getElementById('selectYear');
 			for (var i = min; i <= max; i++) {
 				var opt = document.createElement('option');
 				opt.value = i;
@@ -328,22 +326,16 @@
 			var fs_iA = document.getElementById("fs_individualAtributes");
 			$(fs_iA).empty();
 
-			$
-					.getJSON(
-							'selectedTipoItem.do',
-							"id="
-									+ myselect.options[myselect.selectedIndex].value,
+			$.getJSON('selectedTipoItem.do',
+							"id="+ myselect.options[myselect.selectedIndex].value,
 							function(nombreAtributos) {
 								var items = [];
-								$
-										.each(
-												nombreAtributos,
-												function(key, val) {
-													items
-															.push("<div class='form-group'> <label class='col-lg-2 control-label' for='inputDefault'>"
-																	+ val.nombre
-																	+ "</label> <div class='col-lg-10'> <input type='text' class='form-control' id="+val.idAtributoItem+"> </input> </div> </div>");
-												});
+								$.each(nombreAtributos,
+									function(key, val) {
+									items.push("<div class='form-group'> <label class='col-lg-2 control-label' for='inputDefault'>"
+											+ val.nombre
+											+ "</label> <div class='col-lg-10'> <input type='text' class='form-control' id="+val.idAtributoItem+"> </input> </div> </div>");
+									});								
 								$("#fs_individualAtributes").append(items);
 							});
 
@@ -372,7 +364,7 @@
 					});
 				},
 				select : function(event, ui) {
-					// 					$("#search").val(ui.item.label);
+// 					$("#search").val(ui.item.label);
 					$("#idAutor").val(ui.item.value);
 					crearAutor(ui.item.value, ui.item.label);
 					clearThis("search");
@@ -389,7 +381,7 @@
 			}).append($('<button/>', {
 				'type' : "button",
 				'class' : "close",
-				'onclick' : "deleteThisLi(" + id + ")",
+				'onclick' :"deleteThisLi("+id+")",
 				html : "x"
 			}));
 			$newAutor.appendTo("#listAutores");
@@ -418,7 +410,7 @@
 				},
 				select : function(event, ui) {
 					$("#idTema").val(ui.item.value);
-					// 					$("#autocompleteTema").val(ui.item.label);
+// 					$("#autocompleteTema").val(ui.item.label);
 					crearTemaRel(ui.item.value, ui.item.label);
 					clearThis("autocompleteTema");
 					return false;
@@ -428,7 +420,7 @@
 		function crearTemaRel(id, value) {
 			var $newTemaRel = $('<div/>', {
 				'class' : "col-lg-4",
-				'id' : "temaDiv" + id,
+				'id' : "temaDiv"+id,
 			}).append($('<div/>', {
 				'class' : "bs-component",
 			}).append($('<label/>', {
@@ -437,28 +429,28 @@
 				html : value
 			}).append($('<button/>', {
 				'type' : "button",
-				'class' : "close",
-				'onclick' : "deleteThis(temaDiv" + id + ")",
+				'class' : "close",			
+				'onclick' :"deleteThis(temaDiv"+id+")",
 				html : "x"
 			}))));
 			$newTemaRel.appendTo("#contenedorTemas");
-		}
-		function deleteThisLi(o) {
+		}	
+		function deleteThisLi(o){
 			var ul = $("#listAutores");
 			console.log(o);
-			// 			console.log();
-			// 			console.log(ul.children());
-			ul.children("[id='" + o + "']").remove();
-
-			// 			ul.children();
-			// 			ul.removeChild(ul.childNodes[o]);
-
+// 			console.log();
+// 			console.log(ul.children());
+			ul.children("[id='"+o+"']").remove();
+			
+// 			ul.children();
+// 			ul.removeChild(ul.childNodes[o]);
+			
 		}
-		function deleteThis(o) {
+		function deleteThis(o){	
 			o.remove();
 		}
 		function clearThis(target) {
-			$("#" + target + "").val('');
+			$("#"+target+"").val(''); 		
 		};
 	</script>
 

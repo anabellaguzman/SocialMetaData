@@ -17,7 +17,7 @@ import com.socialmetadata.model.Usuario;
 public class LoginController {
 	 @RequestMapping(value = { "/", "/home" })  
 	 public String getUserDefault() {  
-	  return "home";  
+	  return "searchItem";  
 	 }  
 	  
 	 @RequestMapping("/login")  
