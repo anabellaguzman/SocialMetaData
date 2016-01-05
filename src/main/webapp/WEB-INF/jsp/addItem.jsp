@@ -196,7 +196,7 @@
 								<button class="btn btn-default">Cancel</button>
 
 								<button type="button" class="btn btn-primary"
-									onclick="addNewItem()">Submit</button>
+									onclick="addNewItem()">Agregar</button>
 
 
 
