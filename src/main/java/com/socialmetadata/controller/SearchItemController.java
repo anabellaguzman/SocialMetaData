@@ -21,12 +21,12 @@ public class SearchItemController {
 	@Autowired
 	private ItemService itemService;
 	
-//	@RequestMapping("/searchItem")
-//	public String setupForm(Map<String, Object> map){
-//		
-//		return "home";
-//		
-//	}
+	@RequestMapping("/advancedSearch")
+	public String setupForm(Map<String, Object> map){
+		
+		return "advancedSearch";
+		
+	}
 
 	@RequestMapping(value = "/searchItem.do", method = RequestMethod.GET)
 	public @ResponseBody ModelAndView  searchItem(@RequestParam String term) {	

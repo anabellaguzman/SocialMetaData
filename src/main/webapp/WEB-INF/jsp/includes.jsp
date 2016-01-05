@@ -6,8 +6,6 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 
-
-
 <div class="navbar navbar-default navbar-fixed-top">
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
@@ -36,15 +34,18 @@
 					<sec:authorize access="isAuthenticated()">
 						<li><a href="./micuenta">Mi Cuenta</a></li>
 
-						<li><form action="j_spring_security_logout" method="post">
-								<a
-									href="<c:url var="logoutUrl" value="j_spring_security_logout" />">
+						<li>
+						<form action="j_spring_security_logout" method="post">
+<!-- 								<a -->
+<%-- 									href="<c:url var="logoutUrl" value="j_spring_security_logout" />"> --%>
 
-									<button type="submit" class="btn btn-default">Logout</button> <input
+									<button type="submit" class="btn btn-link" >
+									Logout</button> <input
 									type="hidden" name="${_csrf.parameterName}"
 									value="${_csrf.token}" />
-								</a>
-							</form></li>
+<!-- 								</a> -->
+							</form>
+							</li>
 					</sec:authorize>
 					<sec:authorize access="isAnonymous()">
 						<li><a href="./login">Login</a></li>
@@ -116,6 +117,20 @@
 				    }
 
 				 });
+	
+	
+	
+// 	<style>
+// 	button {
+// 	  background-color: transparent;
+// 	}
+// 	button:active,
+// 	button:hover {
+// 	  outline: 0;
+// 	}
+
+
+// 	</style>
 
 </script>
 
