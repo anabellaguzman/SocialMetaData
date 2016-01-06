@@ -43,78 +43,39 @@
 							</div>
 						</div>
 						<div class="form-group">
-
 							<label for="inputDefault" class="col-lg-2 control-label">Año</label>
-
 							<div class="col-lg-10">
-
-
-
-								<select class="form-control" id="selectYear">
-
+								<select onclick= "populateYear()" class="form-control" id="selectYear">
 								</select>
-
 							</div>
-
 						</div>
-
-
-
-
-
 						<div class="form-group">
-
 							<label for="inputDefault" class="col-lg-2 control-label">Autor</label>
-
 							<div class="col-lg-10">
-
 								<input id="search" class="form-control"> <input
 									type="hidden" class="form-control" id="idAutor"></input>
-
 								<ul class="list-group" id="listAutores">
-
 								</ul>
-
 							</div>
-
 						</div>
-
 						<div class="form-group">
-
 							<label for="inputDefault" class="col-lg-2 control-label">Temas
-
 								Relacionados</label>
-
 							<div class="col-lg-10" id="temasRelacionados">
-
 								<input id="autocompleteTema" class="form-control"> <input
 									type="hidden" class="form-control" id="idTema"></input>
-
 								<div class="bs-component" id="contenedorTemas"></div>
-
 							</div>
-
 						</div>
-
-
-
 						<div class="form-group">
-
 							<label for="select" class="col-lg-2 control-label">Tipo
-
 								Item</label>
-
 							<div class="col-lg-10">
-
 								<select class="form-control" onchange="jsFunction()"
 									id="selectOpt">
-
 									<c:forEach items="${listTipoItem}" var="tipoItem">
-
 										<option value="${tipoItem.idTipoItem}">${tipoItem.descripcion}</option>
-
 									</c:forEach>
-
 								</select>
 							</div>
 						</div>
@@ -139,38 +100,18 @@
 								</div>
 							</c:forEach>
 						</fieldset>
-
-
-
-
-
-
 						<div class="form-group">
-
 							<div class="col-lg-10 col-lg-offset-2">
-
 								<button class="btn btn-default">Cancel</button>
-
 								<button type="button" class="btn btn-primary"
-									onclick="addNewItem()">Buscar</button>
-
-
-
+									onclick="advancedSearchItem()">Buscar</button>
 							</div>
-
 						</div>
-
 					</fieldset>
-
-
-
 				</form>
-
 			</div>
-
 		</div>
 	</div>
-
 	<div id="subViewDiv" class="bs-component"></div>
 
 
@@ -180,92 +121,102 @@
 
 
 	<script type="text/javascript">
-		$(function loadFileUploadView() {
 
-		});
 
-		function addNewItem() {
+		function advancedSearchItem() {
 
 			var titulo = $("#idTituloItem").val();
 			var year = $("#selectYear").val();
-			var tipoItem = $("#selectOpt").val();
-			var idioma = $("#selectIdioma").val();
-			var descripcion = $("#textArea").val();
+// 			var tipoItem = $("#selectOpt").val();
+// 			var idioma = $("#selectIdioma").val();
+// 			var descripcion = $("#textArea").val();
 
-			var cTemas = document.getElementById("contenedorTemas");
-			var lTemas = cTemas.getElementsByTagName("label");
-			var lengthTemas = lTemas.length;
-			var idTemas = [];
-			for (var i = 0; i < lengthTemas; ++i) {
-				var idT = lTemas[i].id;
-				idTemas.push(idT);
-				console.log(idT);
-			}
+// 			var cTemas = document.getElementById("contenedorTemas");
+// 			var lTemas = cTemas.getElementsByTagName("label");
+// 			var lengthTemas = lTemas.length;
+// 			var idTemas = [];
+// 			for (var i = 0; i < lengthTemas; ++i) {
+// 				var idT = lTemas[i].id;
+// 				idTemas.push(idT);
+// 				console.log(idT);
+// 			}
 
-			var fsIndAtr = document.getElementById("fs_individualAtributes");
-			var inputIndAtr = fsIndAtr.getElementsByTagName("input");
-			var lIndAtr = inputIndAtr.length;
+// 			var fsIndAtr = document.getElementById("fs_individualAtributes");
+// 			var inputIndAtr = fsIndAtr.getElementsByTagName("input");
+// 			var lIndAtr = inputIndAtr.length;
 
-			console.log("inputInd");
-			console.log(inputIndAtr);
+// 			console.log("inputInd");
+// 			console.log(inputIndAtr);
 
-			// 			console.log(lIndAtr);
-			var idIndAtr = [];
-			var valIndAtr = [];
-			for (var i = 0; i < lIndAtr; ++i) {
+// 			// 			console.log(lIndAtr);
+// 			var idIndAtr = [];
+// 			var valIndAtr = [];
+// 			for (var i = 0; i < lIndAtr; ++i) {
 
-				console.log("console.log(inputIndAtr[i].id);");
-				idIndAtr.push(inputIndAtr[i].id);
-				console.log(inputIndAtr[i].id);
-				console.log("console.log(inputIndAtr[i].value);");
-				console.log(inputIndAtr[i].value);
-				valIndAtr.push(inputIndAtr[i].value);
+// 				console.log("console.log(inputIndAtr[i].id);");
+// 				idIndAtr.push(inputIndAtr[i].id);
+// 				console.log(inputIndAtr[i].id);
+// 				console.log("console.log(inputIndAtr[i].value);");
+// 				console.log(inputIndAtr[i].value);
+// 				valIndAtr.push(inputIndAtr[i].value);
 
-				// 				console.log(inIndAtr[i]);
-				// 				console.log(inIndAtr[i].val());
-				// 				var idA = inIndAtr[i].id;
-				// 				idAutores.push(idA);
-			}
+// 				// 				console.log(inIndAtr[i]);
+// 				// 				console.log(inIndAtr[i].val());
+// 				// 				var idA = inIndAtr[i].id;
+// 				// 				idAutores.push(idA);
+// 			}
 
-			var x = document.getElementById("listAutores");
-			var y = x.getElementsByTagName("li");
-			var length = y.length;
-			var idAutores = [];
-			for (var i = 0; i < length; ++i) {
-				var idA = y[i].id;
-				idAutores.push(idA);
-			}
+// 			var x = document.getElementById("listAutores");
+// 			var y = x.getElementsByTagName("li");
+// 			var length = y.length;
+// 			var idAutores = [];
+// 			for (var i = 0; i < length; ++i) {
+// 				var idA = y[i].id;
+// 				idAutores.push(idA);
+// 			}
 			$.ajax({
-				url : "addItem",
+				url : "advancedSearch.do",
 				type : "POST",
 				data : {
 					tituloItem : titulo,
 					year : year,
-					idAutores : idAutores.toString(),
-					idTemas : idTemas.toString(),
-					idTipoItem : tipoItem,
-					idIdioma : idioma,
-					descripcion : descripcion,
-					idOwnAtr : idIndAtr.toString(),
-					valOwnAtr : valIndAtr.toString(),
-
-				},
-				success : function(data, textStatus) {
-
-					// data.redirect contains the string URL to redirect to
-					// 				            window.location.href = data.redirect;
-					console.log("data");
-					console.log(data);
-					location.href = document.URL.substr(0, document.URL
-							.lastIndexOf('/'))
-							+ "/item?idItem=" + data;
+// 					idAutores : idAutores.toString(),
+// 					idTemas : idTemas.toString(),
+// 					idTipoItem : tipoItem,
+// 					idIdioma : idioma,
+// 					descripcion : descripcion,
+// 					idOwnAtr : idIndAtr.toString(),
+// 					valOwnAtr : valIndAtr.toString(),
 
 				}
+// 			,
+// 				success : function(data, textStatus) {
+
+// 					// data.redirect contains the string URL to redirect to
+// 					// 				            window.location.href = data.redirect;
+// 					console.log("data");
+// 					console.log(data);
+// 					location.href = document.URL.substr(0, document.URL
+// 							.lastIndexOf('/'))
+// 							+ "/item?idItem=" + data;
+
+// 				}
 			});
 
 		}
+		
+		var alreadyClickedYear = false;
 
-		$(function year() {
+		
+		function populateYear(){
+			if (!alreadyClickedYear){
+				alreadyClickedYear = true;
+				year();
+			}
+			
+		}
+
+		function year() {
 			var min = 1999, max = new Date().getFullYear(), select = document
 					.getElementById('selectYear');
 			for (var i = min; i <= max; i++) {
@@ -275,7 +226,7 @@
 				select.appendChild(opt);
 			}
 			select.value = new Date().getFullYear();
-		});
+		}
 
 		function jsFunction() {
 

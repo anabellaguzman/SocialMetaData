@@ -33,6 +33,16 @@ public class SearchItemController {
 		return "advancedSearch";
 		
 	}
+	
+	@RequestMapping(value = "/advancedSearch.do", method = RequestMethod.POST)
+	public void advancedSearchItem(@RequestParam String  tituloItem, @RequestParam String year){
+		
+		System.out.println("/advancedSearch.do");
+		itemService.advancedSearch(tituloItem, Integer.valueOf(year));
+		
+		
+		
+	}
 
 	@RequestMapping(value = "/searchItem.do", method = RequestMethod.GET)
 	public @ResponseBody ModelAndView  searchItem(@RequestParam String term) {	

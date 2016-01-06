@@ -114,20 +114,16 @@ public class AddItemController {
 			@RequestParam int idIdioma, @RequestParam String descripcion,
 			@RequestParam List<String> idOwnAtr, @RequestParam List<String> valOwnAtr
 			) {
-
 		System.out.println("HOLA");
 		Idioma idioma = idiomaService.getIdioma(idIdioma);
 		TipoItem tipoItem = tipoItemService.getTipoItem(idTipoItem);
-
-		Item item = new Item();
-		
+		Item item = new Item();		
 		item.setCreator(getUsuarioInSession());
 		item.setTitulo(tituloItem);
 		item.setYear(Integer.valueOf(year));
 		item.setTipo(tipoItem);
 		item.setIdioma(idioma);
 		item.setDescripcion(descripcion);
-
 		Set<Autor> autores = new HashSet<Autor>();
 		for (int i = 0; i < idAutores.size(); i++) {
 			String enteroString = idAutores.get(i);
@@ -135,8 +131,7 @@ public class AddItemController {
 			Autor a = autorService.getAutor(entero);
 			autores.add(a);
 		}
-		item.setAutores(autores);
-		
+		item.setAutores(autores);		
 		Set<Tema> temas = new HashSet<Tema>();
 		for (int i = 0; i < idTemas.size(); i++) {
 			String enteroString = idTemas.get(i);
@@ -144,48 +139,31 @@ public class AddItemController {
 			Tema t = temaService.getTema(entero);
 			temas.add(t);
 		}
-		item.setSetTemas(temas);
-		
-		
-		item.setIdItem(itemService.add(item));
-		
-		
-	
-		Set<ValorAtributoItem> valorAtributoItem = new HashSet<ValorAtributoItem>();
-		
+		item.setSetTemas(temas);		
+		item.setIdItem(itemService.add(item));	
+		Set<ValorAtributoItem> valorAtributoItem = new HashSet<ValorAtributoItem>();		
 		for (int i = 0; i < idOwnAtr.size(); i++) {
 			String enteroString = idOwnAtr.get(i);
 			int id = Integer.parseInt(enteroString);
-			AtributoItem atributo = atributoItemService.getAtributoItem(id);
-			
+			AtributoItem atributo = atributoItemService.getAtributoItem(id);		
 			ValorAtributoItemEPK pk = new ValorAtributoItemEPK(item, atributo);
 			ValorAtributoItem valAI = new ValorAtributoItem(pk, valOwnAtr.get(i));
-			valorAtributoItem.add(valAI);
+			valorAtributoItem.add(valAI);			
 			
-			
-		}
-		
+		}		
 		item.setValorAtributoPropio(valorAtributoItem);
-		
-
 		 return item.getIdItem();
-		
-		
-
 	}
 	
-	private Usuario getUsuarioInSession(){
-		
+	private Usuario getUsuarioInSession(){		
 		  Authentication auth = SecurityContextHolder.getContext()  
 				    .getAuthentication();  
 				  String username = "";  
 				  if (!(auth instanceof AnonymousAuthenticationToken)) {  
 				   UserDetails userDetail = (UserDetails) auth.getPrincipal();  
 				   username = userDetail.getUsername();  
-				  }  
-				  
-				  System.out.println("username: "+username);
-		
+				  }  				  
+				  System.out.println("username: "+username);		
 		return usuarioService.getByUsername(username);
 		
 	}
