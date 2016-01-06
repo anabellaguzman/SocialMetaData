@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-
 import com.socialmetadata.model.Item;
 import com.socialmetadata.service.ItemService;
 
@@ -25,6 +24,16 @@ public class SearchItemController {
 	public String setupForm(Map<String, Object> map){
 		
 		return "advancedSearch";
+		
+	}
+	
+	@RequestMapping(value = "/advancedSearch.do", method = RequestMethod.POST)
+	public void advancedSearchItem(@RequestParam String  tituloItem, @RequestParam String year){
+		
+		System.out.println("/advancedSearch.do");
+		itemService.advancedSearch(tituloItem, Integer.valueOf(year));
+		
+		
 		
 	}
 

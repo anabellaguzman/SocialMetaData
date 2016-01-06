@@ -92,6 +92,10 @@ public class ItemService {
 			c.getTitulo();
 		}
 	}
+	
+	public void advancedSearch(String titulo, Integer year){
+		itemDAO.advancedSearch(titulo, year);
+	}
 
 
 }
