@@ -12,6 +12,10 @@
 		<org.springframework.version>4.0.6.RELEASE</org.springframework.version>
 		<!-- Spring security -->
 		<spring-security.version>3.2.5.RELEASE</spring-security.version>
+		<!-- Spring Social -->
+		<spring-social.version>1.0.0.RELEASE</spring-social.version>
+		<spring-social-twitter.version>1.0.0.RELEASE</spring-social-twitter.version>
+		<spring-social-facebook.version>1.0.0.RELEASE</spring-social-facebook.version>
 		<!-- JUnit -->
 		<junit.version>3.8.1</junit.version>
 		<!-- Commons DBCP -->
@@ -20,15 +24,15 @@
 		<commons-lang.version>3.1</commons-lang.version>
 		<!-- Hibernate -->
 		<hibernate.version>3.6.7.Final</hibernate.version>
-		
+
 		<jstl.version>1.2</jstl.version>
-		
+
 
 
 	</properties>
 
 	<dependencies>
-	<!-- Spring security -->
+		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
@@ -87,6 +91,47 @@
 			<version>${spring-security.version}</version>
 		</dependency>
 
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework.security</groupId> -->
+		<!-- <artifactId>spring-security-crypto</artifactId> -->
+		<!-- <version>3.1.0.RC3</version> -->
+		<!-- </dependency> -->
+
+
+
+
+		<!-- Spring social -->
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-core</artifactId>
+			<version>${spring-social.version}</version>
+		</dependency>
+		<!-- Spring Social Web (contains login/signup controllers) -->
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-web</artifactId>
+			<version>${spring-social.version}</version>
+		</dependency>
+		<!--Spring Social Twitter -->
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-twitter</artifactId>
+			<version>${spring-social-twitter.version}</version>
+		</dependency>
+		<!-- Spring Social Facebook -->
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-facebook</artifactId>
+			<version>${spring-social-facebook.version}</version>
+		</dependency>
+		<!--Spring Social Google -->
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-google</artifactId>
+			<version>1.0.0.RELEASE</version>
+		</dependency>
+
+
 		<!-- Hibernate resources -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -113,8 +158,8 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>3.3.2.GA</version>
 		</dependency>
-		
-		
+
+
 		<dependency>
 			<groupId>taglibs</groupId>
 			<artifactId>standard</artifactId>
@@ -192,12 +237,19 @@
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<!-- jstl -->
 		<dependency>
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
 			<version>${jstl.version}</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.1.2</version>
 		</dependency>
 
 
