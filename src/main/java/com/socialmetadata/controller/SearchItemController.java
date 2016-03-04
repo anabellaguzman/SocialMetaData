@@ -12,16 +12,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.socialmetadata.model.Item;
+import com.socialmetadata.model.TipoItem;
 import com.socialmetadata.service.ItemService;
+import com.socialmetadata.service.TipoItemService;
 
 @Controller
 public class SearchItemController {
+	
+	@Autowired
+	private TipoItemService tipoItemService;
 	
 	@Autowired
 	private ItemService itemService;
 	
 	@RequestMapping("/advancedSearch")
 	public String setupForm(Map<String, Object> map){
+		
+		List<TipoItem> listTipoItem = tipoItemService.getAllTipoItem();
 		
 		return "advancedSearch";
 		
