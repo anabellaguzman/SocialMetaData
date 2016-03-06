@@ -78,6 +78,7 @@
 									<div class="panel panel-default">
 										<div class="panel-heading">${comentarios.titulo}</div>
 										<div class="panel-body">${comentarios.comentario}</div>
+										<div class="panel-body"><p class="text-muted"><small>Por: ${comentarios.usuario.nombre} - Fecha: ${comentarios.fecha}</small></p></div>
 									</div>
 								</c:forEach></li>
 
