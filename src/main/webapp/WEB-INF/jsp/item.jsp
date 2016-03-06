@@ -72,13 +72,41 @@
 					<div class="tab-pane fade active in" id="descripcion">
 						<p>${item.descripcion}</p>
 					</div>
+					<div class="tab-pane fade" id="archivos">
+						<p>archivoooos</p>
+						<c:out value="${message}" />
+						<form method="post" action="addArchivo"
+							enctype="multipart/form-data">
+							<table>
+								<tr>
+									<td>Seleccionar archivo:</td>
+									<td><input type="file" id=fichero name="fichero"></td>
+									<td><input type="text" id=titulo name="titulo">titulo archivo</td>
+									<td><input type="hidden" id="idItem" name="idItem" value="${item.idItem}"></td>
+								</tr>
+								<tr>
+
+								</tr>
+								<tr>
+									<td colspan="2" align="center"><input type="submit"
+										value="Subir fichero"> <!--     	<button type="button" class="btn btn-primary" -->
+										<!-- 								onclick="uploadFile()">Submit</button></td> -->
+								</tr>
+							</table>
+						</form>
+					</div>
 					<div class="tab-pane fade" id="comentarios">
 						<ul class="list-unstyled">
 							<li><c:forEach items="${item.comentarios}" var="comentarios">
 									<div class="panel panel-default">
 										<div class="panel-heading">${comentarios.titulo}</div>
 										<div class="panel-body">${comentarios.comentario}</div>
-										<div class="panel-body"><p class="text-muted"><small>Por: ${comentarios.usuario.nombre} - Fecha: ${comentarios.fecha}</small></p></div>
+										<div class="panel-body">
+											<p class="text-muted">
+												<small>Por: ${comentarios.usuario.nombre} - Fecha:
+													${comentarios.fecha}</small>
+											</p>
+										</div>
 									</div>
 								</c:forEach></li>
 
@@ -164,6 +192,24 @@
 
 	<div id="subViewDiv" class="bs-component"></div>
 	<script type="text/javascript">
+// 		function addArchivo() {
+// 			console.log($("#idItem").val());
+// 			$.ajax({
+// 				url : 'addArchivo',
+// 				//				contentType : false,
+// 				type : 'POST',
+// 				data : {
+// 					idItem : 5,
+// 				//					fileFormBean : $('#fichero'),
+
+// 				},
+// 				//				cache : false,
+// 				//				processData : false,
+// 				success : function(data) {
+// 					alert(':)');
+// 				}
+// 			});
+// 		}
 		function addComment() {
 			$.ajax({
 				url : "addComment",
