@@ -12,7 +12,28 @@
 <script src="../resources/flatly/bootswatch.js"></script>
 <script src="<c:url value="/resources/flatly/bootswatch.js" />"></script>
 </head>
+<style>
+.btn-file {
+	position: relative;
+	overflow: hidden;
+}
 
+.btn-file input[type=file] {
+	position: absolute;
+	top: 0;
+	right: 0;
+	min-width: 100%;
+	min-height: 100%;
+	font-size: 100px;
+	text-align: right;
+	filter: alpha(opacity = 0);
+	opacity: 0;
+	outline: none;
+	background: white;
+	cursor: inherit;
+	display: block;
+}
+</style>
 
 <body>
 
@@ -75,141 +96,153 @@
 					<div class="tab-pane fade" id="archivos">
 						<p>archivoooos</p>
 						<c:out value="${message}" />
-						<form method="post" action="addArchivo"
+						<form class="form-horizontal" method="post" action="addArchivo"
 							enctype="multipart/form-data">
 							<table>
 								<tr>
 									<td>Seleccionar archivo:</td>
 									<td><input type="file" id=fichero name="fichero"></td>
-									<td><input type="text" id=titulo name="titulo">titulo archivo</td>
-									<td><input type="hidden" id="idItem" name="idItem" value="${item.idItem}"></td>
+									<td><input type="text" id=titulo name="titulo">titulo
+										archivo</td>
+									<td><input type="hidden" id="idItem" name="idItem"
+										value="${item.idItem}"></td>
 								</tr>
 								<tr>
 
 								</tr>
 								<tr>
 									<td colspan="2" align="center"><input type="submit"
-										value="Subir fichero"> <!--     	<button type="button" class="btn btn-primary" -->
-										<!-- 								onclick="uploadFile()">Submit</button></td> -->
+										value="Subir fichero">
+										<button type="button" class="btn btn-primary"
+											onclick="uploadFile()">Submit</button></td>
 								</tr>
 							</table>
+
+
 						</form>
 					</div>
-					<div class="tab-pane fade" id="comentarios">
-						<ul class="list-unstyled">
-							<li><c:forEach items="${item.comentarios}" var="comentarios">
-									<div class="panel panel-default">
-										<div class="panel-heading">${comentarios.titulo}</div>
-										<div class="panel-body">${comentarios.comentario}</div>
-										<div class="panel-body">
-											<p class="text-muted">
-												<small>Por: ${comentarios.usuario.nombre} - Fecha:
-													${comentarios.fecha}</small>
-											</p>
-										</div>
+
+
+
+
+
+
+				</div>
+				<div class="tab-pane fade" id="comentarios">
+					<ul class="list-unstyled">
+						<li><c:forEach items="${item.comentarios}" var="comentarios">
+								<div class="panel panel-default">
+									<div class="panel-heading">${comentarios.titulo}</div>
+									<div class="panel-body">${comentarios.comentario}</div>
+									<div class="panel-body">
+										<p class="text-muted">
+											<small>Por: ${comentarios.usuario.nombre} - Fecha:
+												${comentarios.fecha}</small>
+										</p>
 									</div>
-								</c:forEach></li>
+								</div>
+							</c:forEach></li>
 
 
 
-						</ul>
-						<div class="bs-component">
-							<div class="modal">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h4 class="modal-title" contenteditable="true" id="tituloC">Titulo
-												de tu comentario ...</h4>
-										</div>
-										<div class="modal-body">
-											<p contenteditable="true" id="comentarioC">Escribe tu
-												comentario...</p>
-										</div>
-										<div class="modal-footer">
-											<sec:authorize access="isAuthenticated()">
-												<button type="button" class="btn btn-primary"
-													onclick="addComment()">Enviar</button>
-											</sec:authorize>
-											<sec:authorize access="isAnonymous()">
-												<button type="button" class="btn btn-primary disabled">Enviar</button>
-											</sec:authorize>
+					</ul>
+					<div class="bs-component">
+						<div class="modal">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h4 class="modal-title" contenteditable="true" id="tituloC">Titulo
+											de tu comentario ...</h4>
+									</div>
+									<div class="modal-body">
+										<p contenteditable="true" id="comentarioC">Escribe tu
+											comentario...</p>
+									</div>
+									<div class="modal-footer">
+										<sec:authorize access="isAuthenticated()">
+											<button type="button" class="btn btn-primary"
+												onclick="addComment()">Enviar</button>
+										</sec:authorize>
+										<sec:authorize access="isAnonymous()">
+											<button type="button" class="btn btn-primary disabled">Enviar</button>
+										</sec:authorize>
 
-										</div>
 									</div>
 								</div>
 							</div>
-							<div id="source-button" class="btn btn-primary btn-xs"
-								style="display: none;">&lt; &gt;</div>
 						</div>
-
+						<div id="source-button" class="btn btn-primary btn-xs"
+							style="display: none;">&lt; &gt;</div>
 					</div>
 
-					<div class="tab-pane fade" id="errores">
-						<ul class="list-unstyled">
-							<li><c:forEach items="${item.errores}" var="errores">
-									<div class="panel panel-default">
-										<div class="panel-heading">${errores.titulo}</div>
-										<div class="panel-body">${errores.comentario}</div>
-									</div>
-								</c:forEach></li>
-
-						</ul>
-						<div class="bs-component">
-							<div class="modal">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h4 class="modal-title" contenteditable="true" id="tituloE">Titulo
-												del Error</h4>
-										</div>
-										<div class="modal-body">
-											<p contenteditable="true" id="comentarioE">Reporte del
-												error ...</p>
-										</div>
-										<div class="modal-footer">
-											<sec:authorize access="isAuthenticated()">
-												<button type="button" class="btn btn-primary"
-													onclick="addError()">Reportar</button>
-											</sec:authorize>
-											<sec:authorize access="isAnonymous()">
-												<button type="button" class="btn btn-primary disabled">Reportar</button>
-											</sec:authorize>
-
-										</div>
-									</div>
-								</div>
-							</div>
-							<div id="source-button" class="btn btn-primary btn-xs"
-								style="display: none;">&lt; &gt;</div>
-						</div>
-
-					</div>
 				</div>
 
+				<div class="tab-pane fade" id="errores">
+					<ul class="list-unstyled">
+						<li><c:forEach items="${item.errores}" var="errores">
+								<div class="panel panel-default">
+									<div class="panel-heading">${errores.titulo}</div>
+									<div class="panel-body">${errores.comentario}</div>
+								</div>
+							</c:forEach></li>
+
+					</ul>
+					<div class="bs-component">
+						<div class="modal">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h4 class="modal-title" contenteditable="true" id="tituloE">Titulo
+											del Error</h4>
+									</div>
+									<div class="modal-body">
+										<p contenteditable="true" id="comentarioE">Reporte del
+											error ...</p>
+									</div>
+									<div class="modal-footer">
+										<sec:authorize access="isAuthenticated()">
+											<button type="button" class="btn btn-primary"
+												onclick="addError()">Reportar</button>
+										</sec:authorize>
+										<sec:authorize access="isAnonymous()">
+											<button type="button" class="btn btn-primary disabled">Reportar</button>
+										</sec:authorize>
+
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="source-button" class="btn btn-primary btn-xs"
+							style="display: none;">&lt; &gt;</div>
+					</div>
+
+				</div>
 			</div>
+
 		</div>
 	</div>
+	
 
 	<div id="subViewDiv" class="bs-component"></div>
 	<script type="text/javascript">
-// 		function addArchivo() {
-// 			console.log($("#idItem").val());
-// 			$.ajax({
-// 				url : 'addArchivo',
-// 				//				contentType : false,
-// 				type : 'POST',
-// 				data : {
-// 					idItem : 5,
-// 				//					fileFormBean : $('#fichero'),
+		// 		function addArchivo() {
+		// 			console.log($("#idItem").val());
+		// 			$.ajax({
+		// 				url : 'addArchivo',
+		// 				//				contentType : false,
+		// 				type : 'POST',
+		// 				data : {
+		// 					idItem : 5,
+		// 				//					fileFormBean : $('#fichero'),
 
-// 				},
-// 				//				cache : false,
-// 				//				processData : false,
-// 				success : function(data) {
-// 					alert(':)');
-// 				}
-// 			});
-// 		}
+		// 				},
+		// 				//				cache : false,
+		// 				//				processData : false,
+		// 				success : function(data) {
+		// 					alert(':)');
+		// 				}
+		// 			});
+		// 		}
 		function addComment() {
 			$.ajax({
 				url : "addComment",
@@ -235,6 +268,40 @@
 
 			});
 		}
+
+// 		$(document).on(
+// 				'change',
+// 				'.btn-file :file',
+// 				function() {
+// 					var input = $(this), numFiles = input.get(0).files ? input
+// 							.get(0).files.length : 1, label = input.val()
+// 							.replace(/\\/g, '/').replace(/.*\//, '');
+// 					input.trigger('fileselect', [ numFiles, label ]);
+// 				});
+
+// 		$(document)
+// 				.ready(
+// 						function() {
+// 							$('.btn-file :file')
+// 									.on(
+// 											'fileselect',
+// 											function(event, numFiles, label) {
+
+// 												var input = $(this).parents(
+// 														'.input-group').find(
+// 														':text'), log = numFiles > 1 ? numFiles
+// 														+ ' files selected'
+// 														: label;
+
+// 												if (input.length) {
+// 													input.val(log);
+// 												} else {
+// 													if (log)
+// 														alert(log);
+// 												}
+
+// 											});
+// 						});
 	</script>
 
 
