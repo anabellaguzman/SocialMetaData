@@ -94,32 +94,50 @@
 						<p>${item.descripcion}</p>
 					</div>
 					<div class="tab-pane fade" id="archivos">
-						<p>archivoooos</p>
+						
 						<c:out value="${message}" />
-						<form class="form-horizontal" method="post" action="addArchivo"
-							enctype="multipart/form-data">
-							<table>
-								<tr>
-									<td>Seleccionar archivo:</td>
-									<td><input type="file" id=fichero name="fichero"></td>
-									<td><input type="text" id=titulo name="titulo">titulo
-										archivo</td>
-									<td><input type="hidden" id="idItem" name="idItem"
-										value="${item.idItem}"></td>
-								</tr>
-								<tr>
+						
+						
+						<div class="container" style="margin-top: 20px;">
+							<div class="row">
 
-								</tr>
-								<tr>
-									<td colspan="2" align="center"><input type="submit"
-										value="Subir fichero">
-										<button type="button" class="btn btn-primary"
-											onclick="uploadFile()">Submit</button></td>
-								</tr>
-							</table>
+								<div class="col-lg-6 col-sm-6 col-12">
+									<div class="jumbotron">
+										<h1>Bootstrap File Input Demo</h1>
+									</div>
+								</div>
 
+								<div class="col-lg-6 col-sm-6 col-12">
+									<h4>Subir Nuevo Archivo</h4>
+									<form class="form-horizontal" method="post" action="addArchivo"
+										enctype="multipart/form-data">
 
-						</form>
+										<div class="form-group">
+											<label for="inputDefault" class="col-lg-2 control-label">Titulo</label>
+											<div class="col-lg-10">
+												<input type="text" class="form-control" id="titulo"
+													name="titulo"></input> <input type="hidden" id="idItem"
+													name="idItem" value="${item.idItem}">
+											</div>
+										</div>
+										<div class="input-group">
+											<span class="input-group-btn"> <span
+												class="btn btn-primary btn-file"> Browse&hellip; <input
+													type="file" multiple id=fichero name="fichero">
+											</span>
+											</span> <input type="text" class="form-control" readonly>
+										</div>
+										<br>
+										<button class="btn btn-default">Cancel</button>
+										<button type="Submit" class="btn btn-primary">Subir</button>
+									</form>
+								</div>
+
+							</div>
+						</div>
+						
+						
+						
 					</div>
 
 
@@ -269,39 +287,39 @@
 			});
 		}
 
-// 		$(document).on(
-// 				'change',
-// 				'.btn-file :file',
-// 				function() {
-// 					var input = $(this), numFiles = input.get(0).files ? input
-// 							.get(0).files.length : 1, label = input.val()
-// 							.replace(/\\/g, '/').replace(/.*\//, '');
-// 					input.trigger('fileselect', [ numFiles, label ]);
-// 				});
+		$(document).on(
+				'change',
+				'.btn-file :file',
+				function() {
+					var input = $(this), numFiles = input.get(0).files ? input
+							.get(0).files.length : 1, label = input.val()
+							.replace(/\\/g, '/').replace(/.*\//, '');
+					input.trigger('fileselect', [ numFiles, label ]);
+				});
 
-// 		$(document)
-// 				.ready(
-// 						function() {
-// 							$('.btn-file :file')
-// 									.on(
-// 											'fileselect',
-// 											function(event, numFiles, label) {
+		$(document)
+				.ready(
+						function() {
+							$('.btn-file :file')
+									.on(
+											'fileselect',
+											function(event, numFiles, label) {
 
-// 												var input = $(this).parents(
-// 														'.input-group').find(
-// 														':text'), log = numFiles > 1 ? numFiles
-// 														+ ' files selected'
-// 														: label;
+												var input = $(this).parents(
+														'.input-group').find(
+														':text'), log = numFiles > 1 ? numFiles
+														+ ' files selected'
+														: label;
 
-// 												if (input.length) {
-// 													input.val(log);
-// 												} else {
-// 													if (log)
-// 														alert(log);
-// 												}
+												if (input.length) {
+													input.val(log);
+												} else {
+													if (log)
+														alert(log);
+												}
 
-// 											});
-// 						});
+											});
+						});
 	</script>
 
 
