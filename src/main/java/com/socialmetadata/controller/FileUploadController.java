@@ -7,6 +7,7 @@ import java.net.URL;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +35,7 @@ public class FileUploadController {
     }
  
     @RequestMapping(method = RequestMethod.POST)
-    public @ModelAttribute("message") String guardaFichero(@ModelAttribute FileFormBean fileFormBean, HttpServletRequest request) {
+    public @ModelAttribute("message") String guardaFichero(@ModelAttribute FileFormBean fileFormBean, HttpServletRequest request, int idFile) {
     	
     	String filePath = request.getServletContext().getRealPath("/"); 
     	
@@ -43,7 +44,7 @@ public class FileUploadController {
 //    	/Users/Development/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SocialMetadata/    	
 //    	multipartFile.transferTo(new File(filePath));
     	try {
-			grabarFicheroALocal(fileFormBean, filePath);
+			grabarFicheroALocal(fileFormBean, filePath, idFile );
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "No se ha podido grabar el fichero";
@@ -68,18 +69,23 @@ public class FileUploadController {
 //    	
 //    }
 // 
-	private void grabarFicheroALocal(FileFormBean fileFormBean, String path) throws Exception {
+	private void grabarFicheroALocal(FileFormBean fileFormBean, String path, int idFile) throws Exception {
 		
 		
 
-		CommonsMultipartFile uploaded = fileFormBean.getFichero();
-    	File localFile = new File(path+"resources/images/"+uploaded.getOriginalFilename());
+		CommonsMultipartFile file = fileFormBean.getFichero();
+		String fileName = file.getOriginalFilename();
+	 
+
+		String extension = FilenameUtils.getExtension(fileName);
+    	File localFile = new File(path+"resources/images/"+idFile+"."+extension);
+    	
     	FileOutputStream os = null;
     	
     	try {
     		
     		os = new FileOutputStream(localFile);
-    		os.write(uploaded.getBytes());
+    		os.write(file.getBytes());
     		
     	} finally {
     		if (os != null) {

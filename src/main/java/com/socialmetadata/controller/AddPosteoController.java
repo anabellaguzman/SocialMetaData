@@ -64,18 +64,24 @@ public class AddPosteoController {
 	 			System.out.println(idItem);
 	 			System.out.println(titulo);
 	 			
+	 			Posteo archivo = createArchivo();
 	 			
 	 			CommonsMultipartFile uploaded = fileFormBean.getFichero();
 	 			uploaded.getOriginalFilename();
 	 			
-	 			FileUploadController fuc = new FileUploadController();
-	 			fuc.guardaFichero(fileFormBean, request);
-	 			Posteo archivo = createArchivo();
-	 			addPosteo(archivo, titulo, uploaded.getOriginalFilename(), idItem);
+	 			int idPosteo = addPosteo(archivo, titulo, uploaded.getOriginalFilename(), idItem);
+	 			
+	 			
+	 			FileUploadController fileUploadController = new FileUploadController();
+	 			fileUploadController.guardaFichero(fileFormBean, request, idPosteo);
+	 			
+	 			System.out.println("id posteo: "+ idPosteo);
 	 		      
 	 	}
 	
-	private void addPosteo(Posteo posteo, String titulo, String comentario, int idItem){
+	
+	
+	private int addPosteo(Posteo posteo, String titulo, String comentario, int idItem){
 		
 	      Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	      String username = auth.getName(); 
@@ -91,7 +97,7 @@ public class AddPosteoController {
 	      posteo.setComentario(comentario);
 	      posteo.setFecha(date);
 	      
-	      posteoService.add(posteo);
+	      return posteoService.add(posteo);
 	}
 	
 	private Posteo createComentario(){

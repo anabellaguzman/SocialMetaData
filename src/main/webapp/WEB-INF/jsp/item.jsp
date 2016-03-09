@@ -46,9 +46,9 @@
 				<h1>${item.titulo}</h1>
 				<div class="row">
 					<div class="col-sm-4">
-						<img class="img-responsive"
+						<img  class="img-responsive"
 							src="<c:url value="/resources/images/${item.imagen}" />"
-							alt="some_text" width="460" height="345">
+							alt="some_text" width="256" height="180">
 					</div>
 					<div class="col-sm-8">
 						<ul class="list-group">
@@ -76,37 +76,28 @@
 					</div>
 				</div>
 			</div>
-			<div>
+			<div class="bs-component">
 				<ul class="nav nav-tabs">
-					<li class="active"><a href="#descripcion" data-toggle="tab"
-						aria-expanded="true">Descripcion</a></li>
-					<li class=""><a href="#comentarios" data-toggle="tab"
-						aria-expanded="false">Comentarios</a></li>
-					<li class=""><a href="#errores" data-toggle="tab"
-						aria-expanded="false">Reporte de Errores</a></li>
-					<li class=""><a href="#archivos" data-toggle="tab"
-						aria-expanded="false">Archivos</a></li>
-
+					<li class="active"><a href="#descripcion" data-toggle="tab">Descripcion</a></li>
+					<li><a href="#comentarios" data-toggle="tab">Comentarios</a></li>
+					<li><a href="#errores" data-toggle="tab">Reporte de Errores</a></li>
+					<li><a href="#archivos" data-toggle="tab">Archivos</a></li>
 				</ul>
 
 				<div id="myTabContent" class="tab-content">
 					<div class="tab-pane fade active in" id="descripcion">
 						<p>${item.descripcion}</p>
 					</div>
-					<div class="tab-pane fade" id="archivos">
-						
-						<c:out value="${message}" />
-						
-						
+					<div class="tab-pane fade" id="archivos">						
+						<c:out value="${message}" />						
 						<div class="container" style="margin-top: 20px;">
 							<div class="row">
 
 								<div class="col-lg-6 col-sm-6 col-12">
 									<div class="jumbotron">
-										<h1>Bootstrap File Input Demo</h1>
+										<h1>Listar archivos</h1>
 									</div>
 								</div>
-
 								<div class="col-lg-6 col-sm-6 col-12">
 									<h4>Subir Nuevo Archivo</h4>
 									<form class="form-horizontal" method="post" action="addArchivo"
@@ -134,18 +125,9 @@
 								</div>
 
 							</div>
-						</div>
-						
-						
-						
+						</div>					
 					</div>
-
-
-
-
-
-
-				</div>
+				
 				<div class="tab-pane fade" id="comentarios">
 					<ul class="list-unstyled">
 						<li><c:forEach items="${item.comentarios}" var="comentarios">
@@ -160,9 +142,6 @@
 									</div>
 								</div>
 							</c:forEach></li>
-
-
-
 					</ul>
 					<div class="bs-component">
 						<div class="modal">
@@ -192,9 +171,7 @@
 						<div id="source-button" class="btn btn-primary btn-xs"
 							style="display: none;">&lt; &gt;</div>
 					</div>
-
 				</div>
-
 				<div class="tab-pane fade" id="errores">
 					<ul class="list-unstyled">
 						<li><c:forEach items="${item.errores}" var="errores">
@@ -203,7 +180,6 @@
 									<div class="panel-body">${errores.comentario}</div>
 								</div>
 							</c:forEach></li>
-
 					</ul>
 					<div class="bs-component">
 						<div class="modal">
@@ -225,7 +201,6 @@
 										<sec:authorize access="isAnonymous()">
 											<button type="button" class="btn btn-primary disabled">Reportar</button>
 										</sec:authorize>
-
 									</div>
 								</div>
 							</div>
@@ -233,34 +208,16 @@
 						<div id="source-button" class="btn btn-primary btn-xs"
 							style="display: none;">&lt; &gt;</div>
 					</div>
-
+				</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
 	
 
 	<div id="subViewDiv" class="bs-component"></div>
 	<script type="text/javascript">
-		// 		function addArchivo() {
-		// 			console.log($("#idItem").val());
-		// 			$.ajax({
-		// 				url : 'addArchivo',
-		// 				//				contentType : false,
-		// 				type : 'POST',
-		// 				data : {
-		// 					idItem : 5,
-		// 				//					fileFormBean : $('#fichero'),
 
-		// 				},
-		// 				//				cache : false,
-		// 				//				processData : false,
-		// 				success : function(data) {
-		// 					alert(':)');
-		// 				}
-		// 			});
-		// 		}
 		function addComment() {
 			$.ajax({
 				url : "addComment",
