@@ -43,9 +43,9 @@
 						<button type="button" id="msg" onclick="showMsg()"
 							class="btn btn-success">Agregar</button>
 						<div id="loginMsg" class="alert alert-dismissible alert-danger"
-							style="display: none">							
+							style="display:none">							
 								<div class="bs-component">
-									<button type="button" class="close" data-dismiss="alert">×</button>
+									<button type="button" class="close" data-dismiss="alert" onclick="hideLoginMsh()">×</button>
 									<strong>Oh! Necesitas</strong> <a href="./login"
 										class="alert-link">Iniciar Sesion</a> para hacer eso.
 								</div>
@@ -90,9 +90,20 @@
 
 	function showMsg() {
 
-		console.log("CLICK");
+// 		console.log("CLICK");
 
 		$("#loginMsg").show();
 
 	}
+	
+	function hideLoginMsh(){
+		$("#loginMsg").hide();
+	}
+	
+// 	$('#loginMsg').on('closed.bs.alert', function () {
+// 		$('#loginMsg').hide();
+// 	      return false;
+// 		});
+	
+
 </script>
