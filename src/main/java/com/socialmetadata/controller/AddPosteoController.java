@@ -10,6 +10,7 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.socialmetadata.model.Archivo;
@@ -59,23 +61,27 @@ public class AddPosteoController {
 	}
 	
 	@RequestMapping(value = "/addArchivo", method = RequestMethod.POST)
-	 	public void addArchivo( @RequestParam int idItem, @RequestParam String titulo, @ModelAttribute FileFormBean fileFormBean, HttpServletRequest request){
+	@ResponseBody
+	 	public int addArchivo( @RequestParam int idItem, @ModelAttribute FileFormBean fileFormBean, HttpServletRequest request){
 	 		
-	 			System.out.println(idItem);
-	 			System.out.println(titulo);
 	 			
 	 			Posteo archivo = createArchivo();
 	 			
-	 			CommonsMultipartFile uploaded = fileFormBean.getFichero();
-	 			uploaded.getOriginalFilename();
+	 			CommonsMultipartFile file = fileFormBean.getFichero();
+	 			String fileName = file.getOriginalFilename();
+	 		 
+
+	 			String extension = "."+FilenameUtils.getExtension(fileName);
 	 			
-	 			int idPosteo = addPosteo(archivo, titulo, uploaded.getOriginalFilename(), idItem);
+	 			
+	 			int idPosteo = addPosteo(archivo, file.getOriginalFilename(), extension, idItem);
 	 			
 	 			
 	 			FileUploadController fileUploadController = new FileUploadController();
-	 			fileUploadController.guardaFichero(fileFormBean, request, idPosteo);
+	 			fileUploadController.guardaFichero(fileFormBean, request, idPosteo,"resources/archivos/");
 	 			
 	 			System.out.println("id posteo: "+ idPosteo);
+	 			return idPosteo;
 	 		      
 	 	}
 	

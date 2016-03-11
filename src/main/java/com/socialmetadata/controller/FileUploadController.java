@@ -35,11 +35,12 @@ public class FileUploadController {
     }
  
     @RequestMapping(method = RequestMethod.POST)
-    public @ModelAttribute("message") String guardaFichero(@ModelAttribute FileFormBean fileFormBean, HttpServletRequest request, int idFile) {
+    public @ModelAttribute("message") String guardaFichero(@ModelAttribute FileFormBean fileFormBean, HttpServletRequest request, int idFile, String folder) {
     	
     	String filePath = request.getServletContext().getRealPath("/"); 
+    	filePath = filePath+folder;
     	
-//    	System.out.println(filePath);
+    	System.out.println(filePath);
     	
 //    	/Users/Development/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SocialMetadata/    	
 //    	multipartFile.transferTo(new File(filePath));
@@ -78,7 +79,9 @@ public class FileUploadController {
 	 
 
 		String extension = FilenameUtils.getExtension(fileName);
-    	File localFile = new File(path+"resources/images/"+idFile+"."+extension);
+//    	File localFile = new File(path+"resources/images/"+idFile+"."+extension);
+    	File localFile = new File(path+idFile+"."+extension);
+
     	
     	FileOutputStream os = null;
     	

@@ -76,6 +76,8 @@
 
 <script type="text/javascript"
 	src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
+<!-- <script  -->
+<%-- 	src="<c:url value="/resources/js/jquery.form.js" />"></script> --%>
 <!-- <script type="text/javascript" -->
 <%-- 	src="<c:url value="/resources/flatly/bootswatch.js" />"></script> --%>
 

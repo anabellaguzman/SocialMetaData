@@ -31,6 +31,7 @@ public class ItemController {
 		Item item = itemService.getItem(idItem);
 		itemService.getItemComentarios(item);
 		itemService.getItemErrores(item);
+		itemService.getItemArchivos(item);
 
 //		item.getComentarios();
 //		item.getErrores();

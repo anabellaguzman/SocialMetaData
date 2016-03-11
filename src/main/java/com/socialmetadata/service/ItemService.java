@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.socialmetadata.dao.ItemDAO;
 import com.socialmetadata.dao.PosteoDAO;
+import com.socialmetadata.model.Archivo;
 import com.socialmetadata.model.Autor;
 import com.socialmetadata.model.Error;
 import com.socialmetadata.model.Item;
@@ -86,6 +87,20 @@ public class ItemService {
 		for (Error c : item.getErrores()) {
 			c.getComentario();
 			c.getTitulo();
+		}
+	}
+	
+	public void getItemArchivos(Item item) {
+		for (Archivo c : item.getArchivos()) {
+			c.getIdPosteo();
+			c.getComentario();
+			c.getTitulo();
+			
+//			System.out.println(c.getIdPosteo());
+//			System.out.println(c.getComentario());
+//			System.out.println(c.getTitulo());
+
+			
 		}
 	}
 

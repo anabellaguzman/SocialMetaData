@@ -9,8 +9,10 @@
 <script type="text/javascript"
 	src="<c:url value="/resources/js/jquery-ui.min.js" />"></script>
 <script src="<c:url value="/resources/flatly/bootstrap.min.js" />"></script>
-<script src="../resources/flatly/bootswatch.js"></script>
 <script src="<c:url value="/resources/flatly/bootswatch.js" />"></script>
+<!-- <script src="http://malsup.github.com/jquery.form.js"></script>  -->
+<script 
+	src="<c:url value="/resources/js/jquery.form.js" />"></script>
 </head>
 <style>
 .btn-file {
@@ -46,7 +48,7 @@
 				<h1>${item.titulo}</h1>
 				<div class="row">
 					<div class="col-sm-4">
-						<img  class="img-responsive"
+						<img class="img-responsive"
 							src="<c:url value="/resources/images/${item.imagen}" />"
 							alt="some_text" width="256" height="180">
 					</div>
@@ -80,7 +82,8 @@
 				<ul class="nav nav-tabs">
 					<li class="active"><a href="#descripcion" data-toggle="tab">Descripcion</a></li>
 					<li><a href="#comentarios" data-toggle="tab">Comentarios</a></li>
-					<li><a href="#errores" data-toggle="tab">Reporte de Errores</a></li>
+					<li><a href="#errores" data-toggle="tab">Reporte de
+							Errores</a></li>
 					<li><a href="#archivos" data-toggle="tab">Archivos</a></li>
 				</ul>
 
@@ -88,136 +91,170 @@
 					<div class="tab-pane fade active in" id="descripcion">
 						<p>${item.descripcion}</p>
 					</div>
-					<div class="tab-pane fade" id="archivos">						
-						<c:out value="${message}" />						
+					<div class="tab-pane fade" id="archivos">
+						<c:out value="${message}" />
 						<div class="container" style="margin-top: 20px;">
 							<div class="row">
 
 								<div class="col-lg-6 col-sm-6 col-12">
 									<div class="jumbotron">
-										<h1>Listar archivos</h1>
+										<h4>Lista de Archivos</h4>
+										<ul class="list-unstyled">
+											<li><c:forEach items="${item.archivos}" var="archivos">
+													<div>
+														<a
+															href=<c:url value="/resources/archivos/${archivos.idPosteo}${archivos.comentario}"/>
+															download="${archivos.titulo}">${archivos.titulo} </a>
+													</div>
+												</c:forEach></li>
+										</ul>
+
+
 									</div>
 								</div>
 								<div class="col-lg-6 col-sm-6 col-12">
-									<h4>Subir Nuevo Archivo</h4>
-									<form class="form-horizontal" method="post" action="addArchivo"
-										enctype="multipart/form-data">
+									<div class="jumbotron">
+										<h4>Subir Nuevo Archivo</h4>
+										<form id=formFile class="form-horizontal" method="post"
+											action="addArchivo" enctype="multipart/form-data">
 
-										<div class="form-group">
-											<label for="inputDefault" class="col-lg-2 control-label">Titulo</label>
-											<div class="col-lg-10">
-												<input type="text" class="form-control" id="titulo"
-													name="titulo"></input> <input type="hidden" id="idItem"
-													name="idItem" value="${item.idItem}">
+											<div class="form-group">
+												<div class="col-lg-10">
+													<!-- 												<input type="text" class="form-control" id="titulo" -->
+													<!-- 													name="titulo"></input> -->
+													<input type="hidden" id="idItem" name="idItem"
+														value="${item.idItem}">
+												</div>
 											</div>
-										</div>
-										<div class="input-group">
-											<span class="input-group-btn"> <span
-												class="btn btn-primary btn-file"> Browse&hellip; <input
-													type="file" multiple id=fichero name="fichero">
-											</span>
-											</span> <input type="text" class="form-control" readonly>
-										</div>
-										<br>
-										<button class="btn btn-default">Cancel</button>
-										<button type="Submit" class="btn btn-primary">Subir</button>
-									</form>
+											<div class="input-group">
+												<span class="input-group-btn"> <span
+													class="btn btn-primary btn-file"> Browse&hellip; <input
+														type="file" multiple id=fichero name="fichero">
+												</span>
+												</span> <input type="text" class="form-control">
+											</div>
+											<br>
+											<button class="btn btn-default">Cancel</button>
+											<!-- 										<button type="Submit" class="btn btn-primary">Subir</button> -->
+
+
+											<sec:authorize access="isAuthenticated()">
+												<button type="Submit" class="btn btn-primary">Subir</button>
+												<div id=fileUploadSuccess class="alert alert-dismissible alert-success" style="display: none">
+													<button type="button" class="close" data-dismiss="alert">×</button>
+													 Tu archivo ha sido subido exitosamente.
+												</div>
+											</sec:authorize>
+											<sec:authorize access="isAnonymous()">
+												<button type="button" class="btn btn-primary" id="msg"
+													onclick="showMsg()">Subir</button>
+												<div id="loginMsg"
+													class="alert alert-dismissible alert-danger"
+													style="display: none">
+													<div class="bs-component">
+														<button type="button" class="close" data-dismiss="alert">×</button>
+														<strong>Oh! Necesitas</strong> <a href="./login"
+															class="alert-link">Iniciar Sesion</a> para hacer eso.
+													</div>
+												</div>
+											</sec:authorize>
+										</form>
+									</div>
 								</div>
 
 							</div>
-						</div>					
+						</div>
 					</div>
-				
-				<div class="tab-pane fade" id="comentarios">
-					<ul class="list-unstyled">
-						<li><c:forEach items="${item.comentarios}" var="comentarios">
-								<div class="panel panel-default">
-									<div class="panel-heading">${comentarios.titulo}</div>
-									<div class="panel-body">${comentarios.comentario}</div>
-									<div class="panel-body">
-										<p class="text-muted">
-											<small>Por: ${comentarios.usuario.nombre} - Fecha:
-												${comentarios.fecha}</small>
-										</p>
-									</div>
-								</div>
-							</c:forEach></li>
-					</ul>
-					<div class="bs-component">
-						<div class="modal">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h4 class="modal-title" contenteditable="true" id="tituloC">Titulo
-											de tu comentario ...</h4>
-									</div>
-									<div class="modal-body">
-										<p contenteditable="true" id="comentarioC">Escribe tu
-											comentario...</p>
-									</div>
-									<div class="modal-footer">
-										<sec:authorize access="isAuthenticated()">
-											<button type="button" class="btn btn-primary"
-												onclick="addComment()">Enviar</button>
-										</sec:authorize>
-										<sec:authorize access="isAnonymous()">
-											<button type="button" class="btn btn-primary disabled">Enviar</button>
-										</sec:authorize>
 
+					<div class="tab-pane fade" id="comentarios">
+						<ul class="list-unstyled">
+							<li><c:forEach items="${item.comentarios}" var="comentarios">
+									<div class="panel panel-default">
+										<div class="panel-heading">${comentarios.titulo}</div>
+										<div class="panel-body">${comentarios.comentario}</div>
+										<div class="panel-body">
+											<p class="text-muted">
+												<small>Por: ${comentarios.usuario.nombre} - Fecha:
+													${comentarios.fecha}</small>
+											</p>
+										</div>
+									</div>
+								</c:forEach></li>
+						</ul>
+						<div class="bs-component">
+							<div class="modal">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h4 class="modal-title" contenteditable="true" id="tituloC">Titulo
+												de tu comentario ...</h4>
+										</div>
+										<div class="modal-body">
+											<p contenteditable="true" id="comentarioC">Escribe tu
+												comentario...</p>
+										</div>
+										<div class="modal-footer">
+											<sec:authorize access="isAuthenticated()">
+												<button type="button" class="btn btn-primary"
+													onclick="addComment()">Enviar</button>
+											</sec:authorize>
+											<sec:authorize access="isAnonymous()">
+												<button type="button" class="btn btn-primary disabled">Enviar</button>
+											</sec:authorize>
+
+										</div>
 									</div>
 								</div>
 							</div>
+							<div id="source-button" class="btn btn-primary btn-xs"
+								style="display: none;">&lt; &gt;</div>
 						</div>
-						<div id="source-button" class="btn btn-primary btn-xs"
-							style="display: none;">&lt; &gt;</div>
 					</div>
-				</div>
-				<div class="tab-pane fade" id="errores">
-					<ul class="list-unstyled">
-						<li><c:forEach items="${item.errores}" var="errores">
-								<div class="panel panel-default">
-									<div class="panel-heading">${errores.titulo}</div>
-									<div class="panel-body">${errores.comentario}</div>
-								</div>
-							</c:forEach></li>
-					</ul>
-					<div class="bs-component">
-						<div class="modal">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h4 class="modal-title" contenteditable="true" id="tituloE">Titulo
-											del Error</h4>
+					<div class="tab-pane fade" id="errores">
+						<ul class="list-unstyled">
+							<li><c:forEach items="${item.errores}" var="errores">
+									<div class="panel panel-default">
+										<div class="panel-heading">${errores.titulo}</div>
+										<div class="panel-body">${errores.comentario}</div>
 									</div>
-									<div class="modal-body">
-										<p contenteditable="true" id="comentarioE">Reporte del
-											error ...</p>
-									</div>
-									<div class="modal-footer">
-										<sec:authorize access="isAuthenticated()">
-											<button type="button" class="btn btn-primary"
-												onclick="addError()">Reportar</button>
-										</sec:authorize>
-										<sec:authorize access="isAnonymous()">
-											<button type="button" class="btn btn-primary disabled">Reportar</button>
-										</sec:authorize>
+								</c:forEach></li>
+						</ul>
+						<div class="bs-component">
+							<div class="modal">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h4 class="modal-title" contenteditable="true" id="tituloE">Titulo
+												del Error</h4>
+										</div>
+										<div class="modal-body">
+											<p contenteditable="true" id="comentarioE">Reporte del
+												error ...</p>
+										</div>
+										<div class="modal-footer">
+											<sec:authorize access="isAuthenticated()">
+												<button type="button" class="btn btn-primary"
+													onclick="addError()">Reportar</button>
+											</sec:authorize>
+											<sec:authorize access="isAnonymous()">
+												<button type="button" class="btn btn-primary disabled">Reportar</button>
+											</sec:authorize>
+										</div>
 									</div>
 								</div>
 							</div>
+							<div id="source-button" class="btn btn-primary btn-xs"
+								style="display: none;">&lt; &gt;</div>
 						</div>
-						<div id="source-button" class="btn btn-primary btn-xs"
-							style="display: none;">&lt; &gt;</div>
 					</div>
-				</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 
 	<div id="subViewDiv" class="bs-component"></div>
 	<script type="text/javascript">
-
 		function addComment() {
 			$.ajax({
 				url : "addComment",
@@ -277,6 +314,35 @@
 
 											});
 						});
+
+		function showMsg() {
+
+			console.log("CLICK");
+
+			$("#loginMsg").show();
+
+		}
+		
+		
+		$(document).ready(function() { 
+            // bind 'myForm' and provide a simple callback function 
+            $('#formFile').ajaxForm({
+                     	success : function (response) {
+                     	console.log("success ajaxForm");
+//         	            alert("The server says: " + response);
+        	        }
+            	
+               
+            }); 
+        }); 
+// 		$('#formFile')
+// 	    .ajaxForm({
+// 	        url : 'addArchivo', // or whatever
+// 	        dataType : 'json',
+// 	        success : function (response) {
+// 	            alert("The server says: " + response);
+// 	        }
+// 	    });
 	</script>
 
 
