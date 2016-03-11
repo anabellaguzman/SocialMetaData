@@ -14,10 +14,11 @@ public class PosteoService {
 	PosteoDAO posteoDAO;
 	
 	@Transactional
-	public void add(Posteo posteo) {
-		 posteoDAO.add(posteo);
+	public int add(Posteo posteo) {
+		return posteoDAO.add(posteo);
 		
 	}
+	
 	
 
 }

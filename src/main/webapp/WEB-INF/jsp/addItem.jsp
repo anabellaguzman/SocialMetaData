@@ -34,7 +34,7 @@
 			<div class="well bs-component">
 				<form class="form-horizontal" method="POST" action="addItem">
 					<fieldset id="fs_generalAtributes">
-						<legend>Búsqueda Avanzada</legend>
+						<legend>Nuevo Item</legend>
 						<div class="form-group">
 							<label for="inputDefault" class="col-lg-2 control-label">Titulo</label>
 							<div class="col-lg-10">
@@ -110,7 +110,7 @@
 						</fieldset>
 						<div class="form-group">
 							<div class="col-lg-10 col-lg-offset-2">
-								<button class="btn btn-default">Cancel</button>
+								<button class="btn btn-default">Cancelar</button>
 								<button type="button" class="btn btn-primary"
 									onclick="addNewItem()">Buscar</button>
 							</div>
