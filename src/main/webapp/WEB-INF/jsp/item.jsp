@@ -10,7 +10,6 @@
 	src="<c:url value="/resources/js/jquery-ui.min.js" />"></script>
 <script src="<c:url value="/resources/flatly/bootstrap.min.js" />"></script>
 <script src="<c:url value="/resources/flatly/bootswatch.js" />"></script>
-<!-- <script src="http://malsup.github.com/jquery.form.js"></script>  -->
 <script src="<c:url value="/resources/js/jquery.form.js" />"></script>
 </head>
 <style>
@@ -132,7 +131,7 @@
 													class="btn btn-primary btn-file"> Browse&hellip; <input
 														type="file" multiple id=fichero name="fichero">
 												</span>
-												</span> <input type="text" class="form-control">
+												</span> <input id="nombreArchivoInput" type="text" class="form-control">
 											</div>
 											<br>
 											<button class="btn btn-default">Cancel</button>
@@ -141,16 +140,21 @@
 
 											<sec:authorize access="isAuthenticated()">
 												<button type="Submit" class="btn btn-primary">Subir</button>
+												<p>
 												<div id=fileUploadSuccess
 													class="alert alert-dismissible alert-success"
 													style="display: none">
+
 													<button type="button" class="close" data-dismiss="alert">×</button>
 													Tu archivo ha sido subido exitosamente.
+
 												</div>
+
 											</sec:authorize>
 											<sec:authorize access="isAnonymous()">
 												<button type="button" class="btn btn-primary" id="msg"
 													onclick="showMsg()">Subir</button>
+												<p>
 												<div id="loginMsg"
 													class="alert alert-dismissible alert-danger"
 													style="display: none">
@@ -185,25 +189,35 @@
 									</div>
 								</c:forEach></li>
 						</ul>
+						
+						
+<!-- 						<div class="form-group"> -->
+<!--   <label class="control-label" for="disabledInput">Disabled input</label> -->
+<!--   <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..." disabled=""> -->
+<!-- </div> -->
 						<div class="bs-component">
 							<div class="modal">
 								<div class="modal-dialog">
 									<div class="modal-content">
 										<div class="modal-header">
-											<h4 class="modal-title" contenteditable="true" id="tituloC">Titulo
+											<h4 class="modal-title"  contenteditable="true" id="tituloC" onFocus=clearField(tituloC)>Titulo
 												de tu comentario ...</h4>
 										</div>
 										<div class="modal-body">
-											<p contenteditable="true" id="comentarioC">Escribe tu
+											<p contenteditable="true" id="comentarioC" onFocus=clearField(comentarioC)>Escribe tu
 												comentario...</p>
 										</div>
 										<div class="modal-footer">
 											<sec:authorize access="isAuthenticated()">
 												<button type="button" class="btn btn-primary"
-													onclick="addComment()">Enviar</button>
+													onclick="addComment()">Comentar</button>
 											</sec:authorize>
 											<sec:authorize access="isAnonymous()">
-												<button type="button" class="btn btn-primary disabled">Enviar</button>
+												<button type="button" class="btn btn-primary disabled">Comentar</button>
+												<p class="text-muted">
+												<small>Necesitas<a href="./login"> Iniciar Sesion </a>para poder comentar</small>
+											</p>
+
 											</sec:authorize>
 
 										</div>
@@ -216,10 +230,17 @@
 					</div>
 					<div class="tab-pane fade" id="errores">
 						<ul class="list-unstyled">
-							<li id= listErrores><c:forEach items="${item.errores}" var="errores">
+							<li id=listErrores><c:forEach items="${item.errores}"
+									var="errores">
 									<div class="panel panel-default">
 										<div class="panel-heading">${errores.titulo}</div>
 										<div class="panel-body">${errores.comentario}</div>
+										<div class="panel-body">
+											<p class="text-muted">
+												<small>Por: ${errores.usuario.nombre} - Fecha:
+													${errores.fecha}</small>
+											</p>
+										</div>
 									</div>
 								</c:forEach></li>
 						</ul>
@@ -228,11 +249,11 @@
 								<div class="modal-dialog">
 									<div class="modal-content">
 										<div class="modal-header">
-											<h4 class="modal-title" contenteditable="true" id="tituloE">Titulo
+											<h4 class="modal-title" contenteditable="true" id="tituloE" onFocus=clearField(tituloE)>Titulo
 												del Error</h4>
 										</div>
 										<div class="modal-body">
-											<p contenteditable="true" id="comentarioE">Reporte del
+											<p contenteditable="true" id="comentarioE" onFocus=clearField(comentarioE)>Reporte del
 												error ...</p>
 										</div>
 										<div class="modal-footer">
@@ -242,6 +263,9 @@
 											</sec:authorize>
 											<sec:authorize access="isAnonymous()">
 												<button type="button" class="btn btn-primary disabled">Reportar</button>
+												<p class="text-muted">
+												<small>Necesitas<a href="./login"> Iniciar Sesion </a>para poder reportar</small>
+											</p>
 											</sec:authorize>
 										</div>
 									</div>
@@ -259,6 +283,10 @@
 
 	<div id="subViewDiv" class="bs-component"></div>
 	<script type="text/javascript">
+	
+		function clearField(field){
+			$(field).empty();
+		}
 		function addComment() {
 			$.ajax({
 				url : "addComment",
@@ -338,15 +366,18 @@
 		$(document).ready(function() {
 			// bind 'myForm' and provide a simple callback function 
 			$('#formFile').ajaxForm({
-				dataType: "html",
+				dataType : "html",
 				success : function(data) {
 					$("#listArchivos").append(data);
-					//         	            alert("The server says: " + response);
+					$("#fileUploadSuccess").show();
+					
+					
+
 				}
 
 			});
 		});
-	</script>
+</script>
 
 
 </body>
