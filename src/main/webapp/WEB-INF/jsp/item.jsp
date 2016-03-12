@@ -11,8 +11,7 @@
 <script src="<c:url value="/resources/flatly/bootstrap.min.js" />"></script>
 <script src="<c:url value="/resources/flatly/bootswatch.js" />"></script>
 <!-- <script src="http://malsup.github.com/jquery.form.js"></script>  -->
-<script 
-	src="<c:url value="/resources/js/jquery.form.js" />"></script>
+<script src="<c:url value="/resources/js/jquery.form.js" />"></script>
 </head>
 <style>
 .btn-file {
@@ -99,14 +98,16 @@
 								<div class="col-lg-6 col-sm-6 col-12">
 									<div class="jumbotron">
 										<h4>Lista de Archivos</h4>
-										<ul class="list-unstyled">
-											<li><c:forEach items="${item.archivos}" var="archivos">
+										<ul id=listArchivos class="list-unstyled">
+											<c:forEach items="${item.archivos}" var="archivos">
+												<li>
 													<div>
 														<a
 															href=<c:url value="/resources/archivos/${archivos.idPosteo}${archivos.comentario}"/>
 															download="${archivos.titulo}">${archivos.titulo} </a>
 													</div>
-												</c:forEach></li>
+												</li>
+											</c:forEach>
 										</ul>
 
 
@@ -140,9 +141,11 @@
 
 											<sec:authorize access="isAuthenticated()">
 												<button type="Submit" class="btn btn-primary">Subir</button>
-												<div id=fileUploadSuccess class="alert alert-dismissible alert-success" style="display: none">
+												<div id=fileUploadSuccess
+													class="alert alert-dismissible alert-success"
+													style="display: none">
 													<button type="button" class="close" data-dismiss="alert">×</button>
-													 Tu archivo ha sido subido exitosamente.
+													Tu archivo ha sido subido exitosamente.
 												</div>
 											</sec:authorize>
 											<sec:authorize access="isAnonymous()">
@@ -168,7 +171,8 @@
 
 					<div class="tab-pane fade" id="comentarios">
 						<ul class="list-unstyled">
-							<li><c:forEach items="${item.comentarios}" var="comentarios">
+							<li id=listComentarios><c:forEach
+									items="${item.comentarios}" var="comentarios">
 									<div class="panel panel-default">
 										<div class="panel-heading">${comentarios.titulo}</div>
 										<div class="panel-body">${comentarios.comentario}</div>
@@ -212,7 +216,7 @@
 					</div>
 					<div class="tab-pane fade" id="errores">
 						<ul class="list-unstyled">
-							<li><c:forEach items="${item.errores}" var="errores">
+							<li id= listErrores><c:forEach items="${item.errores}" var="errores">
 									<div class="panel panel-default">
 										<div class="panel-heading">${errores.titulo}</div>
 										<div class="panel-body">${errores.comentario}</div>
@@ -263,6 +267,10 @@
 					tituloC : $("#tituloC").text(),
 					comentarioC : $("#comentarioC").text(),
 					idItem : $("#idItem").val()
+				},
+				dataType : "html",
+				success : function(data) {
+					$("#listComentarios").append(data);
 				}
 
 			});
@@ -276,6 +284,10 @@
 					tituloE : $("#tituloE").text(),
 					comentarioE : $("#comentarioE").text(),
 					idItem : $("#idItem").val()
+				},
+				dataType : "html",
+				success : function(data) {
+					$("#listErrores").append(data);
 				}
 
 			});
@@ -322,27 +334,18 @@
 			$("#loginMsg").show();
 
 		}
-		
-		
-		$(document).ready(function() { 
-            // bind 'myForm' and provide a simple callback function 
-            $('#formFile').ajaxForm({
-                     	success : function (response) {
-                     	console.log("success ajaxForm");
-//         	            alert("The server says: " + response);
-        	        }
-            	
-               
-            }); 
-        }); 
-// 		$('#formFile')
-// 	    .ajaxForm({
-// 	        url : 'addArchivo', // or whatever
-// 	        dataType : 'json',
-// 	        success : function (response) {
-// 	            alert("The server says: " + response);
-// 	        }
-// 	    });
+
+		$(document).ready(function() {
+			// bind 'myForm' and provide a simple callback function 
+			$('#formFile').ajaxForm({
+				dataType: "html",
+				success : function(data) {
+					$("#listArchivos").append(data);
+					//         	            alert("The server says: " + response);
+				}
+
+			});
+		});
 	</script>
 
 
