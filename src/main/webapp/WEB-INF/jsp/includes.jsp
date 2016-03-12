@@ -3,8 +3,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 
 <div class="navbar navbar-default navbar-fixed-top">
 	<nav class="navbar navbar-default">
@@ -36,14 +35,11 @@
 
 						<li>
 						<form action="j_spring_security_logout" method="post">
-<!-- 								<a -->
-<%-- 									href="<c:url var="logoutUrl" value="j_spring_security_logout" />"> --%>
 
 									<button type="submit" class="btn btn-link" >
 									Logout</button> <input
 									type="hidden" name="${_csrf.parameterName}"
 									value="${_csrf.token}" />
-<!-- 								</a> -->
 							</form>
 							</li>
 					</sec:authorize>
@@ -71,15 +67,9 @@
 	href="<c:url value="/resources/css/jquery-ui.min.css" />">
 <script type="text/javascript"
 	src="<c:url value="/resources/js/jquery-1.11.3.js" />"></script>
-<!-- <script type="text/javascript" -->
-<%-- 	src="<c:url value="/resources/js/jquery-ui.min.js" />"></script> --%>
 
 <script type="text/javascript"
 	src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
-<!-- <script  -->
-<%-- 	src="<c:url value="/resources/js/jquery.form.js" />"></script> --%>
-<!-- <script type="text/javascript" -->
-<%-- 	src="<c:url value="/resources/flatly/bootswatch.js" />"></script> --%>
 
 
 <script type="text/javascript">
@@ -119,20 +109,7 @@
 				    }
 
 				 });
-	
-	
-	
-// 	<style>
-// 	button {
-// 	  background-color: transparent;
-// 	}
-// 	button:active,
-// 	button:hover {
-// 	  outline: 0;
-// 	}
 
-
-// 	</style>
 
 </script>
 
