@@ -50,21 +50,21 @@
 						</div>
 						<div class="form-group">
 							<label for="inputDefault" class="col-lg-2 control-label">Autor</label>
-							<div class="col-lg-10">
+							<div class="col-lg-9">
 								<input id="search" class="form-control"> <input
 									type="hidden" class="form-control" id="idAutor"></input>
 								<ul class="list-group" id="listAutores">
 								</ul>
-							</div>
+							</div><a class="btn btn-primary" href="#">+</a>
 						</div>
 						<div class="form-group">
 							<label for="inputDefault" class="col-lg-2 control-label">Temas
 								Relacionados</label>
-							<div class="col-lg-10" id="temasRelacionados">
+							<div class="col-lg-9" id="temasRelacionados">
 								<input id="autocompleteTema" class="form-control"> <input
 									type="hidden" class="form-control" id="idTema"></input>
-								<div class="bs-component" id="contenedorTemas"></div>
-							</div>
+								<div class="bs-component" id="contenedorTemas"><p></div>
+							</div><a class="btn btn-primary" href="#">+</a>
 						</div>
 						<div class="form-group">
 							<label for="select" class="col-lg-2 control-label">Tipo
@@ -112,7 +112,7 @@
 							<div class="col-lg-10 col-lg-offset-2">
 								<button class="btn btn-default">Cancelar</button>
 								<button type="button" class="btn btn-primary"
-									onclick="addNewItem()">Buscar</button>
+									onclick="addNewItem()">Agregar</button>
 							</div>
 						</div>
 					</fieldset>
@@ -327,20 +327,21 @@
 		});
 		function crearTemaRel(id, value) {
 			var $newTemaRel = $('<div/>', {
-				'class' : "col-lg-4",
+				'class' : "col-lg-5",
 				'id' : "temaDiv" + id,
 			}).append($('<div/>', {
 				'class' : "bs-component",
-			}).append($('<label/>', {
+			}).append($('<div/>', {
 				'class' : "alert alert-dismissible alert-success",
 				'id' : id,
-				html : value
 			}).append($('<button/>', {
 				'type' : "button",
 				'class' : "close",
 				'onclick' : "deleteThis(temaDiv" + id + ")",
 				html : "x"
-			}))));
+				
+			})
+					).append(value)));
 			$newTemaRel.appendTo("#contenedorTemas");
 		}
 		function deleteThisLi(o) {
