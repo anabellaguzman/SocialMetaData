@@ -33,29 +33,10 @@ public class ItemController {
 		itemService.getItemErrores(item);
 		itemService.getItemArchivos(item);
 
-//		item.getComentarios();
-//		item.getErrores();
-//		item.getArchivos();
-//		
-////		itemService.getItemPosteos(item);
-//		
-		
-		
-//		Set<Comentario> comentarios = item.getComentarios();
-//		
-//		for (Comentario c : comentarios){
-//			System.out.println(c.getComentario());
-//		}
-//		Set<Archivo> archivos = item.getArchivos();
-//		
-//		for (Archivo c : archivos){
-//			System.out.println(c.getComentario());
-//		}
-
-
 		mav.addObject("item", item);
 
 	 return mav;
+	 
 	 }
 
 }
