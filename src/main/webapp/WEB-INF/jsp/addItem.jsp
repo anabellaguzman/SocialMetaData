@@ -23,6 +23,7 @@
 
 <script type="text/javascript"
 	src="<c:url value="/resources/js/jquery-ui.min.js" />"></script>
+<script src="<c:url value="/resources/js/jquery.form.js" />"></script>
 
 <title>Agregar Nuevo Item</title>
 
@@ -55,7 +56,15 @@
 									type="hidden" class="form-control" id="idAutor"></input>
 								<ul class="list-group" id="listAutores">
 								</ul>
-							</div><a class="btn btn-primary" href="#">+</a>
+							</div>
+
+
+							<!-- 							<button type="button" class="btn btn-primary btn-lg" -->
+							<!-- 								data-toggle="modal" data-target="#myModal">+</button> -->
+
+
+							<a class="btn btn-primary" data-toggle="modal"
+								data-target="#modalAddAutor">+</a>
 						</div>
 						<div class="form-group">
 							<label for="inputDefault" class="col-lg-2 control-label">Temas
@@ -63,8 +72,12 @@
 							<div class="col-lg-9" id="temasRelacionados">
 								<input id="autocompleteTema" class="form-control"> <input
 									type="hidden" class="form-control" id="idTema"></input>
-								<div class="bs-component" id="contenedorTemas"><p></div>
-							</div><a class="btn btn-primary" href="#">+</a>
+								<div class="bs-component" id="contenedorTemas">
+									<p>
+								</div>
+							</div>
+							<a class="btn btn-primary" data-toggle="modal"
+								data-target="#modalAddTema">+</a>
 						</div>
 						<div class="form-group">
 							<label for="select" class="col-lg-2 control-label">Tipo
@@ -119,6 +132,75 @@
 				</form>
 			</div>
 		</div>
+
+		<!-- Modal Add Autor -->
+		<div class="modal fade" id="modalAddAutor" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close" id="btnCloseModal">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">Nuevo Autor</h4>
+					</div>
+					<div class="modal-body">
+						<form id=formAutor class="form-horizontal" method="POST"
+							action="addAutor">
+							<fieldset>
+								<div class="form-group">
+									<label for="inNewAutorNombre" class="col-lg-2 control-label">Nombre</label>
+									<div class="col-lg-10">
+										<input type="text" class="form-control" id="newAutorNombre"
+											name="newAutorNombre" placeholder="Nombre">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inNewAutorApellido" class="col-lg-2 control-label">Apellido</label>
+									<div class="col-lg-10">
+										<input type="text" class="form-control" id="newAutorApellido"
+											name="newAutorApellido" placeholder="Apellido">
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-lg-10 col-lg-offset-2">
+										<button id="btnResetAutor" type="reset"
+											class="btn btn-default">Limpiar campos</button>
+										<button type="submit" class="btn btn-primary">Guardar</button>
+									</div>
+								</div>
+								<div id=serverMsg></div>
+							</fieldset>
+						</form>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<!-- Modal Add Tema -->
+		<div class="modal fade" id="modalAddTema" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+					</div>
+					<div class="modal-body">...</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary">Save
+							changes</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</div>
 	<div id="subViewDiv" class="bs-component"></div>
 
@@ -272,7 +354,6 @@
 					});
 				},
 				select : function(event, ui) {
-					// 					$("#search").val(ui.item.label);
 					$("#idAutor").val(ui.item.value);
 					crearAutor(ui.item.value, ui.item.label);
 					clearThis("search");
@@ -339,9 +420,8 @@
 				'class' : "close",
 				'onclick' : "deleteThis(temaDiv" + id + ")",
 				html : "x"
-				
-			})
-					).append(value)));
+
+			})).append(value)));
 			$newTemaRel.appendTo("#contenedorTemas");
 		}
 		function deleteThisLi(o) {
@@ -361,6 +441,37 @@
 		function clearThis(target) {
 			$("#" + target + "").val('');
 		};
+
+		// 		Funciones para modals
+
+		$('#formAutor').ajaxForm({
+			success : function(data) {
+				console.log(data);
+				createAlertSuccess(data);
+				$('#btnResetAutor').trigger('click');
+				$("#autorSuccess").fadeOut(4000, function() {
+					$(this).remove();
+				});
+			}
+
+		});
+
+		function createAlertSuccess(data) {
+			console.log("entro  a createAlertSuccess");
+			var $newAlert = $('<div/>', {
+				'class' : "alert alert-dismiss alert-success",
+				'id' : "autorSuccess",
+				html : data
+			}).append($('<button/>', {
+				'type' : "button",
+				'class' : "close",
+				'data-dismiss' : "alert",
+				html : "x"
+			}));
+			$newAlert.appendTo("#serverMsg");
+
+			return;
+		}
 	</script>
 
 

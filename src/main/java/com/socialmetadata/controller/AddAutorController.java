@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
+
 
 import com.socialmetadata.model.Autor;
 import com.socialmetadata.service.AutorService;
@@ -17,18 +17,15 @@ public class AddAutorController {
 	@Autowired
 	private AutorService autorService;
 	
-	@RequestMapping(value = "/addAutor")
-	@ResponseBody
-	public ModelAndView setupForm (){
-		ModelAndView mav = new ModelAndView("autorForm");		
-		return mav;
-	}
 	
-	@RequestMapping(value="/addAutor.do", method=RequestMethod.POST)
-	public void addAutor(@RequestParam String nombre, @RequestParam String apellido){
+	@RequestMapping(value="/addAutor", method=RequestMethod.POST)
+	@ResponseBody
+	public String addAutor(@RequestParam String newAutorNombre, @RequestParam String newAutorApellido){
 		
-		Autor autor = new Autor(nombre, apellido);
+		Autor autor = new Autor(newAutorNombre, newAutorApellido);
 		autorService.addAutor(autor);
+		
+		return "Autor guardado exitosamente";
 	}
 	
 
