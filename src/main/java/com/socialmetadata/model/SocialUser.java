@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="UserConnection")
+//@Table(name="UserConnection")
 public class SocialUser {
 	
 
