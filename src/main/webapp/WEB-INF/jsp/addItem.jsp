@@ -9,23 +9,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<link rel="stylesheet"
-	href="<c:url value="/resources/flatly/bootstrap.css" />" media="screen">
+<link rel="stylesheet"href="<c:url value="/resources/flatly/bootstrap.css" />" media="screen">
 
-<link rel="stylesheet"
-	href="<c:url value="/resources/flatly/bootswatch.min.css" />">
+<link rel="stylesheet"href="<c:url value="/resources/flatly/bootswatch.min.css" />">
 
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/jquery-ui.min.css" />">
+<link rel="stylesheet"href="<c:url value="/resources/css/jquery-ui.min.css" />">
 
-<script type="text/javascript"
-	src="<c:url value="/resources/js/jquery.js" />"></script>
+<script type="text/javascript"src="<c:url value="/resources/js/jquery.js" />"></script>
 
-<script type="text/javascript"
-	src="<c:url value="/resources/js/jquery-ui.min.js" />"></script>
+<script type="text/javascript"src="<c:url value="/resources/js/jquery-ui.min.js" />"></script>
+<script src="<c:url value="/resources/js/jquery.form.js" />"></script>
 
 <title>Agregar Nuevo Item</title>
-
 </head>
 <body>
 	<div id="removable">
@@ -50,21 +45,33 @@
 						</div>
 						<div class="form-group">
 							<label for="inputDefault" class="col-lg-2 control-label">Autor</label>
-							<div class="col-lg-10">
+							<div class="col-lg-9">
 								<input id="search" class="form-control"> <input
 									type="hidden" class="form-control" id="idAutor"></input>
 								<ul class="list-group" id="listAutores">
 								</ul>
 							</div>
+
+
+							<!-- 							<button type="button" class="btn btn-primary btn-lg" -->
+							<!-- 								data-toggle="modal" data-target="#myModal">+</button> -->
+
+
+							<a class="btn btn-primary" data-toggle="modal"
+								data-target="#modalAddAutor">+</a>
 						</div>
 						<div class="form-group">
 							<label for="inputDefault" class="col-lg-2 control-label">Temas
 								Relacionados</label>
-							<div class="col-lg-10" id="temasRelacionados">
+							<div class="col-lg-9" id="temasRelacionados">
 								<input id="autocompleteTema" class="form-control"> <input
 									type="hidden" class="form-control" id="idTema"></input>
-								<div class="bs-component" id="contenedorTemas"></div>
+								<div class="bs-component" id="contenedorTemas">
+									<p>
+								</div>
 							</div>
+							<a class="btn btn-primary" data-toggle="modal"
+								data-target="#modalAddTema">+</a>
 						</div>
 						<div class="form-group">
 							<label for="select" class="col-lg-2 control-label">Tipo
@@ -112,13 +119,104 @@
 							<div class="col-lg-10 col-lg-offset-2">
 								<button class="btn btn-default">Cancelar</button>
 								<button type="button" class="btn btn-primary"
-									onclick="addNewItem()">Buscar</button>
+									onclick="addNewItem()">Agregar</button>
 							</div>
 						</div>
 					</fieldset>
 				</form>
 			</div>
 		</div>
+
+		<!-- Modal Add Autor -->
+		<div class="modal fade" id="modalAddAutor" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close" id="btnCloseModal">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">Nuevo Autor</h4>
+					</div>
+					<div class="modal-body">
+						<form id=formAutor class="form-horizontal" method="POST"
+							action="addAutor">
+							<fieldset>
+								<div class="form-group">
+									<label for="inNewAutorNombre" class="col-lg-2 control-label">Nombre</label>
+									<div class="col-lg-10">
+										<input type="text" class="form-control" id="newAutorNombre"
+											name="newAutorNombre" placeholder="Nombre">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inNewAutorApellido" class="col-lg-2 control-label">Apellido</label>
+									<div class="col-lg-10">
+										<input type="text" class="form-control" id="newAutorApellido"
+											name="newAutorApellido" placeholder="Apellido">
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-lg-10 col-lg-offset-2">
+										<button id="btnResetAutor" type="reset"
+											class="btn btn-default" style="display: none">Limpiar campos</button>
+										<button type="submit" class="btn btn-primary">Guardar</button>
+									</div>
+								</div>
+								<div id=serverMsg></div>
+							</fieldset>
+						</form>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<!-- Modal Add Tema -->
+	<div class="modal fade" id="modalAddTema" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close" id="btnCloseModal">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Nuevo Tema</h4>
+				</div>
+				<div class="modal-body">
+
+
+
+					<form id=formTema class="form-horizontal" method="POST"
+						action="addTema">
+						<fieldset>
+
+							<div class="form-group">
+								<label for="inNewTema" class="col-lg-2 control-label">Tema</label>
+								<div class="col-lg-10">
+									<input type="text" class="form-control" id="newTema"
+										name="newTema" placeholder="Tema">
+								</div>
+							</div>			
+							<div class="form-group">
+								<div class="col-lg-10 col-lg-offset-2">
+									<button id="btnResetTema" type="reset" class="btn btn-default" style="display: none">Limpiar
+										campos</button>
+									<button type="submit" class="btn btn-primary">Guardar</button>
+								</div>
+							</div>
+							<div id = serverMsgT>							
+							</div>
+						</fieldset>
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
 	</div>
 	<div id="subViewDiv" class="bs-component"></div>
 
@@ -272,7 +370,6 @@
 					});
 				},
 				select : function(event, ui) {
-					// 					$("#search").val(ui.item.label);
 					$("#idAutor").val(ui.item.value);
 					crearAutor(ui.item.value, ui.item.label);
 					clearThis("search");
@@ -327,20 +424,20 @@
 		});
 		function crearTemaRel(id, value) {
 			var $newTemaRel = $('<div/>', {
-				'class' : "col-lg-4",
+				'class' : "col-lg-5",
 				'id' : "temaDiv" + id,
 			}).append($('<div/>', {
 				'class' : "bs-component",
-			}).append($('<label/>', {
+			}).append($('<div/>', {
 				'class' : "alert alert-dismissible alert-success",
 				'id' : id,
-				html : value
 			}).append($('<button/>', {
 				'type' : "button",
 				'class' : "close",
 				'onclick' : "deleteThis(temaDiv" + id + ")",
 				html : "x"
-			}))));
+
+			})).append(value)));
 			$newTemaRel.appendTo("#contenedorTemas");
 		}
 		function deleteThisLi(o) {
@@ -360,13 +457,52 @@
 		function clearThis(target) {
 			$("#" + target + "").val('');
 		};
+
+		// 		Funciones para modals
+
+		$('#formAutor').ajaxForm({
+			success : function(data) {
+				console.log(data);
+				createAlertSuccess(data, "autorSuccess", "#serverMsg");
+				$('#btnResetAutor').trigger('click');
+				$("#autorSuccess").fadeOut(4000, function() {
+					$(this).remove();
+				});
+			}
+
+		});
+		
+		
+		$('#formTema').ajaxForm({
+			success : function(data) {
+				console.log(data);
+				createAlertSuccess(data, "temaSuccess", "#serverMsgT");
+				$('#btnResetTema').trigger('click');
+				$("#temaSuccess").fadeOut(4000, function(){
+					$(this).remove();
+				});
+			}
+
+		});
+	
+		
+		
+		function createAlertSuccess(data, id, elToAppend){			
+			var $newAlert = $('<div/>', {
+				'class' : "alert alert-dismiss alert-success",
+				'id' : id,
+				html : data
+			}).append($('<button/>', {
+				'type' : "button",
+				'class' : "close",
+				'data-dismiss' : "alert",
+				html : "x"
+			}));
+			$newAlert.appendTo(elToAppend);
+		return ;
+	}
+
 	</script>
-
-
-
-
-
-
 
 </body>
 
