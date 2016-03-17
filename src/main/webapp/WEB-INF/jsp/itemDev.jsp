@@ -16,8 +16,8 @@
 
 <body>
 	<a class="btn btn-primary" data-toggle="modal"
-		data-target="#modalAddAutor">+</a>
-	<div class="modal fade" id="modalAddAutor" tabindex="-1" role="dialog"
+		data-target="#modalAddTema">+</a>
+	<div class="modal fade" id="modalAddTema" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -26,33 +26,26 @@
 						aria-label="Close" id="btnCloseModal">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">Nuevo Autor</h4>
+					<h4 class="modal-title" id="myModalLabel">Nuevo Tema</h4>
 				</div>
 				<div class="modal-body">
 
 
 
-					<form id=formAutor class="form-horizontal" method="POST"
-						action="addAutor">
+					<form id=formTema class="form-horizontal" method="POST"
+						action="addTema">
 						<fieldset>
 
 							<div class="form-group">
-								<label for="inNewAutorNombre" class="col-lg-2 control-label">Nombre</label>
+								<label for="inNewTema" class="col-lg-2 control-label">Tema</label>
 								<div class="col-lg-10">
-									<input type="text" class="form-control" id="newAutorNombre"
-										name="newAutorNombre" placeholder="Nombre">
+									<input type="text" class="form-control" id="newTema"
+										name="newTema" placeholder="Tema">
 								</div>
-							</div>
-							<div class="form-group">
-								<label for="inNewAutorApellido" class="col-lg-2 control-label">Apellido</label>
-								<div class="col-lg-10">
-									<input type="text" class="form-control" id="newAutorApellido"
-										name="newAutorApellido" placeholder="Apellido">
-								</div>
-							</div>
+							</div>			
 							<div class="form-group">
 								<div class="col-lg-10 col-lg-offset-2">
-									<button id="btnResetAutor" type="reset" class="btn btn-default">Limpiar
+									<button id="btnResetTema" type="reset" class="btn btn-default">Limpiar
 										campos</button>
 									<button type="submit" class="btn btn-primary">Guardar</button>
 								</div>
@@ -68,12 +61,12 @@
 	</div>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('#formAutor').ajaxForm({
+			$('#formTema').ajaxForm({
 				success : function(data) {
 					console.log(data);
-					createAlertSuccess(data);
-					$('#btnResetAutor').trigger('click');
-					$("#autorSuccess").fadeOut(4000, function(){
+					createAlertSuccess(data, "#temaSuccess");
+					$('#btnResetTema').trigger('click');
+					$("#temaSuccess").fadeOut(4000, function(){
 						$(this).remove();
 					});
 				}
@@ -84,11 +77,11 @@
 
 		
 		
-		function createAlertSuccess(data){
+		function createAlertSuccess(data, id){
 			
 				var $newAlert = $('<div/>', {
 					'class' : "alert alert-dismiss alert-success",
-					'id' : "autorSuccess",
+					'id' : id,
 					html : data
 				}).append($('<button/>', {
 					'type' : "button",

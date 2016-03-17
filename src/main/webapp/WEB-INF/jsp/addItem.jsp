@@ -9,24 +9,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<link rel="stylesheet"
-	href="<c:url value="/resources/flatly/bootstrap.css" />" media="screen">
+<link rel="stylesheet"href="<c:url value="/resources/flatly/bootstrap.css" />" media="screen">
 
-<link rel="stylesheet"
-	href="<c:url value="/resources/flatly/bootswatch.min.css" />">
+<link rel="stylesheet"href="<c:url value="/resources/flatly/bootswatch.min.css" />">
 
-<link rel="stylesheet"
-	href="<c:url value="/resources/css/jquery-ui.min.css" />">
+<link rel="stylesheet"href="<c:url value="/resources/css/jquery-ui.min.css" />">
 
-<script type="text/javascript"
-	src="<c:url value="/resources/js/jquery.js" />"></script>
+<script type="text/javascript"src="<c:url value="/resources/js/jquery.js" />"></script>
 
-<script type="text/javascript"
-	src="<c:url value="/resources/js/jquery-ui.min.js" />"></script>
+<script type="text/javascript"src="<c:url value="/resources/js/jquery-ui.min.js" />"></script>
 <script src="<c:url value="/resources/js/jquery.form.js" />"></script>
 
 <title>Agregar Nuevo Item</title>
-
 </head>
 <body>
 	<div id="removable">
@@ -166,7 +160,7 @@
 								<div class="form-group">
 									<div class="col-lg-10 col-lg-offset-2">
 										<button id="btnResetAutor" type="reset"
-											class="btn btn-default">Limpiar campos</button>
+											class="btn btn-default" style="display: none">Limpiar campos</button>
 										<button type="submit" class="btn btn-primary">Guardar</button>
 									</div>
 								</div>
@@ -180,26 +174,48 @@
 		</div>
 
 		<!-- Modal Add Tema -->
-		<div class="modal fade" id="modalAddTema" tabindex="-1" role="dialog"
-			aria-labelledby="myModalLabel">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<h4 class="modal-title" id="myModalLabel">Modal title</h4>
-					</div>
-					<div class="modal-body">...</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary">Save
-							changes</button>
-					</div>
+	<div class="modal fade" id="modalAddTema" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close" id="btnCloseModal">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Nuevo Tema</h4>
 				</div>
+				<div class="modal-body">
+
+
+
+					<form id=formTema class="form-horizontal" method="POST"
+						action="addTema">
+						<fieldset>
+
+							<div class="form-group">
+								<label for="inNewTema" class="col-lg-2 control-label">Tema</label>
+								<div class="col-lg-10">
+									<input type="text" class="form-control" id="newTema"
+										name="newTema" placeholder="Tema">
+								</div>
+							</div>			
+							<div class="form-group">
+								<div class="col-lg-10 col-lg-offset-2">
+									<button id="btnResetTema" type="reset" class="btn btn-default" style="display: none">Limpiar
+										campos</button>
+									<button type="submit" class="btn btn-primary">Guardar</button>
+								</div>
+							</div>
+							<div id = serverMsgT>							
+							</div>
+						</fieldset>
+					</form>
+				</div>
+
 			</div>
 		</div>
+	</div>
 
 	</div>
 	<div id="subViewDiv" class="bs-component"></div>
@@ -447,7 +463,7 @@
 		$('#formAutor').ajaxForm({
 			success : function(data) {
 				console.log(data);
-				createAlertSuccess(data);
+				createAlertSuccess(data, "autorSuccess", "#serverMsg");
 				$('#btnResetAutor').trigger('click');
 				$("#autorSuccess").fadeOut(4000, function() {
 					$(this).remove();
@@ -455,12 +471,26 @@
 			}
 
 		});
+		
+		
+		$('#formTema').ajaxForm({
+			success : function(data) {
+				console.log(data);
+				createAlertSuccess(data, "temaSuccess", "#serverMsgT");
+				$('#btnResetTema').trigger('click');
+				$("#temaSuccess").fadeOut(4000, function(){
+					$(this).remove();
+				});
+			}
 
-		function createAlertSuccess(data) {
-			console.log("entro  a createAlertSuccess");
+		});
+	
+		
+		
+		function createAlertSuccess(data, id, elToAppend){			
 			var $newAlert = $('<div/>', {
 				'class' : "alert alert-dismiss alert-success",
-				'id' : "autorSuccess",
+				'id' : id,
 				html : data
 			}).append($('<button/>', {
 				'type' : "button",
@@ -468,17 +498,11 @@
 				'data-dismiss' : "alert",
 				html : "x"
 			}));
-			$newAlert.appendTo("#serverMsg");
+			$newAlert.appendTo(elToAppend);
+		return ;
+	}
 
-			return;
-		}
 	</script>
-
-
-
-
-
-
 
 </body>
 

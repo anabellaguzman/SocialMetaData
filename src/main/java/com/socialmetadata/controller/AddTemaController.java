@@ -17,18 +17,14 @@ public class AddTemaController {
 	@Autowired
 	private TemaService temaService;
 
-	@RequestMapping(value = "/addTema")
+	@RequestMapping(value = "/addTema", method=RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView setupForm(){
-		ModelAndView mav = new ModelAndView("temaForm");		
-		return mav;
-	}
-	
-	@RequestMapping(value="/addTema.do", method=RequestMethod.POST)
-	public void addTema(@RequestParam String tema1){
+	public String addTema(@RequestParam String newTema){
 		
-		Tema tema = new Tema(tema1);		
+		Tema tema = new Tema(newTema);		
 		temaService.addTema(tema);
+		
+		return "Tema guardado exitosamente";
 		
 		
 	}
