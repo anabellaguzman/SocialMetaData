@@ -35,6 +35,11 @@ public class Autor {
 		this.nombre = nombre;
 		this.apellido = apellido;
 	}
+	public Autor(String nombre, String apellido) {
+		super();
+		this.nombre = nombre;
+		this.apellido = apellido;
+	}
 
 	public int getIdAutor() {
 		return idAutor;

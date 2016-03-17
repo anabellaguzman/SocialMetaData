@@ -34,6 +34,11 @@ public class Tema {
 		this.idTema = idTema;
 		this.tema = tema;
 	}
+	
+	public Tema(String tema) {
+		super();
+		this.tema = tema;
+	}
 
 	public int getIdTema() {
 		return idTema;
