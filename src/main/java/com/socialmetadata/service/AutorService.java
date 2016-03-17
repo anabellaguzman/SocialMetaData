@@ -30,5 +30,11 @@ public class AutorService {
 	public Autor getAutor(int idAutor) {
 		return autorDAO.getAutor(idAutor);
 	}
+	
+	@Transactional
+	public void addAutor(Autor autor) {
+		 autorDAO.add(autor);
+	}
+
 
 }

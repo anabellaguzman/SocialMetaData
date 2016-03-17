@@ -14,10 +14,15 @@ public class PosteoService {
 	PosteoDAO posteoDAO;
 	
 	@Transactional
-	public void add(Posteo posteo) {
-		 posteoDAO.add(posteo);
+	public Posteo add(Posteo posteo) {
+		
+		posteo = posteoDAO.getPosteo(posteoDAO.add(posteo));
+		
+		return posteo;
+//		System.out.println(posteo.getUsuario()+" "+posteo.getComentario()+" "+posteo.getIdPosteo());
 		
 	}
+	
 	
 
 }
