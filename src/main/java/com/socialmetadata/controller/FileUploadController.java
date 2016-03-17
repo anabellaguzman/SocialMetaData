@@ -38,7 +38,7 @@ public class FileUploadController {
     	
     	String filePath = request.getServletContext().getRealPath("/"); 
     	
-//    	System.out.println(filePath);
+    	System.out.println(filePath);
     	
 //    	/Users/Development/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SocialMetadata/    	
 //    	multipartFile.transferTo(new File(filePath));
