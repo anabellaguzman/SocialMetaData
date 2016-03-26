@@ -49,7 +49,17 @@
 						<img class="img-responsive"
 							src="<c:url value="/resources/images/${item.imagen}" />"
 							alt="some_text" width="256" height="180">
+						<p>	
 					</div>
+					<div class="col-sm-8">
+					<a href="#" class="btn btn-warning">Favorito</a>
+					
+					<a href="https://www.google.com/search?q=${item.titulo}" class="btn btn-danger" target="_blank">Google</a>
+					
+					<a href="#" class="btn btn-info">Compartir en Facebook</a>
+					<p>
+					</div>
+					
 					<div class="col-sm-8">
 						<ul class="list-group">
 							<li class="list-group-item">Formato:
