@@ -57,6 +57,8 @@ public class UsuarioDAO {
 		return session.getCurrentSession().createQuery("from Usuario").list();
 	}
 	
+
+	
 	
 
 

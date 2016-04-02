@@ -52,7 +52,7 @@
 						<p>	
 					</div>
 					<div class="col-sm-8">
-					<a href="#" class="btn btn-warning">Favorito</a>
+					<a href="./addtofavs?idItem=${item.idItem}" class="btn btn-warning">Favorito</a>
 					
 					<a href="https://www.google.com/search?q=${item.titulo}" class="btn btn-danger" target="_blank">Google</a>
 					
