@@ -24,7 +24,7 @@ public class UsuarioDAO {
 		
 	}
 
-	public void edit(Usuario usuario) {
+	public void update(Usuario usuario) {
 		session.getCurrentSession().update(usuario);
 		
 	}
@@ -56,6 +56,8 @@ public class UsuarioDAO {
 		
 		return session.getCurrentSession().createQuery("from Usuario").list();
 	}
+	
+
 	
 	
 

@@ -16,14 +16,9 @@
 	href="<c:url value="/resources/css/jquery-ui.min.css" />">
 <script type="text/javascript"
 	src="<c:url value="/resources/js/jquery-1.11.3.js" />"></script>
-<!-- <script type="text/javascript" -->
-<%-- 	src="<c:url value="/resources/js/jquery-ui.min.js" />"></script> --%>
 
 <script type="text/javascript"
 	src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
-<!-- <script type="text/javascript" -->
-<%-- 	src="<c:url value="/resources/flatly/bootswatch.js" />"></script> --%>
-
 
 <div class="container">
 	<div class="well bs-component">
@@ -89,8 +84,6 @@
 	}
 
 	function showMsg() {
-
-// 		console.log("CLICK");
 
 		$("#loginMsg").show();
 
