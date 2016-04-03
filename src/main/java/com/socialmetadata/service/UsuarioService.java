@@ -50,9 +50,6 @@ public class UsuarioService {
 		
 		for (Item i : u.getItemsFavoritos()) {
 			
-			System.out.println("id usuario "+ idUsuario);
-			System.out.println("i.getIdItem(); "+ i.getIdItem());
-			System.out.println("i.getTitulo(); "+ i.getTitulo());
 //			i.getIdItem();
 			i.getTitulo();
 		}
@@ -60,6 +57,14 @@ public class UsuarioService {
 
 
 		return u;
+	}
+	
+	
+	@Transactional
+	public void update(Usuario usuario) {
+		
+		usuarioDAO.update(usuario);
+		
 	}
 
 }

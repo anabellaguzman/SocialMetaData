@@ -30,30 +30,17 @@ public class MiCuentaController {
 	@Transactional
 	@RequestMapping(value = "/micuenta", method = RequestMethod.GET)
 	public ModelAndView setupView() {
-		// ModelAndView mav = new ModelAndView("");
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
-		String name = auth.getName(); // get logged in username
-		
+		String name = auth.getName(); // get logged in username		
 		Usuario usuario = usuarioService.getByUsername(name);
 		usuario = usuarioService.getFavoritos(usuario.getIdUsuario());
-
 		ModelAndView mav = new ModelAndView("miCuenta");
-//		
-//		for (Item i: favs){
-		System.out.println("micuenta controller");
-//		
-//	}
 		
 		Set <Item> favs = usuario.getItemsFavoritos();
-//		
-		for (Item i: favs){
-			System.out.println("i enf or "+ i.getIdItem());
-			
-		}
-		
 
-		mav.addObject("items", favs);
+
+		mav.addObject("items", usuario.getItemsFavoritos());
 
 		return mav;
 	}
@@ -71,6 +58,28 @@ public class MiCuentaController {
 		
 		
 		return "Ha sido agregado a tus favoritos exitosamente!";
+	}
+	
+	
+	@Transactional
+	@RequestMapping(value = "/removeFav.do", method = RequestMethod.GET)
+	public void removeFavorite(@RequestParam int idItem) {
+		
+		System.out.println("idItem controller "+ idItem);
+		Authentication auth = SecurityContextHolder.getContext()
+				.getAuthentication();
+		String name = auth.getName(); // get logged in username
+		Item item = itemService.getItem(idItem);
+		Usuario usuario = usuarioService.getByUsername(name);
+		
+		usuario.getItemsFavoritos().remove(item);
+		
+		usuarioService.update(usuario);
+		
+		
+		
+		
+		
 	}
 
 }
