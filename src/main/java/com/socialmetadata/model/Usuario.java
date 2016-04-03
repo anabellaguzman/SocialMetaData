@@ -144,6 +144,10 @@ public class Usuario {
 	public void setRoles(Set<Rol> roles) {
 		this.roles = roles;
 	}
+	
+	public void addItemsFavoritos(Item item){
+		this.itemsFavoritos.add(item);
+	}
 
 	
 

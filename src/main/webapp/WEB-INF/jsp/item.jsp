@@ -49,7 +49,45 @@
 						<img class="img-responsive"
 							src="<c:url value="/resources/images/${item.imagen}" />"
 							alt="some_text" width="256" height="180">
+						<p>	
 					</div>
+					<div class="col-sm-8">
+					<a href="./addtofavs?idItem=${item.idItem}" class="btn btn-warning">Favorito</a>
+					<a href="https://www.google.com/search?q=${item.titulo}" class="btn btn-danger" target="_blank">Google</a>
+<!-- 					<span style="white-space:nowrap;"> -->
+<%-- 					<a href="./addtofavs?idItem=${item.idItem}" > --%>
+<!-- 					<img class="img-responsive" -->
+<%-- 											src="<c:url value="/resources/icons/h2.png" />" --%>
+<!-- 											alt="delete" width="64" height="64"> -->
+<!-- 						</a>			 -->
+											
+					
+<!-- 					</span> -->
+					
+<!-- 					<span style="white-space:nowrap;"> -->
+<%-- 					<a href="./addtofavs?idItem=${item.idItem}" > --%>
+<!-- 					<img class="img-responsive" -->
+<%-- 											src="<c:url value="/resources/icons/h2.png" />" --%>
+<!-- 											alt="delete" width="64" height="64"> -->
+<!-- 						</a>			 -->
+											
+					
+<!-- 					</span> -->
+					
+			
+					
+					
+<%-- 					<a style="display:inline" href="https://www.google.com/search?q=${item.titulo}"  target="_blank"><img style="display:inline" class="img-responsive" --%>
+<%-- 											src="<c:url value="/resources/icons/g2.png" />" --%>
+<!-- 											alt="delete" width="64" height="64"></a> -->
+<%-- 					<a href="https://www.google.com/search?q=${item.titulo}"  target="_blank"><img class="img-responsive" --%>
+<%-- 											src="<c:url value="/resources/icons/f1.png" />" --%>
+<!-- 											alt="delete" width="64" height="64"></a> -->
+					
+					<a href="#" class="btn btn-info">Compartir en Facebook</a>
+					<p>
+					</div>
+					
 					<div class="col-sm-8">
 						<ul class="list-group">
 							<li class="list-group-item">Formato:

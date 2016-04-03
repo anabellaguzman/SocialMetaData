@@ -8,8 +8,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.socialmetadata.dao.UsuarioDAO;
+import com.socialmetadata.model.Autor;
+import com.socialmetadata.model.Item;
 import com.socialmetadata.model.Rol;
 import com.socialmetadata.model.Usuario;
+import com.socialmetadata.model.ValorAtributoItem;
 
 @Service
 public class UsuarioService {
@@ -35,6 +38,33 @@ public class UsuarioService {
 	
 		return u;
 
+	}
+	
+	@Transactional
+	public Usuario getFavoritos(int idUsuario) {
+		
+		System.out.println("usuario Service ");
+		Usuario u = usuarioDAO.getUsuario(idUsuario);		
+		u.getItemsFavoritos();
+
+		
+		for (Item i : u.getItemsFavoritos()) {
+			
+//			i.getIdItem();
+			i.getTitulo();
+		}
+
+
+
+		return u;
+	}
+	
+	
+	@Transactional
+	public void update(Usuario usuario) {
+		
+		usuarioDAO.update(usuario);
+		
 	}
 
 }

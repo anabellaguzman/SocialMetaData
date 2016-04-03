@@ -9,101 +9,113 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<link rel="stylesheet"href="<c:url value="/resources/flatly/bootstrap.css" />" media="screen">
+<link rel="stylesheet"
+	href="<c:url value="/resources/flatly/bootstrap.css" />" media="screen">
 
-<link rel="stylesheet"href="<c:url value="/resources/flatly/bootswatch.min.css" />">
+<link rel="stylesheet"
+	href="<c:url value="/resources/flatly/bootswatch.min.css" />">
 
-<link rel="stylesheet"href="<c:url value="/resources/css/jquery-ui.min.css" />">
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/jquery-ui.min.css" />">
 
-<script type="text/javascript"src="<c:url value="/resources/js/jquery.js" />"></script>
+<script type="text/javascript"
+	src="<c:url value="/resources/js/jquery.js" />"></script>
 
-<script type="text/javascript"src="<c:url value="/resources/js/jquery-ui.min.js" />"></script>
+<script type="text/javascript"
+	src="<c:url value="/resources/js/jquery-ui.min.js" />"></script>
 <script src="<c:url value="/resources/js/jquery.form.js" />"></script>
 
 <title>Agregar Nuevo Item</title>
 </head>
 <body>
 	<div id="removable">
-		<div class="col-lg-6">
-			<br>
-			<div class="well bs-component">
-				<form class="form-horizontal" method="POST" action="addItem">
-					<fieldset id="fs_generalAtributes">
-						<legend>Nuevo Item</legend>
-						<div class="form-group">
-							<label for="inputDefault" class="col-lg-2 control-label">Titulo</label>
-							<div class="col-lg-10">
-								<input type="text" class="form-control" id="idTituloItem"></input>
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="inputDefault" class="col-lg-2 control-label">Año</label>
-							<div class="col-lg-10">
-								<select class="form-control" id="selectYear">
-								</select>
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="inputDefault" class="col-lg-2 control-label">Autor</label>
-							<div class="col-lg-9">
-								<input id="search" class="form-control"> <input
-									type="hidden" class="form-control" id="idAutor"></input>
-								<ul class="list-group" id="listAutores">
-								</ul>
-							</div>
+	<div class="container">
+		<form class="form-horizontal" method="POST" action="addItem">
+							<div class="well bs-component">
+														<h1>Nuevo Item</h1>
+							
+		
+			<div class="row">
+				<div class="col-lg-6">
+					<br>
 
-
-							<!-- 							<button type="button" class="btn btn-primary btn-lg" -->
-							<!-- 								data-toggle="modal" data-target="#myModal">+</button> -->
-
-
-							<a class="btn btn-primary" data-toggle="modal"
-								data-target="#modalAddAutor">+</a>
-						</div>
-						<div class="form-group">
-							<label for="inputDefault" class="col-lg-2 control-label">Temas
-								Relacionados</label>
-							<div class="col-lg-9" id="temasRelacionados">
-								<input id="autocompleteTema" class="form-control"> <input
-									type="hidden" class="form-control" id="idTema"></input>
-								<div class="bs-component" id="contenedorTemas">
-									<p>
+						<fieldset id="fs_generalAtributes">
+							<div class="form-group">
+								<label for="inputDefault" class="col-lg-2 control-label">Titulo</label>
+								<div class="col-lg-10">
+									<input type="text" class="form-control" id="idTituloItem"></input>
 								</div>
 							</div>
-							<a class="btn btn-primary" data-toggle="modal"
-								data-target="#modalAddTema">+</a>
-						</div>
-						<div class="form-group">
-							<label for="select" class="col-lg-2 control-label">Tipo
-								Item</label>
-							<div class="col-lg-10">
-								<select class="form-control" onchange="jsFunction()"
-									id="selectOpt">
-									<c:forEach items="${listTipoItem}" var="tipoItem">
-										<option value="${tipoItem.idTipoItem}">${tipoItem.descripcion}</option>
-									</c:forEach>
-								</select>
+							<div class="form-group">
+								<label for="inputDefault" class="col-lg-2 control-label">Año</label>
+								<div class="col-lg-10">
+									<select class="form-control" id="selectYear">
+									</select>
+								</div>
 							</div>
-						</div>
-						<div class="form-group">
-							<label for="select" class="col-lg-2 control-label">Idioma</label>
-							<div class="col-lg-10">
-								<select class="form-control" id="selectIdioma">
-									<c:forEach items="${listIdioma}" var="idioma">
-										<option value="${idioma.idIdioma}">${idioma.idioma}</option>
-									</c:forEach>
-								</select>
+							<div class="form-group">
+								<label for="inputDefault" class="col-lg-2 control-label">Autor</label>
+								<div class="col-lg-9">
+									<input id="search" class="form-control"> <input
+										type="hidden" class="form-control" id="idAutor"></input>
+									<ul class="list-group" id="listAutores">
+									</ul>
+								</div>
+								<a class="btn btn-primary" data-toggle="modal"
+									data-target="#modalAddAutor">+</a>
 							</div>
-						</div>
-						<div class="form-group">
-							<label for="textArea" class="col-lg-2 control-label">Descripcion</label>
-							<div class="col-lg-10">
-								<textarea class="form-control" rows="3" id="textArea"></textarea>
-								<span class="help-block">No debe superar los 500
-									caracteres</span>
+							<div class="form-group">
+								<label for="inputDefault" class="col-lg-2 control-label">Temas
+									Relacionados</label>
+								<div class="col-lg-9" id="temasRelacionados">
+									<input id="autocompleteTema" class="form-control"> <input
+										type="hidden" class="form-control" id="idTema"></input>
+									<div class="bs-component" id="contenedorTemas">
+										<p>
+									</div>
+								</div>
+								<a class="btn btn-primary" data-toggle="modal"
+									data-target="#modalAddTema">+</a>
 							</div>
+							<div class="form-group">
+								<label for="select" class="col-lg-2 control-label">Tipo
+									Item</label>
+								<div class="col-lg-10">
+									<select class="form-control" onchange="jsFunction()"
+										id="selectOpt">
+										<c:forEach items="${listTipoItem}" var="tipoItem">
+											<option value="${tipoItem.idTipoItem}">${tipoItem.descripcion}</option>
+										</c:forEach>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="select" class="col-lg-2 control-label">Idioma</label>
+								<div class="col-lg-10">
+									<select class="form-control" id="selectIdioma">
+										<c:forEach items="${listIdioma}" var="idioma">
+											<option value="${idioma.idIdioma}">${idioma.idioma}</option>
+										</c:forEach>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="textArea" class="col-lg-2 control-label">Descripcion</label>
+								<div class="col-lg-10">
+									<textarea class="form-control" rows="3" id="textArea"></textarea>
+									<span class="help-block">No debe superar los 500
+										caracteres</span>
+								</div>
 
-						</div>
+							</div>
+						</fieldset>
+					
+				</div>
+
+				<div class="col-lg-6">
+					<br>
+					
+
 						<fieldset id="fs_individualAtributes">
 							<c:forEach items="${listAtributosFistItem}" var="atributoItem">
 								<div class='form-group'>
@@ -122,10 +134,15 @@
 									onclick="addNewItem()">Agregar</button>
 							</div>
 						</div>
-					</fieldset>
-				</form>
+
+			
+				</div>
+
 			</div>
+						</div>
+		</form>
 		</div>
+	
 
 		<!-- Modal Add Autor -->
 		<div class="modal fade" id="modalAddAutor" tabindex="-1" role="dialog"
@@ -160,7 +177,8 @@
 								<div class="form-group">
 									<div class="col-lg-10 col-lg-offset-2">
 										<button id="btnResetAutor" type="reset"
-											class="btn btn-default" style="display: none">Limpiar campos</button>
+											class="btn btn-default" style="display: none">Limpiar
+											campos</button>
 										<button type="submit" class="btn btn-primary">Guardar</button>
 									</div>
 								</div>
@@ -174,48 +192,47 @@
 		</div>
 
 		<!-- Modal Add Tema -->
-	<div class="modal fade" id="modalAddTema" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close" id="btnCloseModal">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">Nuevo Tema</h4>
-				</div>
-				<div class="modal-body">
+		<div class="modal fade" id="modalAddTema" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close" id="btnCloseModal">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">Nuevo Tema</h4>
+					</div>
+					<div class="modal-body">
 
 
 
-					<form id=formTema class="form-horizontal" method="POST"
-						action="addTema">
-						<fieldset>
+						<form id=formTema class="form-horizontal" method="POST"
+							action="addTema">
+							<fieldset>
 
-							<div class="form-group">
-								<label for="inNewTema" class="col-lg-2 control-label">Tema</label>
-								<div class="col-lg-10">
-									<input type="text" class="form-control" id="newTema"
-										name="newTema" placeholder="Tema">
+								<div class="form-group">
+									<label for="inNewTema" class="col-lg-2 control-label">Tema</label>
+									<div class="col-lg-10">
+										<input type="text" class="form-control" id="newTema"
+											name="newTema" placeholder="Tema">
+									</div>
 								</div>
-							</div>			
-							<div class="form-group">
-								<div class="col-lg-10 col-lg-offset-2">
-									<button id="btnResetTema" type="reset" class="btn btn-default" style="display: none">Limpiar
-										campos</button>
-									<button type="submit" class="btn btn-primary">Guardar</button>
+								<div class="form-group">
+									<div class="col-lg-10 col-lg-offset-2">
+										<button id="btnResetTema" type="reset" class="btn btn-default"
+											style="display: none">Limpiar campos</button>
+										<button type="submit" class="btn btn-primary">Guardar</button>
+									</div>
 								</div>
-							</div>
-							<div id = serverMsgT>							
-							</div>
-						</fieldset>
-					</form>
-				</div>
+								<div id=serverMsgT></div>
+							</fieldset>
+						</form>
+					</div>
 
+				</div>
 			</div>
 		</div>
-	</div>
 
 	</div>
 	<div id="subViewDiv" class="bs-component"></div>
@@ -471,23 +488,20 @@
 			}
 
 		});
-		
-		
+
 		$('#formTema').ajaxForm({
 			success : function(data) {
 				console.log(data);
 				createAlertSuccess(data, "temaSuccess", "#serverMsgT");
 				$('#btnResetTema').trigger('click');
-				$("#temaSuccess").fadeOut(4000, function(){
+				$("#temaSuccess").fadeOut(4000, function() {
 					$(this).remove();
 				});
 			}
 
 		});
-	
-		
-		
-		function createAlertSuccess(data, id, elToAppend){			
+
+		function createAlertSuccess(data, id, elToAppend) {
 			var $newAlert = $('<div/>', {
 				'class' : "alert alert-dismiss alert-success",
 				'id' : id,
@@ -499,9 +513,8 @@
 				html : "x"
 			}));
 			$newAlert.appendTo(elToAppend);
-		return ;
-	}
-
+			return;
+		}
 	</script>
 
 </body>
