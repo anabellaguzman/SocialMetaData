@@ -1,13 +1,13 @@
-package com.socialmetadata.dao;
+package com.socialmetadata.springsocial;
 
 import java.util.List;
 import java.util.Set;
 
 import org.springframework.util.MultiValueMap;
 
-import com.socialmetadata.model.SocialUser;
-
 public interface SocialUserDAO {
+	
+	void add(SocialUser socialUser);
 	
 	 List<SocialUser> findByUserId(String userId);
 

@@ -1,4 +1,4 @@
-package com.socialmetadata.model;
+package com.socialmetadata.springsocial;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +14,7 @@ public class SocialUser {
 
 	  @Id
 	  @GeneratedValue(strategy = GenerationType.AUTO)
-	  private int id;
+	  private int idSocialUser;
 
 	  /**
 	   * A local identifier for the user, in our case the username.
@@ -26,27 +26,24 @@ public class SocialUser {
 
 	  private String providerUserId;
 
-	  @Column(nullable = false)
-	  private int rank;
-
 	  private String displayName;
 
 	  private String profileUrl;
 
 	  private String imageUrl;
 
-	  @Column(nullable = false)
+//	  @Column(nullable = false)
 	  private String accessToken;
 
 	  private String secret;
 
 	  private String refreshToken;
 	  private Long expireTime;
-	public int getId() {
-		return id;
+	public int getIdSocialUser() {
+		return idSocialUser;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setIdSocialUser(int idSocialUser) {
+		this.idSocialUser = idSocialUser;
 	}
 	public String getUserId() {
 		return userId;
@@ -65,12 +62,6 @@ public class SocialUser {
 	}
 	public void setProviderUserId(String providerUserId) {
 		this.providerUserId = providerUserId;
-	}
-	public int getRank() {
-		return rank;
-	}
-	public void setRank(int rank) {
-		this.rank = rank;
 	}
 	public String getDisplayName() {
 		return displayName;
@@ -116,7 +107,7 @@ public class SocialUser {
 	}
 
 
-	// getters and setters omitted for brevity
+
 	  
 
 }

@@ -21,7 +21,7 @@
 		<mapping class="com.socialmetadata.model.Rol" />
 		<mapping class="com.socialmetadata.model.Users" />
 		<mapping class="com.socialmetadata.model.UserRole" />
-<!-- 		<mapping class="com.socialmetadata.model.SocialUser" table="UserConnection"/> -->
+		<mapping class="com.socialmetadata.springsocial.SocialUser"/>
 		
 		
 		

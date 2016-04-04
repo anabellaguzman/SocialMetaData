@@ -1,3 +1,4 @@
+package com.socialmetadata.springsocial;
 //package com.socialmedtadata.springsocial;
 //
 //import org.springframework.social.connect.ConnectionData;
