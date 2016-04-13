@@ -29,6 +29,14 @@ public class Rol {
 	
 	@ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
 	private Set<Usuario> rolUsuarios;
+	
+	public Rol(){}
+	
+
+	public Rol(int idRol) {
+		super();
+		this.idRol = idRol;
+	}
 
 	public int getIdRol() {
 		return idRol;

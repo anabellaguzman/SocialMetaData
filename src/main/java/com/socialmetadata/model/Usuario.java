@@ -63,15 +63,20 @@ public class Usuario {
 	
 	public Usuario() {}
 
-	public Usuario(Integer idUsuario, String nombre, String apellido, String email,
-			Date fechaNacimiento, String password) {
+	public Usuario (String username, String nombre, String apellido, String email,
+	 String password) {
 		super();
-		this.idUsuario = idUsuario;
+		
 		this.nombre = nombre;
 		this.apellido = apellido;
+		this.username = username;
 		this.email = email;
 		this.password = password;
+		this.enabled = true;
+		
 	}
+	
+	
 
 	public Integer getIdUsuario() {
 		return idUsuario;
@@ -144,10 +149,16 @@ public class Usuario {
 	public void setRoles(Set<Rol> roles) {
 		this.roles = roles;
 	}
+//--------------
 	
 	public void addItemsFavoritos(Item item){
 		this.itemsFavoritos.add(item);
 	}
+	public void addRol(Rol rol){
+		this.roles.add(rol);
+	}
+	
+	
 
 	
 

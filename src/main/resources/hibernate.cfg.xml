@@ -19,8 +19,8 @@
 		<mapping class="com.socialmetadata.model.ValorAtributoItem" />
 		<mapping class="com.socialmetadata.model.AtributoItem" />
 		<mapping class="com.socialmetadata.model.Rol" />
-		<mapping class="com.socialmetadata.model.Users" />
-		<mapping class="com.socialmetadata.model.UserRole" />
+<!-- 		<mapping class="com.socialmetadata.model.Users" /> -->
+<!-- 		<mapping class="com.socialmetadata.model.UserRole" /> -->
 		
 		
 
