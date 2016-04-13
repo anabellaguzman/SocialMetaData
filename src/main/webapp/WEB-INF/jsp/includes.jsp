@@ -37,14 +37,14 @@
 						<form action="j_spring_security_logout" method="post">
 
 									<button type="submit" class="btn btn-link" >
-									Logout</button> <input
+									Cerrar Sesion</button> <input
 									type="hidden" name="${_csrf.parameterName}"
 									value="${_csrf.token}" />
 							</form>
 							</li>
 					</sec:authorize>
 					<sec:authorize access="isAnonymous()">
-						<li><a href="./login">Login</a></li>
+						<li><a href="./login">Iniciar Sesion</a></li>
 					</sec:authorize>
 
 				</ul>

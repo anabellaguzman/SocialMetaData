@@ -66,5 +66,12 @@ public class UsuarioService {
 		usuarioDAO.update(usuario);
 		
 	}
+	
+	@Transactional
+	public void add(Usuario usuario) {
+		
+		usuarioDAO.add(usuario);
+		
+	}
 
 }
