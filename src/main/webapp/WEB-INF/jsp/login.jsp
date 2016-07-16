@@ -3,6 +3,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/jsp/includes.jsp"%>
+
+<%-- <%@page import="java.net.URLEncoder"%> --%>
+<%-- <% --%
+// 	String fbURL = "http://www.facebook.com/dialog/oauth?client_id=1052217758124008&redirect_uri="
+// 			+ URLEncoder
+// 					.encode("http://localhost:8080/SocialMetadata/loginFacebook.do")
+// 			+ "&scope=email";
+<%-- %> --%>
+
+
+
+
 <html>
 <head>
 <title>Iniciar Sesion | Social Metadata</title>
@@ -13,6 +25,67 @@
 }
 </style>
 <body>
+	<script>
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId : '1177390648949659',
+				xfbml : true,
+				version : 'v2.7'
+			});
+			
+			FB.getLoginStatus(function(response) {
+		    	if (response.status === 'connected') {
+		    		document.getElementById('status').innerHTML = 'We are connected.';
+		    		document.getElementById('btnLoginFB').style.visibility = 'hidden';
+		    	} else if (response.status === 'not_authorized') {
+		    		document.getElementById('status').innerHTML = 'We are not logged in.'
+		    	} else {
+		    		document.getElementById('status').innerHTML = 'You are not logged into Facebook.';
+		    	}
+		    });
+			
+			
+			
+		};
+		
+
+	
+
+		(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) {
+				return;
+			}
+			js = d.createElement(s);
+			js.id = id;
+			js.src = "//connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+		
+		function loginFB() {
+			FB.login(function(response) {
+				if (response.status === 'connected') {
+		    		document.getElementById('status').innerHTML = 'We are connected.';
+		    		document.getElementById('btnLoginFB').style.visibility = 'hidden';
+		    	} else if (response.status === 'not_authorized') {
+		    		document.getElementById('status').innerHTML = 'We are not logged in.'
+		    	} else {
+		    		document.getElementById('status').innerHTML = 'You are not logged into Facebook.';
+		    	}
+			}, {scope: 'email'});
+		}
+		
+		// getting basic user info
+		function getInfoFB() {
+			FB.api('/me', 'GET', {fields: 'last_name'}, function(response) {
+				document.getElementById('status').innerHTML = response.id;
+			});
+		}
+		
+		
+		
+		
+	</script>
 	<br />
 	<br />
 	<br />
@@ -31,9 +104,12 @@
 				<div class="well bs-component">
 
 					<div align="center">
-						<a href="#" class="btn btn-info">Iniciar con Facebook</a> <br>
-						<br> <a href="#" class="btn btn-danger">Iniciar
-							con Gmail</a>
+					<div id="status"></div>
+					<button id="btnLoginFB" type="button" class="btn btn-default" onclick="loginFB()">Facebook Login</button>
+					<button onclick="getInfoFB()">Get Info</button>
+<%-- 						<a href="<%=fbURL%>" class="btn btn-info">Iniciar con --%>
+<!-- 							Facebook</a> <br> <br> <a href="#" class="btn btn-danger">Iniciar -->
+<!-- 							con Gmail</a> -->
 					</div>
 
 				</div>
