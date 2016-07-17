@@ -48,9 +48,7 @@
 			
 		};
 		
-
 	
-
 		(function(d, s, id) {
 			var js, fjs = d.getElementsByTagName(s)[0];
 			if (d.getElementById(id)) {
@@ -72,15 +70,25 @@
 		    	} else {
 		    		document.getElementById('status').innerHTML = 'You are not logged into Facebook.';
 		    	}
-			}, {scope: 'email'});
+			}, {scope: 'public_profile, email'});
 		}
 		
 		// getting basic user info
 		function getInfoFB() {
 			FB.api('/me', 'GET', {fields: 'last_name'}, function(response) {
-				document.getElementById('status').innerHTML = response.id;
+				document.getElementById('status').innerHTML = response.name;
 			});
 		}
+		
+		
+		  function testAPI() {
+			    console.log('Welcome!  Fetching your information.... ');
+			    FB.api('/me?fields=id,first_name,last_name, email', function(response) {
+			      console.log('Successful login for: ' + response.name);
+			      document.getElementById('status').innerHTML =
+			        'Thanks for logging in, ' + response.first_name + '!' + response.last_name + "id: "+ response.id + "email : " + response.email;
+			    }, {scope: 'public_profile, email'});
+			  }
 		
 		
 		
@@ -106,7 +114,7 @@
 					<div align="center">
 					<div id="status"></div>
 					<button id="btnLoginFB" type="button" class="btn btn-default" onclick="loginFB()">Facebook Login</button>
-					<button onclick="getInfoFB()">Get Info</button>
+					<button onclick="testAPI()">Get Info</button>
 <%-- 						<a href="<%=fbURL%>" class="btn btn-info">Iniciar con --%>
 <!-- 							Facebook</a> <br> <br> <a href="#" class="btn btn-danger">Iniciar -->
 <!-- 							con Gmail</a> -->
