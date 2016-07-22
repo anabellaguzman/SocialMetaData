@@ -18,6 +18,8 @@
 <html>
 <head>
 <title>Iniciar Sesion | Social Metadata</title>
+<meta name="google-signin-client_id" content="413624237768-cvofq4hn3p92et55ehdg9jm7rf4hvjad.apps.googleusercontent.com">
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 <style>
 .divider {
@@ -90,7 +92,17 @@
 			    }, {scope: 'public_profile, email'});
 			  }
 		
-		
+		  function onSignIn(googleUser) {
+			  var profile = googleUser.getBasicProfile();
+			  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+			  console.log('Name: ' + profile.getName());
+			  console.log('Image URL: ' + profile.getImageUrl());
+			  console.log('Email: ' + profile.getEmail());
+			  
+			  var id_token = googleUser.getAuthResponse().id_token;
+		        console.log("ID Token: " + id_token);
+
+			}
 		
 		
 	</script>
@@ -114,10 +126,12 @@
 					<div align="center">
 					<div id="status"></div>
 					<button id="btnLoginFB" type="button" class="btn btn-default" onclick="loginFB()">Facebook Login</button>
-					<button onclick="testAPI()">Get Info</button>
+					<button type="button" class="btn btn-default" onclick="testAPI()">Get Info FB</button>
 <%-- 						<a href="<%=fbURL%>" class="btn btn-info">Iniciar con --%>
 <!-- 							Facebook</a> <br> <br> <a href="#" class="btn btn-danger">Iniciar -->
 <!-- 							con Gmail</a> -->
+<div class="g-signin2" data-onsuccess="onSignIn"></div>
+<button type="button" class="btn btn-default" onclick="onSignIn()">Get Info Gmail</button>
 					</div>
 
 				</div>
