@@ -31,7 +31,10 @@
 
 				<ul class="nav navbar-nav navbar-right">
 					<sec:authorize access="isAuthenticated()">
-						<li><a href="./micuenta">Mi Cuenta</a></li>
+						<li>
+<%-- 						<sec:authentication property="principal.username --%>
+<%-- 						"/> --%>
+						<a href="./micuenta">Mi Cuenta</a></li>
 
 						<li>
 						<form action="j_spring_security_logout" method="post">

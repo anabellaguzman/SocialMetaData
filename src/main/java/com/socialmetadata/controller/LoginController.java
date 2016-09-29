@@ -31,6 +31,9 @@ public class LoginController {
 	  } else if (logout != null) {  
 	   message = "Logout successful !";  
 	  }  
+	  
+	  
+	  System.out.println("PASO POR ACA");
 	  return new ModelAndView("login", "message", message);  
 	 }  
 	  

@@ -109,7 +109,7 @@
 	<br />
 	<br />
 	<br />
-
+<div id="removable">
 	<div align="center" class="container">
 		<div class="row">
 
@@ -191,6 +191,8 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	
 	</div>
 </body>
 </html>

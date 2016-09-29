@@ -15,6 +15,7 @@ import com.socialmetadata.model.Usuario;
 import com.socialmetadata.service.AutorService;
 import com.socialmetadata.service.RolService;
 import com.socialmetadata.service.UsuarioService;
+import com.socialmetadata.utilities.PasswordEncoderGenerator;
 
 
 @Controller
@@ -41,11 +42,17 @@ public class RegisterUserController {
 	public String registerUser(@RequestParam String nombre, @RequestParam String apellido,
 			@RequestParam String email, @RequestParam String username, @RequestParam String password){
 		
+//		Usuario usuario = new Usuario(username, nombre, apellido, email, password);
+		
+		password = PasswordEncoderGenerator.encodePassword(password);
+		
 		Usuario usuario = new Usuario(username, nombre, apellido, email, password);
+
+		
 		usuarioService.add(usuario);
 		
 		
-		System.out.println(nombre);
+//		System.out.println(nombre);
 		
 		return "Su cuenta a sido creada exitosamente";
 	}
