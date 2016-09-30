@@ -33,7 +33,8 @@ public class LoginController {
 	  }  
 	  
 	  
-	  System.out.println("PASO POR ACA");
+//	  System.out.println("PASO POR ACA");
+	  System.out.println(message);
 	  return new ModelAndView("login", "message", message);  
 	 }  
 	  

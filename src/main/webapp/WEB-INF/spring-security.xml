@@ -27,8 +27,8 @@
 
 	<authentication-manager>
 		<authentication-provider user-service-ref="loginService">
-
-			<password-encoder ref="encoder" />
+			<password-encoder hash="bcrypt" />
+			<!-- <password-encoder ref="bcrypEncoder" /> -->
 		</authentication-provider>
 
 
@@ -46,9 +46,9 @@
 	<!-- </authentication-provider> -->
 	<!-- </authentication-manager> -->
 
-	<beans:bean id="encoder"
+	<beans:bean id="bcrypEncoder"
 		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
-		<beans:constructor-arg name="strength" value="11" />
+		<!-- <beans:constructor-arg name="strength" value="11" /> -->
 	</beans:bean>
 
 
