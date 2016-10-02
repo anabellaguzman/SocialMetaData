@@ -106,55 +106,45 @@
 		
 		
 	</script>
-	<br />
-	<br />
-	<br />
-<div id="removable">
-	<div align="center" class="container">
-		<div class="row">
 
-			<div class="col-lg-6" align="center">
+<div id="removable">
+	<div class="container">
+
+			
 
 
 				<h1>Iniciar Sesion</h1>
-				<div class="progress">
-					<div class="progress-bar" style="width: 100%;"></div>
-				</div>
+	
+<div class="col-lg-6">
+<!-- 				<div class="well bs-component"> -->
 
-				<div class="well bs-component">
+<!-- 					<div align="center"> -->
+<!-- 					<div id="status"></div> -->
+<!-- 					<button id="btnLoginFB" type="button" class="btn btn-default" onclick="loginFB()">Facebook Login</button> -->
+<!-- 					<button type="button" class="btn btn-default" onclick="testAPI()">Get Info FB</button> -->
+<%-- <%-- 						<a href="<%=fbURL%>" class="btn btn-info">Iniciar con --%> 
+<!-- <!-- 							Facebook</a> <br> <br> <a href="#" class="btn btn-danger">Iniciar --> 
+<!-- <!-- 							con Gmail</a> --> 
+<!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
+<!-- <button type="button" class="btn btn-default" onclick="onSignIn()">Get Info Gmail</button> -->
+<!-- 					</div> -->
 
-					<div align="center">
-					<div id="status"></div>
-					<button id="btnLoginFB" type="button" class="btn btn-default" onclick="loginFB()">Facebook Login</button>
-					<button type="button" class="btn btn-default" onclick="testAPI()">Get Info FB</button>
-<%-- 						<a href="<%=fbURL%>" class="btn btn-info">Iniciar con --%>
-<!-- 							Facebook</a> <br> <br> <a href="#" class="btn btn-danger">Iniciar -->
-<!-- 							con Gmail</a> -->
-<div class="g-signin2" data-onsuccess="onSignIn"></div>
-<button type="button" class="btn btn-default" onclick="onSignIn()">Get Info Gmail</button>
-					</div>
+<!-- 				</div> -->
 
-				</div>
-
-				<div class="progress">
-					<div class="progress-bar" style="width: 100%;"></div>
-				</div>
-
-				<div class="divider"></div>
+			
+			
 
 				<div class="well bs-component">
 					<form:form class="form-horizontal" method="post"
 						action="j_spring_security_check" modelAttribute="usuario">
 						<fieldset>
 
-							<legend>Iniciar con SocialMetada</legend>
 
 							<div class="form-group">
-								<label for="inputEmail" class="col-lg-2 control-label">Usuario
-									o e-mail </label>
+								<label for="inputEmail" class="col-lg-2 control-label">E-mail </label>
 								<div class="col-lg-10">
 									<form:input path="username" type="text" class="form-control"
-										id="inputEmail" placeholder="Usuario o e-mail" />
+										id="inputEmail" placeholder="E-mail" />
 								</div>
 							</div>
 

@@ -17,6 +17,8 @@ import com.socialmetadata.model.Usuario;
 public class LoginController {
 	 @RequestMapping(value = { "/", "/home" })  
 	 public String getUserDefault() {  
+		 
+		 System.out.println(SecurityContextHolder.getContext().getAuthentication());
 	  return "home";  
 	 }  
 	  
