@@ -18,8 +18,8 @@
 <html>
 <head>
 <title>Iniciar Sesion | Social Metadata</title>
-<meta name="google-signin-client_id" content="413624237768-cvofq4hn3p92et55ehdg9jm7rf4hvjad.apps.googleusercontent.com">
-<script src="https://apis.google.com/js/platform.js" async defer></script>
+<!-- <meta name="google-signin-client_id" content="413624237768-cvofq4hn3p92et55ehdg9jm7rf4hvjad.apps.googleusercontent.com"> -->
+<!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
 </head>
 <style>
 .divider {
@@ -27,85 +27,85 @@
 }
 </style>
 <body>
-	<script>
-		window.fbAsyncInit = function() {
-			FB.init({
-				appId : '1177390648949659',
-				xfbml : true,
-				version : 'v2.7'
-			});
+<!-- 	<script> -->
+<!-- // 		window.fbAsyncInit = function() { -->
+<!-- // 			FB.init({ -->
+<!-- // 				appId : '1177390648949659', -->
+<!-- // 				xfbml : true, -->
+<!-- // 				version : 'v2.7' -->
+<!-- // 			}); -->
 			
-			FB.getLoginStatus(function(response) {
-		    	if (response.status === 'connected') {
-		    		document.getElementById('status').innerHTML = 'We are connected.';
-		    		document.getElementById('btnLoginFB').style.visibility = 'hidden';
-		    	} else if (response.status === 'not_authorized') {
-		    		document.getElementById('status').innerHTML = 'We are not logged in.'
-		    	} else {
-		    		document.getElementById('status').innerHTML = 'You are not logged into Facebook.';
-		    	}
-		    });
+<!-- // 			FB.getLoginStatus(function(response) { -->
+<!-- // 		    	if (response.status === 'connected') { -->
+<!-- // 		    		document.getElementById('status').innerHTML = 'We are connected.'; -->
+<!-- // 		    		document.getElementById('btnLoginFB').style.visibility = 'hidden'; -->
+<!-- // 		    	} else if (response.status === 'not_authorized') { -->
+<!-- // 		    		document.getElementById('status').innerHTML = 'We are not logged in.' -->
+<!-- // 		    	} else { -->
+<!-- // 		    		document.getElementById('status').innerHTML = 'You are not logged into Facebook.'; -->
+<!-- // 		    	} -->
+<!-- // 		    }); -->
 			
 			
 			
-		};
+<!-- // 		}; -->
 		
 	
-		(function(d, s, id) {
-			var js, fjs = d.getElementsByTagName(s)[0];
-			if (d.getElementById(id)) {
-				return;
-			}
-			js = d.createElement(s);
-			js.id = id;
-			js.src = "//connect.facebook.net/en_US/sdk.js";
-			fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
+<!-- // 		(function(d, s, id) { -->
+<!-- // 			var js, fjs = d.getElementsByTagName(s)[0]; -->
+<!-- // 			if (d.getElementById(id)) { -->
+<!-- // 				return; -->
+<!-- // 			} -->
+<!-- // 			js = d.createElement(s); -->
+<!-- // 			js.id = id; -->
+<!-- // 			js.src = "//connect.facebook.net/en_US/sdk.js"; -->
+<!-- // 			fjs.parentNode.insertBefore(js, fjs); -->
+<!-- // 		}(document, 'script', 'facebook-jssdk')); -->
 		
-		function loginFB() {
-			FB.login(function(response) {
-				if (response.status === 'connected') {
-		    		document.getElementById('status').innerHTML = 'We are connected.';
-		    		document.getElementById('btnLoginFB').style.visibility = 'hidden';
-		    	} else if (response.status === 'not_authorized') {
-		    		document.getElementById('status').innerHTML = 'We are not logged in.'
-		    	} else {
-		    		document.getElementById('status').innerHTML = 'You are not logged into Facebook.';
-		    	}
-			}, {scope: 'public_profile, email'});
-		}
+<!-- // 		function loginFB() { -->
+<!-- // 			FB.login(function(response) { -->
+<!-- // 				if (response.status === 'connected') { -->
+<!-- // 		    		document.getElementById('status').innerHTML = 'We are connected.'; -->
+<!-- // 		    		document.getElementById('btnLoginFB').style.visibility = 'hidden'; -->
+<!-- // 		    	} else if (response.status === 'not_authorized') { -->
+<!-- // 		    		document.getElementById('status').innerHTML = 'We are not logged in.' -->
+<!-- // 		    	} else { -->
+<!-- // 		    		document.getElementById('status').innerHTML = 'You are not logged into Facebook.'; -->
+<!-- // 		    	} -->
+<!-- // 			}, {scope: 'public_profile, email'}); -->
+<!-- // 		} -->
 		
-		// getting basic user info
-		function getInfoFB() {
-			FB.api('/me', 'GET', {fields: 'last_name'}, function(response) {
-				document.getElementById('status').innerHTML = response.name;
-			});
-		}
+<!-- // 		// getting basic user info -->
+<!-- // 		function getInfoFB() { -->
+<!-- // 			FB.api('/me', 'GET', {fields: 'last_name'}, function(response) { -->
+<!-- // 				document.getElementById('status').innerHTML = response.name; -->
+<!-- // 			}); -->
+<!-- // 		} -->
 		
 		
-		  function testAPI() {
-			    console.log('Welcome!  Fetching your information.... ');
-			    FB.api('/me?fields=id,first_name,last_name, email', function(response) {
-			      console.log('Successful login for: ' + response.name);
-			      document.getElementById('status').innerHTML =
-			        'Thanks for logging in, ' + response.first_name + '!' + response.last_name + "id: "+ response.id + "email : " + response.email;
-			    }, {scope: 'public_profile, email'});
-			  }
+<!-- // 		  function testAPI() { -->
+<!-- // 			    console.log('Welcome!  Fetching your information.... '); -->
+<!-- // 			    FB.api('/me?fields=id,first_name,last_name, email', function(response) { -->
+<!-- // 			      console.log('Successful login for: ' + response.name); -->
+<!-- // 			      document.getElementById('status').innerHTML = -->
+<!-- // 			        'Thanks for logging in, ' + response.first_name + '!' + response.last_name + "id: "+ response.id + "email : " + response.email; -->
+<!-- // 			    }, {scope: 'public_profile, email'}); -->
+<!-- // 			  } -->
 		
-		  function onSignIn(googleUser) {
-			  var profile = googleUser.getBasicProfile();
-			  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-			  console.log('Name: ' + profile.getName());
-			  console.log('Image URL: ' + profile.getImageUrl());
-			  console.log('Email: ' + profile.getEmail());
+<!-- // 		  function onSignIn(googleUser) { -->
+<!-- // 			  var profile = googleUser.getBasicProfile(); -->
+<!-- // 			  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead. -->
+<!-- // 			  console.log('Name: ' + profile.getName()); -->
+<!-- // 			  console.log('Image URL: ' + profile.getImageUrl()); -->
+<!-- // 			  console.log('Email: ' + profile.getEmail()); -->
 			  
-			  var id_token = googleUser.getAuthResponse().id_token;
-		        console.log("ID Token: " + id_token);
+<!-- // 			  var id_token = googleUser.getAuthResponse().id_token; -->
+<!-- // 		        console.log("ID Token: " + id_token); -->
 
-			}
+<!-- // 			} -->
 		
 		
-	</script>
+<!-- 	</script> -->
 
 <div id="removable">
 	<div class="container">
@@ -183,6 +183,6 @@
 		</div>
 	</div>
 	
-	</div>
+
 </body>
 </html>

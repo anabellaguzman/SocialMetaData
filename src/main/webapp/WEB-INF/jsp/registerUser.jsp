@@ -117,41 +117,43 @@
 
 	<div id="removable">
 		<div class="container">
-<!-- 			<div class="row"> -->
-<h1>Elije como Registrate</h1>
-				<div class="col-lg-6">
+			<!-- 			<div class="row"> -->
+			<h1>Elije como Registrate</h1>
+			<div class="col-lg-6">
 
-					<div class="well bs-component">
-					
+				<div class="well bs-component">
+
 					<legend>Red Social </legend>
 
-						<div align="left">
-							<div id="status"></div>
-							
-<div class="fb-login-button" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="true"></div>							
-<!-- 							<button id="btnLoginFB" type="button" class="btn btn-default" -->
-<!-- 								onclick="loginFB()">Facebook Login</button> -->
-							<button type="button" class="btn btn-default" onclick="testAPI()">Get
-								Info FB</button>
-							<%-- 						<a href="<%=fbURL%>" class="btn btn-info">Iniciar con --%>
-							<!-- 							Facebook</a> <br> <br> <a href="#" class="btn btn-danger">Iniciar -->
-							<!-- 							con Gmail</a> -->
-							<div class="g-signin2" data-onsuccess="onSignIn"></div>
-							<button type="button" class="btn btn-default"
-								onclick="onSignIn()">Get Info Gmail</button>
-						</div>
+					<div align="left">
+						<div id="status"></div>
 
-</div>
-</div>
+						<div class="fb-login-button" data-max-rows="1" data-size="xlarge"
+							data-show-faces="false" data-auto-logout-link="true"></div>
+						<!-- 							<button id="btnLoginFB" type="button" class="btn btn-default" -->
+						<!-- 								onclick="loginFB()">Facebook Login</button> -->
+						<button type="button" class="btn btn-default" onclick="testAPI()">Get
+							Info FB</button>
+						<%-- 						<a href="<%=fbURL%>" class="btn btn-info">Iniciar con --%>
+						<!-- 							Facebook</a> <br> <br> <a href="#" class="btn btn-danger">Iniciar -->
+						<!-- 							con Gmail</a> -->
+						<div class="g-signin2" data-onsuccess="onSignIn"></div>
+						<button type="button" class="btn btn-default" onclick="onSignIn()">Get
+							Info Gmail</button>
+					</div>
 
-<div class="col-lg-offset-6">
-<div class="well bs-component">
+				</div>
+			</div>
 
-						<form class="form-horizontal" method="POST"
-							action="registerUser.do">
-							<div class="well bs-component">
-								<fieldset>
-									<legend>SocialMetadata</legend>
+			<div class="col-lg-offset-6">
+				<div class="well bs-component">
+
+					<form class="form-horizontal" method="POST">
+						<!-- 							action="registerUser.do"> -->
+						<div class="well bs-component">
+							<fieldset>
+								<legend>SocialMetadata</legend>
+			
 									<div class="form-group">
 										<label for="nombre" class="col-lg-2 control-label">Nombre</label>
 										<div class="col-lg-10">
@@ -191,18 +193,89 @@
 									</div>
 									<div class="form-group">
 										<div class="col-lg-10 col-lg-offset-2">
-											<button type="submit" class="btn btn-primary">Crear</button>
+											<button type="button" class="btn btn-primary"
+ 									onclick="registerUser()">Crear</button>
 										</div>
 									</div>
-								</fieldset>
-							</div>
-						</form>
-						
-					</div>
-					</div>
+							</fieldset>
+						</div>
+					</form>
 
 				</div>
 			</div>
+
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		function registerUser() {
+
+			console.log("ENTRO");
+
+			var nombre = $("#nombre").val();
+			var apellido = $("#apellido").val();
+			var username = $("#username").val();
+			var password = $("#password").val();
+
 		
+
+			$.ajax({
+				url : "registerUser.do",
+				type : "POST",
+				async: false,
+				data : {
+					nombre : nombre,
+					apellido : apellido,
+					username : username,
+					password : password,
+
+				},
+				
+				success: function (){
+					
+					console.log("ajax registerUser sucess");
+					
+				}
+					
+							
+					
+			});
+			
+		
+			login(username, password);
+		}
+		
+		function login(username, password){
+			
+			console.log("login()"+username+password);
+			
+			$.ajax({
+				url : "http://localhost:8080/SocialMetadata/j_spring_security_check?",
+				type : "POST",
+				data : {
+
+					username : username,
+					password : password,
+
+				},
+					
+					success : function(data, textStatus) {
+
+						
+						console.log("user is logged in");
+	
+						location.href = document.URL.substr(0, document.URL
+								.lastIndexOf('/'))
+								+ "/home";
+
+					}
+			});
+			
+		}
+		
+		
+	</script>
+
+
 </body>
 </html>

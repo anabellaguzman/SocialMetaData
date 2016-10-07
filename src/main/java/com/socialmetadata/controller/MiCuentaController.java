@@ -30,6 +30,10 @@ public class MiCuentaController {
 	@Transactional
 	@RequestMapping(value = "/micuenta", method = RequestMethod.GET)
 	public ModelAndView setupView() {
+		
+		System.out.println(SecurityContextHolder.getContext().getAuthentication());
+		
+		
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
 		String name = auth.getName(); // get logged in username		

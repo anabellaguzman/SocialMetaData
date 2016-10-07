@@ -5,6 +5,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -56,17 +57,20 @@ public class RegisterUserController {
 	@RequestMapping(value="/registerUser.do", method=RequestMethod.POST)
 	@ResponseBody
 	public String registerUser(@RequestParam String nombre, @RequestParam String apellido,
-			@RequestParam String email, @RequestParam String username, @RequestParam String password){
+			 @RequestParam String username, @RequestParam String password){
 		
+		
+		System.out.println("entra a registerUser.do");
 //		Usuario usuario = new Usuario(username, nombre, apellido, email, password);
 		
 		password = PasswordEncoderGenerator.encodePassword(password);
 		
-		Usuario usuario = new Usuario(username, nombre, apellido, email, password);
+		Usuario usuario = new Usuario(username, nombre, apellido, username, password);
 
 		
 		usuarioService.add(usuario);
 		
+	
 //		usuario = usuarioService.getByUsername(username);
 		
 		
@@ -104,7 +108,7 @@ public class RegisterUserController {
 		
 //		System.out.println(nombre);
 		
-		return "Su cuenta a sido creada exitosamente";
+		return "usuario registrado exitosamente";
 	}
 	
 
