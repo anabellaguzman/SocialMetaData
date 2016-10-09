@@ -38,10 +38,14 @@
 <body>
 
 	<div id="removable">
+
 		<div class="container">
+
+			<div class="col-sm-4" id=serverMSG></div>
 			<%-- 	<img src="<c:url value="/resources/images/1.jpg" />" alt="some_text" width="180" height="150"> --%>
-			<br>
+			<br> <br> <br>
 			<div class="jumbotron">
+
 				<input type="hidden" id="idItem" value="${item.idItem}" />
 				<h1>${item.titulo}</h1>
 				<div class="row">
@@ -49,45 +53,65 @@
 						<img class="img-responsive"
 							src="<c:url value="/resources/images/${item.imagen}" />"
 							alt="some_text" width="256" height="180">
-						<p>	
+						<p>
 					</div>
+
+
+
+
 					<div class="col-sm-8">
-					<a href="./addtofavs?idItem=${item.idItem}" class="btn btn-warning">Favorito</a>
-					<a href="https://www.google.com/search?q=${item.titulo}" class="btn btn-danger" target="_blank">Google</a>
-<!-- 					<span style="white-space:nowrap;"> -->
-<%-- 					<a href="./addtofavs?idItem=${item.idItem}" > --%>
-<!-- 					<img class="img-responsive" -->
-<%-- 											src="<c:url value="/resources/icons/h2.png" />" --%>
-<!-- 											alt="delete" width="64" height="64"> -->
-<!-- 						</a>			 -->
-											
-					
-<!-- 					</span> -->
-					
-<!-- 					<span style="white-space:nowrap;"> -->
-<%-- 					<a href="./addtofavs?idItem=${item.idItem}" > --%>
-<!-- 					<img class="img-responsive" -->
-<%-- 											src="<c:url value="/resources/icons/h2.png" />" --%>
-<!-- 											alt="delete" width="64" height="64"> -->
-<!-- 						</a>			 -->
-											
-					
-<!-- 					</span> -->
-					
-			
-					
-					
-<%-- 					<a style="display:inline" href="https://www.google.com/search?q=${item.titulo}"  target="_blank"><img style="display:inline" class="img-responsive" --%>
-<%-- 											src="<c:url value="/resources/icons/g2.png" />" --%>
-<!-- 											alt="delete" width="64" height="64"></a> -->
-<%-- 					<a href="https://www.google.com/search?q=${item.titulo}"  target="_blank"><img class="img-responsive" --%>
-<%-- 											src="<c:url value="/resources/icons/f1.png" />" --%>
-<!-- 											alt="delete" width="64" height="64"></a> -->
-					
-					<a href="#" class="btn btn-info">Compartir en Facebook</a>
-					<p>
+
+
+
+
+						<sec:authorize access="isAuthenticated()">
+							<a class="btn btn-warning" onclick="addToFavs(${item.idItem})">Favorito</a>
+						</sec:authorize>
+						<sec:authorize access="isAnonymous()">
+						<a class="btn btn-warning" onclick="autenthicationRequired('Necesitas Iniciar Sesion para realizar eso!')">Favorito</a>
+<!-- 							<p class="text-muted"> -->
+<!-- 								<small>Necesitas<a href="./login"> Iniciar Sesion </a>para -->
+<!-- 									poder comentar -->
+<!-- 								</small> -->
+<!-- 							</p> -->
+
+						</sec:authorize>
+						<a href="https://www.google.com/search?q=${item.titulo}"
+							class="btn btn-danger" target="_blank">Google</a>
+						<!-- 					<span style="white-space:nowrap;"> -->
+						<%-- 					<a href="./addtofavs?idItem=${item.idItem}" > --%>
+						<!-- 					<img class="img-responsive" -->
+						<%-- 											src="<c:url value="/resources/icons/h2.png" />" --%>
+						<!-- 											alt="delete" width="64" height="64"> -->
+						<!-- 						</a>			 -->
+
+
+						<!-- 					</span> -->
+
+						<!-- 					<span style="white-space:nowrap;"> -->
+						<%-- 					<a href="./addtofavs?idItem=${item.idItem}" > --%>
+						<!-- 					<img class="img-responsive" -->
+						<%-- 											src="<c:url value="/resources/icons/h2.png" />" --%>
+						<!-- 											alt="delete" width="64" height="64"> -->
+						<!-- 						</a>			 -->
+
+
+						<!-- 					</span> -->
+
+
+
+
+						<%-- 					<a style="display:inline" href="https://www.google.com/search?q=${item.titulo}"  target="_blank"><img style="display:inline" class="img-responsive" --%>
+						<%-- 											src="<c:url value="/resources/icons/g2.png" />" --%>
+						<!-- 											alt="delete" width="64" height="64"></a> -->
+						<%-- 					<a href="https://www.google.com/search?q=${item.titulo}"  target="_blank"><img class="img-responsive" --%>
+						<%-- 											src="<c:url value="/resources/icons/f1.png" />" --%>
+						<!-- 											alt="delete" width="64" height="64"></a> -->
+
+						<a href="#" class="btn btn-info">Compartir en Facebook</a>
+						<p>
 					</div>
-					
+
 					<div class="col-sm-8">
 						<ul class="list-group">
 							<li class="list-group-item">Formato:
@@ -169,7 +193,8 @@
 													class="btn btn-primary btn-file"> Browse&hellip; <input
 														type="file" multiple id=fichero name="fichero">
 												</span>
-												</span> <input id="nombreArchivoInput" type="text" class="form-control">
+												</span> <input id="nombreArchivoInput" type="text"
+													class="form-control">
 											</div>
 											<br>
 											<button class="btn btn-default">Cancel</button>
@@ -227,23 +252,23 @@
 									</div>
 								</c:forEach></li>
 						</ul>
-						
-						
-<!-- 						<div class="form-group"> -->
-<!--   <label class="control-label" for="disabledInput">Disabled input</label> -->
-<!--   <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..." disabled=""> -->
-<!-- </div> -->
+
+
+						<!-- 						<div class="form-group"> -->
+						<!--   <label class="control-label" for="disabledInput">Disabled input</label> -->
+						<!--   <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..." disabled=""> -->
+						<!-- </div> -->
 						<div class="bs-component">
 							<div class="modal">
 								<div class="modal-dialog">
 									<div class="modal-content">
 										<div class="modal-header">
-											<h4 class="modal-title"  contenteditable="true" id="tituloC" onFocus=clearField(tituloC)>Titulo
-												de tu comentario ...</h4>
+											<h4 class="modal-title" contenteditable="true" id="tituloC"
+												onFocus=clearField(tituloC)>Titulo de tu comentario ...</h4>
 										</div>
 										<div class="modal-body">
-											<p contenteditable="true" id="comentarioC" onFocus=clearField(comentarioC)>Escribe tu
-												comentario...</p>
+											<p contenteditable="true" id="comentarioC"
+												onFocus=clearField(comentarioC)>Escribe tu comentario...</p>
 										</div>
 										<div class="modal-footer">
 											<sec:authorize access="isAuthenticated()">
@@ -253,8 +278,10 @@
 											<sec:authorize access="isAnonymous()">
 												<button type="button" class="btn btn-primary disabled">Comentar</button>
 												<p class="text-muted">
-												<small>Necesitas<a href="./login"> Iniciar Sesion </a>para poder comentar</small>
-											</p>
+													<small>Necesitas<a href="./login"> Iniciar
+															Sesion </a>para poder comentar
+													</small>
+												</p>
 
 											</sec:authorize>
 
@@ -287,12 +314,12 @@
 								<div class="modal-dialog">
 									<div class="modal-content">
 										<div class="modal-header">
-											<h4 class="modal-title" contenteditable="true" id="tituloE" onFocus=clearField(tituloE)>Titulo
-												del Error</h4>
+											<h4 class="modal-title" contenteditable="true" id="tituloE"
+												onFocus=clearField(tituloE)>Titulo del Error</h4>
 										</div>
 										<div class="modal-body">
-											<p contenteditable="true" id="comentarioE" onFocus=clearField(comentarioE)>Reporte del
-												error ...</p>
+											<p contenteditable="true" id="comentarioE"
+												onFocus=clearField(comentarioE)>Reporte del error ...</p>
 										</div>
 										<div class="modal-footer">
 											<sec:authorize access="isAuthenticated()">
@@ -302,8 +329,10 @@
 											<sec:authorize access="isAnonymous()">
 												<button type="button" class="btn btn-primary disabled">Reportar</button>
 												<p class="text-muted">
-												<small>Necesitas<a href="./login"> Iniciar Sesion </a>para poder reportar</small>
-											</p>
+													<small>Necesitas<a href="./login"> Iniciar
+															Sesion </a>para poder reportar
+													</small>
+												</p>
 											</sec:authorize>
 										</div>
 									</div>
@@ -325,6 +354,68 @@
 		function clearField(field){
 			$(field).empty();
 		}
+		
+		function addToFavs(idItem){					
+		
+			$.ajax({
+				url : "addtofavs",
+				type : "GET",
+				data : {
+					idItem : idItem
+				},
+				dataType : "html",
+				
+				
+				success : function(data) {
+					createAlertSuccess(data, "addToFavsSuccess", "#serverMSG");
+					$("#addToFavsSuccess").fadeOut(4000, function() {
+						$(this).remove();
+					});
+				}
+				
+	
+
+			});
+		
+		}
+		
+		function autenthicationRequired(message){
+			createAlertSuccess(message, "authReq", "#serverMSG");
+			$("#authReq").fadeOut(4000, function() {
+				$(this).remove();
+			});
+			
+		}
+		
+		function createAlertSuccess(data, id, elToAppend) {
+			var $newAlert = $('<div/>', {
+				'class' : "alert alert-dismiss alert-success",
+				'id' : id,
+				html : data
+			}).append($('<button/>', {
+				'type' : "button",
+				'class' : "close",
+				'data-dismiss' : "alert",
+				html : "x"
+			}));
+			$newAlert.appendTo(elToAppend);
+			return;
+		}
+		
+		
+// 		Funciones para modals
+
+		$('#serverMSG').ajaxForm({
+			success : function(data) {
+				createAlertSuccess(data, "autorSuccess", "#serverMsg");
+				$("#autorSuccess").fadeOut(4000, function() {
+					$(this).remove();
+				});
+			}
+
+		});
+		
+		
 		function addComment() {
 			$.ajax({
 				url : "addComment",
