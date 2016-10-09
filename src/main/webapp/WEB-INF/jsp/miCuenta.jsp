@@ -12,6 +12,7 @@
 <title>Mi Cuenta</title>
 </head>
 <body>
+<div id="removable">
 	<div class="container">
 
 		<h1>Mi Cuenta</h1>
@@ -93,6 +94,6 @@
 
 		}
 	</script>
-
+</div>
 </body>
 </html>

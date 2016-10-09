@@ -479,7 +479,6 @@
 
 		$('#formAutor').ajaxForm({
 			success : function(data) {
-				console.log(data);
 				createAlertSuccess(data, "autorSuccess", "#serverMsg");
 				$('#btnResetAutor').trigger('click');
 				$("#autorSuccess").fadeOut(4000, function() {

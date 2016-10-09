@@ -17,6 +17,8 @@ import com.socialmetadata.model.Usuario;
 public class LoginController {
 	 @RequestMapping(value = { "/", "/home" })  
 	 public String getUserDefault() {  
+		 
+		 System.out.println(SecurityContextHolder.getContext().getAuthentication());
 	  return "home";  
 	 }  
 	  
@@ -31,6 +33,10 @@ public class LoginController {
 	  } else if (logout != null) {  
 	   message = "Logout successful !";  
 	  }  
+	  
+	  
+//	  System.out.println("PASO POR ACA");
+	  System.out.println(message);
 	  return new ModelAndView("login", "message", message);  
 	 }  
 	  

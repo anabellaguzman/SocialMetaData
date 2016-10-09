@@ -1,5 +1,6 @@
 package com.socialmetadata.service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -7,18 +8,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.socialmetadata.dao.RolDAO;
 import com.socialmetadata.dao.UsuarioDAO;
 import com.socialmetadata.model.Autor;
 import com.socialmetadata.model.Item;
 import com.socialmetadata.model.Rol;
 import com.socialmetadata.model.Usuario;
 import com.socialmetadata.model.ValorAtributoItem;
+import com.socialmetadata.utilities.PasswordEncoderGenerator;
 
 @Service
 public class UsuarioService {
 
 	@Autowired
 	private UsuarioDAO usuarioDAO;
+	
+	@Autowired
+	private RolDAO rolDAO;
 
 	@Transactional
 	public Usuario getUsuario(int idUsuario) {
@@ -70,7 +76,22 @@ public class UsuarioService {
 	@Transactional
 	public void add(Usuario usuario) {
 		
+		Rol rol = rolDAO.getRol(1);
+		Set<Rol> roles = new HashSet<Rol>();
+		roles.add(rol);
+		
+//		String password = usuario.getPassword();	
+//		password = PasswordEncoderGenerator.encodePassword(password);
+//		usuario.setPassword(password);	
+		usuario.setRoles(roles);
+		
+		
 		usuarioDAO.add(usuario);
+		
+		
+		
+		
+		
 		
 	}
 

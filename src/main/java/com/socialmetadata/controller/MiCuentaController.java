@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.socialmetadata.model.Item;
@@ -30,6 +31,10 @@ public class MiCuentaController {
 	@Transactional
 	@RequestMapping(value = "/micuenta", method = RequestMethod.GET)
 	public ModelAndView setupView() {
+		
+		System.out.println(SecurityContextHolder.getContext().getAuthentication());
+		
+		
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
 		String name = auth.getName(); // get logged in username		
@@ -47,11 +52,13 @@ public class MiCuentaController {
 
 	@Transactional
 	@RequestMapping(value = "/addtofavs", method = RequestMethod.GET)
+	@ResponseBody
 	public String addToFavorites(@RequestParam int idItem) {
 
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
 		String name = auth.getName(); // get logged in username
+		System.out.println(name);
 		Item item = itemService.getItem(idItem);
 		Usuario usuario = usuarioService.getByUsername(name);
 		usuario.addItemsFavoritos(item);

@@ -114,7 +114,7 @@ public class AddItemController {
 			@RequestParam int idIdioma, @RequestParam String descripcion,
 			@RequestParam List<String> idOwnAtr, @RequestParam List<String> valOwnAtr
 			) {
-		System.out.println("HOLA");
+		
 		Idioma idioma = idiomaService.getIdioma(idIdioma);
 		TipoItem tipoItem = tipoItemService.getTipoItem(idTipoItem);
 		Item item = new Item();		
