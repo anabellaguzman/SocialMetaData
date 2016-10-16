@@ -1,5 +1,6 @@
 package com.socialmetadata.controller;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,12 +41,7 @@ public class RegisterUserController {
 	@Autowired
 	
 	private AuthenticationManager authenticationManager;
-	
-	
-	
-	
-	
-	
+
 
 	@RequestMapping(value = "/registerUser", method = RequestMethod.GET)
 	public String setupForm(){
@@ -61,52 +57,18 @@ public class RegisterUserController {
 		
 		
 		System.out.println("entra a registerUser.do");
-//		Usuario usuario = new Usuario(username, nombre, apellido, email, password);
 		
 		password = PasswordEncoderGenerator.encodePassword(password);
 		
 		Usuario usuario = new Usuario(username, nombre, apellido, username, password);
-
+		
+		
+		Rol rol = rolService.getRol(1);
+		Set<Rol> roles = new HashSet<Rol>();
+		roles.add(rol);	
+		usuario.setRoles(roles);
 		
 		usuarioService.add(usuario);
-		
-	
-//		usuario = usuarioService.getByUsername(username);
-		
-		
-//		UserDetails auth = loginService.loadUserByUsername(username);
-		
-//		UserDetails ud = loginService.loadUserByUsername(username);
-		
-
-//		System.out.println(ud.getAuthorities());
-//		System.out.println(ud.getPassword());
-//		System.out.println(ud.getUsername());
-		
-		
-		
-		
-//		Authentication request = new UsernamePasswordAuthenticationToken
-//				(ud.getUsername(), ud.getPassword(), ud.getAuthorities());
-//		
-//		authenticationManager.authenticate(request);
-//		
-//		 Authentication request = new UsernamePasswordAuthenticationToken(principal, credentials, authorities)
-//		Authentication  result = authenticationManager.authenticate(request);
-//		 
-//		 Authentication request = new UsernamePasswordAuthen
-//		    
-//		  
-//		    
-//		    
-//		    SecurityContextHolder.getContext().setAuthentication( result );
-////		
-//		System.out.println(SecurityContextHolder.getContext().getAuthentication());
-		
-		
-		
-		
-//		System.out.println(nombre);
 		
 		return "usuario registrado exitosamente";
 	}

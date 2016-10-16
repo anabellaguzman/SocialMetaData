@@ -76,14 +76,14 @@ public class UsuarioService {
 	@Transactional
 	public void add(Usuario usuario) {
 		
-		Rol rol = rolDAO.getRol(1);
-		Set<Rol> roles = new HashSet<Rol>();
-		roles.add(rol);
-		
-//		String password = usuario.getPassword();	
-//		password = PasswordEncoderGenerator.encodePassword(password);
-//		usuario.setPassword(password);	
-		usuario.setRoles(roles);
+//		Rol rol = rolDAO.getRol(1);
+//		Set<Rol> roles = new HashSet<Rol>();
+//		roles.add(rol);
+//		
+////		String password = usuario.getPassword();	
+////		password = PasswordEncoderGenerator.encodePassword(password);
+////		usuario.setPassword(password);	
+//		usuario.setRoles(roles);
 		
 		
 		usuarioDAO.add(usuario);

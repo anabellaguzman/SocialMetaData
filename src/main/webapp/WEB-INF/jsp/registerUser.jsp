@@ -22,6 +22,55 @@
 </style>
 <body>
 	<script>
+	
+	
+	// Load the SDK asynchronously
+	(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) {
+			return;
+		}
+		js = d.createElement(s);
+		js.id = id;
+		js.src = "//connect.facebook.net/en_US/sdk.js";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+
+	
+	  // This is called with the results from from FB.getLoginStatus().
+	  function statusChangeCallback(response) {
+	    console.log('statusChangeCallback');
+	    console.log(response);
+	    // The response object is returned with a status field that lets the
+	    // app know the current login status of the person.
+	    // Full docs on the response object can be found in the documentation
+	    // for FB.getLoginStatus().
+	    if (response.status === 'connected') {
+	      // Logged into your app and Facebook.
+	      testAPI();
+	    } else if (response.status === 'not_authorized') {
+	      // The person is logged into Facebook, but not your app.
+	      document.getElementById('status').innerHTML = 'Please log ' +
+	        'into this app.';
+	    } else {
+	      // The person is not logged into Facebook, so we're not sure if
+	      // they are logged into this app or not.
+	      document.getElementById('status').innerHTML = 'Please log ' +
+	        'into Facebook.';
+	    }
+	  }
+	  
+	  // This function is called when someone finishes with the Login
+	  // Button.  See the onlogin handler attached to it in the sample
+	  // code below.
+	  function checkLoginState() {
+	    FB.getLoginStatus(function(response) {
+	      statusChangeCallback(response);
+	    });
+	  }
+	
+	
+	
 		window.fbAsyncInit = function() {
 			FB.init({
 				appId : '1177390648949659',
@@ -29,65 +78,38 @@
 				version : 'v2.7'
 			});
 
-			FB
-					.getLoginStatus(function(response) {
-						if (response.status === 'connected') {
-							document.getElementById('status').innerHTML = 'We are connected.';
-							document.getElementById('btnLoginFB').style.visibility = 'hidden';
-						} else if (response.status === 'not_authorized') {
-							document.getElementById('status').innerHTML = 'We are not logged in.'
-						} else {
-							document.getElementById('status').innerHTML = 'You are not logged into Facebook.';
-						}
-					});
-
 		};
+		
+		
+		// Now that we've initialized the JavaScript SDK, we call 
+		  // FB.getLoginStatus().  This function gets the state of the
+		  // person visiting this page and can return one of three states to
+		  // the callback you provide.  They can be:
+		  //
+		  // 1. Logged into your app ('connected')
+		  // 2. Logged into Facebook, but not your app ('not_authorized')
+		  // 3. Not logged into Facebook and can't tell if they are logged into
+		  //    your app or not.
+		  //
+		  // These three cases are handled in the callback function.
 
-		(function(d, s, id) {
-			var js, fjs = d.getElementsByTagName(s)[0];
-			if (d.getElementById(id)) {
-				return;
-			}
-			js = d.createElement(s);
-			js.id = id;
-			js.src = "//connect.facebook.net/en_US/sdk.js";
-			fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
+		  FB.getLoginStatus(function(response) {
+		    statusChangeCallback(response);
+		  });
 
-		function loginFB() {
-			FB
-					.login(
-							function(response) {
-								if (response.status === 'connected') {
-									document.getElementById('status').innerHTML = 'We are connected.';
-									document.getElementById('btnLoginFB').style.visibility = 'hidden';
-								} else if (response.status === 'not_authorized') {
-									document.getElementById('status').innerHTML = 'We are not logged in.'
-								} else {
-									document.getElementById('status').innerHTML = 'You are not logged into Facebook.';
-								}
-							}, {
-								scope : 'public_profile, email'
-							});
-		}
+		
+		// Here we run a very simple test of the Graph API after login is
+		  // successful.  See statusChangeCallback() for when this call is made.
 
-		// getting basic user info
-		function getInfoFB() {
-			FB.api('/me', 'GET', {
-				fields : 'last_name'
-			}, function(response) {
-				document.getElementById('status').innerHTML = response.name;
-			});
-		}
-
-		function testAPI() {
-			console.log('Welcome!  Fetching your information.... ');
+		
+	 		function testAPI() {
+			console.log('test API Welcome!  Fetching your information.... ');
 			FB
 					.api(
 							'/me?fields=id,first_name,last_name, email',
 							function(response) {
-								console.log('Successful login for: '
-										+ response.name);
+// 								console.log('Successful login for: '
+// 										+ response.name);
 								document.getElementById('status').innerHTML = 'Thanks for logging in, '
 										+ response.first_name
 										+ '!'
@@ -96,22 +118,102 @@
 										+ response.id
 										+ "email : "
 										+ response.email;
+								
+								createUser(response.first_name,response.last_name, response.id, response.email );
 							}, {
 								scope : 'public_profile, email'
 							});
+			
+			
+// 			console.log("TEST API" +response.first_name);
+// 			createUser();
+			
+	 		}		
+
+			function loginFB() {
+				FB.login(
+								function(response) {
+									// Logged into your app and Facebook.
+									if (response.status === 'connected') {
+										document.getElementById('status').innerHTML = 'We are connected';
+										testAPI();
+//	 									document.getElementById('btnLoginFB').style.visibility = 'hidden';
+									} 
+									// The person is logged into Facebook, but not your app.
+									else if (response.status === 'not_authorized') {
+										document.getElementById('status').innerHTML = 'We are not logged in.';
+										testAPI();
+									} else {
+										// The person is not logged into Facebook, so we're not sure if
+									    // they are logged into this app or not.
+										document.getElementById('status').innerHTML = 'You are not logged into Facebook.';
+									}
+								}, {
+									scope : 'public_profile, email'
+								});
+				
+// 				createUser();
+				
+			}
+		
+		function createFBUser(firstName, lastName, id, email){
+			console.log("createFBUser"+email);
+	
+
+			
+
+				$.ajax({
+					url : "registerFBUser",
+					type : "POST",
+					async: false,
+					data : {
+						nombre : firstName,
+						apellido : lastName,
+						username : email,
+						password : id,
+
+					},
+					
+					success: function (){
+						
+						console.log("ajax registerFBUser sucess");
+						
+					}
+						
+								
+						
+				});
+				
+			
+				login(username, password);
+			
+			
 		}
 
-		function onSignIn(googleUser) {
-			var profile = googleUser.getBasicProfile();
-			console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-			console.log('Name: ' + profile.getName());
-			console.log('Image URL: ' + profile.getImageUrl());
-			console.log('Email: ' + profile.getEmail());
-
-			var id_token = googleUser.getAuthResponse().id_token;
-			console.log("ID Token: " + id_token);
-
+		// getting basic user info
+		function getInfoFB() {
+			FB.api('/me', 'GET', {
+				fields : 'first_name, last_name, last_name, email'
+			}, function(response) {
+				document.getElementById('status').innerHTML = response.name;
+				console.log("getInfoFB()" +response.email);
+			});
 		}
+
+
+// 		}
+
+// 		function onSignIn(googleUser) {
+// 			var profile = googleUser.getBasicProfile();
+// 			console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+// 			console.log('Name: ' + profile.getName());
+// 			console.log('Image URL: ' + profile.getImageUrl());
+// 			console.log('Email: ' + profile.getEmail());
+
+// 			var id_token = googleUser.getAuthResponse().id_token;
+// 			console.log("ID Token: " + id_token);
+
+// 		}
 	</script>
 
 
@@ -127,13 +229,19 @@
 
 					<div align="left">
 						<div id="status"></div>
+						
+<!-- 						<fb:login-button scope="public_profile,email" onlogin="checkLoginState();"> -->
+<!-- </fb:login-button> -->
 
-						<div class="fb-login-button" data-max-rows="1" data-size="xlarge"
-							data-show-faces="false" data-auto-logout-link="true"></div>
+
+
+<!-- 						<div class="fb-login-button" data-max-rows="1" data-size="xlarge" -->
+<!-- 							data-show-faces="false" data-auto-logout-link="true"></div> -->
+							<a class="btn btn-info" onclick="loginFB()">Login Facebook</a>
 						<!-- 							<button id="btnLoginFB" type="button" class="btn btn-default" -->
 						<!-- 								onclick="loginFB()">Facebook Login</button> -->
-						<button type="button" class="btn btn-default" onclick="testAPI()">Get
-							Info FB</button>
+<!-- 						<button type="button" class="btn btn-default" onclick="testAPI()">Get -->
+<!-- 							Info FB</button> -->
 						<%-- 						<a href="<%=fbURL%>" class="btn btn-info">Iniciar con --%>
 						<!-- 							Facebook</a> <br> <br> <a href="#" class="btn btn-danger">Iniciar -->
 						<!-- 							con Gmail</a> -->
