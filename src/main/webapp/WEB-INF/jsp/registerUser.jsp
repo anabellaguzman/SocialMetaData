@@ -21,9 +21,7 @@
 }
 </style>
 <body>
-	<script>
-	
-	
+	<script>	
 	// Load the SDK asynchronously
 	(function(d, s, id) {
 		var js, fjs = d.getElementsByTagName(s)[0];
@@ -68,9 +66,7 @@
 	      statusChangeCallback(response);
 	    });
 	  }
-	
-	
-	
+
 		window.fbAsyncInit = function() {
 			FB.init({
 				appId : '1177390648949659',
@@ -95,21 +91,16 @@
 
 		  FB.getLoginStatus(function(response) {
 		    statusChangeCallback(response);
-		  });
-
-		
+		  });		
 		// Here we run a very simple test of the Graph API after login is
 		  // successful.  See statusChangeCallback() for when this call is made.
-
 		
-	 		function testAPI() {
-			console.log('test API Welcome!  Fetching your information.... ');
+	 		function loginFBUserAPI() {
+			console.log('loginFBUserAPI() Welcome!  Fetching your information.... ');
 			FB
 					.api(
 							'/me?fields=id,first_name,last_name, email',
 							function(response) {
-// 								console.log('Successful login for: '
-// 										+ response.name);
 								document.getElementById('status').innerHTML = 'Thanks for logging in, '
 										+ response.first_name
 										+ '!'
@@ -119,14 +110,11 @@
 										+ "email : "
 										+ response.email;
 								
-								createUser(response.first_name,response.last_name, response.id, response.email );
+								loginFBUserinApp(response.first_name,response.last_name, response.id, response.email );
 							}, {
 								scope : 'public_profile, email'
 							});
-			
-			
-// 			console.log("TEST API" +response.first_name);
-// 			createUser();
+
 			
 	 		}		
 
@@ -136,13 +124,13 @@
 									// Logged into your app and Facebook.
 									if (response.status === 'connected') {
 										document.getElementById('status').innerHTML = 'We are connected';
-										testAPI();
+										loginFBUserAPI();
 //	 									document.getElementById('btnLoginFB').style.visibility = 'hidden';
 									} 
 									// The person is logged into Facebook, but not your app.
 									else if (response.status === 'not_authorized') {
 										document.getElementById('status').innerHTML = 'We are not logged in.';
-										testAPI();
+										loginFBUserAPI();
 									} else {
 										// The person is not logged into Facebook, so we're not sure if
 									    // they are logged into this app or not.
@@ -151,19 +139,13 @@
 								}, {
 									scope : 'public_profile, email'
 								});
-				
-// 				createUser();
+
 				
 			}
-		
-		function createFBUser(firstName, lastName, id, email){
-			console.log("createFBUser"+email);
 	
-
-			
-
+		function loginFBUserinApp(firstName, lastName, id, email){
 				$.ajax({
-					url : "registerFBUser",
+					url : "loginFBUser.do",
 					type : "POST",
 					async: false,
 					data : {
@@ -171,37 +153,12 @@
 						apellido : lastName,
 						username : email,
 						password : id,
-
-					},
+					},					
+					success: function (){						
+						login(email, id);}		
+				});	
 					
-					success: function (){
-						
-						console.log("ajax registerFBUser sucess");
-						
-					}
-						
-								
-						
-				});
-				
-			
-				login(username, password);
-			
-			
 		}
-
-		// getting basic user info
-		function getInfoFB() {
-			FB.api('/me', 'GET', {
-				fields : 'first_name, last_name, last_name, email'
-			}, function(response) {
-				document.getElementById('status').innerHTML = response.name;
-				console.log("getInfoFB()" +response.email);
-			});
-		}
-
-
-// 		}
 
 // 		function onSignIn(googleUser) {
 // 			var profile = googleUser.getBasicProfile();
@@ -229,19 +186,7 @@
 
 					<div align="left">
 						<div id="status"></div>
-						
-<!-- 						<fb:login-button scope="public_profile,email" onlogin="checkLoginState();"> -->
-<!-- </fb:login-button> -->
-
-
-
-<!-- 						<div class="fb-login-button" data-max-rows="1" data-size="xlarge" -->
-<!-- 							data-show-faces="false" data-auto-logout-link="true"></div> -->
 							<a class="btn btn-info" onclick="loginFB()">Login Facebook</a>
-						<!-- 							<button id="btnLoginFB" type="button" class="btn btn-default" -->
-						<!-- 								onclick="loginFB()">Facebook Login</button> -->
-<!-- 						<button type="button" class="btn btn-default" onclick="testAPI()">Get -->
-<!-- 							Info FB</button> -->
 						<%-- 						<a href="<%=fbURL%>" class="btn btn-info">Iniciar con --%>
 						<!-- 							Facebook</a> <br> <br> <a href="#" class="btn btn-danger">Iniciar -->
 						<!-- 							con Gmail</a> -->
@@ -317,15 +262,11 @@
 
 	<script type="text/javascript">
 		function registerUser() {
-
 			console.log("ENTRO");
-
 			var nombre = $("#nombre").val();
 			var apellido = $("#apellido").val();
 			var username = $("#username").val();
 			var password = $("#password").val();
-
-		
 
 			$.ajax({
 				url : "registerUser.do",
@@ -337,48 +278,31 @@
 					username : username,
 					password : password,
 
-				},
-				
-				success: function (){
-					
-					console.log("ajax registerUser sucess");
-					
+				},				
+				success: function (){				
+					console.log("ajax registerUser sucess");					
 				}
-					
-							
-					
+			
 			});
 			
 		
 			login(username, password);
 		}
 		
-		function login(username, password){
-			
-			console.log("login()"+username+password);
-			
+		function login(username, password){				
 			$.ajax({
 				url : "http://localhost:8080/SocialMetadata/j_spring_security_check?",
 				type : "POST",
 				data : {
-
 					username : username,
 					password : password,
-
-				},
-					
-					success : function(data, textStatus) {
-
-						
-						console.log("user is logged in");
-	
+				},					
+					success : function(data, textStatus) {						
 						location.href = document.URL.substr(0, document.URL
 								.lastIndexOf('/'))
 								+ "/home";
-
 					}
-			});
-			
+			});			
 		}
 		
 		

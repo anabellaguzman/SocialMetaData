@@ -73,5 +73,64 @@ public class RegisterUserController {
 		return "usuario registrado exitosamente";
 	}
 	
+	
+	private boolean checkIsUser(String username){
+		
+		if (usuarioService.getByUsername(username)==null){
+			return false;
+		}
+		else{return true;}
+		
+		
+	}
+	
+		@Transactional
+		@RequestMapping(value="/loginFBUser.do", method=RequestMethod.POST)
+		@ResponseBody
+		public String loginFBUser(@RequestParam String nombre, @RequestParam String apellido,
+				 @RequestParam String username, @RequestParam String password){
+			
+			if(checkIsUser(username)==false){
+				
+				System.out.println("no existe el username");
+				registerFBUser(nombre, apellido, username, password);
+			};
+			
+//			Rol rolUser = rolService.getRol(1);
+//			Rol rolFB = rolService.getRol(1);
+//			Set<Rol> roles = new HashSet<Rol>();
+//			roles.add(rolUser);	
+//			roles.add(rolFB);
+//			usuario.setRoles(roles);
+//			
+//			usuarioService.add(usuario);
+//			
+			return "usuario registrado exitosamente";
+		}
+	
+	
+	@Transactional
+	@RequestMapping(value="/registerFBUser.do", method=RequestMethod.POST)
+	@ResponseBody
+	public String registerFBUser(@RequestParam String nombre, @RequestParam String apellido,
+			 @RequestParam String username, @RequestParam String password){
+	
+		password = PasswordEncoderGenerator.encodePassword(password);
+		
+		Usuario usuario = new Usuario(username, nombre, apellido, username, password);
+		
+		
+		Rol rolUser = rolService.getRol(1);
+		Rol rolFB = rolService.getRol(3);
+		Set<Rol> roles = new HashSet<Rol>();
+		roles.add(rolUser);	
+		roles.add(rolFB);
+		usuario.setRoles(roles);
+		
+		usuarioService.add(usuario);
+		
+		return "usuario FB registrado exitosamente";
+	}
+	
 
 }
