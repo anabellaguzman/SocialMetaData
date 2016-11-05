@@ -35,14 +35,30 @@ public class UsuarioService {
 	public Usuario getByUsername(String username) {
 	
 		List<Usuario> usuarioL = usuarioDAO.getByUsername(username);
-	
-		Usuario u = usuarioL.get(0);
-		for (Rol r : u.getRoles()){
-//			System.out.println("Rol: "+ r.getRol());
-			r.getRol();
+		
+		
+		
+//		Usuario u = usuarioL.get(0);
+		
+		if(usuarioL.size()==0){
+			
+			System.out.println("size =0 usuarioService getbyusername");
+			
+			return null;
 		}
-	
-		return u;
+		
+		else{
+			Usuario u = usuarioL.get(0);
+			for (Rol r : u.getRoles()){
+//				System.out.println("Rol: "+ r.getRol());
+				r.getRol();
+			}
+			
+			return u;
+		}
+
+//		Usuario u = new Usuario();
+//		return u;
 
 	}
 	
@@ -76,14 +92,14 @@ public class UsuarioService {
 	@Transactional
 	public void add(Usuario usuario) {
 		
-		Rol rol = rolDAO.getRol(1);
-		Set<Rol> roles = new HashSet<Rol>();
-		roles.add(rol);
-		
-//		String password = usuario.getPassword();	
-//		password = PasswordEncoderGenerator.encodePassword(password);
-//		usuario.setPassword(password);	
-		usuario.setRoles(roles);
+//		Rol rol = rolDAO.getRol(1);
+//		Set<Rol> roles = new HashSet<Rol>();
+//		roles.add(rol);
+//		
+////		String password = usuario.getPassword();	
+////		password = PasswordEncoderGenerator.encodePassword(password);
+////		usuario.setPassword(password);	
+//		usuario.setRoles(roles);
 		
 		
 		usuarioDAO.add(usuario);
