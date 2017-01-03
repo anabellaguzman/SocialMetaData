@@ -68,47 +68,22 @@
 							<a class="btn btn-warning" onclick="addToFavs(${item.idItem})">Favorito</a>
 						</sec:authorize>
 						<sec:authorize access="isAnonymous()">
-						<a class="btn btn-warning" onclick="autenthicationRequired('Necesitas Iniciar Sesion para realizar eso!')">Favorito</a>
-<!-- 							<p class="text-muted"> -->
-<!-- 								<small>Necesitas<a href="./login"> Iniciar Sesion </a>para -->
-<!-- 									poder comentar -->
-<!-- 								</small> -->
-<!-- 							</p> -->
+							<a class="btn btn-warning"
+								onclick="autenthicationRequired('Necesitas Iniciar Sesion para realizar eso!')">Favorito</a>
+							<!-- 							<p class="text-muted"> -->
+							<!-- 								<small>Necesitas<a href="./login"> Iniciar Sesion </a>para -->
+							<!-- 									poder comentar -->
+							<!-- 								</small> -->
+							<!-- 							</p> -->
 
 						</sec:authorize>
+
+
 						<a href="https://www.google.com/search?q=${item.titulo}"
 							class="btn btn-danger" target="_blank">Google</a>
-						<!-- 					<span style="white-space:nowrap;"> -->
-						<%-- 					<a href="./addtofavs?idItem=${item.idItem}" > --%>
-						<!-- 					<img class="img-responsive" -->
-						<%-- 											src="<c:url value="/resources/icons/h2.png" />" --%>
-						<!-- 											alt="delete" width="64" height="64"> -->
-						<!-- 						</a>			 -->
-
-
-						<!-- 					</span> -->
-
-						<!-- 					<span style="white-space:nowrap;"> -->
-						<%-- 					<a href="./addtofavs?idItem=${item.idItem}" > --%>
-						<!-- 					<img class="img-responsive" -->
-						<%-- 											src="<c:url value="/resources/icons/h2.png" />" --%>
-						<!-- 											alt="delete" width="64" height="64"> -->
-						<!-- 						</a>			 -->
-
-
-						<!-- 					</span> -->
-
-
-
-
-						<%-- 					<a style="display:inline" href="https://www.google.com/search?q=${item.titulo}"  target="_blank"><img style="display:inline" class="img-responsive" --%>
-						<%-- 											src="<c:url value="/resources/icons/g2.png" />" --%>
-						<!-- 											alt="delete" width="64" height="64"></a> -->
-						<%-- 					<a href="https://www.google.com/search?q=${item.titulo}"  target="_blank"><img class="img-responsive" --%>
-						<%-- 											src="<c:url value="/resources/icons/f1.png" />" --%>
-						<!-- 											alt="delete" width="64" height="64"></a> -->
-
-						<a href="#" class="btn btn-info">Compartir en Facebook</a>
+						<sec:authorize ifAnyGranted="ROLE_FB">
+							<a href="#" class="btn btn-info">Compartir en Facebook</a>
+						</sec:authorize>
 						<p>
 					</div>
 
