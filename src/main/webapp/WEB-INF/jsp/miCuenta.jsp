@@ -43,9 +43,9 @@
 								<c:forEach items="${items}" var="item">
 									<tr class="active">
 										<%-- 									<td id="${item.idItem}" style="display:none;">${item.idItem}</td> --%>
-										<td onclick="doSearchItem('${item.idItem}')">${item.titulo}
+										<td id= "fav${item.idItem}" onclick="doSearchItem('${item.idItem}')">${item.titulo}
 										</td>
-										<td align="center" onclick="delteFavorito('${item.idItem}')"><img
+										<td id = "trash${item.idItem}"align="center" onclick="delteFavorito('${item.idItem}')"><img
 											class="img-responsive"
 											src="<c:url value="/resources/icons/trash.png" />"
 											alt="delete" width="24" height="24"></td>
@@ -86,13 +86,25 @@
 					// 					$("#subViewDiv").html(response);
 					console.log("SUCESSFULLY REMOVED");
 				},
-				error : function(xhr, textStatus, errorThrown) {
-					alert("Error: " + xhr.status + " " + xhr.statusText);
-				}
+// 				error : function(xhr, textStatus, errorThrown) {
+// 					alert("Error: " + xhr.status + " " + xhr.statusText);
+// 				}
 
 			});
+			
+			console.log("TESTTTT");
+			removeItemList(id);
 
 		}
+		
+		function removeItemList(id){
+			$('#fav'+id).remove();
+			$('#trash'+id).remove();
+			
+		}
+		
+		
+
 	</script>
 </div>
 </body>
