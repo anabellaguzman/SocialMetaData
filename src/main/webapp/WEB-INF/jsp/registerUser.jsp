@@ -45,7 +45,7 @@
 									<div class="form-group">
 										<label for="inputApellido" class="col-lg-2 control-label">Apellido</label>
 										<div class="col-lg-10">
-											<input type="text" class="form-control" id="apellido"
+											<input type="text" class="form-control" id="apellido" 
 												name="apellido" placeholder="Apellido">
 										</div>
 									</div>
@@ -73,9 +73,10 @@
 										</div>
 									</div>
 									<div class="form-group">
+									<p align="center" class="text-danger" id=checkMsg></p>
 										<div class="col-lg-10 col-lg-offset-2">
 											<button type="button" class="btn btn-primary"
- 									onclick="registerUser()">Registrarme</button>
+ 									onclick="controllData()">Registrarme</button>
 										</div>
 									</div>
 							</fieldset>
@@ -89,8 +90,38 @@
 	</div>
 
 	<script type="text/javascript">
+	
+		function controllData(){
+			
+			
+			
+			
+			if ($("#nombre").val()===""||$("#apellido").val()===""||$("#username").val()===""){
+					
+				
+				checkMsg="Debe completar todos los campos";
+				$( "#checkMsg").text(checkMsg);
+			}
+			else{if($("#password").val()!=$("#passwordConfirm").val()){
+				
+				checkMsg="Las contraseñas no coinciden";
+				 $( "#checkMsg").text(checkMsg);
+				
+				}
+				else{
+					registerUser();
+				}
+					
+			
+			}
+			
+			
+			
+			
+			
+		}
 		function registerUser() {
-			console.log("ENTRO");
+			console.log("ENTRA A registerUser");
 			var nombre = $("#nombre").val();
 			var apellido = $("#apellido").val();
 			var username = $("#username").val();

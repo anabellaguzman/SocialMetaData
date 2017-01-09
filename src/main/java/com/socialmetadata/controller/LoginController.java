@@ -29,9 +29,9 @@ public class LoginController {
 	  
 	  String message = "";  
 	  if (error != null) {  
-	   message = "Incorrect username or password !";  
+	   message = "Usuario o contraseña incorrectos!";  
 	  } else if (logout != null) {  
-	   message = "Logout successful !";  
+	   message = "";  //logout successful
 	  }  
 	  
 	  
