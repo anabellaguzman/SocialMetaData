@@ -51,6 +51,7 @@ public class SearchItemController {
 	public void advancedSearchItem(@RequestParam String  tituloItem, @RequestParam String year){
 		
 		System.out.println("/advancedSearch.do");
+		System.out.println("titulo:"+tituloItem);
 		itemService.advancedSearch(tituloItem, Integer.valueOf(year));
 		System.out.println("titulo:"+tituloItem);
 		

@@ -48,14 +48,34 @@
 
 				<input type="hidden" id="idItem" value="${item.idItem}" />
 				<h1>${item.titulo}</h1>
-				<div class="row">
-					<div class="col-sm-4">
-						<img class="img-responsive"
-							src="<c:url value="/resources/images/${item.imagen}" />"
-							alt="some_text" width="256" height="180">
-						<p>
-					</div>
 
+				<div class="row">
+
+					<div class="col-sm-4">
+						<p>
+							<img id=portada class="img-responsive"
+								src="<c:url value="/resources/images/${item.imagen}" />"
+								alt="some_text" width="256" height="180">
+						<p class=small>
+						<sec:authorize access="isAuthenticated()">
+							<a class="btn btn-primary" data-toggle="modal"
+								data-target="#modalActualizarPortada">Actualizar Portada</a>
+						</sec:authorize>
+						
+						<sec:authorize access="isAnonymous()">
+							<button type="button" class="btn btn-primary" id="msg"
+								onclick="showMsg()">Actualizar Portada</button>
+							<p>
+							<div id="loginMsg" class="alert alert-dismissible alert-danger"
+								style="display: none">
+								<div class="bs-component">
+									<button type="button" class="close" data-dismiss="alert">×</button>
+									<strong>Oh! Necesitas</strong> <a href="./login"
+										class="alert-link">Iniciar Sesion</a> para hacer eso.
+								</div>
+							</div>
+						</sec:authorize>
+					</div>
 
 
 
@@ -70,11 +90,6 @@
 						<sec:authorize access="isAnonymous()">
 							<a class="btn btn-warning"
 								onclick="autenthicationRequired('Necesitas Iniciar Sesion para realizar eso!')">Favorito</a>
-							<!-- 							<p class="text-muted"> -->
-							<!-- 								<small>Necesitas<a href="./login"> Iniciar Sesion </a>para -->
-							<!-- 									poder comentar -->
-							<!-- 								</small> -->
-							<!-- 							</p> -->
 
 						</sec:authorize>
 
@@ -157,10 +172,10 @@
 
 											<div class="form-group">
 												<div class="col-lg-10">
-													<!-- 												<input type="text" class="form-control" id="titulo" -->
-													<!-- 													name="titulo"></input> -->
-													<input type="hidden" id="idItem" name="idItem"
-														value="${item.idItem}">
+<!-- 													<input type="text" class="form-control" id="titulo" -->
+<!-- 														name="titulo"></input>  -->
+														<input type="hidden" id="idItem"
+														name="idItem" value="${item.idItem}">
 												</div>
 											</div>
 											<div class="input-group">
@@ -173,7 +188,6 @@
 											</div>
 											<br>
 											<button class="btn btn-default">Cancel</button>
-											<!-- 										<button type="Submit" class="btn btn-primary">Subir</button> -->
 
 
 											<sec:authorize access="isAuthenticated()">
@@ -316,10 +330,79 @@
 							<div id="source-button" class="btn btn-primary btn-xs"
 								style="display: none;">&lt; &gt;</div>
 						</div>
+						
+
+
+		
 					</div>
 				</div>
 			</div>
 		</div>
+		
+		
+		
+										<!-- Modal Actualizar Portada -->
+		<div class="modal fade" id="modalActualizarPortada" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close" id="btnCloseModal">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">Actualizar Portada</h4>
+					</div>
+					<div class="modal-body">
+
+					<form id=formFilePortada class="form-horizontal" method="post"
+						action="addPortrait" enctype="multipart/form-data">
+
+						<div class="form-group">
+							<div class="col-lg-10">
+								<!-- 												<input type="text" class="form-control" id="titulo" -->
+								<!-- 													name="titulo"></input> -->
+								<input type="hidden" id="idItem" name="idItem"
+									value="${item.idItem}">
+							</div>
+						</div>
+						<div class="input-group">
+							<span class="input-group-btn"> <span
+								class="btn btn-primary btn-file"> Browse&hellip; <input
+									type="file" multiple id=portrait name="portrait">
+							</span>
+							</span> <input id="PortraitInput" type="text" class="form-control">
+						</div>
+						<br>
+<!-- 						<button class="btn btn-default">Cancel</button> -->
+						<!-- 										<button type="Submit" class="btn btn-primary">Subir</button> -->
+
+
+						<sec:authorize access="isAuthenticated()">
+							<button type="Submit" class="btn btn-primary">Subir</button>
+							<p>
+							<div id=portraitUploadSuccess
+								class="alert alert-dismissible alert-success"
+								style="display: none">
+
+								<button type="button" class="close" data-dismiss="alert">×</button>
+								La portada ha sido actualizada exitosamente.
+
+							</div>
+
+						</sec:authorize>
+
+					</form>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		
 	</div>
 
 
@@ -357,7 +440,7 @@
 		function autenthicationRequired(message){
 			createAlertSuccess(message, "authReq", "#serverMSG");
 			$("#authReq").fadeOut(4000, function() {
-				$(this).remove();
+				$(this).hide();
 			});
 			
 		}
@@ -384,7 +467,7 @@
 			success : function(data) {
 				createAlertSuccess(data, "autorSuccess", "#serverMsg");
 				$("#autorSuccess").fadeOut(4000, function() {
-					$(this).remove();
+					$(this).hide();
 				});
 			}
 
@@ -466,6 +549,49 @@
 
 			});
 		});
+		
+		
+		$(document).ready(function(){
+			// bind 'myForm' and provide a simple callback function 
+		
+			$('#formFilePortada').ajaxForm({
+				dataType : "html",
+				success : function(data){
+					setTimeout(function() {
+						$("#portada").replaceWith(data);
+						$("#portraitUploadSuccess").show();
+						$("#portraitUploadSuccess").fadeOut(4000, function() {
+							$(this).hide();
+							
+						});
+					},100);
+					
+				}
+				
+			});
+			
+		});
+			
+			
+// 			console.log("actualizaaaaaaado")
+// 			$('#formFilePortada').ajaxForm({
+// 				dataType : "html",
+// 				success : function(data) {
+// 					setTimeout(function() {
+// 						$("#portada").replaceWith(data);
+// 						$("#portraitUploadSuccess").show();
+// 						$("#portraitUploadSuccess").fadeOut(4000, function() {
+// 							$(this).hide();
+// 						}, 100);
+					
+					
+				
+					
+// // 					$("#portada").replaceWith(data);
+// // 					$("#fileUploadSuccess").show();
+// 				}
+// 			});
+// 			});
 </script>
 
 

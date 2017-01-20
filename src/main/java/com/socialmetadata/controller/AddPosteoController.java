@@ -93,6 +93,46 @@ public class AddPosteoController {
 		return mav;
 
 	}
+	
+	
+	@RequestMapping(value = "/addPortrait", method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView addPortrait(@RequestParam int idItem,
+			@ModelAttribute FileFormBean fileFormBean,
+			HttpServletRequest request) {
+		
+		System.out.println("(value = /addPortrait");
+		
+		Item item = itemService.getItem(idItem);
+
+		CommonsMultipartFile file = fileFormBean.getPortrait();
+
+		String fileName = file.getOriginalFilename();
+		String imagen = Integer.toString(idItem);
+		
+		String extension = "." + FilenameUtils.getExtension(fileName);
+		imagen =imagen+extension;
+		System.out.println(imagen);
+	
+		item.setImagen(imagen);
+//
+//		 archivo = addPosteo(archivo, file.getOriginalFilename(),extension, idItem);
+//		 System.out.println("id posteo: " + archivo.getIdPosteo());
+//
+		FileUploadController fileUploadController = new FileUploadController();
+		fileUploadController.guardaPortada(fileFormBean, request, imagen,
+				"resources/images/");
+		
+		itemService.update(item);
+//
+//		
+		ModelAndView mav = new ModelAndView("portada");
+		mav.addObject("item", item );
+		
+
+		return mav;
+
+	}
 
 	private Posteo addPosteo(Posteo posteo, String titulo, String comentario,
 			int idItem) {
