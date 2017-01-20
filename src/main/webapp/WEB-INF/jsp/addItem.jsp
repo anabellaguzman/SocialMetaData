@@ -29,120 +29,121 @@
 </head>
 <body>
 	<div id="removable">
-	<div class="container">
-		<form class="form-horizontal" method="POST" action="addItem">
-							<div class="well bs-component">
-														<h1>Nuevo Item</h1>
-							
-		
-			<div class="row">
-				<div class="col-lg-6">
-					<br>
+		<div class="container">
+			<form class="form-horizontal" method="POST" action="addItem">
+				<div class="well bs-component">
+					<h1>Nuevo Item</h1>
 
-						<fieldset id="fs_generalAtributes">
-							<div class="form-group">
-								<label for="inputDefault" class="col-lg-2 control-label">Titulo</label>
-								<div class="col-lg-10">
-									<input type="text" class="form-control" id="idTituloItem"></input>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="inputDefault" class="col-lg-2 control-label">Año</label>
-								<div class="col-lg-10">
-									<select class="form-control" id="selectYear">
-									</select>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="inputDefault" class="col-lg-2 control-label">Autor</label>
-								<div class="col-lg-9">
-									<input id="search" class="form-control"> <input
-										type="hidden" class="form-control" id="idAutor"></input>
-									<ul class="list-group" id="listAutores">
-									</ul>
-								</div>
-								<a class="btn btn-primary" data-toggle="modal"
-									data-target="#modalAddAutor">+</a>
-							</div>
-							<div class="form-group">
-								<label for="inputDefault" class="col-lg-2 control-label">Temas
-									Relacionados</label>
-								<div class="col-lg-9" id="temasRelacionados">
-									<input id="autocompleteTema" class="form-control"> <input
-										type="hidden" class="form-control" id="idTema"></input>
-									<div class="bs-component" id="contenedorTemas">
-										<p>
+
+					<div class="row">
+						<div class="col-lg-6">
+							<br>
+
+							<fieldset id="fs_generalAtributes">
+								<div class="form-group">
+									<label for="inputDefault" class="col-lg-2 control-label">Titulo (*)</label>
+									<div class="col-lg-10">
+										<input type="text" class="form-control" id="idTituloItem"></input>
 									</div>
 								</div>
-								<a class="btn btn-primary" data-toggle="modal"
-									data-target="#modalAddTema">+</a>
-							</div>
-							<div class="form-group">
-								<label for="select" class="col-lg-2 control-label">Tipo
-									Item</label>
-								<div class="col-lg-10">
-									<select class="form-control" onchange="jsFunction()"
-										id="selectOpt">
-										<c:forEach items="${listTipoItem}" var="tipoItem">
-											<option value="${tipoItem.idTipoItem}">${tipoItem.descripcion}</option>
-										</c:forEach>
-									</select>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="select" class="col-lg-2 control-label">Idioma</label>
-								<div class="col-lg-10">
-									<select class="form-control" id="selectIdioma">
-										<c:forEach items="${listIdioma}" var="idioma">
-											<option value="${idioma.idIdioma}">${idioma.idioma}</option>
-										</c:forEach>
-									</select>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="textArea" class="col-lg-2 control-label">Descripcion</label>
-								<div class="col-lg-10">
-									<textarea class="form-control" rows="3" id="textArea"></textarea>
-									<span class="help-block">No debe superar los 500
-										caracteres</span>
-								</div>
-
-							</div>
-						</fieldset>
-					
-				</div>
-
-				<div class="col-lg-6">
-					<br>
-					
-
-						<fieldset id="fs_individualAtributes">
-							<c:forEach items="${listAtributosFistItem}" var="atributoItem">
-								<div class='form-group'>
-									<label class='col-lg-2 control-label' for='inputDefault'>${atributoItem.nombre}</label>
-									<div class='col-lg-10'>
-										<input type='text' class='form-control'
-											id="${atributoItem.idAtributoItem}">
+								<div class="form-group">
+									<label for="inputDefault" class="col-lg-2 control-label">Año (*)</label>
+									<div class="col-lg-10">
+										<select class="form-control" id="selectYear">
+										</select>
 									</div>
 								</div>
-							</c:forEach>
-						</fieldset>
-						<div class="form-group">
-							<div class="col-lg-10 col-lg-offset-2">
-								<button class="btn btn-default">Cancelar</button>
-								<button type="button" class="btn btn-primary"
-									onclick="addNewItem()">Agregar</button>
+								<div class="form-group">
+									<label for="inputDefault" class="col-lg-2 control-label">Autor</label>
+									<div class="col-lg-9">
+										<input id="search" class="form-control"> <input
+											type="hidden" class="form-control" id="idAutor"></input>
+										<ul class="list-group" id="listAutores">
+										</ul>
+									</div>
+									<a class="btn btn-primary" data-toggle="modal"
+										data-target="#modalAddAutor">+</a>
+								</div>
+								<div class="form-group">
+									<label for="inputDefault" class="col-lg-2 control-label">Temas
+										Relacionados</label>
+									<div class="col-lg-9" id="temasRelacionados">
+										<input id="autocompleteTema" class="form-control"> <input
+											type="hidden" class="form-control" id="idTema"></input>
+										<div class="bs-component" id="contenedorTemas">
+											<p>
+										</div>
+									</div>
+									<a class="btn btn-primary" data-toggle="modal"
+										data-target="#modalAddTema">+</a>
+								</div>
+								<div class="form-group">
+									<label for="select" class="col-lg-2 control-label">Tipo
+										Item</label>
+									<div class="col-lg-10">
+										<select class="form-control" onchange="jsFunction()"
+											id="selectOpt">
+											<c:forEach items="${listTipoItem}" var="tipoItem">
+												<option value="${tipoItem.idTipoItem}">${tipoItem.descripcion}</option>
+											</c:forEach>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="select" class="col-lg-2 control-label">Idioma</label>
+									<div class="col-lg-10">
+										<select class="form-control" id="selectIdioma">
+											<c:forEach items="${listIdioma}" var="idioma">
+												<option value="${idioma.idIdioma}">${idioma.idioma}</option>
+											</c:forEach>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="textArea" class="col-lg-2 control-label">Descripcion</label>
+									<div class="col-lg-10">
+										<textarea class="form-control" rows="3" id="textArea"></textarea>
+										<span class="help-block">No debe superar los 500
+											caracteres</span>
+									</div>
+
+								</div>
+							</fieldset>
+
+						</div>
+
+						<div class="col-lg-6">
+							<br>
+
+
+							<fieldset id="fs_individualAtributes">
+								<c:forEach items="${listAtributosFistItem}" var="atributoItem">
+									<div class='form-group'>
+										<label class='col-lg-2 control-label' for='inputDefault'>${atributoItem.nombre}</label>
+										<div class='col-lg-10'>
+											<input type='text' class='form-control'
+												id="${atributoItem.idAtributoItem}">
+										</div>
+									</div>
+								</c:forEach>
+							</fieldset>
+							<div class="form-group">
+							<p align="center" class="text-danger" id=checkMsg></p>
+								<div class="col-lg-10 col-lg-offset-2">
+									<button class="btn btn-default">Cancelar</button>
+									<button type="button" class="btn btn-primary"
+										onclick="checkData()">Agregar</button>
+								</div>
 							</div>
+
+
 						</div>
 
-			
+					</div>
 				</div>
-
-			</div>
-						</div>
-		</form>
+			</form>
 		</div>
-	
+
 
 		<!-- Modal Add Autor -->
 		<div class="modal fade" id="modalAddAutor" tabindex="-1" role="dialog"
@@ -233,12 +234,118 @@
 				</div>
 			</div>
 		</div>
+		
+										<!-- Modal Actualizar Portada -->
+		<div class="modal fade" id="modalPortada" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close" id="btnCloseModal">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">Actualizar Portada</h4>
+					</div>
+					<div class="modal-body">
+
+					<form id=formFilePortada class="form-horizontal" method="post"
+						action="addPortrait" enctype="multipart/form-data">
+
+						<div class="form-group">
+							<div class="col-lg-10">
+								<!-- 												<input type="text" class="form-control" id="titulo" -->
+								<!-- 													name="titulo"></input> -->
+								<input type="hidden" id="idItem" name="idItem"
+									value="${item.idItem}">
+							</div>
+						</div>
+						<div class="input-group">
+							<span class="input-group-btn"> <span
+								class="btn btn-primary btn-file"> Browse&hellip; <input
+									type="file" multiple id=portrait name="portrait">
+							</span>
+							</span> <input id="PortraitInput" type="text" class="form-control">
+						</div>
+						<br>
+						<button class="btn btn-default">Cancel</button>
+						<!-- 										<button type="Submit" class="btn btn-primary">Subir</button> -->
+
+
+						<sec:authorize access="isAuthenticated()">
+							<button type="Submit" class="btn btn-primary">Subir</button>
+							<p>
+							<div id=portraitUploadSuccess
+								class="alert alert-dismissible alert-success"
+								style="display: none">
+
+								<button type="button" class="close" data-dismiss="alert">×</button>
+								La portada ha sido actualizada exitosamente.
+
+							</div>
+
+						</sec:authorize>
+						<sec:authorize access="isAnonymous()">
+							<button type="button" class="btn btn-primary" id="msg"
+								onclick="showMsg()">Actualizar</button>
+							<p>
+							<div id="loginMsg" class="alert alert-dismissible alert-danger"
+								style="display: none">
+								<div class="bs-component">
+									<button type="button" class="close" data-dismiss="alert">×</button>
+									<strong>Oh! Necesitas</strong> <a href="./login"
+										class="alert-link">Iniciar Sesion</a> para hacer eso.
+								</div>
+							</div>
+						</sec:authorize>
+					</form>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
 
 	</div>
 	<div id="subViewDiv" class="bs-component"></div>
 
 
 	<script type="text/javascript">
+		function checkData() {
+			if ($("#idTituloItem").val() === "") {
+
+				checkMsg = "Debe completar todos los campos obligatorios";
+				$("#checkMsg").text(checkMsg);
+			} else {
+				
+				var x = document.getElementById("listAutores");
+				var y = x.getElementsByTagName("li");
+				var cTemas = document.getElementById("contenedorTemas");
+				var lTemas = cTemas.getElementsByTagName("button");
+				if ( y.length < 1 || lTemas.length < 1 ){
+					
+					checkMsg = "Debe completar un autor y relacionar tema";
+					$("#checkMsg").text(checkMsg);
+					
+				}else{
+					if($("#textArea").val().length >501){
+						checkMsg = "La descripción no debe superar los 500 caracteres";
+						$("#checkMsg").text(checkMsg);
+						
+					}else{
+						addNewItem();
+// console.log(checkMsg = $("#textArea").val().length);
+// 						checkMsg = "todo ok";
+// 						$("#checkMsg").text(checkMsg);
+					}
+ 				
+				}
+					
+				}
+
+			}
+
+		
 		$(function loadFileUploadView() {
 
 		});

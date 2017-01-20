@@ -42,7 +42,7 @@ public class MiCuentaController {
 		usuario = usuarioService.getFavoritos(usuario.getIdUsuario());
 		ModelAndView mav = new ModelAndView("miCuenta");
 		
-		Set <Item> favs = usuario.getItemsFavoritos();
+//		Set <Item> favs = usuario.getItemsFavoritos();
 
 
 		mav.addObject("items", usuario.getItemsFavoritos());
@@ -70,7 +70,7 @@ public class MiCuentaController {
 	
 	@Transactional
 	@RequestMapping(value = "/removeFav.do", method = RequestMethod.GET)
-	public void removeFavorite(@RequestParam int idItem) {
+	public String removeFavorite(@RequestParam int idItem) {
 		
 		System.out.println("idItem controller "+ idItem);
 		Authentication auth = SecurityContextHolder.getContext()
@@ -83,7 +83,7 @@ public class MiCuentaController {
 		
 		usuarioService.update(usuario);
 		
-		
+		return "successfully removed";
 		
 		
 		
