@@ -104,8 +104,8 @@ public class ItemService {
 		}
 	}
 
-	public void advancedSearch(String titulo, Integer year) {
-		itemDAO.advancedSearch(titulo, year);
+	public void advancedSearch(String titulo, String year, String idTipoItem, String idIdioma) {
+		itemDAO.advancedSearch(titulo, year, idTipoItem, idIdioma );
 	}
 
 }

@@ -10,9 +10,11 @@ import javax.persistence.Id;
 //import javax.persistence.Table;
 import javax.persistence.OneToMany;
 
+
+
 @Entity
 //@Table( name ="idioma")
-public class Idioma {
+public class Idioma  {
 	
 	@Id
 	@Column
@@ -54,6 +56,8 @@ public class Idioma {
 	public void setItems(Set<Item> items) {
 		this.items = items;
 	}
-		
+	
+
+	
 
 }

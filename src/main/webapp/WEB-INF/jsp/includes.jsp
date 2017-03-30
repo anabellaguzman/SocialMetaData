@@ -3,7 +3,9 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+<%@taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
+
 
 <div class="navbar navbar-default navbar-fixed-top">
 	<nav class="navbar navbar-default">
@@ -23,7 +25,7 @@
 				<div class="navbar-form navbar-left" role="search">
 					<div class="form-group">
 						<input id="searchItem" type="text" class="form-control"
-							placeholder="Buscar Item">
+							placeholder="Introduzca un Titulo">
 					</div>
 					<button type="button" class="btn btn-default"
 						onclick="doSearchItemsLike()">Buscar</button>
@@ -32,19 +34,25 @@
 				<ul class="nav navbar-nav navbar-right">
 					<sec:authorize access="isAuthenticated()">
 						<li>
-<%-- 						<sec:authentication property="principal.username --%>
-<%-- 						"/> --%>
-						<a href="./micuenta">Mi Cuenta</a></li>
+							<%-- 						<sec:authentication property="principal.username --%>
+							<%-- 						"/> --%>
+
+					
+								<button class="btn btn-link" onclick="goMiCuenta()">Mi Cuenta</button>
+						</li>
 
 						<li>
-						<form action="j_spring_security_logout" method="post">
+<!-- 						<p > -->
 
-									<button type="submit" class="btn btn-link" >
-									Cerrar Sesion</button> <input
-									type="hidden" name="${_csrf.parameterName}"
+						
+							<form action="j_spring_security_logout" method="post">
+			
+								<button type="submit" class="btn btn-link">Cerrar
+									Sesion</button>
+								<input type="hidden" name="${_csrf.parameterName}"
 									value="${_csrf.token}" />
 							</form>
-							</li>
+						</li>
 					</sec:authorize>
 					<sec:authorize access="isAnonymous()">
 						<li><a href="./login">Iniciar Sesion</a></li>
@@ -100,20 +108,25 @@
 
 		});
 	}
+
+	$("#searchItem").keypress(function(e) {
+
+		if (e.which == 13) {
+			e.preventDefault();
+			doSearchItemsLike();
+			// 		    	e.stopPropagation();
+			// 		    	$("#searchItem").unbind('keypress');
+
+		}
+
+	});
 	
-	$("#searchItem").keypress(function (e) {
-
-				    if (e.which == 13) {
-				    	e.preventDefault();
-				    	doSearchItemsLike();
-		// 		    	e.stopPropagation();
-		// 		    	$("#searchItem").unbind('keypress');
-
-				    }
-
-				 });
-
-
+	function goMiCuenta(){
+		
+		location.href = document.URL.substr(0, document.URL.lastIndexOf('/'))
+		+ "/micuenta";
+		
+	}
 </script>
 
 

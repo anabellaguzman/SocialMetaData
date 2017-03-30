@@ -40,7 +40,6 @@
 						<div id="loginMsg" class="alert alert-dismissible alert-danger"
 							style="display:none">							
 								<div class="bs-component">
-									<button type="button" class="close" data-dismiss="alert" onclick="hideLoginMsh()">×</button>
 									<strong>Oh! Necesitas</strong> <a href="./login"
 										class="alert-link">Iniciar Sesion</a> para hacer eso.
 								</div>

@@ -127,8 +127,10 @@
 
 			var titulo = $("#idTituloItem").val();
 			var year = $("#selectYear").val();
-// 			var tipoItem = $("#selectOpt").val();
-// 			var idioma = $("#selectIdioma").val();
+			var tipoItem = $("#selectOpt").val();
+			var idioma = $("#selectIdioma").val();
+			
+			console.log($("#selectOpt").val());
 // 			var descripcion = $("#textArea").val();
 
 // 			var cTemas = document.getElementById("contenedorTemas");
@@ -182,8 +184,8 @@
 					year : year,
 // 					idAutores : idAutores.toString(),
 // 					idTemas : idTemas.toString(),
-// 					idTipoItem : tipoItem,
-// 					idIdioma : idioma,
+					idTipoItem : tipoItem,
+					idIdioma : idioma,
 // 					descripcion : descripcion,
 // 					idOwnAtr : idIndAtr.toString(),
 // 					valOwnAtr : valIndAtr.toString(),
@@ -225,7 +227,12 @@
 				opt.innerHTML = i;
 				select.appendChild(opt);
 			}
-			select.value = new Date().getFullYear();
+			
+			var optE = document.createElement('option');
+			optE.value = 0;
+			optE.innetHTML = " ";
+			select.appendChild(optE);
+// 			select.value = new Date().getFullYear();
 		}
 
 		function jsFunction() {

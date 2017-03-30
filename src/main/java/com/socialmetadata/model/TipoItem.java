@@ -30,7 +30,16 @@ public class TipoItem {
     @OneToMany(mappedBy="tipoItem", fetch = FetchType.LAZY)
     private Set<AtributoItem> atributoItem;
     
+    
+    
     public TipoItem(){}
+    
+    public TipoItem(int idTipoItem, String descripcion){
+    	
+    	this.idTipoItem = idTipoItem;
+		this.descripcion = descripcion;
+    	
+    }
 
 	public TipoItem(int idTipoItem, String descripcion, Set<Item> items,
 			Set<AtributoItem> atributoItem) {

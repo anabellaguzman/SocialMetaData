@@ -22,7 +22,7 @@
 			<ul class="nav nav-tabs">
 				<li class="active"><a href="#misFavs" data-toggle="tab">Mis
 						Favoritos</a></li>
-				<li><a href="#miPerfil" data-toggle="tab">Mi Perfil</a></li>
+<!-- 				<li><a href="#miPerfil" data-toggle="tab">Mi Perfil</a></li> -->
 			</ul>
 			<div id="myTabContent" class="tab-content">
 				<div class="tab-pane fade active in" id="misFavs">

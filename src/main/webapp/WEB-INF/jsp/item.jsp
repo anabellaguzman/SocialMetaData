@@ -35,7 +35,36 @@
 }
 </style>
 
+<!-- <script> -->
+
+<!-- // { // "appID": "184484190795", // "frictionlessRequests": true, // -->
+<!-- "init": true, // "level": "debug", // "signedRequest": null, // -->
+<!-- "status": true, // "viewMode": "website", // "autoRun": false // } -->
+
+<!-- </script> -->
+
+
+
 <body>
+
+	<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1177390648949659',
+      xfbml      : true,
+      version    : 'v2.8'
+    });
+    FB.AppEvents.logPageView();
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
 
 	<div id="removable">
 
@@ -57,24 +86,24 @@
 								src="<c:url value="/resources/images/${item.imagen}" />"
 								alt="some_text" width="256" height="180">
 						<p class=small>
-						<sec:authorize access="isAuthenticated()">
-							<a class="btn btn-primary" data-toggle="modal"
-								data-target="#modalActualizarPortada">Actualizar Portada</a>
-						</sec:authorize>
-						
-						<sec:authorize access="isAnonymous()">
-							<button type="button" class="btn btn-primary" id="msg"
-								onclick="showMsg()">Actualizar Portada</button>
-							<p>
-							<div id="loginMsg" class="alert alert-dismissible alert-danger"
-								style="display: none">
-								<div class="bs-component">
-									<button type="button" class="close" data-dismiss="alert">×</button>
-									<strong>Oh! Necesitas</strong> <a href="./login"
-										class="alert-link">Iniciar Sesion</a> para hacer eso.
+							<sec:authorize access="isAuthenticated()">
+								<a class="btn btn-primary" data-toggle="modal"
+									data-target="#modalActualizarPortada">Actualizar Portada</a>
+							</sec:authorize>
+
+							<sec:authorize access="isAnonymous()">
+								<button type="button" class="btn btn-primary" id="msg"
+									onclick="showMsgP()">Actualizar Portada</button>
+								<p>
+								<div id="loginMsgP" class="alert alert-dismissible alert-danger"
+									style="display: none">
+									<div class="bs-component">
+										<!-- 									<button type="button" data-dismiss="alert"></button> -->
+										<strong>Oh! Necesitas</strong> <a href="./login"
+											class="alert-link">Iniciar Sesion</a> para hacer eso.
+									</div>
 								</div>
-							</div>
-						</sec:authorize>
+							</sec:authorize>
 					</div>
 
 
@@ -89,7 +118,11 @@
 						</sec:authorize>
 						<sec:authorize access="isAnonymous()">
 							<a class="btn btn-warning"
-								onclick="autenthicationRequired('Necesitas Iniciar Sesion para realizar eso!')">Favorito</a>
+								onclick="showMsgP()">Favorito</a>
+								
+								
+							
+								
 
 						</sec:authorize>
 
@@ -97,7 +130,15 @@
 						<a href="https://www.google.com/search?q=${item.titulo}"
 							class="btn btn-danger" target="_blank">Google</a>
 						<sec:authorize ifAnyGranted="ROLE_FB">
-							<a href="#" class="btn btn-info">Compartir en Facebook</a>
+
+
+
+							<a id="shareBtn" class="btn btn-info"
+								>Compartir
+								en Facebook</a>
+								
+								
+								
 						</sec:authorize>
 						<p>
 					</div>
@@ -172,10 +213,10 @@
 
 											<div class="form-group">
 												<div class="col-lg-10">
-<!-- 													<input type="text" class="form-control" id="titulo" -->
-<!-- 														name="titulo"></input>  -->
-														<input type="hidden" id="idItem"
-														name="idItem" value="${item.idItem}">
+													<!-- 													<input type="text" class="form-control" id="titulo" -->
+													<!-- 														name="titulo"></input>  -->
+													<input type="hidden" id="idItem" name="idItem"
+														value="${item.idItem}">
 												</div>
 											</div>
 											<div class="input-group">
@@ -205,13 +246,13 @@
 											</sec:authorize>
 											<sec:authorize access="isAnonymous()">
 												<button type="button" class="btn btn-primary" id="msg"
-													onclick="showMsg()">Subir</button>
+													onclick="showMsgA()">Subir</button>
 												<p>
-												<div id="loginMsg"
+												<div id="loginMsgA"
 													class="alert alert-dismissible alert-danger"
 													style="display: none">
 													<div class="bs-component">
-														<button type="button" class="close" data-dismiss="alert">×</button>
+														
 														<strong>Oh! Necesitas</strong> <a href="./login"
 															class="alert-link">Iniciar Sesion</a> para hacer eso.
 													</div>
@@ -330,20 +371,20 @@
 							<div id="source-button" class="btn btn-primary btn-xs"
 								style="display: none;">&lt; &gt;</div>
 						</div>
-						
 
 
-		
+
+
 					</div>
 				</div>
 			</div>
 		</div>
-		
-		
-		
-										<!-- Modal Actualizar Portada -->
-		<div class="modal fade" id="modalActualizarPortada" tabindex="-1" role="dialog"
-			aria-labelledby="myModalLabel">
+
+
+
+		<!-- Modal Actualizar Portada -->
+		<div class="modal fade" id="modalActualizarPortada" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -355,54 +396,54 @@
 					</div>
 					<div class="modal-body">
 
-					<form id=formFilePortada class="form-horizontal" method="post"
-						action="addPortrait" enctype="multipart/form-data">
+						<form id=formFilePortada class="form-horizontal" method="post"
+							action="addPortrait" enctype="multipart/form-data">
 
-						<div class="form-group">
-							<div class="col-lg-10">
-								<!-- 												<input type="text" class="form-control" id="titulo" -->
-								<!-- 													name="titulo"></input> -->
-								<input type="hidden" id="idItem" name="idItem"
-									value="${item.idItem}">
+							<div class="form-group">
+								<div class="col-lg-10">
+									<!-- 												<input type="text" class="form-control" id="titulo" -->
+									<!-- 													name="titulo"></input> -->
+									<input type="hidden" id="idItem" name="idItem"
+										value="${item.idItem}">
+								</div>
 							</div>
-						</div>
-						<div class="input-group">
-							<span class="input-group-btn"> <span
-								class="btn btn-primary btn-file"> Browse&hellip; <input
-									type="file" multiple id=portrait name="portrait">
-							</span>
-							</span> <input id="PortraitInput" type="text" class="form-control">
-						</div>
-						<br>
-<!-- 						<button class="btn btn-default">Cancel</button> -->
-						<!-- 										<button type="Submit" class="btn btn-primary">Subir</button> -->
-
-
-						<sec:authorize access="isAuthenticated()">
-							<button type="Submit" class="btn btn-primary">Subir</button>
-							<p>
-							<div id=portraitUploadSuccess
-								class="alert alert-dismissible alert-success"
-								style="display: none">
-
-								<button type="button" class="close" data-dismiss="alert">×</button>
-								La portada ha sido actualizada exitosamente.
-
+							<div class="input-group">
+								<span class="input-group-btn"> <span
+									class="btn btn-primary btn-file"> Browse&hellip; <input
+										type="file" multiple id=portrait name="portrait">
+								</span>
+								</span> <input id="PortraitInput" type="text" class="form-control">
 							</div>
+							<br>
+							<!-- 						<button class="btn btn-default">Cancel</button> -->
+							<!-- 										<button type="Submit" class="btn btn-primary">Subir</button> -->
 
-						</sec:authorize>
 
-					</form>
+							<sec:authorize access="isAuthenticated()">
+								<button type="Submit" class="btn btn-primary">Subir</button>
+								<p>
+								<div id=portraitUploadSuccess
+									class="alert alert-dismissible alert-success"
+									style="display: none">
+
+									<button type="button" class="close" data-dismiss="alert">×</button>
+									La portada ha sido actualizada exitosamente.
+
+								</div>
+
+							</sec:authorize>
+
+						</form>
 
 					</div>
 
 				</div>
 			</div>
 		</div>
-		
-		
-		
-		
+
+
+
+
 	</div>
 
 
@@ -445,6 +486,14 @@
 			
 		}
 		
+		function autenthicationRequired(message){
+			createWarning(message, "authReq", "#serverMSG");
+			$("#authReq").fadeOut(4000, function() {
+				$(this).hide();
+			});
+			
+		}
+		
 		function createAlertSuccess(data, id, elToAppend) {
 			var $newAlert = $('<div/>', {
 				'class' : "alert alert-dismiss alert-success",
@@ -455,6 +504,37 @@
 				'class' : "close",
 				'data-dismiss' : "alert",
 				html : "x"
+			}));
+			$newAlert.appendTo(elToAppend);
+			return;
+		}
+		
+		
+// 		<button type="button" class="close" data-dismiss="alert">×</button>
+// 		<strong>Oh! Necesitas</strong> <a href="./login"
+// 			class="alert-link">Iniciar Sesion</a> para hacer eso.
+		
+		
+// 			<div class="alert alert-dismissible alert-danger">
+// 			  <button type="button" class="close" data-dismiss="alert">×</button>
+// 			  <strong>Oh snap!</strong> <a href="#" class="alert-link">Change a few things up</a> and try submitting again.
+// 			</div>
+			
+			
+		
+		function createWarning(data, id, elToAppend) {
+			var $newAlert = $('<div/>', {
+				'class' : "alert alert-dismissible alert-danger",
+				'id' : id,
+				html : data
+			}).append($('<button/>', {
+				'type' : "button",
+				'class' : "close",
+				'data-dismiss' : "alert",
+				html : "x",
+			})).append($('<a/>',{
+				'href': "./login",
+				html: "Necesitas iniciar sesion para realizar eso",
 			}));
 			$newAlert.appendTo(elToAppend);
 			return;
@@ -534,6 +614,13 @@
 		function showMsg() {
 			$("#loginMsg").show();
 		}
+		
+		function showMsgP() {
+			$("#loginMsgP").show();
+		}
+		function showMsgA() {
+			$("#loginMsgA").show();
+		}
 
 		$(document).ready(function() {
 			// bind 'myForm' and provide a simple callback function 
@@ -549,6 +636,30 @@
 
 			});
 		});
+		
+
+		
+		 function shareFB(href) {
+			 console.log(href);
+		  FB.ui({
+		    method: 'share',
+		    display: 'popup',
+		    href: href,
+		  }, function(response){});
+		}
+		 
+		
+		 document.getElementById('shareBtn').onclick = function() {
+			  FB.ui({
+			    method: 'share',
+			    display: 'popup',
+			    href: 'http://www.uccor.edu.ar/',
+			  }, function(response){
+				  console.log("fb response"+response);
+			  });
+			}
+		
+		
 		
 		
 		$(document).ready(function(){

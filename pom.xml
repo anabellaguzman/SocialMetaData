@@ -18,7 +18,7 @@
 		<commons-dbcp.version>1.4</commons-dbcp.version>
 		<!-- Commons Lang -->
 		<commons-lang.version>3.1</commons-lang.version>
-		<!-- Hibernate -->
+		<!-- Hibernate  3.6.7.Final-->
 		<hibernate.version>3.6.7.Final</hibernate.version>
 		
 		<jstl.version>1.2</jstl.version>

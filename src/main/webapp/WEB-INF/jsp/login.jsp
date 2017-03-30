@@ -239,8 +239,8 @@
 						</fieldset>
 					</form:form>
 					<div align="center">
-						<a href="#">Olvidaste tu usuario o contraseña?</a> <br> <a
-							href="./registerUser">No tienes una cuenta? Registrate</a>
+<!-- 						<a href="#">Olvidaste tu usuario o contraseña?</a> <br>  -->
+						<a href="./registerUser">No tienes una cuenta? Registrate</a>
 
 					</div>
 
