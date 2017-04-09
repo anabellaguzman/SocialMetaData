@@ -1,14 +1,22 @@
 package com.socialmetadata.model;
 
+import javax.persistence.AssociationOverride;
+import javax.persistence.AssociationOverrides;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 import com.socialmetadata.modeloDao.embebedPK.VotacionEPK;
 
 @Entity
-@Table( name ="UsuarioItemPuntaje")
+@Table( name ="usuarioitempuntaje")
+@AssociationOverrides({
+	@AssociationOverride(name = "votacionPK.item", 
+		joinColumns = @JoinColumn(name = "idItem")),
+	@AssociationOverride(name = "votacionPK.usuario", 
+		joinColumns = @JoinColumn(name = "idUsuario")) })
 public class Votacion {
 	
 	@EmbeddedId

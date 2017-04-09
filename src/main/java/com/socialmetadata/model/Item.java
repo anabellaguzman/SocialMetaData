@@ -102,6 +102,9 @@ public class Item {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.item", cascade=CascadeType.ALL)
     private Set<ValorAtributoItem> valorAtributoPropio;
     
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "votacionPK.item", cascade=CascadeType.ALL)
+    private Set<Votacion> listadoVotos;
+//    
     
     
 	public int getIdItem() {
@@ -181,6 +184,16 @@ public class Item {
 	}
 	public void setValorAtributoPropio(Set<ValorAtributoItem> valorAtributoPropio) {
 		this.valorAtributoPropio = valorAtributoPropio;
+		
+		
+		
+	}
+	public Set<Votacion> getListadoVotos() {
+		
+		return listadoVotos;
+	}
+	public void setListadoVotos(Set<Votacion> listadoVotos) {
+		this.listadoVotos = listadoVotos;
 	}
 	public boolean isEnabled() {
 		return enabled;

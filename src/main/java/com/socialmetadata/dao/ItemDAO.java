@@ -3,6 +3,8 @@ package com.socialmetadata.dao;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.xml.crypto.dsig.keyinfo.RetrievalMethod;
+
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -59,12 +61,17 @@ public class ItemDAO {
 	}
 	
 	@Transactional
-	public void advancedSearch(String titulo, String year, String idTipoItem, String idIdioma){
+	public List<Item> advancedSearch(String titulo, String year, String idTipoItem, String idIdioma, Item item){
 		Criteria criteria = session.getCurrentSession().createCriteria(Item.class);
 		
 		System.out.println("String idIdioma"+idIdioma);
 		System.out.println("ITEM DAO CRITERIA");
 		System.out.println("YEAR: "+year);
+		
+//		criteria.createAlias("autores", "autor")
+//		.add(Restrictions.in("autor.autor", item.getAutores()));
+		
+
 		
 		
 		if(!year.equals("0")) {
@@ -103,6 +110,8 @@ public class ItemDAO {
 			System.out.println("YEAR: "+ i.getYear());
 			
 		}
+		
+		return results;
 		
 	}
 	

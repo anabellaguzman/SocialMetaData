@@ -4,6 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 <script type="text/javascript"
 	src="<c:url value="/resources/js/jquery.js" />"></script>
 <script type="text/javascript"
@@ -33,6 +35,48 @@
 	cursor: inherit;
 	display: block;
 }
+
+
+
+
+
+
+
+
+
+
+.ec-stars-wrapper {
+	/* Espacio entre los inline-block (los hijos, los `a`) 
+	   http://ksesocss.blogspot.com/2012/03/display-inline-block-y-sus-empeno-en.html */
+	font-size: 0;
+	/* Podríamos quitarlo, 
+		pero de esta manera (siempre que no le demos padding), 
+		sólo aplicará la regla .ec-stars-wrapper:hover a cuando
+		también se esté haciendo hover a alguna estrella */
+	display: inline-block;
+}
+.ec-stars-wrapper a {
+	text-decoration: none;
+	display: inline-block;
+	/* Volver a dar tamaño al texto */
+	font-size: 32px;
+	font-size: 2rem;
+	
+	color: #888;
+}
+
+.ec-stars-wrapper:hover a {
+	color: FFD700;
+}
+/*
+ * El selector de hijo, es necesario para aumentar la especifidad
+ */
+.ec-stars-wrapper > a:hover ~ a {
+	color: #888;
+}
+
+
+
 </style>
 
 <!-- <script> -->
@@ -64,11 +108,18 @@
      js.src = "//connect.facebook.net/en_US/sdk.js";
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
+  
+  
+
+  
+  
 </script>
 
 	<div id="removable">
 
 		<div class="container">
+
+
 
 			<div class="col-sm-4" id=serverMSG></div>
 			<%-- 	<img src="<c:url value="/resources/images/1.jpg" />" alt="some_text" width="180" height="150"> --%>
@@ -109,8 +160,25 @@
 
 
 					<div class="col-sm-8">
+					
+<%-- 				<span class="stars" data-rating="${item.puntaje}"   data-num-stars="5" ></span>	 --%>
+<!-- 					</br> -->
 
 
+<!-- style="color:FFD700;" -->
+
+
+<input type="hidden" id="idItemPuntaje" name="idItemPuntaje"
+														value="${item.puntaje}">
+
+
+	<div class="ec-stars-wrapper">
+	<a id="star1" href="#" data-value="1" title="Votar con 1 estrellas" onclick= "votar(1)">&#9733;</a>
+	<a id="star2" href="#" data-value="2" title="Votar con 2 estrellas" onclick= "votar(2)">&#9733;</a>
+	<a id="star3" href="#" data-value="3" title="Votar con 3 estrellas" onclick= "votar(3)">&#9733;</a>
+	<a id="star4" href="#" data-value="4" title="Votar con 4 estrellas" onclick= "votar(4)">&#9733;</a>
+	<a id="star5" href="#" data-value="5" title="Votar con 5 estrellas" onclick= "votar(5)">&#9733;</a>
+</div>
 
 
 						<sec:authorize access="isAuthenticated()">
@@ -449,6 +517,69 @@
 
 	<div id="subViewDiv" class="bs-component"></div>
 	<script type="text/javascript">
+	
+	  
+	  $(function stars() {
+		  
+		  var rating = $("#idItemPuntaje").val();
+		  console.log("rating"+rating);
+		  
+		  rating = Math.round( 2.5);
+		  
+		  for (var i = 1; i <= rating; ++i) {
+			  
+			  
+			  var star = "star"+i;
+			  
+			  console.log(star);
+		  
+		  document.getElementById(star).style.color = "FFD700";
+		  
+		  }
+// 		  var rating = $("#idItemPuntaje").val();
+// 		  console.log("rating"+rating);
+		  
+	  })
+	  
+	  function votar(number){
+		  console.log("num votacion"+number);
+		  
+		  $.ajax({
+				url : "votarItem",
+				type : "POST",
+				data : {
+					idItem : $("#idItem").val(),
+		  			voto : number}
+				});
+		  
+		  
+	  }
+	      
+
+	        
+	          
+	      
+	          
+	     
+
+// 	          var numStars = $(this).data("numStars");
+
+// 	          var fullStar = new Array(Math.floor(rating + 1)).join('<i class="fa fa-star"></i>');
+
+// 	          var halfStar = ((rating%1) !== 0) ? '<i class="fa fa-star-half-empty"></i>': '';
+
+// 	          var noStar = new Array(Math.floor(numStars + 1 - rating)).join('<i class="fa fa-star-o"></i>');
+
+// 	          $(this).html(fullStar + halfStar + noStar);
+
+// 	      });
+// 	  };
+
+// 	  $('.stars').stars();
+	  
+	
+	
+	
 	
 		function clearField(field){
 			$(field).empty();

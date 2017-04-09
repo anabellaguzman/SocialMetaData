@@ -124,6 +124,9 @@
 
 
 		function advancedSearchItem() {
+			
+			
+			
 
 			var titulo = $("#idTituloItem").val();
 			var year = $("#selectYear").val();
@@ -131,17 +134,17 @@
 			var idioma = $("#selectIdioma").val();
 			
 			console.log($("#selectOpt").val());
-// 			var descripcion = $("#textArea").val();
 
-// 			var cTemas = document.getElementById("contenedorTemas");
-// 			var lTemas = cTemas.getElementsByTagName("label");
-// 			var lengthTemas = lTemas.length;
-// 			var idTemas = [];
-// 			for (var i = 0; i < lengthTemas; ++i) {
-// 				var idT = lTemas[i].id;
-// 				idTemas.push(idT);
-// 				console.log(idT);
-// 			}
+
+			var cTemas = document.getElementById("contenedorTemas");
+			var lTemas = cTemas.getElementsByTagName("label");
+			var lengthTemas = lTemas.length;
+			var idTemas = [];
+			for (var i = 0; i < lengthTemas; ++i) {
+				var idT = lTemas[i].id;
+				idTemas.push(idT);
+				console.log(idT);
+			}
 
 // 			var fsIndAtr = document.getElementById("fs_individualAtributes");
 // 			var inputIndAtr = fsIndAtr.getElementsByTagName("input");
@@ -168,29 +171,41 @@
 // 				// 				idAutores.push(idA);
 // 			}
 
-// 			var x = document.getElementById("listAutores");
-// 			var y = x.getElementsByTagName("li");
-// 			var length = y.length;
-// 			var idAutores = [];
-// 			for (var i = 0; i < length; ++i) {
-// 				var idA = y[i].id;
-// 				idAutores.push(idA);
-// 			}
+			var x = document.getElementById("listAutores");
+			var y = x.getElementsByTagName("li");
+			var length = y.length;
+			var idAutores = [];
+			for (var i = 0; i < length; ++i) {
+				var idA = y[i].id;
+				idAutores.push(idA);
+			}
 			$.ajax({
 				url : "advancedSearch.do",
 				type : "POST",
 				data : {
 					tituloItem : titulo,
 					year : year,
-// 					idAutores : idAutores.toString(),
-// 					idTemas : idTemas.toString(),
+					idAutores : idAutores.toString(),
+					idTemas : idTemas.toString(),
 					idTipoItem : tipoItem,
 					idIdioma : idioma,
 // 					descripcion : descripcion,
 // 					idOwnAtr : idIndAtr.toString(),
 // 					valOwnAtr : valIndAtr.toString(),
 
-				}
+				},
+				
+				
+				
+				
+				
+				success : function(response) {
+					$("#subViewDiv").html(response);
+
+						var element = document.getElementById("removable");
+						element.parentNode.removeChild(element);
+
+				},
 // 			,
 // 				success : function(data, textStatus) {
 

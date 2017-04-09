@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -38,6 +39,13 @@ public class Usuario {
 	@Column 
 	private boolean enabled;
 	
+	
+	
+//	
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.usuario")
+//	private Set<Votacion> listadoVotosRealizados;
+//	
+//	
 	
 	@ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(
@@ -157,9 +165,17 @@ public class Usuario {
 	public void addRol(Rol rol){
 		this.roles.add(rol);
 	}
-	
-	
 
+//	public Set<Votacion> getListadoVotosRealizados() {
+//		return listadoVotosRealizados;
+//	}
+//
+//	public void setListadoVotosRealizados(Set<Votacion> listadoVotosRealizados) {
+//		this.listadoVotosRealizados = listadoVotosRealizados;
+//	}
+//	
+//	
+	
 	
 
 }

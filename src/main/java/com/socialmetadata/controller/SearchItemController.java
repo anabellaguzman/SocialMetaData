@@ -2,6 +2,7 @@ package com.socialmetadata.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -16,11 +17,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.socialmetadata.dao.ItemDAO;
 import com.socialmetadata.model.AtributoItem;
+import com.socialmetadata.model.Autor;
 import com.socialmetadata.model.Idioma;
 import com.socialmetadata.model.Item;
+import com.socialmetadata.model.Tema;
 import com.socialmetadata.model.TipoItem;
+import com.socialmetadata.service.AutorService;
 import com.socialmetadata.service.IdiomaService;
 import com.socialmetadata.service.ItemService;
+import com.socialmetadata.service.TemaService;
 import com.socialmetadata.service.TipoItemService;
 
 @Controller
@@ -33,6 +38,11 @@ public class SearchItemController {
 	private ItemService itemService;
 	@Autowired
 	private IdiomaService idiomaService;
+	@Autowired
+	private AutorService autorService;
+	@Autowired
+	private TemaService temaService;
+
 	
 	@RequestMapping("/advancedSearch")
 	public String setupForm(Map<String, Object> map){
@@ -62,9 +72,35 @@ public class SearchItemController {
 	}
 	
 	@RequestMapping(value = "/advancedSearch.do", method = RequestMethod.POST)
-	public void advancedSearchItem(@RequestParam String  tituloItem, @RequestParam String year, 
+	public @ResponseBody ModelAndView advancedSearchItem(@RequestParam String  tituloItem, @RequestParam String year, 
 			@RequestParam String idTipoItem,
-			@RequestParam String idIdioma){
+			@RequestParam String idIdioma,
+			@RequestParam List<String> idAutores,
+			@RequestParam List<String> idTemas){
+		
+		
+		
+		Item item = new Item();		
+
+		item.setTitulo(tituloItem);
+		item.setYear(Integer.valueOf(year));
+
+		Set<Autor> autores = new HashSet<Autor>();
+		for (int i = 0; i < idAutores.size(); i++) {
+			String enteroString = idAutores.get(i);
+			int entero = Integer.parseInt(enteroString);
+			Autor a = autorService.getAutor(entero);
+			autores.add(a);
+		}
+		item.setAutores(autores);		
+//		Set<Tema> temas = new HashSet<Tema>();
+//		for (int i = 0; i < idTemas.size(); i++) {
+//			String enteroString = idTemas.get(i);
+//			int entero = Integer.parseInt(enteroString);
+//			Tema t = temaService.getTema(entero);
+//			temas.add(t);
+//		}
+//		item.setSetTemas(temas);
 		
 //		System.out.println("/advancedSearch.do");
 //		System.out.println("titulo:"+tituloItem);
@@ -79,11 +115,26 @@ public class SearchItemController {
 //		
 //		else{
 //			
-		itemService.advancedSearch(tituloItem, year, idTipoItem, idIdioma );			
+		List<Item> items = itemService.advancedSearch(tituloItem, year, idTipoItem, idIdioma, item);			
 //		}
+
+		
+		for (Item i : items) {
+			System.out.println(i.getTitulo());
+			System.out.println(i.getYear());
+			System.out.println(i.getTipo().getDescripcion());
+			
+			
+			
+			
+		}
 		
 		
+		ModelAndView mav = new ModelAndView("tableSearchItem");
 		
+		mav.addObject("items", items);
+		
+		return mav;
 		
 	}
 
