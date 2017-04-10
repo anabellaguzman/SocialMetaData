@@ -64,7 +64,7 @@ public class ItemController {
 	
 	@RequestMapping(value = "/votarItem", method = RequestMethod.POST)
 	@Transactional
-	public void votarItem(@RequestParam Double voto, @RequestParam int idItem) {
+	public void votarItem(@RequestParam Double voto, @RequestParam int idItem) throws InterruptedException {
 		
 		System.out.println("voto: "+ voto+"idItem: "+idItem);
 		
@@ -87,18 +87,69 @@ public class ItemController {
 		VotacionEPK pk = new VotacionEPK (item, usuario);
 		Votacion votacion = new Votacion(pk, voto);
 		
-		votacionService.addVotacion(votacion);
+		item = votacionService.addVotacion(votacion, item);
 		
+//		String result = votacionService.addVotacion(votacion, item);
 		
+//		Set<Votacion> listadoVotos = item.getListadoVotos();
+//		listadoVotos.add(votacion);
+//		
+//		item.setListadoVotos(listadoVotos);
+//		
+//		itemService.update(item);
+//		item = itemService.getItem(item.getIdItem());
 		
-		Set<Votacion> votaciones = item.getListadoVotos();
+//		String result = votacionService.addVotacion(votacion, item);
 		
-		for (Votacion v: votaciones){
+		 
+		
+//		Set<Votacion> listadoVotos = item.getListadoVotos();
+//		
+//		if (result == "1"){
+//			System.out.println("SE ACTUALIZO DB");
+//			
+//			votaciones = item.getListadoVotos();
+////			votaciones.add(votacion);
+//			
+			for (Votacion v: item.getListadoVotos()){
+				
+				System.out.println("usuario: "+v.getVotacionPK().getUsuario().getIdUsuario() +"item: "+v.getVotacionPK().getItem().getIdItem()+" puntaje: "+v.getPuntaje());
+				
+			}
 			
-			System.out.println("item get votos puntaje "+ v.getPuntaje());
+			calculateAvg(item);
 			
-			System.out.println("item get votos iditem "+ v.getVotacionPK().getItem().getIdItem());
+			
 		}
+	
+	
+		private Double calculateAvg (Item item){
+			
+			Double sumQtyVotos = 0.00;
+			Integer qtyVotos = 0;
+			
+			
+			
+			for (Votacion v: item.getListadoVotos()){
+				
+				System.out.println("usuario: "+v.getVotacionPK().getUsuario().getIdUsuario() +"item: "+v.getVotacionPK().getItem().getIdItem()+" puntaje: "+v.getPuntaje());
+				
+				qtyVotos ++;
+				sumQtyVotos = sumQtyVotos + v.getPuntaje();
+				
+			}
+			
+			System.out.println("Qty Votos:  "+ qtyVotos+"sumQtyVotos: "+ sumQtyVotos);
+			
+			Double avg = sumQtyVotos/qtyVotos;
+			System.out.println("AVG:  "+ avg);
+			
+			return avg;
+			
+		}
+		
+		
+
 		
 		
 		
@@ -109,4 +160,4 @@ public class ItemController {
 		
 		
 
-}
+

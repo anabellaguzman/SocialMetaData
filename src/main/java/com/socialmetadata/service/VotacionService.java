@@ -4,9 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import com.socialmetadata.dao.VotacionDAO;
-
+import com.socialmetadata.model.Item;
 import com.socialmetadata.model.Votacion;
 
 
@@ -17,12 +16,9 @@ public class VotacionService {
 	private VotacionDAO votacionDAO;
 	
 	@Transactional
-	public void addVotacion(Votacion votacion) {	
-		votacionDAO.edit(votacion);
+	public Item addVotacion(Votacion votacion, Item item) {	
+		return votacionDAO.edit(votacion, item);
 		
-		
-		
-//		 votacionDAO.add(votacion);
 	}
 
 }
