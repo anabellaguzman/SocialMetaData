@@ -36,15 +36,6 @@
 	display: block;
 }
 
-
-
-
-
-
-
-
-
-
 .ec-stars-wrapper {
 	/* Espacio entre los inline-block (los hijos, los `a`) 
 	   http://ksesocss.blogspot.com/2012/03/display-inline-block-y-sus-empeno-en.html */
@@ -224,8 +215,6 @@
 
 							</li>
 							<li class="list-group-item">Año: ${item.year}</li>
-							<li class="list-group-item">Cantidad votos :
-								${item.cantidadVotos}</li>
 							<li class="list-group-item">Idioma : ${item.idioma.idioma}</li>
 							<c:forEach items="${item.valorAtributoPropio}"
 								var="valorAtributo">
@@ -524,7 +513,7 @@
 		  var rating = $("#idItemPuntaje").val();
 		  console.log("rating"+rating);
 		  
-		  rating = Math.round( 2.5);
+// 		  rating = Math.round( 2.5);
 		  
 		  for (var i = 1; i <= rating; ++i) {
 			  
@@ -542,24 +531,96 @@
 	  })
 	  
 	  function votar(number){
-		  console.log("num votacion"+number);
+
 		  
 		  $.ajax({
 				url : "votarItem",
 				type : "POST",
 				data : {
 					idItem : $("#idItem").val(),
-		  			voto : number}
+		  			voto : number},
+				success : function(data) {
+					
+						updateStars(),
+						createAlertSuccess(data, "addToFavsSuccess", "#serverMSG");
+						$("#addToFavsSuccess").fadeOut(4000, function() {
+							$(this).remove();
+						});
+						}	
+		  			
+		  			
+		  			
 				});
 		  
 		  
 	  }
-	      
+	  
+	  function updateStars() {
+		  
+		  $.ajax({
+			  url : "getNewAvg",
+				type : "POST",
+				data : {
+					idItem : $("#idItem").val(),
+				},
+		  		success : function(data) {
+		  			console.log("updated avg"+data);
+		  			var rating = data;
+		  			rating = Math.round( data);
+		  			
+		  			for (var i = 1; i <= 5; ++i) {
+						  
+						  
+			 			  var star = "star"+i;
+						  
+			 			  
+					  
+			 		  	document.getElementById(star).style.color = "#888";
+					  
+			 		  }
+		  			
+		   		  for (var i = 1; i <= rating; ++i) {
+					  
+					  
+		 			  var star = "star"+i;
+					  
+		 			  console.log(star);
+				  
+		 		  	document.getElementById(star).style.color = "FFD700";
+				  
+		 		  }
+		  			
+		  			
+		  			
+		  		}
+			  
+		  });
+		  
+	  }
+		  
+		  
 
-	        
-	          
-	      
-	          
+		  
+		  
+		  
+// 		  var rating = $("#idItemPuntaje").val();
+// 		  console.log("rating"+rating);
+		  
+// 		  rating = Math.round( 2.5);
+		  
+// 		  for (var i = 1; i <= rating; ++i) {
+			  
+			  
+// 			  var star = "star"+i;
+			  
+// 			  console.log(star);
+		  
+// 		  document.getElementById(star).style.color = "FFD700";
+		  
+// 		  }
+
+		  
+	  
 	     
 
 // 	          var numStars = $(this).data("numStars");

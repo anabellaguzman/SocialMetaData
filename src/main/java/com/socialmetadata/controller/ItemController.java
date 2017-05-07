@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.socialmetadata.model.Archivo;
@@ -64,7 +65,8 @@ public class ItemController {
 	
 	@RequestMapping(value = "/votarItem", method = RequestMethod.POST)
 	@Transactional
-	public void votarItem(@RequestParam Double voto, @RequestParam int idItem) throws InterruptedException {
+	@ResponseBody
+	public String votarItem(@RequestParam Double voto, @RequestParam int idItem) {
 		
 		System.out.println("voto: "+ voto+"idItem: "+idItem);
 		
@@ -81,7 +83,7 @@ public class ItemController {
 		
 //		idUsuario = usuario.getIdUsuario();
 		
-		System.out.println("idUsuario: "+ usuario.getIdUsuario());
+//		System.out.println("idUsuario: "+ usuario.getIdUsuario());
 
 		
 		VotacionEPK pk = new VotacionEPK (item, usuario);
@@ -111,15 +113,18 @@ public class ItemController {
 //			votaciones = item.getListadoVotos();
 ////			votaciones.add(votacion);
 //			
-			for (Votacion v: item.getListadoVotos()){
-				
-				System.out.println("usuario: "+v.getVotacionPK().getUsuario().getIdUsuario() +"item: "+v.getVotacionPK().getItem().getIdItem()+" puntaje: "+v.getPuntaje());
-				
-			}
+//			for (Votacion v: item.getListadoVotos()){
+//				
+//				System.out.println("usuario: "+v.getVotacionPK().getUsuario().getIdUsuario() +"item: "+v.getVotacionPK().getItem().getIdItem()+" puntaje: "+v.getPuntaje());
+//				
+//			}
 			
-			calculateAvg(item);
+//			calculateAvg(item);
+			item.setPuntaje(calculateAvg(item));
 			
+			itemService.update(item);
 			
+			return "Su voto ha sido guardado correctamente!";
 		}
 	
 	
@@ -132,7 +137,7 @@ public class ItemController {
 			
 			for (Votacion v: item.getListadoVotos()){
 				
-				System.out.println("usuario: "+v.getVotacionPK().getUsuario().getIdUsuario() +"item: "+v.getVotacionPK().getItem().getIdItem()+" puntaje: "+v.getPuntaje());
+//				System.out.println("usuario: "+v.getVotacionPK().getUsuario().getIdUsuario() +"item: "+v.getVotacionPK().getItem().getIdItem()+" puntaje: "+v.getPuntaje());
 				
 				qtyVotos ++;
 				sumQtyVotos = sumQtyVotos + v.getPuntaje();
@@ -148,6 +153,18 @@ public class ItemController {
 			
 		}
 		
+		
+		@RequestMapping(value = "/getNewAvg", method = RequestMethod.POST)
+		@Transactional
+		@ResponseBody
+		public Double getNewAvg( @RequestParam int idItem) {
+			
+			Item item = itemService.getItem(idItem);
+			
+			item.getPuntaje();
+			
+			return item.getPuntaje();
+		}
 		
 
 		
