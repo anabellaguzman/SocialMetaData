@@ -124,6 +124,7 @@ public class AddItemController {
 		item.setTipo(tipoItem);
 		item.setIdioma(idioma);
 		item.setDescripcion(descripcion);
+		item.setPuntaje(0);
 		Set<Autor> autores = new HashSet<Autor>();
 		for (int i = 0; i < idAutores.size(); i++) {
 			String enteroString = idAutores.get(i);
@@ -137,10 +138,13 @@ public class AddItemController {
 			String enteroString = idTemas.get(i);
 			int entero = Integer.parseInt(enteroString);
 			Tema t = temaService.getTema(entero);
+			
+			System.out.println("ADD ITEM - Tema: "+t.getTema());
 			temas.add(t);
 		}
 		item.setSetTemas(temas);		
 		item.setIdItem(itemService.add(item));	
+		
 		Set<ValorAtributoItem> valorAtributoItem = new HashSet<ValorAtributoItem>();		
 		for (int i = 0; i < idOwnAtr.size(); i++) {
 			String enteroString = idOwnAtr.get(i);

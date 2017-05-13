@@ -27,6 +27,41 @@
 <title>Búsqueda Avanzada</title>
 
 </head>
+
+<style>
+
+
+  .botonTema {
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    display: inline-block;
+    height: 45px;
+    text-align: center;
+    text-decoration: none solid rgb(255, 255, 255);
+    text-size-adjust: 100%;
+    touch-action: manipulation;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: auto;
+    column-rule-color: rgb(255, 255, 255);
+    perspective-origin: 42.5938px 22.5px;
+    transform-origin: 42.5938px 22.5px;
+    user-select: none;
+    caret-color: rgb(255, 255, 255);
+    background: rgb(24, 188, 156) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 2px solid rgb(24, 188, 156);
+    border-radius: 4px 4px 4px 4px;
+    font: normal normal normal normal 15px / 21.4286px Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    outline: rgb(255, 255, 255) none 0px;
+    padding: 10px 15px;
+}
+
+
+
+</style>
+
+
 <body>
 
 	<div id="removable">
@@ -130,46 +165,35 @@
 
 			var titulo = $("#idTituloItem").val();
 			var year = $("#selectYear").val();
+			console.log("VALUE OF YEAR "+$("#selectYear").val());
 			var tipoItem = $("#selectOpt").val();
+			//select opt es el tipo
 			var idioma = $("#selectIdioma").val();
 			
 			console.log($("#selectOpt").val());
 
-
+			
 			var cTemas = document.getElementById("contenedorTemas");
-			var lTemas = cTemas.getElementsByTagName("label");
-			var lengthTemas = lTemas.length;
+			var btnsTemas = cTemas.getElementsByClassName("botonTema");
+			var lbtnsTemas = btnsTemas.length;				
 			var idTemas = [];
-			for (var i = 0; i < lengthTemas; ++i) {
-				var idT = lTemas[i].id;
+	
+
+			for (var i = 0; i < lbtnsTemas; ++i) {		
+				var idT = btnsTemas[i].id;
 				idTemas.push(idT);
-				console.log(idT);
 			}
 
-// 			var fsIndAtr = document.getElementById("fs_individualAtributes");
-// 			var inputIndAtr = fsIndAtr.getElementsByTagName("input");
-// 			var lIndAtr = inputIndAtr.length;
+			var cTemas = document.getElementById("contenedorTemas");
+			var btnsTemas = cTemas.getElementsByClassName("botonTema");
+			var lbtnsTemas = btnsTemas.length;				
+			var idTemas = [];
+			for (var i = 0; i < lbtnsTemas; ++i) {		
+				var idT = btnsTemas[i].id;
+				idTemas.push(idT);
+			}
 
-// 			console.log("inputInd");
-// 			console.log(inputIndAtr);
 
-// 			// 			console.log(lIndAtr);
-// 			var idIndAtr = [];
-// 			var valIndAtr = [];
-// 			for (var i = 0; i < lIndAtr; ++i) {
-
-// 				console.log("console.log(inputIndAtr[i].id);");
-// 				idIndAtr.push(inputIndAtr[i].id);
-// 				console.log(inputIndAtr[i].id);
-// 				console.log("console.log(inputIndAtr[i].value);");
-// 				console.log(inputIndAtr[i].value);
-// 				valIndAtr.push(inputIndAtr[i].value);
-
-// 				// 				console.log(inIndAtr[i]);
-// 				// 				console.log(inIndAtr[i].val());
-// 				// 				var idA = inIndAtr[i].id;
-// 				// 				idAutores.push(idA);
-// 			}
 
 			var x = document.getElementById("listAutores");
 			var y = x.getElementsByTagName("li");
@@ -361,7 +385,7 @@
 			}).append($('<div/>', {
 				'class' : "bs-component",
 			}).append($('<label/>', {
-				'class' : "alert alert-dismissible alert-success",
+				'class' : "botonTema",
 				'id' : id,
 				html : value
 			}).append($('<button/>', {

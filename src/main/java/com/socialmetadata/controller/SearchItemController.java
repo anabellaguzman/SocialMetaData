@@ -9,6 +9,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -71,6 +72,9 @@ public class SearchItemController {
 		
 	}
 	
+	
+	
+	
 	@RequestMapping(value = "/advancedSearch.do", method = RequestMethod.POST)
 	public @ResponseBody ModelAndView advancedSearchItem(@RequestParam String  tituloItem, @RequestParam String year, 
 			@RequestParam String idTipoItem,
@@ -78,13 +82,16 @@ public class SearchItemController {
 			@RequestParam List<String> idAutores,
 			@RequestParam List<String> idTemas){
 		
-		
+		System.out.println("SEARCH ITEM CONTROLLER");	
 		
 		Item item = new Item();		
-
+		if (year == ""){
+			year = "0";
+		}
+				
 		item.setTitulo(tituloItem);
 		item.setYear(Integer.valueOf(year));
-
+		
 		Set<Autor> autores = new HashSet<Autor>();
 		for (int i = 0; i < idAutores.size(); i++) {
 			String enteroString = idAutores.get(i);
@@ -92,50 +99,29 @@ public class SearchItemController {
 			Autor a = autorService.getAutor(entero);
 			autores.add(a);
 		}
-		item.setAutores(autores);		
-//		Set<Tema> temas = new HashSet<Tema>();
-//		for (int i = 0; i < idTemas.size(); i++) {
-//			String enteroString = idTemas.get(i);
-//			int entero = Integer.parseInt(enteroString);
-//			Tema t = temaService.getTema(entero);
-//			temas.add(t);
-//		}
-//		item.setSetTemas(temas);
-		
-//		System.out.println("/advancedSearch.do");
-//		System.out.println("titulo:"+tituloItem);
+		item.setAutores(autores);	
 		
 		
-//		if (year == ""){
-//			System.out.println("YEAR IS NULL");
-//			Integer year2 = null;
-//			itemService.advancedSearch(tituloItem, year, idTipoItem);
-//			
-//		}
-//		
-//		else{
-//			
-		List<Item> items = itemService.advancedSearch(tituloItem, year, idTipoItem, idIdioma, item);			
-//		}
-
-		
-		for (Item i : items) {
-			System.out.println(i.getTitulo());
-			System.out.println(i.getYear());
-			System.out.println(i.getTipo().getDescripcion());
-			
-			
-			
-			
+		//Temas
+		Set<Tema> temas = new HashSet<Tema>();
+		for (int i = 0; i < idTemas.size(); i++) {
+			String enteroString = idTemas.get(i);
+			int entero = Integer.parseInt(enteroString);
+			Tema t = temaService.getTema(entero);
+			temas.add(t);
 		}
+		item.setSetTemas(temas);
 		
+				
+		List<Item> items = itemService.advancedSearch(tituloItem, year, idTipoItem, idIdioma, item);			
+//	
+//		List<Item> items = new ArrayList ();
 		
-		ModelAndView mav = new ModelAndView("tableSearchItem");
+//		items.add(item);
 		
-		mav.addObject("items", items);
-		
-		return mav;
-		
+		ModelAndView mav = new ModelAndView("tableSearchItem");		
+		mav.addObject("items", items);		
+		return mav;	
 	}
 
 	@RequestMapping(value = "/searchItem.do", method = RequestMethod.GET)

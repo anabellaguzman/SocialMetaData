@@ -1,26 +1,34 @@
 package com.socialmetadata.dao;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.xml.crypto.dsig.keyinfo.RetrievalMethod;
 
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.ejb.criteria.predicate.IsEmptyPredicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.socialmetadata.model.Autor;
 import com.socialmetadata.model.Idioma;
 import com.socialmetadata.model.Item;
+import com.socialmetadata.model.Tema;
 import com.socialmetadata.model.TipoItem;
-
 
 @Repository
 public class ItemDAO {
-	
+
 	@Autowired
 	private SessionFactory session;
 	@Autowired
@@ -37,99 +45,116 @@ public class ItemDAO {
 
 	public void update(Item item) {
 		session.getCurrentSession().update(item);
-		
+
 	}
 
 	public void delete(int idItem) {
 		session.getCurrentSession().delete(getItem(idItem));
-		
+
 	}
 
 	public Item getItem(int idItem) {
-		return (Item)session.getCurrentSession().get(Item.class, idItem);
-	
+		return (Item) session.getCurrentSession().get(Item.class, idItem);
+
 	}
 
 	public List<Item> getAllItems() {
-		
+
 		return session.getCurrentSession().createQuery("from Item").list();
 	}
-	
-	public List<Item> getItemsByTile(String term) {
-		
-		return session.getCurrentSession().createQuery("FROM Item WHERE titulo like '%"+ term + "%'").list();
-	}
-	
-	@Transactional
-	public List<Item> advancedSearch(String titulo, String year, String idTipoItem, String idIdioma, Item item){
-		Criteria criteria = session.getCurrentSession().createCriteria(Item.class);
-		
-		System.out.println("String idIdioma"+idIdioma);
-		System.out.println("ITEM DAO CRITERIA");
-		System.out.println("YEAR: "+year);
-		
-//		criteria.createAlias("autores", "autor")
-//		.add(Restrictions.in("autor.autor", item.getAutores()));
-		
 
-		
-		
-		if(!year.equals("0")) {
+	public List<Item> getItemsByTile(String term) {
+
+		return session.getCurrentSession()
+				.createQuery("FROM Item WHERE titulo like '%" + term + "%'")
+				.list();
+	}
+
+	@Transactional
+	public List<Item> advancedSearch(String titulo, String year,
+			String idTipoItem, String idIdioma, Item item) {
+
+		Criteria criteria = session.getCurrentSession().createCriteria(
+				Item.class, "item");
+
+		System.out.println("ITEM DAO CRITERIA");
+
+		//Titulo
+		if (titulo != null) {
+			criteria.add(Restrictions.ilike("titulo", "%" + titulo + "%"));
+		}
+		//Year
+		if (!year.equals("0")) {
 			criteria.add(Restrictions.eq("year", Integer.parseInt(year)));
 		}
-		if(titulo != null){
-			criteria.add(Restrictions.ilike("titulo", "%"+titulo+"%" ));
-			}
-		if(!idTipoItem.equals("0")){			
-			
-			TipoItem tipoItem = tipoItemDAO.getTipoItem(Integer.parseInt(idTipoItem));
-			
-			System.out.println("entro tipo");
-			criteria.add(Restrictions.eq("tipo", tipoItem));
-			
-		}
-		if(!idIdioma.equals("0")){
-			
+		//Idioma
+		if (!idIdioma.equals("0")) {
 			int intidIdioma = Integer.parseInt(idIdioma);
-			
 			Idioma idioma = idiomaDAO.getIdioma(intidIdioma);
-
 			criteria.add(Restrictions.eq("idioma", idioma));
-			
 		}
 		
+		//TipoItem
+		if (!idTipoItem.equals("0")) {
+			TipoItem tipoItem = tipoItemDAO.getTipoItem(Integer
+					.parseInt(idTipoItem));
+			criteria.add(Restrictions.eq("tipo", tipoItem));
+
+		}
 		
-		List<Item> results = criteria.list();
+		//Autores
+		Set<Autor> sautores = item.getAutores();
+		Disjunction disjunction = Restrictions.disjunction();
+		criteria.createAlias("autores", "a");
+		for (Autor toau : sautores) {
+			disjunction.add(Restrictions.eq("a.idAutor", toau.getIdAutor()));
+		}
+		criteria.add(disjunction);
 		
+		
+		//Temas
+		Set<Tema> stemas = item.getSetTemas();
+		Disjunction disjunctionTemas = Restrictions.disjunction();
+		criteria.createAlias("setTemas", "t");
+		for (Tema temaAcomparar : stemas) {
+			disjunction.add(Restrictions.eq("t.idTema", temaAcomparar.getIdTema()));
+		}
+		criteria.add(disjunction);
+		
+
+		List<Item> resultsD = criteria.list();
+		
+		
+		
+		//Limpieza
+		List<Item> listaLimpia = new ArrayList();
+		// Forma número 1 (Uso de Maps).
+		Map<Integer, Item> mapItems = new HashMap<Integer, Item>(
+				resultsD.size());
+		// Aquí está la magia
+		for (Item i : resultsD) {
+			mapItems.put(i.getIdItem(), i);
+		}
+		// Agrego cada elemento del map a una nueva lista y muestro cada
+		// elemento.
+		System.out.println("Lista sin repetidos:");
+		for (Entry<Integer, Item> i : mapItems.entrySet()) {
+			listaLimpia.add(i.getValue());
+			System.out.println(i.getValue());
+		}
+
 		System.out.println("ITEM DAO CRITERIA RESULTADO");
-		
-		
-		for (Item i: results){
-			
-			System.out.println("TITULO: "+ i.getTitulo());
-			System.out.println("YEAR: "+ i.getYear());
-			
+
+		for (Item i : listaLimpia) {
+			System.out.println("TITULO: " + i.getTitulo());
+			System.out.println("YEAR: " + i.getYear());
+			System.out.println("IDIOMA: " + i.getIdioma().getIdioma());
+			System.out.println("TIPO ITEM: " + i.getTipo().getDescripcion());
 		}
-		
-		return results;
-		
+		//
+		return listaLimpia;
+
 	}
-	
-	
-	
-	
-	// Form object
-//	public class bookingSearchForm {
-//	    private String bookingId;
-//	    public getBookingId()...
-//	    public setBookingId()...
-//	}
-//
-//	// Hibernate
-//	Criteria criteria = getSession().createCriteria(Booking.class);
-//	if(form.getBookingId() != null) {
-//	    criteria.add(Restrictions.eq("bookingId", form.getBookingId()));
-//	}
-//	criteria.list();
+
 
 }

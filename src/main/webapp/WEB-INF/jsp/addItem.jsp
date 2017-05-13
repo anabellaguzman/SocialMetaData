@@ -27,6 +27,38 @@
 
 <title>Agregar Nuevo Item</title>
 </head>
+<style>
+
+
+  .botonTema {
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    display: inline-block;
+    height: 45px;
+    text-align: center;
+    text-decoration: none solid rgb(255, 255, 255);
+    text-size-adjust: 100%;
+    touch-action: manipulation;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: auto;
+    column-rule-color: rgb(255, 255, 255);
+    perspective-origin: 42.5938px 22.5px;
+    transform-origin: 42.5938px 22.5px;
+    user-select: none;
+    caret-color: rgb(255, 255, 255);
+    background: rgb(24, 188, 156) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 2px solid rgb(24, 188, 156);
+    border-radius: 4px 4px 4px 4px;
+    font: normal normal normal normal 15px / 21.4286px Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    outline: rgb(255, 255, 255) none 0px;
+    padding: 10px 15px;
+}
+
+
+
+</style>
 <body>
 	<div id="removable">
 		<div class="container">
@@ -318,11 +350,14 @@
 				$("#checkMsg").text(checkMsg);
 			} else {
 				
+				
+				
+				
 				var x = document.getElementById("listAutores");
 				var y = x.getElementsByTagName("li");
 				var cTemas = document.getElementById("contenedorTemas");
-				var lTemas = cTemas.getElementsByTagName("button");
-				if ( y.length < 1 || lTemas.length < 1 ){
+				var btnsTemas = cTemas.getElementsByClassName("botonTema");
+				if ( y.length < 1 || btnsTemas.length < 1 ){
 					
 					checkMsg = "Debe completar un autor y relacionar tema";
 					$("#checkMsg").text(checkMsg);
@@ -350,6 +385,8 @@
 
 		});
 
+		$('div.myClass')
+		
 		function addNewItem() {
 
 			var titulo = $("#idTituloItem").val();
@@ -359,13 +396,14 @@
 			var descripcion = $("#textArea").val();
 
 			var cTemas = document.getElementById("contenedorTemas");
-			var lTemas = cTemas.getElementsByTagName("label");
-			var lengthTemas = lTemas.length;
+			var btnsTemas = cTemas.getElementsByClassName("botonTema");
+			var lbtnsTemas = btnsTemas.length;				
 			var idTemas = [];
-			for (var i = 0; i < lengthTemas; ++i) {
-				var idT = lTemas[i].id;
+	
+
+			for (var i = 0; i < lbtnsTemas; ++i) {		
+				var idT = btnsTemas[i].id;
 				idTemas.push(idT);
-				console.log(idT);
 			}
 
 			var fsIndAtr = document.getElementById("fs_individualAtributes");
@@ -553,9 +591,9 @@
 			}).append($('<div/>', {
 				'class' : "bs-component",
 			}).append($('<div/>', {
-				'class' : "alert alert-dismissible alert-success",
+				'class' : "botonTema",
 				'id' : id,
-			}).append($('<button/>', {
+			})			.append($('<button/>', {
 				'type' : "button",
 				'class' : "close",
 				'onclick' : "deleteThis(temaDiv" + id + ")",
@@ -563,6 +601,10 @@
 
 			})).append(value)));
 			$newTemaRel.appendTo("#contenedorTemas");
+			
+
+			
+			
 		}
 		function deleteThisLi(o) {
 			var ul = $("#listAutores");
