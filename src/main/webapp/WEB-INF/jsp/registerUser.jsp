@@ -93,7 +93,10 @@
 	
 		function controllData(){
 			
-			
+				var pass1 = $("#password").val();
+				var lpass1 = pass1.length;
+				
+// 				console.log("largo pass: "+ lpass1);
 			
 			
 			if ($("#nombre").val()===""||$("#apellido").val()===""||$("#username").val()===""){
@@ -102,15 +105,22 @@
 				checkMsg="Debe completar todos los campos";
 				$( "#checkMsg").text(checkMsg);
 			}
-			else{if($("#password").val()!=$("#passwordConfirm").val()){
-				
-				checkMsg="Las contraseñas no coinciden";
+			else{if(lpass1<8||lpass1>45){
+				checkMsg="La contraseña debe contener entre 8 y 45 caracteres";
 				 $( "#checkMsg").text(checkMsg);
+				}
+				 else{if($("#password").val()!=$("#passwordConfirm").val()){
+					
+					checkMsg="Las contraseñas no coinciden";
+					 $( "#checkMsg").text(checkMsg);
+					
+					}
+					else{
+						registerUser();
+					}
 				
-				}
-				else{
-					registerUser();
-				}
+			}
+			
 					
 			
 			}

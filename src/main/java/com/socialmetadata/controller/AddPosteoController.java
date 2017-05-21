@@ -1,6 +1,9 @@
 package com.socialmetadata.controller;
 
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -118,6 +121,9 @@ public class AddPosteoController {
 //
 //		 archivo = addPosteo(archivo, file.getOriginalFilename(),extension, idItem);
 //		 System.out.println("id posteo: " + archivo.getIdPosteo());
+		
+		
+		
 //
 		FileUploadController fileUploadController = new FileUploadController();
 		fileUploadController.guardaPortada(fileFormBean, request, imagen,
@@ -143,14 +149,22 @@ public class AddPosteoController {
 
 		Usuario usuario = usuarioService.getByUsername(username);
 		Item item = itemService.getItem(idItem);
+		
+		Date dateC = Calendar.getInstance().getTime();
 
-		Date date = new Date();
-
+//		Date date = new Date();
+		
+		System.out.println("DATE: "+dateC);
+		DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+		String dateP = formatter.format(dateC);
+		
+		
+	
 		posteo.setUsuario(usuario);
 		posteo.setItem(item);
 		posteo.setTitulo(titulo);
 		posteo.setComentario(comentario);
-		posteo.setFecha(date);
+		posteo.setFecha(dateP);
 
 		return posteoService.add(posteo);
 	}

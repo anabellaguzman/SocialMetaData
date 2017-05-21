@@ -117,9 +117,9 @@ public class ItemDAO {
 		Disjunction disjunctionTemas = Restrictions.disjunction();
 		criteria.createAlias("setTemas", "t");
 		for (Tema temaAcomparar : stemas) {
-			disjunction.add(Restrictions.eq("t.idTema", temaAcomparar.getIdTema()));
+			disjunctionTemas.add(Restrictions.eq("t.idTema", temaAcomparar.getIdTema()));
 		}
-		criteria.add(disjunction);
+		criteria.add(disjunctionTemas);
 		
 
 		List<Item> resultsD = criteria.list();

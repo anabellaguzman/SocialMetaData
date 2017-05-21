@@ -192,9 +192,6 @@
 				var idT = btnsTemas[i].id;
 				idTemas.push(idT);
 			}
-
-
-
 			var x = document.getElementById("listAutores");
 			var y = x.getElementsByTagName("li");
 			var length = y.length;
@@ -203,6 +200,35 @@
 				var idA = y[i].id;
 				idAutores.push(idA);
 			}
+			
+			
+// 			var fsIndAtr = document.getElementById("fs_individualAtributes");
+// 			var inputIndAtr = fsIndAtr.getElementsByTagName("input");
+// 			var lIndAtr = inputIndAtr.length;
+
+// 			console.log("inputInd");
+// 			console.log(inputIndAtr);
+
+// 			// 			console.log(lIndAtr);
+// 			var idIndAtr = [];
+// 			var valIndAtr = [];
+// 			for (var i = 0; i < lIndAtr; ++i) {
+
+// 				console.log("console.log(inputIndAtr[i].id);");
+// 				idIndAtr.push(inputIndAtr[i].id);
+// 				console.log(inputIndAtr[i].id);
+// 				console.log("console.log(inputIndAtr[i].value);");
+// 				console.log(inputIndAtr[i].value);
+// 				valIndAtr.push(inputIndAtr[i].value);
+
+// 				// 				console.log(inIndAtr[i]);
+// 				// 				console.log(inIndAtr[i].val());
+// 				// 				var idA = inIndAtr[i].id;
+// 				// 				idAutores.push(idA);
+// 			}
+			
+			
+			
 			$.ajax({
 				url : "advancedSearch.do",
 				type : "POST",
@@ -274,33 +300,33 @@
 // 			select.value = new Date().getFullYear();
 		}
 
-		function jsFunction() {
+// 		function jsFunction() {
 
-			vNombreAtributos = new Array();
-			var myselect = document.getElementById("selectOpt");
-			var fs_iA = document.getElementById("fs_individualAtributes");
-			$(fs_iA).empty();
+// 			vNombreAtributos = new Array();
+// 			var myselect = document.getElementById("selectOpt");
+// 			var fs_iA = document.getElementById("fs_individualAtributes");
+// 			$(fs_iA).empty();
 
-			$
-					.getJSON(
-							'selectedTipoItem.do',
-							"id="
-									+ myselect.options[myselect.selectedIndex].value,
-							function(nombreAtributos) {
-								var items = [];
-								$
-										.each(
-												nombreAtributos,
-												function(key, val) {
-													items
-															.push("<div class='form-group'> <label class='col-lg-2 control-label' for='inputDefault'>"
-																	+ val.nombre
-																	+ "</label> <div class='col-lg-10'> <input type='text' class='form-control' id="+val.idAtributoItem+"> </input> </div> </div>");
-												});
-								$("#fs_individualAtributes").append(items);
-							});
+// 			$
+// 					.getJSON(
+// 							'selectedTipoItem.do',
+// 							"id="
+// 									+ myselect.options[myselect.selectedIndex].value,
+// 							function(nombreAtributos) {
+// 								var items = [];
+// 								$
+// 										.each(
+// 												nombreAtributos,
+// 												function(key, val) {
+// 													items
+// 															.push("<div class='form-group'> <label class='col-lg-2 control-label' for='inputDefault'>"
+// 																	+ val.nombre
+// 																	+ "</label> <div class='col-lg-10'> <input type='text' class='form-control' id="+val.idAtributoItem+"> </input> </div> </div>");
+// 												});
+// 								$("#fs_individualAtributes").append(items);
+// 							});
 
-		}
+// 		}
 
 		$(function() {
 			$("#search").autocomplete({

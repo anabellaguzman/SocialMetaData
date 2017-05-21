@@ -32,7 +32,7 @@ public abstract class Posteo {
 	@Column(columnDefinition = "TEXT")
 	private String comentario;
 	@Column
-	private Date fecha;
+	private String fecha;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idItem")
 	private Item item;
@@ -42,7 +42,7 @@ public abstract class Posteo {
 	
 	public Posteo(){}
 	
-	public Posteo(String titulo, Date fecha, Item item, Usuario usuario) {
+	public Posteo(String titulo, String fecha, Item item, Usuario usuario) {
 //		super();
 		this.titulo = titulo;
 		this.fecha = fecha;
@@ -74,11 +74,11 @@ public abstract class Posteo {
 		this.comentario = comentario;
 	}
 
-	public Date getFecha() {
+	public String getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(Date fecha) {
+	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
 

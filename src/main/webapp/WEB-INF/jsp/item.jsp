@@ -328,12 +328,12 @@
 							<li id=listComentarios><c:forEach
 									items="${item.comentarios}" var="comentarios">
 									<div class="panel panel-default">
-										<div class="panel-heading">${comentarios.titulo}</div>
+										<div class="panel-heading">${comentarios.usuario.nombre} ${comentarios.usuario.apellido}  
+													</div>
 										<div class="panel-body">${comentarios.comentario}</div>
 										<div class="panel-body">
 											<p class="text-muted">
-												<small>Por: ${comentarios.usuario.nombre} - Fecha:
-													${comentarios.fecha}</small>
+												<small>${comentarios.fecha}</small>
 											</p>
 										</div>
 									</div>
@@ -349,16 +349,17 @@
 							<div class="modal">
 								<div class="modal-dialog">
 									<div class="modal-content">
-										<div class="modal-header">
-											<h4 class="modal-title" contenteditable="true" id="tituloC"
-												onFocus=clearField(tituloC)>Titulo de tu comentario ...</h4>
-										</div>
+<!-- 										<div class="modal-header"> -->
+<!-- 											<h4 class="modal-title" contenteditable="true" id="tituloC" -->
+<!-- 												onFocus=clearField(tituloC)>Titulo de tu comentario ...</h4> -->
+<!-- 										</div> -->
 										<div class="modal-body">
 											<p contenteditable="true" id="comentarioC"
 												onFocus=clearField(comentarioC)>Escribe tu comentario...</p>
 										</div>
 										<div class="modal-footer">
 											<sec:authorize access="isAuthenticated()">
+											<p align="center" class="text-danger" id=checkMsgEr></p>
 												<button type="button" class="btn btn-primary"
 													onclick="addComment()">Comentar</button>
 											</sec:authorize>
@@ -385,11 +386,11 @@
 							<li id=listErrores><c:forEach items="${item.errores}"
 									var="errores">
 									<div class="panel panel-default">
-										<div class="panel-heading">${errores.titulo}</div>
+										<div class="panel-heading">${errores.usuario.nombre} ${errores.usuario.apellido}</div>
 										<div class="panel-body">${errores.comentario}</div>
 										<div class="panel-body">
 											<p class="text-muted">
-												<small>Por: ${errores.usuario.nombre} - Fecha:
+												<small>
 													${errores.fecha}</small>
 											</p>
 										</div>
@@ -400,16 +401,17 @@
 							<div class="modal">
 								<div class="modal-dialog">
 									<div class="modal-content">
-										<div class="modal-header">
-											<h4 class="modal-title" contenteditable="true" id="tituloE"
-												onFocus=clearField(tituloE)>Titulo del Error</h4>
-										</div>
+<!-- 										<div class="modal-header"> -->
+<!-- 											<h4 class="modal-title" contenteditable="true" id="tituloE" -->
+<!-- 												onFocus=clearField(tituloE)>Titulo del Error</h4> -->
+<!-- 										</div> -->
 										<div class="modal-body">
 											<p contenteditable="true" id="comentarioE"
-												onFocus=clearField(comentarioE)>Reporte del error ...</p>
+												onFocus=clearField(comentarioE)>Escribe un error que hayas encontrado en el ejemplar ...</p>
 										</div>
 										<div class="modal-footer">
 											<sec:authorize access="isAuthenticated()">
+											<p align="center" class="text-danger" id=checkMsg></p>
 												<button type="button" class="btn btn-primary"
 													onclick="addError()">Reportar</button>
 											</sec:authorize>
@@ -446,7 +448,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close" id="btnCloseModal">
+							aria-label="Close" id="btnCloseModalUpdatePortrait">
 							<span aria-hidden="true">&times;</span>
 						</button>
 						<h4 class="modal-title" id="myModalLabel">Actualizar Portada</h4>
@@ -747,28 +749,46 @@
 		
 		
 		function addComment() {
-			$.ajax({
-				url : "addComment",
-				type : "POST",
-				data : {
-					tituloC : $("#tituloC").text(),
-					comentarioC : $("#comentarioC").text(),
-					idItem : $("#idItem").val()
-				},
-				dataType : "html",
-				success : function(data) {
-					$("#listComentarios").append(data);
-				}
+		
+			if ($("#comentarioC").text().length<1 || $("#comentarioC").text() =="Escribe tu comentario..."){
+				checkMsg="Debes escribir algo";
+				$( "#checkMsg").text(checkMsg);
+			}
+			else{
+				$.ajax({
+					url : "addComment",
+					type : "POST",
+					data : {
+						tituloC : "",
+						comentarioC : $("#comentarioC").text(),
+						idItem : $("#idItem").val()
+					},
+					dataType : "html",
+					success : function(data) {
+						$("#listComentarios").append(data);
+					}
 
-			});
-		}
+				});
+
+			}
+				
+			}
+
+
 
 		function addError() {
+			
+			if ($("#comentarioE").text().length<1 ||$("#comentarioE").text()=="Escribe un error que hayas encontrado en el ejemplar ..."){
+				checkMsg="Debes escribir algo";
+				$( "#checkMsgEr").text(checkMsg);
+			}
+			else{
+			
 			$.ajax({
 				url : "addError",
 				type : "POST",
 				data : {
-					tituloE : $("#tituloE").text(),
+					tituloE : "",
 					comentarioE : $("#comentarioE").text(),
 					idItem : $("#idItem").val()
 				},
@@ -778,6 +798,7 @@
 				}
 
 			});
+			}
 		}
 
 		$(document).on(
@@ -851,10 +872,12 @@
 			  });
 			}
 		
+// 		 $(function () {
+// 			   $('#modalActualizarPortada').modal('toggle');
+// 			});
 		
 		
-		
-		$(document).ready(function(){
+// 		$(document).ready(function(){
 			// bind 'myForm' and provide a simple callback function 
 		
 			$('#formFilePortada').ajaxForm({
@@ -867,13 +890,14 @@
 							$(this).hide();
 							
 						});
-					},100);
-					
+						
+					},1000);
+// 					$("#modalActualizarPortada.close").click();
 				}
 				
 			});
 			
-		});
+// 		});
 			
 			
 // 			console.log("actualizaaaaaaado")

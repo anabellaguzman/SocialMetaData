@@ -23,6 +23,9 @@ import com.socialmetadata.model.Idioma;
 import com.socialmetadata.model.Item;
 import com.socialmetadata.model.Tema;
 import com.socialmetadata.model.TipoItem;
+import com.socialmetadata.model.ValorAtributoItem;
+import com.socialmetadata.modeloDao.embebedPK.ValorAtributoItemEPK;
+import com.socialmetadata.service.AtributoItemService;
 import com.socialmetadata.service.AutorService;
 import com.socialmetadata.service.IdiomaService;
 import com.socialmetadata.service.ItemService;
@@ -43,6 +46,8 @@ public class SearchItemController {
 	private AutorService autorService;
 	@Autowired
 	private TemaService temaService;
+	@Autowired
+	private AtributoItemService atributoItemService;
 
 	
 	@RequestMapping("/advancedSearch")
@@ -64,7 +69,7 @@ public class SearchItemController {
 		Set<AtributoItem> atributosFirstItem = firstItem.getAtributoItem();
 		
 
-		map.put("listAtributosFistItem", atributosFirstItem);
+//		map.put("listAtributosFistItem", atributosFirstItem);
 		map.put("listTipoItem", listTipoItem);
 		map.put("listIdioma", listIdioma);
 		
@@ -80,7 +85,10 @@ public class SearchItemController {
 			@RequestParam String idTipoItem,
 			@RequestParam String idIdioma,
 			@RequestParam List<String> idAutores,
-			@RequestParam List<String> idTemas){
+			@RequestParam List<String> idTemas
+//			,
+//			@RequestParam List<String> idOwnAtr, @RequestParam List<String> valOwnAtr
+			){
 		
 		System.out.println("SEARCH ITEM CONTROLLER");	
 		
@@ -111,6 +119,18 @@ public class SearchItemController {
 			temas.add(t);
 		}
 		item.setSetTemas(temas);
+		
+		//		Set<ValorAtributoItem> valorAtributoItem = new HashSet<ValorAtributoItem>();		
+//		for (int i = 0; i < idOwnAtr.size(); i++) {
+//			String enteroString = idOwnAtr.get(i);
+//			int id = Integer.parseInt(enteroString);
+//			AtributoItem atributo = atributoItemService.getAtributoItem(id);		
+//			ValorAtributoItemEPK pk = new ValorAtributoItemEPK(atributo);
+//			ValorAtributoItem valAI = new ValorAtributoItem(pk, valOwnAtr.get(i));
+//			valorAtributoItem.add(valAI);			
+//			
+//		}		
+//		item.setValorAtributoPropio(valorAtributoItem);
 		
 				
 		List<Item> items = itemService.advancedSearch(tituloItem, year, idTipoItem, idIdioma, item);			

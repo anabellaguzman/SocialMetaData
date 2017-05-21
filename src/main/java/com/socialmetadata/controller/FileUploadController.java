@@ -42,6 +42,22 @@ public class FileUploadController {
     	String filePath = request.getServletContext().getRealPath("/"); 
     	filePath = filePath+folder;
     	
+    	
+//    	File fichero = new File("RUTA_DEL_ARCHIVO");
+//        eliminarFichero(fichero);
+    	
+    	File oldPortrait = new File(filePath+idFile);
+    	if (!oldPortrait.exists()) {
+            System.out.println("El archivo data no existe.");
+        } else {
+        	oldPortrait.delete();
+            System.out.println("El archivo data fue eliminado.");
+        }
+    	
+//    	System.out.println("ruta archivo existente"+filePath+folder+idFile);
+//    	oldPortrait.delete();
+    	
+    	
     	System.out.println(filePath);
     	
 //    	/Users/Development/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SocialMetadata/    	
