@@ -1,8 +1,9 @@
 package com.socialmetadata.controller;
 
-
-
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.Column;
 
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.socialmetadata.model.Archivo;
 import com.socialmetadata.model.Comentario;
+import com.socialmetadata.model.Error;
 import com.socialmetadata.model.Item;
 import com.socialmetadata.model.Posteo;
 import com.socialmetadata.model.Usuario;
@@ -35,146 +37,139 @@ public class ItemController {
 
 	@Autowired
 	private ItemService itemService;
-	
-	
+
 	@Autowired
 	private UsuarioService usuarioService;
-	
+
 	@Autowired
 	private VotacionService votacionService;
 
-
-	@RequestMapping(value ="/item",  method = RequestMethod.GET)
+	@RequestMapping(value = "/item", method = RequestMethod.GET)
 	// @Transactional(propagation = Propagation.REQUIRES_NEW)
 	@Transactional
 	public ModelAndView setupForm(Integer idItem) {
-		
+
 		ModelAndView mav = new ModelAndView("item");
+
 		Item item = itemService.getItem(idItem);
-		itemService.getItemComentarios(item);
+
+		List<Comentario> comentarios = itemService.getItemComentarios(item);
+		List<Error> errores = itemService.getItemErrores(item);
+
+//		itemService.getItemComentarios(item);
 		itemService.getItemErrores(item);
 		itemService.getItemArchivos(item);
 
-		mav.addObject("item", item);
+		for (ValorAtributoItem vai : item.getValorAtributoPropio()) {
+			vai.getValor();
+			vai.getPk().getAtributo().getNombre();
+		}
 
-	 return mav;
-	 
-	 }
-	
-	
-	
+		mav.addObject("item", item);
+		mav.addObject("comentarios", comentarios);
+		mav.addObject("errores", errores);
+
+		return mav;
+
+	}
+
 	@RequestMapping(value = "/votarItem", method = RequestMethod.POST)
 	@Transactional
 	@ResponseBody
 	public String votarItem(@RequestParam Double voto, @RequestParam int idItem) {
-		
-		System.out.println("voto: "+ voto+"idItem: "+idItem);
-		
-		
-//		VotacionEPK pk = new VotacionEPK (, idItem);
 
-		
+		System.out.println("voto: " + voto + "idItem: " + idItem);
+
+		// VotacionEPK pk = new VotacionEPK (, idItem);
+
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
 		String name = auth.getName(); // get logged in username
 		System.out.println(name);
 		Item item = itemService.getItem(idItem);
 		Usuario usuario = usuarioService.getByUsername(name);
-		
-//		idUsuario = usuario.getIdUsuario();
-		
-//		System.out.println("idUsuario: "+ usuario.getIdUsuario());
 
-		
-		VotacionEPK pk = new VotacionEPK (item, usuario);
+		// idUsuario = usuario.getIdUsuario();
+
+		// System.out.println("idUsuario: "+ usuario.getIdUsuario());
+
+		VotacionEPK pk = new VotacionEPK(item, usuario);
 		Votacion votacion = new Votacion(pk, voto);
-		
-		item = votacionService.addVotacion(votacion, item);
-		
-//		String result = votacionService.addVotacion(votacion, item);
-		
-//		Set<Votacion> listadoVotos = item.getListadoVotos();
-//		listadoVotos.add(votacion);
-//		
-//		item.setListadoVotos(listadoVotos);
-//		
-//		itemService.update(item);
-//		item = itemService.getItem(item.getIdItem());
-		
-//		String result = votacionService.addVotacion(votacion, item);
-		
-		 
-		
-//		Set<Votacion> listadoVotos = item.getListadoVotos();
-//		
-//		if (result == "1"){
-//			System.out.println("SE ACTUALIZO DB");
-//			
-//			votaciones = item.getListadoVotos();
-////			votaciones.add(votacion);
-//			
-//			for (Votacion v: item.getListadoVotos()){
-//				
-//				System.out.println("usuario: "+v.getVotacionPK().getUsuario().getIdUsuario() +"item: "+v.getVotacionPK().getItem().getIdItem()+" puntaje: "+v.getPuntaje());
-//				
-//			}
-			
-//			calculateAvg(item);
-			item.setPuntaje(calculateAvg(item));
-			
-			itemService.update(item);
-			
-			return "Su voto ha sido guardado correctamente!";
-		}
-	
-	
-		private Double calculateAvg (Item item){
-			
-			Double sumQtyVotos = 0.00;
-			Integer qtyVotos = 0;
-			
-			
-			
-			for (Votacion v: item.getListadoVotos()){
-				
-//				System.out.println("usuario: "+v.getVotacionPK().getUsuario().getIdUsuario() +"item: "+v.getVotacionPK().getItem().getIdItem()+" puntaje: "+v.getPuntaje());
-				
-				qtyVotos ++;
-				sumQtyVotos = sumQtyVotos + v.getPuntaje();
-				
-			}
-			
-			System.out.println("Qty Votos:  "+ qtyVotos+"sumQtyVotos: "+ sumQtyVotos);
-			
-			Double avg = sumQtyVotos/qtyVotos;
-			System.out.println("AVG:  "+ avg);
-			
-			return avg;
-			
-		}
-		
-		
-		@RequestMapping(value = "/getNewAvg", method = RequestMethod.POST)
-		@Transactional
-		@ResponseBody
-		public Double getNewAvg( @RequestParam int idItem) {
-			
-			Item item = itemService.getItem(idItem);
-			
-			item.getPuntaje();
-			
-			return item.getPuntaje();
-		}
-		
 
-		
-		
-		
-//		ValorAtributoItem valAI = new ValorAtributoItem(pk, valOwnAtr.get(i));
-		
+		item = votacionService.addVotacion(votacion, item);
+
+		// String result = votacionService.addVotacion(votacion, item);
+
+		// Set<Votacion> listadoVotos = item.getListadoVotos();
+		// listadoVotos.add(votacion);
+		//
+		// item.setListadoVotos(listadoVotos);
+		//
+		// itemService.update(item);
+		// item = itemService.getItem(item.getIdItem());
+
+		// String result = votacionService.addVotacion(votacion, item);
+
+		// Set<Votacion> listadoVotos = item.getListadoVotos();
+		//
+		// if (result == "1"){
+		// System.out.println("SE ACTUALIZO DB");
+		//
+		// votaciones = item.getListadoVotos();
+		// // votaciones.add(votacion);
+		//
+		// for (Votacion v: item.getListadoVotos()){
+		//
+		// System.out.println("usuario: "+v.getVotacionPK().getUsuario().getIdUsuario()
+		// +"item: "+v.getVotacionPK().getItem().getIdItem()+" puntaje: "+v.getPuntaje());
+		//
+		// }
+
+		// calculateAvg(item);
+		item.setPuntaje(calculateAvg(item));
+
+		itemService.update(item);
+
+		return "Su voto ha sido guardado correctamente!";
 	}
 
-		
-		
+	private Double calculateAvg(Item item) {
 
+		Double sumQtyVotos = 0.00;
+		Integer qtyVotos = 0;
 
+		for (Votacion v : item.getListadoVotos()) {
+
+			// System.out.println("usuario: "+v.getVotacionPK().getUsuario().getIdUsuario()
+			// +"item: "+v.getVotacionPK().getItem().getIdItem()+" puntaje: "+v.getPuntaje());
+
+			qtyVotos++;
+			sumQtyVotos = sumQtyVotos + v.getPuntaje();
+
+		}
+
+		System.out.println("Qty Votos:  " + qtyVotos + "sumQtyVotos: "
+				+ sumQtyVotos);
+
+		Double avg = sumQtyVotos / qtyVotos;
+		System.out.println("AVG:  " + avg);
+
+		return avg;
+
+	}
+
+	@RequestMapping(value = "/getNewAvg", method = RequestMethod.POST)
+	@Transactional
+	@ResponseBody
+	public Double getNewAvg(@RequestParam int idItem) {
+
+		Item item = itemService.getItem(idItem);
+
+		item.getPuntaje();
+
+		return item.getPuntaje();
+	}
+
+	// ValorAtributoItem valAI = new ValorAtributoItem(pk, valOwnAtr.get(i));
+
+}

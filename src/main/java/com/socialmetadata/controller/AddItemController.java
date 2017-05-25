@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang3.text.WordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.SpringVersion;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -115,6 +116,12 @@ public class AddItemController {
 			@RequestParam List<String> idOwnAtr, @RequestParam List<String> valOwnAtr
 			) {
 		
+		
+		System.out.println("idownatr size"+ idOwnAtr.size()+" "+valOwnAtr.size());
+		
+		tituloItem = WordUtils.capitalizeFully(tituloItem);
+		
+		
 		Idioma idioma = idiomaService.getIdioma(idIdioma);
 		TipoItem tipoItem = tipoItemService.getTipoItem(idTipoItem);
 		Item item = new Item();		
@@ -149,13 +156,16 @@ public class AddItemController {
 		for (int i = 0; i < idOwnAtr.size(); i++) {
 			String enteroString = idOwnAtr.get(i);
 			int id = Integer.parseInt(enteroString);
-			AtributoItem atributo = atributoItemService.getAtributoItem(id);		
+			AtributoItem atributo = atributoItemService.getAtributoItem(id);	
+			
+			
 			ValorAtributoItemEPK pk = new ValorAtributoItemEPK(item, atributo);
 			ValorAtributoItem valAI = new ValorAtributoItem(pk, valOwnAtr.get(i));
 			valorAtributoItem.add(valAI);			
 			
 		}		
 		item.setValorAtributoPropio(valorAtributoItem);
+		itemService.update(item);
 		 return item.getIdItem();
 	}
 	

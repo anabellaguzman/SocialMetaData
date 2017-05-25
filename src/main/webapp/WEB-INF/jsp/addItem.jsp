@@ -25,7 +25,7 @@
 	src="<c:url value="/resources/js/jquery-ui.min.js" />"></script>
 <script src="<c:url value="/resources/js/jquery.form.js" />"></script>
 
-<title>Agregar Nuevo Item</title>
+<title>Agregar Nuevo Ejemplar</title>
 </head>
 <style>
 
@@ -64,7 +64,7 @@
 		<div class="container">
 			<form class="form-horizontal" method="POST" action="addItem">
 				<div class="well bs-component">
-					<h1>Nuevo Item</h1>
+					<h1>Nuevo Ejemplar</h1>
 
 
 					<div class="row">

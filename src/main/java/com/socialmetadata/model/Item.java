@@ -71,6 +71,7 @@ public class Item {
     
     
     @OneToMany
+//    (fetch=FetchType.EAGER)
     @JoinColumn(name="idItem", insertable=false, updatable=false)
     private Set<Posteo> posteos;
 

@@ -1,5 +1,6 @@
 package com.socialmetadata.controller;
 
+import org.apache.commons.lang3.text.WordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,8 @@ public class AddTemaController {
 	@RequestMapping(value = "/addTema", method=RequestMethod.POST)
 	@ResponseBody
 	public String addTema(@RequestParam String newTema){
+		
+		newTema = WordUtils.capitalizeFully(newTema);
 		
 		Tema tema = new Tema(newTema);		
 		temaService.addTema(tema);

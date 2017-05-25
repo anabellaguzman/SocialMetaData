@@ -36,7 +36,7 @@ public abstract class Posteo {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idItem")
 	private Item item;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idUsuario")
 	private Usuario usuario;
 	

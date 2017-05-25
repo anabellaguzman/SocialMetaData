@@ -278,7 +278,7 @@
 											</div>
 											<div class="input-group">
 												<span class="input-group-btn"> <span
-													class="btn btn-primary btn-file"> Browse&hellip; <input
+													class="btn btn-primary btn-file"> Buscar&hellip; <input
 														type="file" multiple id=fichero name="fichero">
 												</span>
 												</span> <input id="nombreArchivoInput" type="text"
@@ -326,7 +326,7 @@
 					<div class="tab-pane fade" id="comentarios">
 						<ul class="list-unstyled">
 							<li id=listComentarios><c:forEach
-									items="${item.comentarios}" var="comentarios">
+									items="${comentarios}" var="comentarios">
 									<div class="panel panel-default">
 										<div class="panel-heading">${comentarios.usuario.nombre} ${comentarios.usuario.apellido}  
 													</div>
@@ -383,7 +383,7 @@
 					</div>
 					<div class="tab-pane fade" id="errores">
 						<ul class="list-unstyled">
-							<li id=listErrores><c:forEach items="${item.errores}"
+							<li id=listErrores><c:forEach items="${errores}"
 									var="errores">
 									<div class="panel panel-default">
 										<div class="panel-heading">${errores.usuario.nombre} ${errores.usuario.apellido}</div>

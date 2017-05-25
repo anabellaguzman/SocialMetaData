@@ -31,7 +31,7 @@
 							<thead>
 								<tr>
 
-									<th class="success">Item</th>
+									<th class="success">Ejemplar</th>
 									<th class="success"></th>
 
 

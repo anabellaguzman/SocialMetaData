@@ -46,19 +46,19 @@ public class FileUploadController {
 //    	File fichero = new File("RUTA_DEL_ARCHIVO");
 //        eliminarFichero(fichero);
     	
-    	File oldPortrait = new File(filePath+idFile);
-    	if (!oldPortrait.exists()) {
-            System.out.println("El archivo data no existe.");
-        } else {
-        	oldPortrait.delete();
-            System.out.println("El archivo data fue eliminado.");
-        }
+//    	File oldPortrait = new File(filePath+idFile);
+//    	if (!oldPortrait.exists()) {
+//            System.out.println("El archivo data no existe.");
+//        } else {
+//        	oldPortrait.delete();
+//            System.out.println("El archivo data fue eliminado.");
+//        }
     	
 //    	System.out.println("ruta archivo existente"+filePath+folder+idFile);
 //    	oldPortrait.delete();
     	
     	
-    	System.out.println(filePath);
+    	System.out.println("FileUploadController: archivo path"+filePath+idFile);
     	
 //    	/Users/Development/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SocialMetadata/    	
 //    	multipartFile.transferTo(new File(filePath));

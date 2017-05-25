@@ -90,7 +90,7 @@ public class SearchItemController {
 //			@RequestParam List<String> idOwnAtr, @RequestParam List<String> valOwnAtr
 			){
 		
-		System.out.println("SEARCH ITEM CONTROLLER");	
+
 		
 		Item item = new Item();		
 		if (year == ""){
@@ -134,45 +134,40 @@ public class SearchItemController {
 		
 				
 		List<Item> items = itemService.advancedSearch(tituloItem, year, idTipoItem, idIdioma, item);			
-//	
-//		List<Item> items = new ArrayList ();
+
 		
-//		items.add(item);
-		
-		ModelAndView mav = new ModelAndView("tableSearchItem");		
-		mav.addObject("items", items);		
-		return mav;	
+		if(items.size() == 0){
+			ModelAndView mav = new ModelAndView("noResultFound");
+			return mav;
+		}
+		else{
+			ModelAndView mav = new ModelAndView("tableSearchItem");
+			
+			mav.addObject("items", items);
+			return mav;
+			
+		}
 	}
 
 	@RequestMapping(value = "/searchItem.do", method = RequestMethod.GET)
 	public @ResponseBody ModelAndView  searchItem(@RequestParam String term) {	
-		
-
-		
+				
 		List<Item> items = itemService.getItemByTitle(term);
 		
-		ModelAndView mav = new ModelAndView("tableSearchItem");
+		if(items.size() == 0){
+			ModelAndView mav = new ModelAndView("noResultFound");
+			return mav;
+		}
+		else{
+			ModelAndView mav = new ModelAndView("tableSearchItem");
+			
+			mav.addObject("items", items);
+			return mav;
+			
+		}
+
 		
-		mav.addObject("items", items);
-//		
-//		for (Item i : items){
-////			
-//			System.out.println("Titlo item: " + i.getTitulo());
-////			i.getAño();
-////			i.getTipo().getDescripcion();
-////			
-////			System.out.println(i.getTipo().getDescripcion());
-////			Set<Autor> autores = i.getAutores();
-//			
-//			for (Autor a : i.getAutores()){
-//				System.out.println("autor nombre"+ a.getNombre());
-//				System.out.println("autor apellido"+ a.getApellido());
-//			}
-//
-//			
-//		}
 		
-		return mav;
 		
 	}
 		
