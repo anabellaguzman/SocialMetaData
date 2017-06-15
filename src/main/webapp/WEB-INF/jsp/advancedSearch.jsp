@@ -103,8 +103,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="select" class="col-lg-2 control-label">Tipo
-								Item</label>
+							<label for="select" class="col-lg-2 control-label">Formato</label>
 							<div class="col-lg-10">
 								<select class="form-control" onchange="jsFunction()"
 									id="selectOpt">
@@ -284,7 +283,7 @@
 		}
 
 		function year() {
-			var min = 1999, max = new Date().getFullYear(), select = document
+			var min = 1900, max = new Date().getFullYear(), select = document
 					.getElementById('selectYear');
 			for (var i = min; i <= max; i++) {
 				var opt = document.createElement('option');

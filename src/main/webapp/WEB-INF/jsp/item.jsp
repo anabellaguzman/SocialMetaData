@@ -68,6 +68,62 @@
 
 
 
+/* pop up */
+
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* The actual popup */
+.popup .popuptext {
+    visibility: hidden;
+    width: 160px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;} 
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
 </style>
 
 <!-- <script> -->
@@ -101,7 +157,10 @@
    }(document, 'script', 'facebook-jssdk'));
   
   
-
+  function popUp() {
+	    var popup = document.getElementById("myPopup");
+	    popup.classList.toggle("show");
+	}
   
   
 </script>
@@ -113,6 +172,9 @@
 
 
 			<div class="col-sm-4" id=serverMSG></div>
+			
+			
+			
 			<%-- 	<img src="<c:url value="/resources/images/1.jpg" />" alt="some_text" width="180" height="150"> --%>
 			<br> <br> <br>
 			<div class="jumbotron">
@@ -151,6 +213,7 @@
 
 
 					<div class="col-sm-8">
+					<div class="row">
 					
 <%-- 				<span class="stars" data-rating="${item.puntaje}"   data-num-stars="5" ></span>	 --%>
 <!-- 					</br> -->
@@ -161,7 +224,7 @@
 
 <input type="hidden" id="idItemPuntaje" name="idItemPuntaje"
 														value="${item.puntaje}">
-
+<sec:authorize access="isAuthenticated()">
 
 	<div class="ec-stars-wrapper">
 	<a id="star1" href="#" data-value="1" title="Votar con 1 estrellas" onclick= "votar(1)">&#9733;</a>
@@ -171,7 +234,29 @@
 	<a id="star5" href="#" data-value="5" title="Votar con 5 estrellas" onclick= "votar(5)">&#9733;</a>
 </div>
 
+</sec:authorize>
+<sec:authorize access="isAnonymous()">
 
+	<div class="ec-stars-wrapper">
+	<a  class= "popup" id="star1" href="#" data-value="1" title="Votar con 1 estrella" onclick= "popUp()">&#9733;
+	<span class="popuptext" id="myPopup">Oh! Necesitas iniciar sesion</span></a>
+	<a  class= "popup" id="star2" href="#" data-value="1" title="Votar con 2 estrellas" onclick= "popUp()">&#9733;
+	<span class="popuptext" id="myPopup">Oh! Necesitas iniciar sesion</span></a>
+	<a  class= "popup" id="star3" href="#" data-value="1" title="Votar con 3 estrellas" onclick= "popUp()">&#9733;
+	<span class="popuptext" id="myPopup">Oh! Necesitas iniciar sesion</span></a>
+	<a  class= "popup" id="star4" href="#" data-value="1" title="Votar con 4 estrellas" onclick= "popUp()">&#9733;
+	<span class="popuptext" id="myPopup">Oh! Necesitas iniciar sesion</span></a>
+	<a  class= "popup" id="star5" href="#" data-value="1" title="Votar con 5 estrellas" onclick= "popUp()">&#9733;
+	<span class="popuptext" id="myPopup">Oh! Necesitas iniciar sesion</span></a>
+
+
+	</div>
+	
+	
+
+
+
+</sec:authorize>
 						<sec:authorize access="isAuthenticated()">
 							<a class="btn btn-warning" onclick="addToFavs(${item.idItem})">Favorito</a>
 						</sec:authorize>
@@ -188,6 +273,9 @@
 
 						<a href="https://www.google.com/search?q=${item.titulo}"
 							class="btn btn-danger" target="_blank">Google</a>
+							
+		
+							
 						<sec:authorize ifAnyGranted="ROLE_FB">
 
 
@@ -201,6 +289,8 @@
 						</sec:authorize>
 						<p>
 					</div>
+					
+										</div>
 
 					<div class="col-sm-8">
 						<ul class="list-group">
@@ -285,7 +375,6 @@
 													class="form-control">
 											</div>
 											<br>
-											<button class="btn btn-default">Cancel</button>
 
 
 											<sec:authorize access="isAuthenticated()">
@@ -521,10 +610,14 @@
 			  
 			  
 			  var star = "star"+i;
+// 			  var starAnonimous = "star"+i+i;
 			  
-			  console.log(star);
+// 			  console.log(starAnonimous);
 		  
+			  
+// 			document.getElementById(starAnonimous).style.color = "FFD700";
 		  document.getElementById(star).style.color = "FFD700";
+		  
 		  
 		  }
 // 		  var rating = $("#idItemPuntaje").val();
@@ -826,6 +919,10 @@
 
 		function showMsg() {
 			$("#loginMsg").show();
+		}
+		
+		function showMsgV() {
+			$("#loginMsgV").show();
 		}
 		
 		function showMsgP() {

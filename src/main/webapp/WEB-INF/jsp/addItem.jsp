@@ -73,13 +73,13 @@
 
 							<fieldset id="fs_generalAtributes">
 								<div class="form-group">
-									<label for="inputDefault" class="col-lg-2 control-label">Titulo (*)</label>
+									<label for="inputDefault" class="col-lg-2 control-label">Titulo</label>
 									<div class="col-lg-10">
 										<input type="text" class="form-control" id="idTituloItem"></input>
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="inputDefault" class="col-lg-2 control-label">Año (*)</label>
+									<label for="inputDefault" class="col-lg-2 control-label">Año</label>
 									<div class="col-lg-10">
 										<select class="form-control" id="selectYear">
 										</select>
@@ -110,8 +110,7 @@
 										data-target="#modalAddTema">+</a>
 								</div>
 								<div class="form-group">
-									<label for="select" class="col-lg-2 control-label">Tipo
-										Item</label>
+									<label for="select" class="col-lg-2 control-label">Formato</label>
 									<div class="col-lg-10">
 										<select class="form-control" onchange="jsFunction()"
 											id="selectOpt">
@@ -346,7 +345,7 @@
 		function checkData() {
 			if ($("#idTituloItem").val() === "") {
 
-				checkMsg = "Debe completar todos los campos obligatorios";
+				checkMsg = "Debe ingresar el titulo";
 				$("#checkMsg").text(checkMsg);
 			} else {
 				
@@ -470,7 +469,7 @@
 		}
 
 		$(function year() {
-			var min = 1999, max = new Date().getFullYear(), select = document
+			var min = 1900, max = new Date().getFullYear(), select = document
 					.getElementById('selectYear');
 			for (var i = min; i <= max; i++) {
 				var opt = document.createElement('option');

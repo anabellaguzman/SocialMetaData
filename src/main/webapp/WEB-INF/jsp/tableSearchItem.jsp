@@ -53,7 +53,7 @@
 						<tr>
 							<!-- 							<th style="display:none;">id</th> -->
 							<th>Titulo</th>
-							<th>Tipo Item</th>
+							<th>Formato</th>
 
 						</tr>
 					</thead>
