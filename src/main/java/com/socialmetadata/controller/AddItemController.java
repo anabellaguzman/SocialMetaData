@@ -160,7 +160,7 @@ public class AddItemController {
 			
 			
 			ValorAtributoItemEPK pk = new ValorAtributoItemEPK(item, atributo);
-			ValorAtributoItem valAI = new ValorAtributoItem(pk, valOwnAtr.get(i));
+			ValorAtributoItem valAI = new ValorAtributoItem(pk, WordUtils.capitalizeFully(valOwnAtr.get(i)));
 			valorAtributoItem.add(valAI);			
 			
 		}		

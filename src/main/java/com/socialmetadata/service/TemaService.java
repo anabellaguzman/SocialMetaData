@@ -34,5 +34,8 @@ public class TemaService {
 	public void addTema(Tema tema) {
 		temaDAO.add(tema);
 	}
-
+	
+	public boolean temaExists(String tema){
+		return temaDAO.temaExists(tema);
+	}
 }

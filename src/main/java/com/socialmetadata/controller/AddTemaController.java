@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.socialmetadata.model.Autor;
 import com.socialmetadata.model.Tema;
 import com.socialmetadata.service.TemaService;
 
@@ -24,10 +25,20 @@ public class AddTemaController {
 		
 		newTema = WordUtils.capitalizeFully(newTema);
 		
-		Tema tema = new Tema(newTema);		
-		temaService.addTema(tema);
 		
-		return "Tema guardado exitosamente";
+		
+		if(temaService.temaExists(newTema)){
+			System.out.println("existe");
+			return "El tema ya existe";
+		}
+		
+		else{
+			
+			Tema tema = new Tema(newTema);		
+			temaService.addTema(tema);
+			return "Tema guardado exitosamente";
+
+		}
 		
 		
 	}

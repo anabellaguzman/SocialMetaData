@@ -116,8 +116,29 @@
 					
 					}
 					else{
-						registerUser();
+						$.ajax({
+							url : "checkUsername.do",
+							type : "POST",
+							async: false,
+							data : {
+								username : $("#username").val(),
+
+							},				
+							success: function (data){				
+		
+								if (data==1){
+									$( "#checkMsg").text("El correo electronico ya ha sido utilizado");
+								}
+								else{
+									
+									registerUser();
+								}
+							}
+						
+						});
 					}
+				 
+				 
 				
 			}
 			
@@ -136,6 +157,8 @@
 			var apellido = $("#apellido").val();
 			var username = $("#username").val();
 			var password = $("#password").val();
+			
+			
 
 			$.ajax({
 				url : "registerUser.do",

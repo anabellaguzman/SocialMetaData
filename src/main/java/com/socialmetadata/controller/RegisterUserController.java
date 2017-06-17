@@ -49,11 +49,32 @@ public class RegisterUserController {
 		return "registerUser";
 	}
 	
+	
+	@RequestMapping(value="/checkUsername.do", method=RequestMethod.POST)
+	@ResponseBody
+	public String checkUsername(
+			 @RequestParam String username){
+		
+		
+		if(checkIsUser(username)){			
+			System.out.println("existe el username");
+			return "1";
+		}
+		
+		else{
+			return "0";
+		}
+	
+	}
+	
 	@Transactional
 	@RequestMapping(value="/registerUser.do", method=RequestMethod.POST)
 	@ResponseBody
 	public String registerUser(@RequestParam String nombre, @RequestParam String apellido,
 			 @RequestParam String username, @RequestParam String password){
+		
+		
+
 		
 		
 		System.out.println("entra a registerUser.do");

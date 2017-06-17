@@ -36,5 +36,7 @@ public class AutorService {
 		 autorDAO.add(autor);
 	}
 
-
+	public boolean autorexists(String nombre, String apellido){
+		return autorDAO.autorexists(nombre, apellido);
+	}
 }

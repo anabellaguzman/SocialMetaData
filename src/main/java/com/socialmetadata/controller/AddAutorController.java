@@ -24,12 +24,21 @@ public class AddAutorController {
 		
 		newAutorApellido = WordUtils.capitalizeFully(newAutorApellido);
 		newAutorNombre = WordUtils.capitalizeFully(newAutorNombre);
+
 		
 		
-		Autor autor = new Autor(newAutorNombre, newAutorApellido);
-		autorService.addAutor(autor);
+		if(autorService.autorexists(newAutorNombre, newAutorApellido)){
+			System.out.println("existe");
+			return "El autor ya existe";
+		}
 		
-		return "Autor guardado exitosamente";
+		else{
+			
+			Autor autor = new Autor(newAutorNombre, newAutorApellido);
+			autorService.addAutor(autor);
+			return "Autor guardado exitosamente";
+
+		}
 	}
 	
 

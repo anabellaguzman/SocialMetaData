@@ -161,7 +161,7 @@
 							<div class="form-group">
 							<p align="center" class="text-danger" id=checkMsg></p>
 								<div class="col-lg-10 col-lg-offset-2">
-									<button class="btn btn-default">Cancelar</button>
+<!-- 									<button class="btn btn-default">Cancelar</button> -->
 									<button type="button" class="btn btn-primary"
 										onclick="checkData()">Agregar</button>
 								</div>

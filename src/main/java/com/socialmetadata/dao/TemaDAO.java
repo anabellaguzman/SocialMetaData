@@ -2,13 +2,17 @@ package com.socialmetadata.dao;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
 
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.socialmetadata.model.Autor;
 import com.socialmetadata.model.Tema;
 
@@ -51,4 +55,22 @@ public class TemaDAO {
 		return session.getCurrentSession().createQuery("FROM Tema WHERE tema like '%"+ term + "%'").list();
 	}
 	
+	@Transactional
+	public boolean temaExists(String tema){
+
+		Criteria criteria = session.getCurrentSession().createCriteria(
+				Tema.class, "tema");
+		
+		criteria.add(Restrictions.eq("tema", tema));
+		
+		List<Tema> results = criteria.list();
+		
+		if(results.size()==0){
+			return false;
+			
+		}
+		else{
+			return true;
+		}
+	}
 }
