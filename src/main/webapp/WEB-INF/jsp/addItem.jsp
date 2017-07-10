@@ -57,6 +57,38 @@
 }
 
 
+.list-group-item{
+
+ 	background: rgb(24,188,156);
+ 	color: rgb(255, 255, 255);
+ 	text-decoration: none solid rgb(255, 255, 255);
+	
+	
+/* 	box-sizing: border-box; */
+/*     color: rgb(255, 255, 255); */
+/*     cursor: pointer; */
+/*     display: inline-block; */
+/*     height: 45px; */
+/*     text-align: center; */
+/*     text-decoration: none solid rgb(255, 255, 255); */
+/*     text-size-adjust: 100%; */
+/*     touch-action: manipulation; */
+/*     vertical-align: middle; */
+/*     white-space: nowrap; */
+/*     width: auto; */
+/*     column-rule-color: rgb(255, 255, 255); */
+/*     perspective-origin: 42.5938px 22.5px; */
+/*     transform-origin: 42.5938px 22.5px; */
+/*     user-select: none; */
+/*     caret-color: rgb(255, 255, 255); */
+/*     background: rgb(24, 188, 156) none repeat scroll 0% 0% / auto padding-box border-box; */
+/*     border: 2px solid rgb(24, 188, 156); */
+/*     border-radius: 4px 4px 4px 4px; */
+/*     font: normal normal normal normal 15px / 21.4286px Lato, "Helvetica Neue", Helvetica, Arial, sans-serif; */
+/*     outline: rgb(255, 255, 255) none 0px; */
+/*     padding: 10px 15px; */
+}
+
 
 </style>
 <body>

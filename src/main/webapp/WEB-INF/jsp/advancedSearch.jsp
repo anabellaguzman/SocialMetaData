@@ -57,6 +57,12 @@
     padding: 10px 15px;
 }
 
+.list-group-item{
+
+ 	background: rgb(24,188,156);
+ 	color: rgb(255, 255, 255);
+ 	text-decoration: none solid rgb(255, 255, 255);
+}
 
 
 </style>

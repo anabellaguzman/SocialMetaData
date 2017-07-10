@@ -67,11 +67,42 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				
+				<br/>  
+<ul class="pagination">
+  <li class="disabled"><a href="#">«</a></li>
+  <li class="active"><a href="#">1</a></li>
+  <li><a onclick="doSearchItemsLike(2)">2</a></li>
+  <li><a href="#">3</a></li>
+  <li><a href="#">4</a></li>
+  <li><a href="#">5</a></li>
+  <li><a href="#">»</a></li>
+</ul>
 			</div>
-			<!-- /example -->
-		</div>
-	</div>
-</div>
+			
+			
+			
+<!-- 			<h1>Employees List</h1>   -->
+<!-- <table border="2" width="70%" cellpadding="2">   -->
+<!-- <tr><th>Id</th><th>Name</th><th>Salary</th></tr>   -->
+<%--    <c:forEach var="emp" items="${list}">    --%>
+<!--    <tr>   -->
+<%--    <td>${emp.id}</td>   --%>
+<%--    <td>${emp.name}</td>   --%>
+<%--    <td>${emp.salary}</td>   --%>
+<!--    </tr>   -->
+<%--    </c:forEach>   --%>
+<!--    </table>   -->
+<!--    <br/>   -->
+<!--    <a href="/SpringMVC/viewemp/1">1</a>    -->
+<!--    <a href="/SpringMVC/viewemp/2">2</a>    -->
+<!--    <a href="/SpringMVC/viewemp/3">3</a>   -->
+			
+			
+<!-- 			<!-- /example --> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+<!-- </div> -->
 
 
 

@@ -12,6 +12,8 @@ import javax.xml.crypto.dsig.keyinfo.RetrievalMethod;
 
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Restrictions;
@@ -62,12 +64,26 @@ public class ItemDAO {
 
 		return session.getCurrentSession().createQuery("from Item").list();
 	}
+	
+//	public List<Item> getItemsByTilePaiged(int from, int to){
+//		return session.getCurrentSession()
+//				.createQuery("FROM Item WHERE titulo like '%" + term + "%' limit 1,20")
+//				.list();
+//	}
 
-	public List<Item> getItemsByTile(String term) {
+	public List<Item> getItemsByTile(String term, int from, int to) {
+		
+//		Session s = session.getCurrentSession();
+		
+		Query q = session.getCurrentSession().createQuery("FROM Item WHERE titulo like '%" + term + "%'");
+		q.setFirstResult(from);
+		q.setMaxResults(to);
+		
+		return q.list();
 
-		return session.getCurrentSession()
-				.createQuery("FROM Item WHERE titulo like '%" + term + "%'")
-				.list();
+//		return session.getCurrentSession()
+//				.createQuery("FROM Item WHERE titulo like '%" + term + "%' limit 1, 20 ")
+//				.list();
 	}
 
 	@Transactional

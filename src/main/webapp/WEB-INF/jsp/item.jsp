@@ -66,6 +66,10 @@
 	color: #888;
 }
 
+.list-group{
+
+	color: rgb(105,187,156)
+}
 
 
 /* pop up */

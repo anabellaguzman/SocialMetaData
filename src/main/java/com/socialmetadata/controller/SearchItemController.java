@@ -150,9 +150,9 @@ public class SearchItemController {
 	}
 
 	@RequestMapping(value = "/searchItem.do", method = RequestMethod.GET)
-	public @ResponseBody ModelAndView  searchItem(@RequestParam String term) {	
+	public @ResponseBody ModelAndView  searchItem(@RequestParam String term, @RequestParam int from, @RequestParam int to) {	
 				
-		List<Item> items = itemService.getItemByTitle(term);
+		List<Item> items = itemService.getItemByTitle(term, from, to);
 		
 		if(items.size() == 0){
 			ModelAndView mav = new ModelAndView("noResultFound");

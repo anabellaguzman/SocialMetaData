@@ -31,7 +31,7 @@ public class Item {
 	private int idItem;
 	@Column
 	private String titulo;
-	@Column(name = "año")
+	@Column(name = "year")
 	private Integer year;
 	@Column 
 	private Double puntaje;

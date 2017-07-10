@@ -62,9 +62,9 @@ public class ItemService {
 	}
 
 	@Transactional
-	public List<Item> getItemByTitle(String term) {
+	public List<Item> getItemByTitle(String term, int from, int to) {
 
-		List<Item> items = itemDAO.getItemsByTile(term);
+		List<Item> items = itemDAO.getItemsByTile(term, from, to);
 
 		for (Item i : items) {
 			i.getTipo().getDescripcion();

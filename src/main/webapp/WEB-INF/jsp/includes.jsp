@@ -28,7 +28,7 @@
 							placeholder="Introduzca un Titulo">
 					</div>
 					<button type="button" class="btn btn-default"
-						onclick="doSearchItemsLike()">Buscar</button>
+						onclick="doSearchItemsLike(1)">Buscar</button>
 				</div>
 
 				<ul class="nav navbar-nav navbar-right">
@@ -84,7 +84,21 @@
 
 
 <script type="text/javascript">
-	function doSearchItemsLike() {
+	function doSearchItemsLike(paige) {
+		
+		var from =(paige-1)*20;
+		var to = from+19;
+		
+		
+		if(paige==1){
+			var term = $('#searchItem').val();
+		}
+
+		
+		
+		console.log("from" + from);
+		console.log("to: "+to);
+		console.log("term: "+term);
 
 		console.log("searchItem val: " + $('#searchItem').val());
 		if ($("#removable").length) {
@@ -97,9 +111,15 @@
 			type : "GET",
 			data : {
 				term : $('#searchItem').val(),
+				from: from,
+				to: to,
 			},
 			success : function(response) {
 				$("#subViewDiv").html(response);
+// 				from = to+1;
+// 				to = to+20;
+				
+			
 			},
 			error : function(xhr, textStatus, errorThrown) {
 
@@ -113,7 +133,7 @@
 
 		if (e.which == 13) {
 			e.preventDefault();
-			doSearchItemsLike();
+			doSearchItemsLike(1);
 			// 		    	e.stopPropagation();
 			// 		    	$("#searchItem").unbind('keypress');
 
