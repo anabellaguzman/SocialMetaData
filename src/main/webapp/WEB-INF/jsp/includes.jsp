@@ -87,18 +87,19 @@
 	function doSearchItemsLike(paige) {
 		
 		var from =(paige-1)*20;
-		var to = from+19;
+		var to = 20;
 		
 		
-		if(paige==1){
-			var term = $('#searchItem').val();
-		}
+		
+// 		if(paige==1){
+// 			var term = $('#searchItem').val();
+// 		}
 
 		
 		
 		console.log("from" + from);
 		console.log("to: "+to);
-		console.log("term: "+term);
+		console.log("term: "+ $('#searchItem').val());
 
 		console.log("searchItem val: " + $('#searchItem').val());
 		if ($("#removable").length) {
@@ -115,6 +116,10 @@
 				to: to,
 			},
 			success : function(response) {
+// 				$("#subViewDiv").html(response);
+				
+				
+// 				$('#subViewDiv').empty();
 				$("#subViewDiv").html(response);
 // 				from = to+1;
 // 				to = to+20;

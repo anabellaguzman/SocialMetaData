@@ -161,6 +161,10 @@ public class SearchItemController {
 		else{
 			ModelAndView mav = new ModelAndView("tableSearchItem");
 			
+			for (Item item: items){
+				System.out.println("item: "+item.getTitulo());
+			}
+			
 			mav.addObject("items", items);
 			return mav;
 			
