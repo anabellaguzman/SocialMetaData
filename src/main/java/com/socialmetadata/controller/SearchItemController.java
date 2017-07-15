@@ -149,6 +149,44 @@ public class SearchItemController {
 		}
 	}
 
+	
+//	@RequestMapping(value = "/getTotalResults", method = RequestMethod.GET)
+//	public @ResponseBody int  searchItem(@RequestParam String term, @RequestParam int from, @RequestParam int to) {	
+//				
+//		List<Item> items = itemService.getItemByTitle(term, from, to);
+//		
+//		if(items.size() == 0){
+//			ModelAndView mav = new ModelAndView("noResultFound");
+//			return mav;
+//		}
+//		else{
+//			ModelAndView mav = new ModelAndView("tableSearchItem");
+//			
+//			for (Item item: items){
+//				System.out.println("item: "+item.getTitulo());
+//			}
+//			
+//			mav.addObject("items", items);
+//			return mav;
+//			
+//	
+	
+	
+	@RequestMapping(value = "/getSearchTotalResults", method = RequestMethod.GET)
+	@ResponseBody
+	public Long  getSearchTotalResults (@RequestParam String term){
+		
+		List<Long> qty = itemService.getItemsByTileTotalResults(term);
+		
+//		System.out.println("SIZE : "+ qty.get(0));
+		
+		return qty.get(0);
+		
+		
+		
+		
+	}	
+
 	@RequestMapping(value = "/searchItem.do", method = RequestMethod.GET)
 	public @ResponseBody ModelAndView  searchItem(@RequestParam String term, @RequestParam int from, @RequestParam int to) {	
 				

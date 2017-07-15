@@ -69,6 +69,20 @@
 <div id="subViewDiv" class="bs-component"></div>
 
 
+<div id="pages" class="bs-component" align="center" style="display: none">
+
+<ul class="pagination" id=ulpages>
+<!--   <li class="disabled"><a href="#">«</a></li> -->
+<!--   <li class="active" onclick="doSearchItemsLike(1)"><a href="#">1</a></li> -->
+<!--   <li><a onclick="doSearchItemsLike(2)">2</a></li> -->
+<!--   <li><a onclick="doSearchItemsLike(3)">3</a></li> -->
+<!--   <li><a onclick="doSearchItemsLike(4)">4</a></li> -->
+<!--   <li><a href="#">5</a></li> -->
+<!--   <li><a href="#">»</a></li> -->
+</ul>
+
+</div>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet"
 	href="<c:url value="/resources/flatly/bootstrap.css" />" media="screen">
@@ -85,10 +99,10 @@
 
 <script type="text/javascript">
 	function doSearchItemsLike(paige) {
-		
-		var from =(paige-1)*20;
 		var to = 20;
+		var from =(paige-1)*to;
 		
+		var total;
 		
 		
 // 		if(paige==1){
@@ -108,21 +122,46 @@
 		}
 
 		$.ajax({
-			url : "searchItem.do",
+			url : "getSearchTotalResults",
 			type : "GET",
 			data : {
 				term : $('#searchItem').val(),
-				from: from,
-				to: to,
-			},
-			success : function(response) {
-// 				$("#subViewDiv").html(response);
+			}
+		
+		,
+			success : function(data) {
 				
+				total = data;
+				console.log("tota: "+total);
+				totalpaginas = Math.ceil(total/to); 
+				console.log("totalpaginas: "+totalpaginas);
+// 				$("#subViewDiv").html(response)
+
+				createPages(totalpaginas,paige);
 				
-// 				$('#subViewDiv').empty();
-				$("#subViewDiv").html(response);
-// 				from = to+1;
-// 				to = to+20;
+				$.ajax({
+					url : "searchItem.do",
+					type : "GET",
+					data : {
+						term : $('#searchItem').val(),
+						from: from,
+						to: to,
+					}
+				
+				,
+					success : function(response) {
+
+						$("#subViewDiv").html(response)
+						
+					
+					},
+					error : function(xhr, textStatus, errorThrown) {
+
+						alert("Error: " + xhr.status + " " + xhr.statusText);
+					}
+
+				}
+				);
 				
 			
 			},
@@ -131,7 +170,40 @@
 				alert("Error: " + xhr.status + " " + xhr.statusText);
 			}
 
-		});
+		}
+		);
+		
+		
+		function createPages(totalpaginas,page) {
+			
+			$(ulpages).empty();			
+			$(pages).show();
+	
+			for (var i = 1; i <= totalpaginas; ++i) {		
+				var li = ($('<li/>', {
+				})).append($('<a/>',{
+					'onclick': "doSearchItemsLike("+i+")",
+					id:"lipag"+i,
+					html: i,
+				}));
+				
+// 				
+				$(ulpages).append(li);
+
+			}
+			
+			 var myId = '#' + 'lipag' + page;
+			
+			
+			$(myId).css('background-color',  "rgb(15," + 120 + "," + 100 + ")");
+			
+			
+			return;
+		}
+		
+		
+
+		
 	}
 
 	$("#searchItem").keypress(function(e) {

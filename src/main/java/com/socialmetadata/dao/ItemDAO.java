@@ -71,9 +71,37 @@ public class ItemDAO {
 //				.list();
 //	}
 
+	
+	public List<Long> getItemsByTileTotalResults(String term) {
+		
+		
+		Query qty = session.getCurrentSession().createQuery("SELECT COUNT(*) FROM Item WHERE titulo like '%" + term + "%'");
+
+		
+//		System.out.println("qty total: "+qty.list());
+		
+		List<Long> totalR = qty.list();
+		
+		return totalR;
+		
+	}
+	
+	
 	public List<Item> getItemsByTile(String term, int from, int to) {
 		
 //		Session s = session.getCurrentSession();
+		
+		Query qty = session.getCurrentSession().createQuery("SELECT COUNT(*) FROM Item WHERE titulo like '%" + term + "%'");
+//		qty.list();
+		
+		System.out.println("qty total: "+qty.list());
+		
+		List<Integer> totalR = qty.list();
+		
+
+		
+//		String totalResults = qty.toString();
+//		System.out.println("totalresults: "+ totalResults);
 		
 		Query q = session.getCurrentSession().createQuery("FROM Item WHERE titulo like '%" + term + "%'");
 		q.setFirstResult(from);

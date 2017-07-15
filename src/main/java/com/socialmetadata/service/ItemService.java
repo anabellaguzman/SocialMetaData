@@ -60,7 +60,14 @@ public class ItemService {
 
 		return item;
 	}
-
+	
+	@Transactional
+	public List<Long> getItemsByTileTotalResults(String term) {
+		return itemDAO.getItemsByTileTotalResults(term);
+		
+	}
+	
+	
 	@Transactional
 	public List<Item> getItemByTitle(String term, int from, int to) {
 

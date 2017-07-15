@@ -69,15 +69,6 @@
 				</table>
 				
 				<br/>  
-<ul class="pagination">
-  <li class="disabled"><a href="#">«</a></li>
-  <li class="active" onclick="doSearchItemsLike(1)"><a href="#">1</a></li>
-  <li><a onclick="doSearchItemsLike(2)">2</a></li>
-  <li><a onclick="doSearchItemsLike(3)">3</a></li>
-  <li><a onclick="doSearchItemsLike(4)">4</a></li>
-  <li><a href="#">5</a></li>
-  <li><a href="#">»</a></li>
-</ul>
 			</div>
 			
 			
@@ -99,7 +90,7 @@
 <!--    <a href="/SpringMVC/viewemp/3">3</a>   -->
 			
 			
-<!-- 			<!-- /example --> -->
+<!-- 			<!-- /example -->
 <!-- 		</div> -->
 <!-- 	</div> -->
 <!-- </div> -->
